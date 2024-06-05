@@ -58,21 +58,21 @@
 <!-- badges: end -->
 <p>The goal of fluxible is to provide a workflow that removes individual evaluation of each flux, reduces risk of bias, and makes it reproducible. Users set specific data quality standards and selection parameters as function arguments that are applied to the entire dataset. The package runs the calculations automatically, without prompting the user to take decisions mid-way, and provides quality flags and plots at the end of the process for a visual check. This makes it easy to use with large flux datasets and to integrate into a reproducible workflow. Using the Fluxible R package makes the workflow reproducible, increases compatibility across studies, and is more time efficient.</p>
 <p>The Fluxible R package is made to transform any dataset of gas concentration over time into a flux dataset. It was originally made to be used with a closed loop chamber system connected to a gas analyzer. A function for use with a tent is in development (see further developments).</p>
-<p>For a quick overview of how the package works, you can look at <a href="https://github.com/jogaudard/fluxible/blob/main/dissemination/poster_EGU24_jgaudard.pdf" class="external-link">the poster</a> that was presented at the European Geoscience Union Annual Meeting 2024.</p>
+<p>For a quick overview of how the package works, you can look at <a href="https://github.com/Plant-Functional-Trait-Course/fluxible/blob/main/dissemination/poster_EGU24_jgaudard.pdf" class="external-link">the poster</a> that was presented at the European Geoscience Union Annual Meeting 2024.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install the development version of fluxible from the <a href="https://github.com/jogaudard/fluxible" class="external-link">GitHub repo</a> with:</p>
+<p>You can install the development version of fluxible from the <a href="https://github.com/Plant-Functional-Trait-Course/fluxible" class="external-link">GitHub repo</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"jogaudard/fluxible"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"plant-functional-trait-course/fluxible"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
 <p>This is a basic example with some sample data from the Plant Functional Traits Course 6 (2022). The flux_match function matches field measured gas concentration data with flux meta data:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://jogaudard.github.io/fluxible/">fluxible</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://plant-functional-trait-course.github.io/fluxible/authors.html#citation" class="external-link">fluxible</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">conc_liahovden</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flux_match.html">flux_match</a></span><span class="op">(</span><span class="va">co2_liahovden</span>, <span class="va">record_liahovden</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">conc_liahovden</span><span class="op">)</span></span>
@@ -299,7 +299,7 @@ $$</span></p>
 <h2 id="dissemination">Dissemination<a class="anchor" aria-label="anchor" href="#dissemination"></a>
 </h2>
 <p>Gaudard, J., Telford, R., Vandvik, V., and Halbritter, A. H.: Fluxible: an R package to calculate ecosystem gas fluxes in a reproducible and automated workflow., EGU General Assembly 2024, Vienna, Austria, 14–19 Apr 2024, EGU24-956, <a href="https://doi.org/10.5194/egusphere-egu24-956" class="external-link uri">https://doi.org/10.5194/egusphere-egu24-956</a>, 2024.</p>
-<p><a href="https://github.com/jogaudard/fluxible/blob/main/dissemination/poster_EGU24_jgaudard.pdf" class="external-link">Direct link to the poster</a></p>
+<p><a href="https://github.com/Plant-Functional-Trait-Course/fluxible/blob/main/dissemination/poster_EGU24_jgaudard.pdf" class="external-link">Direct link to the poster</a></p>
 <!-- [Link to the abstract](https://meetingorganizer.copernicus.org/EGU24/EGU24-956.html) -->
 <div class="section level4">
 <h4 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
