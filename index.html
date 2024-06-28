@@ -75,56 +75,85 @@
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://plant-functional-trait-course.github.io/fluxible" class="external-link">fluxible</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">conc_liahovden</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flux_match.html">flux_match</a></span><span class="op">(</span><span class="va">co2_liahovden</span>, <span class="va">record_liahovden</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">conc_liahovden</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 6 × 13</span></span>
-<span><span class="co">#&gt;   f_datetime          temp_air temp_soil f_conc   PAR turfID   type </span></span>
-<span><span class="co">#&gt;   &lt;dttm&gt;                 &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;</span></span>
-<span><span class="co">#&gt; 1 2022-07-27 05:37:40       NA        NA   465.    NA 4 AN1C 4 NEE  </span></span>
-<span><span class="co">#&gt; 2 2022-07-27 05:37:41       NA        NA   465.    NA 4 AN1C 4 NEE  </span></span>
-<span><span class="co">#&gt; 3 2022-07-27 05:37:42       NA        NA   465.    NA 4 AN1C 4 NEE  </span></span>
-<span><span class="co">#&gt; 4 2022-07-27 05:37:43       NA        NA   464.    NA 4 AN1C 4 NEE  </span></span>
-<span><span class="co">#&gt; 5 2022-07-27 05:37:44       NA        NA   464.    NA 4 AN1C 4 NEE  </span></span>
-<span><span class="co">#&gt; 6 2022-07-27 05:37:45       NA        NA   463.    NA 4 AN1C 4 NEE  </span></span>
-<span><span class="co">#&gt; # ℹ 6 more variables: f_start &lt;dttm&gt;, f_end &lt;dttm&gt;, f_fluxID &lt;fct&gt;,</span></span>
-<span><span class="co">#&gt; #   f_n_conc &lt;int&gt;, f_ratio &lt;dbl&gt;, f_flag_match &lt;chr&gt;</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">conc_liahovden</span><span class="op">)</span></span>
+<span><span class="co">#&gt; tibble [28,929 × 13] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;  $ f_datetime  : POSIXct[1:28929], format: "2022-07-27 05:37:40" "2022-07-27 05:37:41" ...</span></span>
+<span><span class="co">#&gt;  $ temp_air    : num [1:28929] NA NA NA NA NA NA NA NA NA 3.03 ...</span></span>
+<span><span class="co">#&gt;  $ temp_soil   : num [1:28929] NA NA NA NA NA NA NA NA NA 6.86 ...</span></span>
+<span><span class="co">#&gt;  $ f_conc      : num [1:28929] 465 465 465 464 464 ...</span></span>
+<span><span class="co">#&gt;  $ PAR         : num [1:28929] NA NA NA NA NA NA NA NA NA 20.6 ...</span></span>
+<span><span class="co">#&gt;  $ turfID      : chr [1:28929] "4 AN1C 4" "4 AN1C 4" "4 AN1C 4" "4 AN1C 4" ...</span></span>
+<span><span class="co">#&gt;  $ type        : chr [1:28929] "NEE" "NEE" "NEE" "NEE" ...</span></span>
+<span><span class="co">#&gt;  $ f_start     : POSIXct[1:28929], format: "2022-07-27 05:37:40" "2022-07-27 05:37:40" ...</span></span>
+<span><span class="co">#&gt;  $ f_end       : POSIXct[1:28929], format: "2022-07-27 05:41:10" "2022-07-27 05:41:10" ...</span></span>
+<span><span class="co">#&gt;  $ f_fluxID    : Factor w/ 138 levels "1","2","3","4",..: 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;  $ f_n_conc    : int [1:28929] 210 210 210 210 210 210 210 210 210 210 ...</span></span>
+<span><span class="co">#&gt;  $ f_ratio     : num [1:28929] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;  $ f_flag_match: chr [1:28929] NA NA NA NA ...</span></span></code></pre></div>
 <p>To calculate a flux the slopes of each flux is necessary. The flux_fitting function can provide a linear or an exponential fit. Let’s start with a linear fit.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">slopes_lin_liahovden</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flux_fitting.html">flux_fitting</a></span><span class="op">(</span><span class="va">conc_liahovden</span>, fit_type <span class="op">=</span> <span class="st">"linear"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning in flux_fitting_lin(conc_df, start_cut = ((start_cut)), end_cut = ((end_cut)), : </span></span>
 <span><span class="co">#&gt;  fluxID 77 : slope was estimated on 194 points out of 210 seconds because data are missing</span></span>
 <span><span class="co">#&gt;  fluxID 85 : slope was estimated on 175 points out of 210 seconds because data are missing</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">slopes_lin_liahovden</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 6 × 22</span></span>
-<span><span class="co">#&gt;   f_datetime          temp_air temp_soil f_conc   PAR turfID   type </span></span>
-<span><span class="co">#&gt;   &lt;dttm&gt;                 &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;</span></span>
-<span><span class="co">#&gt; 1 2022-07-27 05:37:40       NA        NA   465.    NA 4 AN1C 4 NEE  </span></span>
-<span><span class="co">#&gt; 2 2022-07-27 05:37:41       NA        NA   465.    NA 4 AN1C 4 NEE  </span></span>
-<span><span class="co">#&gt; 3 2022-07-27 05:37:42       NA        NA   465.    NA 4 AN1C 4 NEE  </span></span>
-<span><span class="co">#&gt; 4 2022-07-27 05:37:43       NA        NA   464.    NA 4 AN1C 4 NEE  </span></span>
-<span><span class="co">#&gt; 5 2022-07-27 05:37:44       NA        NA   464.    NA 4 AN1C 4 NEE  </span></span>
-<span><span class="co">#&gt; 6 2022-07-27 05:37:45       NA        NA   463.    NA 4 AN1C 4 NEE  </span></span>
-<span><span class="co">#&gt; # ℹ 15 more variables: f_start &lt;dttm&gt;, f_end &lt;dttm&gt;, f_fluxID &lt;fct&gt;,</span></span>
-<span><span class="co">#&gt; #   f_n_conc &lt;int&gt;, f_ratio &lt;dbl&gt;, f_flag_match &lt;chr&gt;, f_time &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   f_cut &lt;fct&gt;, n_conc &lt;int&gt;, f_rsquared &lt;dbl&gt;, f_adj_rsquared &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   f_pvalue &lt;dbl&gt;, f_intercept &lt;dbl&gt;, f_slope &lt;dbl&gt;, f_fit &lt;dbl&gt;</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">slopes_lin_liahovden</span><span class="op">)</span></span>
+<span><span class="co">#&gt; tibble [28,929 × 22] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;  $ f_datetime    : POSIXct[1:28929], format: "2022-07-27 05:37:40" "2022-07-27 05:37:41" ...</span></span>
+<span><span class="co">#&gt;  $ temp_air      : num [1:28929] NA NA NA NA NA NA NA NA NA 3.03 ...</span></span>
+<span><span class="co">#&gt;  $ temp_soil     : num [1:28929] NA NA NA NA NA NA NA NA NA 6.86 ...</span></span>
+<span><span class="co">#&gt;  $ f_conc        : num [1:28929] 465 465 465 464 464 ...</span></span>
+<span><span class="co">#&gt;  $ PAR           : num [1:28929] NA NA NA NA NA NA NA NA NA 20.6 ...</span></span>
+<span><span class="co">#&gt;  $ turfID        : chr [1:28929] "4 AN1C 4" "4 AN1C 4" "4 AN1C 4" "4 AN1C 4" ...</span></span>
+<span><span class="co">#&gt;  $ type          : chr [1:28929] "NEE" "NEE" "NEE" "NEE" ...</span></span>
+<span><span class="co">#&gt;  $ f_start       : POSIXct[1:28929], format: "2022-07-27 05:37:40" "2022-07-27 05:37:40" ...</span></span>
+<span><span class="co">#&gt;  $ f_end         : POSIXct[1:28929], format: "2022-07-27 05:41:10" "2022-07-27 05:41:10" ...</span></span>
+<span><span class="co">#&gt;  $ f_fluxID      : Factor w/ 138 levels "1","2","3","4",..: 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;  $ f_n_conc      : int [1:28929] 210 210 210 210 210 210 210 210 210 210 ...</span></span>
+<span><span class="co">#&gt;  $ f_ratio       : num [1:28929] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;  $ f_flag_match  : chr [1:28929] NA NA NA NA ...</span></span>
+<span><span class="co">#&gt;  $ f_time        : num [1:28929] 0 1 2 3 4 5 6 7 8 9 ...</span></span>
+<span><span class="co">#&gt;  $ f_cut         : Factor w/ 1 level "keep": 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;  $ n_conc        : int [1:28929] 210 210 210 210 210 210 210 210 210 210 ...</span></span>
+<span><span class="co">#&gt;  $ f_rsquared    : num [1:28929] 0.965 0.965 0.965 0.965 0.965 ...</span></span>
+<span><span class="co">#&gt;  $ f_adj_rsquared: num [1:28929] 0.965 0.965 0.965 0.965 0.965 ...</span></span>
+<span><span class="co">#&gt;  $ f_pvalue      : Named num [1:28929] 9.82e-154 9.82e-154 9.82e-154 9.82e-154 9.82e-154 ...</span></span>
+<span><span class="co">#&gt;   ..- attr(*, "names")= chr [1:28929] "value" "value" "value" "value" ...</span></span>
+<span><span class="co">#&gt;  $ f_intercept   : num [1:28929] 463 463 463 463 463 ...</span></span>
+<span><span class="co">#&gt;  $ f_slope       : num [1:28929] -0.106 -0.106 -0.106 -0.106 -0.106 ...</span></span>
+<span><span class="co">#&gt;  $ f_fit         : num [1:28929] 463 463 463 463 463 ...</span></span>
+<span><span class="co">#&gt;  - attr(*, "fit_type")= chr "linear"</span></span></code></pre></div>
 <p>To assess the quality of the fit we use flux_quality. This will add quality flags advising if the calculated slopes should be kept, or replaced by 0 or NA.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">slopes_lin_liahovden</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flux_quality.html">flux_quality</a></span><span class="op">(</span><span class="va">slopes_lin_liahovden</span>, fit_type <span class="op">=</span> <span class="st">"lin"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">slopes_lin_liahovden</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 6 × 25</span></span>
-<span><span class="co">#&gt;   f_datetime          temp_air temp_soil f_conc   PAR turfID   type </span></span>
-<span><span class="co">#&gt;   &lt;dttm&gt;                 &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;</span></span>
-<span><span class="co">#&gt; 1 2022-07-27 05:37:40       NA        NA   465.    NA 4 AN1C 4 NEE  </span></span>
-<span><span class="co">#&gt; 2 2022-07-27 05:37:41       NA        NA   465.    NA 4 AN1C 4 NEE  </span></span>
-<span><span class="co">#&gt; 3 2022-07-27 05:37:42       NA        NA   465.    NA 4 AN1C 4 NEE  </span></span>
-<span><span class="co">#&gt; 4 2022-07-27 05:37:43       NA        NA   464.    NA 4 AN1C 4 NEE  </span></span>
-<span><span class="co">#&gt; 5 2022-07-27 05:37:44       NA        NA   464.    NA 4 AN1C 4 NEE  </span></span>
-<span><span class="co">#&gt; 6 2022-07-27 05:37:45       NA        NA   463.    NA 4 AN1C 4 NEE  </span></span>
-<span><span class="co">#&gt; # ℹ 18 more variables: f_start &lt;dttm&gt;, f_end &lt;dttm&gt;, f_fluxID &lt;fct&gt;,</span></span>
-<span><span class="co">#&gt; #   f_n_conc &lt;int&gt;, f_ratio &lt;dbl&gt;, f_flag_match &lt;chr&gt;, f_time &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   f_cut &lt;fct&gt;, n_conc &lt;int&gt;, f_rsquared &lt;dbl&gt;, f_adj_rsquared &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   f_pvalue &lt;dbl&gt;, f_intercept &lt;dbl&gt;, f_slope &lt;dbl&gt;, f_fit &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   f_start_error &lt;chr&gt;, f_quality_flag &lt;chr&gt;, f_slope_corr &lt;dbl&gt;</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">slopes_lin_liahovden</span><span class="op">)</span></span>
+<span><span class="co">#&gt; tibble [28,929 × 25] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;  $ f_datetime    : POSIXct[1:28929], format: "2022-07-27 05:37:40" "2022-07-27 05:37:41" ...</span></span>
+<span><span class="co">#&gt;  $ temp_air      : num [1:28929] NA NA NA NA NA NA NA NA NA 3.03 ...</span></span>
+<span><span class="co">#&gt;  $ temp_soil     : num [1:28929] NA NA NA NA NA NA NA NA NA 6.86 ...</span></span>
+<span><span class="co">#&gt;  $ f_conc        : num [1:28929] 465 465 465 464 464 ...</span></span>
+<span><span class="co">#&gt;  $ PAR           : num [1:28929] NA NA NA NA NA NA NA NA NA 20.6 ...</span></span>
+<span><span class="co">#&gt;  $ turfID        : chr [1:28929] "4 AN1C 4" "4 AN1C 4" "4 AN1C 4" "4 AN1C 4" ...</span></span>
+<span><span class="co">#&gt;  $ type          : chr [1:28929] "NEE" "NEE" "NEE" "NEE" ...</span></span>
+<span><span class="co">#&gt;  $ f_start       : POSIXct[1:28929], format: "2022-07-27 05:37:40" "2022-07-27 05:37:40" ...</span></span>
+<span><span class="co">#&gt;  $ f_end         : POSIXct[1:28929], format: "2022-07-27 05:41:10" "2022-07-27 05:41:10" ...</span></span>
+<span><span class="co">#&gt;  $ f_fluxID      : Factor w/ 138 levels "1","2","3","4",..: 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;  $ f_n_conc      : int [1:28929] 210 210 210 210 210 210 210 210 210 210 ...</span></span>
+<span><span class="co">#&gt;  $ f_ratio       : num [1:28929] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;  $ f_flag_match  : chr [1:28929] NA NA NA NA ...</span></span>
+<span><span class="co">#&gt;  $ f_time        : num [1:28929] 0 1 2 3 4 5 6 7 8 9 ...</span></span>
+<span><span class="co">#&gt;  $ f_cut         : Factor w/ 1 level "keep": 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;  $ n_conc        : int [1:28929] 210 210 210 210 210 210 210 210 210 210 ...</span></span>
+<span><span class="co">#&gt;  $ f_rsquared    : num [1:28929] 0.965 0.965 0.965 0.965 0.965 ...</span></span>
+<span><span class="co">#&gt;  $ f_adj_rsquared: num [1:28929] 0.965 0.965 0.965 0.965 0.965 ...</span></span>
+<span><span class="co">#&gt;  $ f_pvalue      : Named num [1:28929] 9.82e-154 9.82e-154 9.82e-154 9.82e-154 9.82e-154 ...</span></span>
+<span><span class="co">#&gt;   ..- attr(*, "names")= chr [1:28929] "value" "value" "value" "value" ...</span></span>
+<span><span class="co">#&gt;  $ f_intercept   : num [1:28929] 463 463 463 463 463 ...</span></span>
+<span><span class="co">#&gt;  $ f_slope       : num [1:28929] -0.106 -0.106 -0.106 -0.106 -0.106 ...</span></span>
+<span><span class="co">#&gt;  $ f_fit         : num [1:28929] 463 463 463 463 463 ...</span></span>
+<span><span class="co">#&gt;  $ f_start_error : chr [1:28929] "ok" "ok" "ok" "ok" ...</span></span>
+<span><span class="co">#&gt;  $ f_quality_flag: chr [1:28929] "ok" "ok" "ok" "ok" ...</span></span>
+<span><span class="co">#&gt;  $ f_slope_corr  : num [1:28929] -0.106 -0.106 -0.106 -0.106 -0.106 ...</span></span>
+<span><span class="co">#&gt;  - attr(*, "fit_type")= chr "linear"</span></span></code></pre></div>
 <p>Users should still do a visual check with the flux_plot function. The flux_plot function plots all the fluxes with their fluxID, both modelled and measured concentration, and indicating quality flags with color codes. Those plots can be printed in the R console, but they will be saved as a pdf document for easier use. Depending on the plots the user can re-run flux_fitting with cuts at the start or the end of the measurements (applied to the entire dataset), change the type of fit, or decide to exclude specific fluxes using the ‘weird_fluxes’ argument.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">slopes_lin_liahovden</span> <span class="op">|&gt;</span></span>
@@ -167,42 +196,82 @@
 <span><span class="co">#&gt; Warning in flux_fitting_exp(conc_df, start_cut = ((start_cut)), end_cut = ((end_cut)), : </span></span>
 <span><span class="co">#&gt;  fluxID 77 : slope was estimated on 194 points out of 210 seconds because data are missing</span></span>
 <span><span class="co">#&gt;  fluxID 85 : slope was estimated on 175 points out of 210 seconds because data are missing</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">slopes_exp_liahovden</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 6 × 30</span></span>
-<span><span class="co">#&gt;   f_datetime          temp_air temp_soil f_conc   PAR turfID   type </span></span>
-<span><span class="co">#&gt;   &lt;dttm&gt;                 &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;</span></span>
-<span><span class="co">#&gt; 1 2022-07-27 05:37:40       NA        NA   465.    NA 4 AN1C 4 NEE  </span></span>
-<span><span class="co">#&gt; 2 2022-07-27 05:37:41       NA        NA   465.    NA 4 AN1C 4 NEE  </span></span>
-<span><span class="co">#&gt; 3 2022-07-27 05:37:42       NA        NA   465.    NA 4 AN1C 4 NEE  </span></span>
-<span><span class="co">#&gt; 4 2022-07-27 05:37:43       NA        NA   464.    NA 4 AN1C 4 NEE  </span></span>
-<span><span class="co">#&gt; 5 2022-07-27 05:37:44       NA        NA   464.    NA 4 AN1C 4 NEE  </span></span>
-<span><span class="co">#&gt; 6 2022-07-27 05:37:45       NA        NA   463.    NA 4 AN1C 4 NEE  </span></span>
-<span><span class="co">#&gt; # ℹ 23 more variables: f_start &lt;dttm&gt;, f_end &lt;dttm&gt;, f_fluxID &lt;fct&gt;,</span></span>
-<span><span class="co">#&gt; #   f_n_conc &lt;int&gt;, f_ratio &lt;dbl&gt;, f_flag_match &lt;chr&gt;, f_time &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   f_cut &lt;fct&gt;, n_conc &lt;int&gt;, Cm_est &lt;dbl&gt;, a_est &lt;dbl&gt;, b_est &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   tz_est &lt;dbl&gt;, f_Cz &lt;dbl&gt;, time_diff &lt;dbl&gt;, f_Cm &lt;dbl&gt;, f_a &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   f_b &lt;dbl&gt;, f_tz &lt;dbl&gt;, f_slope_tz &lt;dbl&gt;, f_fit &lt;dbl&gt;, f_fit_slope &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   f_start_z &lt;dttm&gt;</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">slopes_exp_liahovden</span><span class="op">)</span></span>
+<span><span class="co">#&gt; tibble [28,929 × 30] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;  $ f_datetime  : POSIXct[1:28929], format: "2022-07-27 05:37:40" "2022-07-27 05:37:41" ...</span></span>
+<span><span class="co">#&gt;  $ temp_air    : num [1:28929] NA NA NA NA NA NA NA NA NA 3.03 ...</span></span>
+<span><span class="co">#&gt;  $ temp_soil   : num [1:28929] NA NA NA NA NA NA NA NA NA 6.86 ...</span></span>
+<span><span class="co">#&gt;  $ f_conc      : num [1:28929] 465 465 465 464 464 ...</span></span>
+<span><span class="co">#&gt;  $ PAR         : num [1:28929] NA NA NA NA NA NA NA NA NA 20.6 ...</span></span>
+<span><span class="co">#&gt;  $ turfID      : chr [1:28929] "4 AN1C 4" "4 AN1C 4" "4 AN1C 4" "4 AN1C 4" ...</span></span>
+<span><span class="co">#&gt;  $ type        : chr [1:28929] "NEE" "NEE" "NEE" "NEE" ...</span></span>
+<span><span class="co">#&gt;  $ f_start     : POSIXct[1:28929], format: "2022-07-27 05:37:40" "2022-07-27 05:37:40" ...</span></span>
+<span><span class="co">#&gt;  $ f_end       : POSIXct[1:28929], format: "2022-07-27 05:41:10" "2022-07-27 05:41:10" ...</span></span>
+<span><span class="co">#&gt;  $ f_fluxID    : Factor w/ 138 levels "1","2","3","4",..: 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;  $ f_n_conc    : int [1:28929] 210 210 210 210 210 210 210 210 210 210 ...</span></span>
+<span><span class="co">#&gt;  $ f_ratio     : num [1:28929] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;  $ f_flag_match: chr [1:28929] NA NA NA NA ...</span></span>
+<span><span class="co">#&gt;  $ f_time      : num [1:28929] 0 1 2 3 4 5 6 7 8 9 ...</span></span>
+<span><span class="co">#&gt;  $ f_cut       : Factor w/ 1 level "keep": 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;  $ n_conc      : int [1:28929] 210 210 210 210 210 210 210 210 210 210 ...</span></span>
+<span><span class="co">#&gt;  $ Cm_est      : num [1:28929] 435 435 435 435 435 ...</span></span>
+<span><span class="co">#&gt;  $ a_est       : num [1:28929] -0.245 -0.245 -0.245 -0.245 -0.245 ...</span></span>
+<span><span class="co">#&gt;  $ b_est       : num [1:28929] -0.00319 -0.00319 -0.00319 -0.00319 -0.00319 ...</span></span>
+<span><span class="co">#&gt;  $ tz_est      : num [1:28929] 14 14 14 14 14 14 14 14 14 14 ...</span></span>
+<span><span class="co">#&gt;  $ f_Cz        : num [1:28929] 465 465 465 465 465 ...</span></span>
+<span><span class="co">#&gt;  $ time_diff   : num [1:28929] 0 0 0 0 0 0 0 0 0 0 ...</span></span>
+<span><span class="co">#&gt;  $ f_Cm        : num [1:28929] 304 304 304 304 304 ...</span></span>
+<span><span class="co">#&gt;  $ f_a         : num [1:28929] -0.4 -0.4 -0.4 -0.4 -0.4 ...</span></span>
+<span><span class="co">#&gt;  $ f_b         : num [1:28929] -0.00152 -0.00152 -0.00152 -0.00152 -0.00152 ...</span></span>
+<span><span class="co">#&gt;  $ f_tz        : num [1:28929] 11.3 11.3 11.3 11.3 11.3 ...</span></span>
+<span><span class="co">#&gt;  $ f_slope_tz  : num [1:28929] -0.156 -0.156 -0.156 -0.156 -0.156 ...</span></span>
+<span><span class="co">#&gt;  $ f_fit       : num [1:28929] 466 466 466 466 466 ...</span></span>
+<span><span class="co">#&gt;  $ f_fit_slope : num [1:28929] 466 466 466 466 466 ...</span></span>
+<span><span class="co">#&gt;  $ f_start_z   : POSIXct[1:28929], format: "2022-07-27 05:37:51" "2022-07-27 05:37:51" ...</span></span>
+<span><span class="co">#&gt;  - attr(*, "fit_type")= chr "exponential"</span></span></code></pre></div>
 <p>Then the quality assessment. The default slope_col argument is for the linear fit, so we now have to specify it.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">slopes_exp_liahovden</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flux_quality.html">flux_quality</a></span><span class="op">(</span><span class="va">slopes_exp_liahovden</span>, fit_type <span class="op">=</span> <span class="st">"expo"</span>, slope_col <span class="op">=</span> <span class="st">"f_slope_tz"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">slopes_exp_liahovden</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 6 × 37</span></span>
-<span><span class="co">#&gt;   f_datetime          temp_air temp_soil f_conc   PAR turfID   type </span></span>
-<span><span class="co">#&gt;   &lt;dttm&gt;                 &lt;dbl&gt;     &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;</span></span>
-<span><span class="co">#&gt; 1 2022-07-27 05:37:40       NA        NA   465.    NA 4 AN1C 4 NEE  </span></span>
-<span><span class="co">#&gt; 2 2022-07-27 05:37:41       NA        NA   465.    NA 4 AN1C 4 NEE  </span></span>
-<span><span class="co">#&gt; 3 2022-07-27 05:37:42       NA        NA   465.    NA 4 AN1C 4 NEE  </span></span>
-<span><span class="co">#&gt; 4 2022-07-27 05:37:43       NA        NA   464.    NA 4 AN1C 4 NEE  </span></span>
-<span><span class="co">#&gt; 5 2022-07-27 05:37:44       NA        NA   464.    NA 4 AN1C 4 NEE  </span></span>
-<span><span class="co">#&gt; 6 2022-07-27 05:37:45       NA        NA   463.    NA 4 AN1C 4 NEE  </span></span>
-<span><span class="co">#&gt; # ℹ 30 more variables: f_start &lt;dttm&gt;, f_end &lt;dttm&gt;, f_fluxID &lt;fct&gt;,</span></span>
-<span><span class="co">#&gt; #   f_n_conc &lt;int&gt;, f_ratio &lt;dbl&gt;, f_flag_match &lt;chr&gt;, f_time &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   f_cut &lt;fct&gt;, n_conc &lt;int&gt;, Cm_est &lt;dbl&gt;, a_est &lt;dbl&gt;, b_est &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   tz_est &lt;dbl&gt;, f_Cz &lt;dbl&gt;, time_diff &lt;dbl&gt;, f_Cm &lt;dbl&gt;, f_a &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   f_b &lt;dbl&gt;, f_tz &lt;dbl&gt;, f_slope_tz &lt;dbl&gt;, f_fit &lt;dbl&gt;, f_fit_slope &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   f_start_z &lt;dttm&gt;, f_cor_coef &lt;dbl&gt;, f_RMSE &lt;dbl&gt;, f_start_error &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   f_fit_quality &lt;chr&gt;, f_correlation &lt;chr&gt;, f_quality_flag &lt;chr&gt;, …</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">slopes_exp_liahovden</span><span class="op">)</span></span>
+<span><span class="co">#&gt; tibble [28,929 × 37] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;  $ f_datetime    : POSIXct[1:28929], format: "2022-07-27 05:37:40" "2022-07-27 05:37:41" ...</span></span>
+<span><span class="co">#&gt;  $ temp_air      : num [1:28929] NA NA NA NA NA NA NA NA NA 3.03 ...</span></span>
+<span><span class="co">#&gt;  $ temp_soil     : num [1:28929] NA NA NA NA NA NA NA NA NA 6.86 ...</span></span>
+<span><span class="co">#&gt;  $ f_conc        : num [1:28929] 465 465 465 464 464 ...</span></span>
+<span><span class="co">#&gt;  $ PAR           : num [1:28929] NA NA NA NA NA NA NA NA NA 20.6 ...</span></span>
+<span><span class="co">#&gt;  $ turfID        : chr [1:28929] "4 AN1C 4" "4 AN1C 4" "4 AN1C 4" "4 AN1C 4" ...</span></span>
+<span><span class="co">#&gt;  $ type          : chr [1:28929] "NEE" "NEE" "NEE" "NEE" ...</span></span>
+<span><span class="co">#&gt;  $ f_start       : POSIXct[1:28929], format: "2022-07-27 05:37:40" "2022-07-27 05:37:40" ...</span></span>
+<span><span class="co">#&gt;  $ f_end         : POSIXct[1:28929], format: "2022-07-27 05:41:10" "2022-07-27 05:41:10" ...</span></span>
+<span><span class="co">#&gt;  $ f_fluxID      : Factor w/ 138 levels "1","2","3","4",..: 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;  $ f_n_conc      : int [1:28929] 210 210 210 210 210 210 210 210 210 210 ...</span></span>
+<span><span class="co">#&gt;  $ f_ratio       : num [1:28929] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;  $ f_flag_match  : chr [1:28929] NA NA NA NA ...</span></span>
+<span><span class="co">#&gt;  $ f_time        : num [1:28929] 0 1 2 3 4 5 6 7 8 9 ...</span></span>
+<span><span class="co">#&gt;  $ f_cut         : Factor w/ 1 level "keep": 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;  $ n_conc        : int [1:28929] 210 210 210 210 210 210 210 210 210 210 ...</span></span>
+<span><span class="co">#&gt;  $ Cm_est        : num [1:28929] 435 435 435 435 435 ...</span></span>
+<span><span class="co">#&gt;  $ a_est         : num [1:28929] -0.245 -0.245 -0.245 -0.245 -0.245 ...</span></span>
+<span><span class="co">#&gt;  $ b_est         : num [1:28929] -0.00319 -0.00319 -0.00319 -0.00319 -0.00319 ...</span></span>
+<span><span class="co">#&gt;  $ tz_est        : num [1:28929] 14 14 14 14 14 14 14 14 14 14 ...</span></span>
+<span><span class="co">#&gt;  $ f_Cz          : num [1:28929] 465 465 465 465 465 ...</span></span>
+<span><span class="co">#&gt;  $ time_diff     : num [1:28929] 0 0 0 0 0 0 0 0 0 0 ...</span></span>
+<span><span class="co">#&gt;  $ f_Cm          : num [1:28929] 304 304 304 304 304 ...</span></span>
+<span><span class="co">#&gt;  $ f_a           : num [1:28929] -0.4 -0.4 -0.4 -0.4 -0.4 ...</span></span>
+<span><span class="co">#&gt;  $ f_b           : num [1:28929] -0.00152 -0.00152 -0.00152 -0.00152 -0.00152 ...</span></span>
+<span><span class="co">#&gt;  $ f_tz          : num [1:28929] 11.3 11.3 11.3 11.3 11.3 ...</span></span>
+<span><span class="co">#&gt;  $ f_slope_tz    : num [1:28929] -0.156 -0.156 -0.156 -0.156 -0.156 ...</span></span>
+<span><span class="co">#&gt;  $ f_fit         : num [1:28929] 466 466 466 466 466 ...</span></span>
+<span><span class="co">#&gt;  $ f_fit_slope   : num [1:28929] 466 466 466 466 466 ...</span></span>
+<span><span class="co">#&gt;  $ f_start_z     : POSIXct[1:28929], format: "2022-07-27 05:37:51" "2022-07-27 05:37:51" ...</span></span>
+<span><span class="co">#&gt;  $ f_cor_coef    : num [1:28929] -0.982 -0.982 -0.982 -0.982 -0.982 ...</span></span>
+<span><span class="co">#&gt;  $ f_RMSE        : num [1:28929] 1.77 1.77 1.77 1.77 1.77 ...</span></span>
+<span><span class="co">#&gt;  $ f_start_error : chr [1:28929] "ok" "ok" "ok" "ok" ...</span></span>
+<span><span class="co">#&gt;  $ f_fit_quality : chr [1:28929] NA NA NA NA ...</span></span>
+<span><span class="co">#&gt;  $ f_correlation : chr [1:28929] "yes" "yes" "yes" "yes" ...</span></span>
+<span><span class="co">#&gt;  $ f_quality_flag: chr [1:28929] "ok" "ok" "ok" "ok" ...</span></span>
+<span><span class="co">#&gt;  $ f_slope_corr  : num [1:28929] -0.156 -0.156 -0.156 -0.156 -0.156 ...</span></span>
+<span><span class="co">#&gt;  - attr(*, "fit_type")= chr "exponential"</span></span></code></pre></div>
 <p>The plots will also show the modelled slope at t zero.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">slopes_exp_liahovden</span> <span class="op">|&gt;</span></span>
@@ -249,16 +318,14 @@
 <span>    slope_col <span class="op">=</span> <span class="st">"f_slope_corr"</span>, <span class="co"># we use the slopes provided by flux_quality</span></span>
 <span>    cols_keep <span class="op">=</span> <span class="st">"f_start"</span></span>
 <span>  <span class="op">)</span> <span class="co"># there is no need to specify the other arguments because the defaults are from our experiment, other users might want to check that</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">fluxes_exp_liahovden</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 6 × 5</span></span>
-<span><span class="co">#&gt;   f_start             f_fluxID f_slope_calc temp_air_ave    flux</span></span>
-<span><span class="co">#&gt;   &lt;dttm&gt;              &lt;fct&gt;           &lt;dbl&gt;        &lt;dbl&gt;   &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 2022-07-27 05:37:40 1            -0.156           3.27  -9.76 </span></span>
-<span><span class="co">#&gt; 2 2022-07-27 05:42:10 2             0.146           3.31   9.10 </span></span>
-<span><span class="co">#&gt; 3 2022-07-27 05:47:05 3            -0.227           3.15 -14.2  </span></span>
-<span><span class="co">#&gt; 4 2022-07-27 05:50:55 4             0.143           2.98   8.93 </span></span>
-<span><span class="co">#&gt; 5 2022-07-27 05:57:40 5            -0.139           2.86  -8.67 </span></span>
-<span><span class="co">#&gt; 6 2022-07-27 06:02:10 6            -0.00487         2.91  -0.304</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">fluxes_exp_liahovden</span><span class="op">)</span></span>
+<span><span class="co">#&gt; tibble [138 × 5] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;  $ f_start     : POSIXct[1:138], format: "2022-07-27 05:37:40" "2022-07-27 05:42:10" ...</span></span>
+<span><span class="co">#&gt;  $ f_fluxID    : Factor w/ 138 levels "1","2","3","4",..: 1 2 3 4 5 6 7 8 9 10 ...</span></span>
+<span><span class="co">#&gt;  $ f_slope_calc: num [1:138] -0.156 0.146 -0.227 0.143 -0.139 ...</span></span>
+<span><span class="co">#&gt;  $ temp_air_ave: num [1:138] 3.27 3.31 3.15 2.98 2.86 ...</span></span>
+<span><span class="co">#&gt;  $ flux        : num [1:138] -9.76 9.1 -14.15 8.93 -8.67 ...</span></span>
+<span><span class="co">#&gt;  - attr(*, "fit_type")= chr "exponential"</span></span></code></pre></div>
 <p>The output is in mmol/m<sup>2</sup>/h and the calculation used is as follow:</p>
 <!-- <img src="https://render.githubusercontent.com/render/math?math=flux=slope\times \frac{P\times V}{R\times T\times A}"> -->
 <p><span class="math display">$$
