@@ -83,15 +83,18 @@ of gas concentration over time</p>
 
 <dt>chamber_volume</dt>
 <dd><p>volume of the flux chamber in L,
-default for Three-D project chamber (25x24.5x40cm)</p></dd>
+default for Three-D project chamber (25x24.5x40cm),
+can also be a column in case it is a variable</p></dd>
 
 
 <dt>tube_volume</dt>
-<dd><p>volume of the tubing in L, default for summer 2020 setup</p></dd>
+<dd><p>volume of the tubing in L, default for summer 2020 setup,
+can also be a column in case it is a variable</p></dd>
 
 
 <dt>atm_pressure</dt>
-<dd><p>atmoshperic pressure, assumed 1 atm</p></dd>
+<dd><p>atmoshperic pressure, assumed 1 atm,
+can be a constant (numerical) or a variable (column name)</p></dd>
 
 
 <dt>plot_area</dt>
@@ -139,15 +142,16 @@ and any columns specified in cols_keep and cols_ave.</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">slopes0</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">flux_calc</span><span class="op">(</span><span class="va">slopes0</span>, slope_col <span class="op">=</span> <span class="st">"f_slope_tz"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 4</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   f_fluxID f_slope_calc temp_air_ave  flux</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>        1        1.56          7.31  95.6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>        2        0.853         7.38  52.4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>        3        0.303         7.46  18.6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>        4        1.13          7.77  69.4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>        5        1.46          7.71  89.9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span>        6        0.426         7.75  26.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 8</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   f_fluxID f_slope_calc chamber_volume tube_volume atm_pressure temp_air_ave</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>        1        1.56            24.5       0.075            1         7.31</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>        2        0.853           24.5       0.075            1         7.38</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>        3        0.303           24.5       0.075            1         7.46</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>        4        1.13            24.5       0.075            1         7.77</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>        5        1.46            24.5       0.075            1         7.71</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span>        6        0.426           24.5       0.075            1         7.75</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 2 more variables: volume_setup &lt;dbl&gt;, flux &lt;dbl&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
