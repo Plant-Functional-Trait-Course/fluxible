@@ -1,126 +1,44 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://jogaudard.github.io/fluxible/404.html</loc>
-  </url>
-  <url>
-    <loc>https://jogaudard.github.io/fluxible/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://jogaudard.github.io/fluxible/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://jogaudard.github.io/fluxible/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://jogaudard.github.io/fluxible/index.html</loc>
-  </url>
-  <url>
-    <loc>https://jogaudard.github.io/fluxible/reference/co2_conc.html</loc>
-  </url>
-  <url>
-    <loc>https://jogaudard.github.io/fluxible/reference/co2_conc_missing.html</loc>
-  </url>
-  <url>
-    <loc>https://jogaudard.github.io/fluxible/reference/co2_df_missing.html</loc>
-  </url>
-  <url>
-    <loc>https://jogaudard.github.io/fluxible/reference/co2_df_short.html</loc>
-  </url>
-  <url>
-    <loc>https://jogaudard.github.io/fluxible/reference/co2_fluxes.html</loc>
-  </url>
-  <url>
-    <loc>https://jogaudard.github.io/fluxible/reference/co2_liahovden.html</loc>
-  </url>
-  <url>
-    <loc>https://jogaudard.github.io/fluxible/reference/flux_calc.html</loc>
-  </url>
-  <url>
-    <loc>https://jogaudard.github.io/fluxible/reference/flux_cut.html</loc>
-  </url>
-  <url>
-    <loc>https://jogaudard.github.io/fluxible/reference/flux_fitting.html</loc>
-  </url>
-  <url>
-    <loc>https://jogaudard.github.io/fluxible/reference/flux_fitting_exp.html</loc>
-  </url>
-  <url>
-    <loc>https://jogaudard.github.io/fluxible/reference/flux_fitting_lin.html</loc>
-  </url>
-  <url>
-    <loc>https://jogaudard.github.io/fluxible/reference/flux_fitting_quadratic.html</loc>
-  </url>
-  <url>
-    <loc>https://jogaudard.github.io/fluxible/reference/flux_match.html</loc>
-  </url>
-  <url>
-    <loc>https://jogaudard.github.io/fluxible/reference/flux_plot.html</loc>
-  </url>
-  <url>
-    <loc>https://jogaudard.github.io/fluxible/reference/flux_plot_exp.html</loc>
-  </url>
-  <url>
-    <loc>https://jogaudard.github.io/fluxible/reference/flux_plot_lin.html</loc>
-  </url>
-  <url>
-    <loc>https://jogaudard.github.io/fluxible/reference/flux_plot_quadratic.html</loc>
-  </url>
-  <url>
-    <loc>https://jogaudard.github.io/fluxible/reference/flux_quality.html</loc>
-  </url>
-  <url>
-    <loc>https://jogaudard.github.io/fluxible/reference/flux_quality_exp.html</loc>
-  </url>
-  <url>
-    <loc>https://jogaudard.github.io/fluxible/reference/flux_quality_lin.html</loc>
-  </url>
-  <url>
-    <loc>https://jogaudard.github.io/fluxible/reference/flux_quality_quadratic.html</loc>
-  </url>
-  <url>
-    <loc>https://jogaudard.github.io/fluxible/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://jogaudard.github.io/fluxible/reference/record_liahovden.html</loc>
-  </url>
-  <url>
-    <loc>https://jogaudard.github.io/fluxible/reference/record_short.html</loc>
-  </url>
-  <url>
-    <loc>https://jogaudard.github.io/fluxible/reference/slopes0.html</loc>
-  </url>
-  <url>
-    <loc>https://jogaudard.github.io/fluxible/reference/slopes0_flag.html</loc>
-  </url>
-  <url>
-    <loc>https://jogaudard.github.io/fluxible/reference/slopes0_temp.html</loc>
-  </url>
-  <url>
-    <loc>https://jogaudard.github.io/fluxible/reference/slopes0lin.html</loc>
-  </url>
-  <url>
-    <loc>https://jogaudard.github.io/fluxible/reference/slopes0lin_flag.html</loc>
-  </url>
-  <url>
-    <loc>https://jogaudard.github.io/fluxible/reference/slopes30.html</loc>
-  </url>
-  <url>
-    <loc>https://jogaudard.github.io/fluxible/reference/slopes30_flag.html</loc>
-  </url>
-  <url>
-    <loc>https://jogaudard.github.io/fluxible/reference/slopes30lin.html</loc>
-  </url>
-  <url>
-    <loc>https://jogaudard.github.io/fluxible/reference/slopes30lin_flag.html</loc>
-  </url>
-  <url>
-    <loc>https://jogaudard.github.io/fluxible/reference/slopes30qua.html</loc>
-  </url>
-  <url>
-    <loc>https://jogaudard.github.io/fluxible/reference/slopes60.html</loc>
-  </url>
-  <url>
-    <loc>https://jogaudard.github.io/fluxible/reference/slopes60lin.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://jogaudard.github.io/fluxible/404.html</loc></url>
+<url><loc>https://jogaudard.github.io/fluxible/LICENSE-text.html</loc></url>
+<url><loc>https://jogaudard.github.io/fluxible/LICENSE.html</loc></url>
+<url><loc>https://jogaudard.github.io/fluxible/authors.html</loc></url>
+<url><loc>https://jogaudard.github.io/fluxible/index.html</loc></url>
+<url><loc>https://jogaudard.github.io/fluxible/reference/co2_conc.html</loc></url>
+<url><loc>https://jogaudard.github.io/fluxible/reference/co2_conc_missing.html</loc></url>
+<url><loc>https://jogaudard.github.io/fluxible/reference/co2_df_missing.html</loc></url>
+<url><loc>https://jogaudard.github.io/fluxible/reference/co2_df_short.html</loc></url>
+<url><loc>https://jogaudard.github.io/fluxible/reference/co2_fluxes.html</loc></url>
+<url><loc>https://jogaudard.github.io/fluxible/reference/co2_liahovden.html</loc></url>
+<url><loc>https://jogaudard.github.io/fluxible/reference/flux_calc.html</loc></url>
+<url><loc>https://jogaudard.github.io/fluxible/reference/flux_cut.html</loc></url>
+<url><loc>https://jogaudard.github.io/fluxible/reference/flux_fitting.html</loc></url>
+<url><loc>https://jogaudard.github.io/fluxible/reference/flux_fitting_exp.html</loc></url>
+<url><loc>https://jogaudard.github.io/fluxible/reference/flux_fitting_lin.html</loc></url>
+<url><loc>https://jogaudard.github.io/fluxible/reference/flux_fitting_quadratic.html</loc></url>
+<url><loc>https://jogaudard.github.io/fluxible/reference/flux_match.html</loc></url>
+<url><loc>https://jogaudard.github.io/fluxible/reference/flux_plot.html</loc></url>
+<url><loc>https://jogaudard.github.io/fluxible/reference/flux_plot_exp.html</loc></url>
+<url><loc>https://jogaudard.github.io/fluxible/reference/flux_plot_lin.html</loc></url>
+<url><loc>https://jogaudard.github.io/fluxible/reference/flux_plot_quadratic.html</loc></url>
+<url><loc>https://jogaudard.github.io/fluxible/reference/flux_quality.html</loc></url>
+<url><loc>https://jogaudard.github.io/fluxible/reference/flux_quality_exp.html</loc></url>
+<url><loc>https://jogaudard.github.io/fluxible/reference/flux_quality_lin.html</loc></url>
+<url><loc>https://jogaudard.github.io/fluxible/reference/flux_quality_quadratic.html</loc></url>
+<url><loc>https://jogaudard.github.io/fluxible/reference/index.html</loc></url>
+<url><loc>https://jogaudard.github.io/fluxible/reference/record_liahovden.html</loc></url>
+<url><loc>https://jogaudard.github.io/fluxible/reference/record_short.html</loc></url>
+<url><loc>https://jogaudard.github.io/fluxible/reference/slopes0.html</loc></url>
+<url><loc>https://jogaudard.github.io/fluxible/reference/slopes0_flag.html</loc></url>
+<url><loc>https://jogaudard.github.io/fluxible/reference/slopes0_temp.html</loc></url>
+<url><loc>https://jogaudard.github.io/fluxible/reference/slopes0lin.html</loc></url>
+<url><loc>https://jogaudard.github.io/fluxible/reference/slopes0lin_flag.html</loc></url>
+<url><loc>https://jogaudard.github.io/fluxible/reference/slopes30.html</loc></url>
+<url><loc>https://jogaudard.github.io/fluxible/reference/slopes30_flag.html</loc></url>
+<url><loc>https://jogaudard.github.io/fluxible/reference/slopes30lin.html</loc></url>
+<url><loc>https://jogaudard.github.io/fluxible/reference/slopes30lin_flag.html</loc></url>
+<url><loc>https://jogaudard.github.io/fluxible/reference/slopes30qua.html</loc></url>
+<url><loc>https://jogaudard.github.io/fluxible/reference/slopes60.html</loc></url>
+<url><loc>https://jogaudard.github.io/fluxible/reference/slopes60lin.html</loc></url>
 </urlset>
+
