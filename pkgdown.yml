@@ -2,7 +2,7 @@ pandoc: 3.1.11
 pkgdown: 2.1.0
 pkgdown_sha: ~
 articles: {}
-last_built: 2024-07-15T12:51Z
+last_built: 2024-07-30T14:52Z
 urls:
   reference: https://jogaudard.github.io/fluxible/reference
   article: https://jogaudard.github.io/fluxible/articles

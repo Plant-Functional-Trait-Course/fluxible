@@ -59,7 +59,8 @@ by 0 according to parameters set by user</p>
 <span>  cut_col <span class="op">=</span> <span class="st">"f_cut"</span>,</span>
 <span>  RMSE_threshold <span class="op">=</span> <span class="fl">25</span>,</span>
 <span>  cor_threshold <span class="op">=</span> <span class="fl">0.5</span>,</span>
-<span>  b_threshold <span class="op">=</span> <span class="fl">1</span></span>
+<span>  b_threshold <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  cut_arg <span class="op">=</span> <span class="st">"cut"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -157,6 +158,10 @@ is considered non significant (exponential fit)</p></dd>
 Defines a window with its opposite inside which the fit is
 considered good enough (exponential fit)</p></dd>
 
+
+<dt id="arg-cut-arg">cut_arg<a class="anchor" aria-label="anchor" href="#arg-cut-arg"></a></dt>
+<dd><p>argument defining that the data point should be cut out</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -167,6 +172,14 @@ considered good enough (exponential fit)</p></dd>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">slopes0lin</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">flux_quality</span><span class="op">(</span><span class="va">slopes0lin</span>, fit_type <span class="op">=</span> <span class="st">"li"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>  Total number of measurements: 6</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>  ok 	 1 	 17 %</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>  zero 	 5 	 83 %</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>  discard 	 0 	 0 %</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>  weird_flux 	 0 	 0 %</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>  start_error 	 0 	 0 %</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,251 × 24</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    f_datetime          temp_air temp_soil f_conc   PAR turfID       type </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span></span>

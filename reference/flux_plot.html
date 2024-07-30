@@ -274,22 +274,30 @@ if "ggsave", the plots can be saved with the ggsave function</p></dd>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">slopes0_flag</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">flux_plot</span><span class="op">(</span><span class="va">slopes0_flag</span>, fit_type <span class="op">=</span> <span class="st">"exp"</span>, fit_slope_col <span class="op">=</span> <span class="st">"f_fit_slope"</span>, print_plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Saving plots in f_quality_plots folder."</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Plotting in progress</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Plots saved in f_quality_plots folder.</span>
 <span class="r-plt img"><img src="flux_plot-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">slopes30lin_flag</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">flux_plot</span><span class="op">(</span><span class="va">slopes30lin_flag</span>, fit_type <span class="op">=</span> <span class="st">"lin"</span>, print_plot <span class="op">=</span> <span class="cn">TRUE</span>, f_plotname <span class="op">=</span> <span class="st">"pdf_quality_plots"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Saving plots in f_quality_plots folder."</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Plotting in progress</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Plots saved in f_quality_plots folder.</span>
 <span class="r-plt img"><img src="flux_plot-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="fu">flux_plot</span><span class="op">(</span><span class="va">slopes30lin_flag</span>, fit_type <span class="op">=</span> <span class="st">"lin"</span>, print_plot <span class="op">=</span> <span class="cn">TRUE</span>, output <span class="op">=</span> <span class="st">"ggsave"</span>, device <span class="op">=</span> <span class="st">"jpg"</span>, f_plotname <span class="op">=</span> <span class="st">"jpg_quality_plots"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Plotting in progress</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Saving plots with ggsave.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Saving 6.67 x 6.67 in image</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Saving plots in f_quality_plots folder."</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Plots saved in f_quality_plots folder.</span>
 <span class="r-plt img"><img src="flux_plot-3.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="fu">flux_plot</span><span class="op">(</span><span class="va">slopes30lin_flag</span>, fit_type <span class="op">=</span> <span class="st">"lin"</span>, print_plot <span class="op">=</span> <span class="cn">TRUE</span>, output <span class="op">=</span> <span class="st">"ggsave"</span>, f_plotname <span class="op">=</span> <span class="st">"jpg_quality_plots.jpg"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Plotting in progress</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Saving plots with ggsave.</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Saving 6.67 x 6.67 in image</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Saving plots in f_quality_plots folder."</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Plots saved in f_quality_plots folder.</span>
 <span class="r-plt img"><img src="flux_plot-4.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="fu">flux_plot</span><span class="op">(</span><span class="va">slopes30qua</span>, fit_type <span class="op">=</span> <span class="st">"quadratic"</span>, print_plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "Saving plots in f_quality_plots folder."</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Part of the fit will not be displayed because f_ylim_lower is too high.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Plotting in progress</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Plots saved in f_quality_plots folder.</span>
 <span class="r-plt img"><img src="flux_plot-5.png" alt="" width="700" height="433"></span>
 </code></pre></div>
     </div>

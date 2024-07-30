@@ -137,6 +137,11 @@ modelled concentration over time and exponential expression parameters</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">co2_conc</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">flux_fitting</span><span class="op">(</span><span class="va">co2_conc</span>, fit_type <span class="op">=</span> <span class="st">"exp"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Cutting measurements...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Estimating starting parameters for optimization...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Optimizing fitting parameters...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Calculating fits and slopes...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Done.</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span>  fluxID 5 : slope was estimated on 205 points out of 210 seconds because data are missing</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span>  fluxID 6 : slope was estimated on 206 points out of 210 seconds because data are missing</span>
