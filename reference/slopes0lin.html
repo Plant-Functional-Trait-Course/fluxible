@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,6 +16,11 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/fluxible_practical_example.html">Practical example: from raw gas concentration data to clean ecosystem gas fluxes.</a></li>
+  </ul></li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
       </ul></div>
@@ -55,13 +60,15 @@
 <dd><p>CO2 concentration in ppm.</p></dd>
 
 <dt>PAR</dt>
-<dd><p>Photosyntethically active radiation inside the chamber in micromol/s/sqm.</p></dd>
+<dd><p>Photosynthetically active radiation inside the chamber
+in micromol/s/sqm.</p></dd>
 
 <dt>turfID</dt>
 <dd><p>Unique ID of the turf in which the measurement took place.</p></dd>
 
 <dt>type</dt>
-<dd><p>Type of measurement: ecosystems respiration (ER) or net ecosystem exchange (NEE).</p></dd>
+<dd><p>Type of measurement: ecosystems respiration (ER)
+or net ecosystem exchange (NEE).</p></dd>
 
 <dt>start</dt>
 <dd><p>Datetime at which the measurement was started.</p></dd>
@@ -85,19 +92,23 @@
 <dd><p>Time variable of the flux in seconds.</p></dd>
 
 <dt>cut</dt>
-<dd><p>Indicating if the measurement should be kept (keep) or discarded (cut).</p></dd>
+<dd><p>Indicating if the measurement should be kept (keep)
+or discarded (cut).</p></dd>
 
 <dt>p.value</dt>
 <dd><p>P-value of the linear model of CO2 concentration over time.</p></dd>
 
 <dt>r.squared</dt>
-<dd><p>R squared of the linear model of CO2 concentration over time.</p></dd>
+<dd><p>R squared of the linear model of CO2 concentration
+over time.</p></dd>
 
 <dt>adj.r.squared</dt>
-<dd><p>Adjusted R squared of the linear model of CO2 concentration over time.</p></dd>
+<dd><p>Adjusted R squared of the linear model of
+CO2 concentration over time.</p></dd>
 
 <dt>intercept</dt>
-<dd><p>Intercept of the linear model of CO2 concentration over time.</p></dd>
+<dd><p>Intercept of the linear model of CO2 concentration
+over time.</p></dd>
 
 <dt>slope</dt>
 <dd><p>Slope of the linear model of CO2 concentration over time.</p></dd>
@@ -136,7 +147,7 @@
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Joseph Gaudard, Paul Efren, Micheal Mustri, Pekka O Niittynen, Richard J Telford.</p>
+  <p>Developed by Joseph Gaudard, Paul Efren, Michael Mustri, Pekka O Niittynen, Richard James Telford.</p>
 </div>
 
 <div class="pkgdown-footer-right">

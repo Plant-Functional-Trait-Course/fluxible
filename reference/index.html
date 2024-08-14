@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,6 +16,11 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/fluxible_practical_example.html">Practical example: from raw gas concentration data to clean ecosystem gas fluxes.</a></li>
+  </ul></li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
       </ul></div>
@@ -81,7 +86,7 @@
           <code><a href="flux_calc.html">flux_calc()</a></code>
 
         </dt>
-        <dd>calculates fluxes</dd>
+        <dd>calculates ecosystem gas fluxes</dd>
       </dl><dl><dt>
 
           <code><a href="flux_cut.html">flux_cut()</a></code>
@@ -90,16 +95,22 @@
         <dd>filter cut data before calculating fluxes</dd>
       </dl><dl><dt>
 
+          <code><a href="flux_fit_type.html">flux_fit_type()</a></code>
+
+        </dt>
+        <dd>to check the type of fit</dd>
+      </dl><dl><dt>
+
           <code><a href="flux_fitting.html">flux_fitting()</a></code>
 
         </dt>
-        <dd>wrap up function for fitting</dd>
+        <dd>Fitting a model to concentration data and estimating the slope</dd>
       </dl><dl><dt>
 
           <code><a href="flux_fitting_exp.html">flux_fitting_exp()</a></code>
 
         </dt>
-        <dd>Fitting a model to the gas concentration curve and estimating the slope</dd>
+        <dd>Fitting a model to the gas concentration curve and estimating the slope over time, using the exponential model from Zhao et al (2018)</dd>
       </dl><dl><dt>
 
           <code><a href="flux_fitting_lin.html">flux_fitting_lin()</a></code>
@@ -123,55 +134,67 @@
           <code><a href="flux_match.html">flux_match()</a></code>
 
         </dt>
-        <dd>Matching continously measured fluxes with measurement IDs</dd>
+        <dd>Matching continuously measured fluxes with measurement IDs and meta data</dd>
+      </dl><dl><dt>
+
+          <code><a href="flux_param_exp.html">flux_param_exp()</a></code>
+
+        </dt>
+        <dd>prepares text to print for flux_plot function</dd>
+      </dl><dl><dt>
+
+          <code><a href="flux_param_lm.html">flux_param_lm()</a></code>
+
+        </dt>
+        <dd>prepares text to print in flux_plot</dd>
       </dl><dl><dt>
 
           <code><a href="flux_plot.html">flux_plot()</a></code>
 
         </dt>
-        <dd>ploting fluxes for fit evaluation</dd>
+        <dd>plotting fluxes for visual evaluation</dd>
       </dl><dl><dt>
 
           <code><a href="flux_plot_exp.html">flux_plot_exp()</a></code>
 
         </dt>
-        <dd>ploting fluxes for fit evaluation</dd>
+        <dd>plotting fluxes with exponential fit</dd>
+      </dl><dl><dt>
+
+          <code><a href="flux_plot_flag.html">flux_plot_flag()</a></code>
+
+        </dt>
+        <dd>creates the flag column to be used by flux_plot</dd>
       </dl><dl><dt>
 
           <code><a href="flux_plot_lin.html">flux_plot_lin()</a></code>
 
         </dt>
-        <dd>ploting fluxes for fit evaluation</dd>
+        <dd>plotting fluxes with linear fit</dd>
       </dl><dl><dt>
 
           <code><a href="flux_plot_quadratic.html">flux_plot_quadratic()</a></code>
 
         </dt>
-        <dd>ploting fluxes for fit evaluation</dd>
+        <dd>plotting fluxes with a quadratic fit</dd>
       </dl><dl><dt>
 
           <code><a href="flux_quality.html">flux_quality()</a></code>
 
         </dt>
-        <dd>assessing quality of slopes calculated</dd>
+        <dd>assessing quality of slopes calculated with flux_fitting</dd>
       </dl><dl><dt>
 
           <code><a href="flux_quality_exp.html">flux_quality_exp()</a></code>
 
         </dt>
-        <dd>assessing fluxes quality calculated with an exponential fit quality assessment for the fluxes calculated with the exponential model</dd>
+        <dd>quality assessment for the slopes estimated by flux_fitting</dd>
       </dl><dl><dt>
 
-          <code><a href="flux_quality_lin.html">flux_quality_lin()</a></code>
+          <code><a href="flux_quality_lm.html">flux_quality_lm()</a></code>
 
         </dt>
-        <dd>quality assessment for the fluxes calculated with the linear model</dd>
-      </dl><dl><dt>
-
-          <code><a href="flux_quality_quadratic.html">flux_quality_quadratic()</a></code>
-
-        </dt>
-        <dd>quality assessment for the fluxes calculated with the quadratic model</dd>
+        <dd>quality assessment for the slopes estimated by flux_fitting</dd>
       </dl><dl><dt>
 
           <code><a href="record_liahovden.html">record_liahovden</a></code>
@@ -199,6 +222,18 @@
       </dl><dl><dt>
 
           <code><a href="slopes0_temp.html">slopes0_temp</a></code>
+
+        </dt>
+        <dd>Slopes for each flux</dd>
+      </dl><dl><dt>
+
+          <code><a href="slopes0_vol.html">slopes0_vol</a></code>
+
+        </dt>
+        <dd>Slopes for each flux</dd>
+      </dl><dl><dt>
+
+          <code><a href="slopes0_vol_tube.html">slopes0_vol_tube</a></code>
 
         </dt>
         <dd>Slopes for each flux</dd>
@@ -246,6 +281,12 @@
         <dd>Slopes for each flux</dd>
       </dl><dl><dt>
 
+          <code><a href="slopes30qua_flag.html">slopes30qua_flag</a></code>
+
+        </dt>
+        <dd>Slopes for each flux</dd>
+      </dl><dl><dt>
+
           <code><a href="slopes60.html">slopes60</a></code>
 
         </dt>
@@ -261,7 +302,7 @@
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Joseph Gaudard, Paul Efren, Micheal Mustri, Pekka O Niittynen, Richard J Telford.</p>
+  <p>Developed by Joseph Gaudard, Paul Efren, Michael Mustri, Pekka O Niittynen, Richard James Telford.</p>
 </div>
 
 <div class="pkgdown-footer-right">

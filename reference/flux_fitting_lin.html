@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,6 +16,11 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/fluxible_practical_example.html">Practical example: from raw gas concentration data to clean ecosystem gas fluxes.</a></li>
+  </ul></li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
       </ul></div>
@@ -45,7 +50,7 @@
 <span>  end_col <span class="op">=</span> <span class="st">"f_end"</span>,</span>
 <span>  datetime_col <span class="op">=</span> <span class="st">"f_datetime"</span>,</span>
 <span>  conc_col <span class="op">=</span> <span class="st">"f_conc"</span>,</span>
-<span>  fluxID_col <span class="op">=</span> <span class="st">"f_fluxID"</span></span>
+<span>  fluxid_col <span class="op">=</span> <span class="st">"f_fluxID"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -58,12 +63,12 @@
 
 
 <dt id="arg-start-cut">start_cut<a class="anchor" aria-label="anchor" href="#arg-start-cut"></a></dt>
-<dd><p>to cut at the start</p></dd>
+<dd><p>time to discard at the start of the measurements
+(in seconds)</p></dd>
 
 
 <dt id="arg-end-cut">end_cut<a class="anchor" aria-label="anchor" href="#arg-end-cut"></a></dt>
-<dd><p>to cut at the end, if you notice on the plots
-that the match was not precise enough</p></dd>
+<dd><p>time to discard at the end of the measurements (in seconds)</p></dd>
 
 
 <dt id="arg-start-col">start_col<a class="anchor" aria-label="anchor" href="#arg-start-col"></a></dt>
@@ -82,13 +87,13 @@ that the match was not precise enough</p></dd>
 <dd><p>column with gas concentration data</p></dd>
 
 
-<dt id="arg-fluxid-col">fluxID_col<a class="anchor" aria-label="anchor" href="#arg-fluxid-col"></a></dt>
+<dt id="arg-fluxid-col">fluxid_col<a class="anchor" aria-label="anchor" href="#arg-fluxid-col"></a></dt>
 <dd><p>column with ID of each flux</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>a df with the modelled gas concentration, slope, intercept,
+    <p>a df with the modeled gas concentration, slope, intercept,
 std error, r square and p value of the linear model</p>
     </div>
 
@@ -97,7 +102,7 @@ std error, r square and p value of the linear model</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Joseph Gaudard, Paul Efren, Micheal Mustri, Pekka O Niittynen, Richard J Telford.</p>
+  <p>Developed by Joseph Gaudard, Paul Efren, Michael Mustri, Pekka O Niittynen, Richard James Telford.</p>
 </div>
 
 <div class="pkgdown-footer-right">

@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,6 +16,11 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/fluxible_practical_example.html">Practical example: from raw gas concentration data to clean ecosystem gas fluxes.</a></li>
+  </ul></li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
       </ul></div>
@@ -55,13 +60,15 @@
 <dd><p>CO2 concentration in ppm.</p></dd>
 
 <dt>PAR</dt>
-<dd><p>Photosyntethically active radiation inside the chamber in micromol/s/sqm.</p></dd>
+<dd><p>Photosynthetically active radiation inside the chamber
+in micromol/s/sqm.</p></dd>
 
 <dt>turfID</dt>
 <dd><p>Unique ID of the turf in which the measurement took place.</p></dd>
 
 <dt>type</dt>
-<dd><p>Type of measurement: ecosystems respiration (ER) or net ecosystem exchange (NEE).</p></dd>
+<dd><p>Type of measurement: ecosystems respiration (ER)
+or net ecosystem exchange (NEE).</p></dd>
 
 <dt>start</dt>
 <dd><p>Datetime at which the measurement was started.</p></dd>
@@ -85,7 +92,8 @@
 <dd><p>Time variable of the flux in seconds.</p></dd>
 
 <dt>cut</dt>
-<dd><p>Indicating if the measurement should be kept (keep) or discarded (cut).</p></dd>
+<dd><p>Indicating if the measurement should be kept (keep)
+or discarded (cut).</p></dd>
 
 <dt>Cm_est</dt>
 <dd><p>Estimation of the Cm parameter.</p></dd>
@@ -103,34 +111,41 @@
 <dd><p>Cz parameter of the C(t) function.</p></dd>
 
 <dt>Cm</dt>
-<dd><p>Cm parameter of the C(t) function, calculated by optim() with Cm_est as starting point.</p></dd>
+<dd><p>Cm parameter of the C(t) function, calculated by optim() with
+Cm_est as starting point.</p></dd>
 
 <dt>a</dt>
-<dd><p>a parameter of the C(t) function, calculated by optim() with a_est as starting point.</p></dd>
+<dd><p>a parameter of the C(t) function, calculated by optim() with
+a_est as starting point.</p></dd>
 
 <dt>b</dt>
-<dd><p>b parameter of the C(t) function, calculated by optim() with b_est as starting point.</p></dd>
+<dd><p>b parameter of the C(t) function, calculated by optim() with
+b_est as starting point.</p></dd>
 
 <dt>tz</dt>
-<dd><p>tz parameter of the C(t) function, calculated by optim() with tz_est as starting point.</p></dd>
+<dd><p>tz parameter of the C(t) function, calculated by optim() with
+tz_est as starting point.</p></dd>
 
 <dt>slope_tz</dt>
 <dd><p>Slope of C(t) at tz</p></dd>
 
 <dt>fit</dt>
-<dd><p>C(t), modelled CO2 concentration as a function of time.</p></dd>
+<dd><p>C(t), modeled CO2 concentration as a function of time.</p></dd>
 
 <dt>fit_slope</dt>
-<dd><p>Output of linear model of CO2 concentration passing by C(tz) and a slope of slope_tz.</p></dd>
+<dd><p>Output of linear model of CO2 concentration passing by C(tz)
+and a slope of slope_tz.</p></dd>
 
 <dt>start_z</dt>
 <dd><p>Datetime format of tz</p></dd>
 
 <dt>temp_fahr</dt>
-<dd><p>Air temperature inside the flux chamber in Fahrenheit averaged over the flux measurement.</p></dd>
+<dd><p>Air temperature inside the flux chamber in Fahrenheit
+averaged over the flux measurement.</p></dd>
 
 <dt>temp_kelvin</dt>
-<dd><p>Air temperature inside the flux chamber in Kelvin averaged over the flux measurement.</p></dd>
+<dd><p>Air temperature inside the flux chamber in Kelvin
+averaged over the flux measurement.</p></dd>
 
 
 </dl></div>
@@ -156,7 +171,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   n_conc &lt;dbl&gt;, ratio &lt;dbl&gt;, flag &lt;lgl&gt;, f_time &lt;dbl&gt;, f_cut &lt;chr&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   Cm_est &lt;dbl&gt;, a_est &lt;dbl&gt;, b_est &lt;dbl&gt;, tz_est &lt;dbl&gt;, f_Cz &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   time_diff &lt;dbl&gt;, f_Cm &lt;dbl&gt;, f_a &lt;dbl&gt;, f_b &lt;dbl&gt;, f_tz &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   f_slope_tz &lt;dbl&gt;, f_fit &lt;dbl&gt;, f_fit_slope &lt;dbl&gt;, f_start_z &lt;dttm&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   f_slope &lt;dbl&gt;, f_fit &lt;dbl&gt;, f_fit_slope &lt;dbl&gt;, f_start_z &lt;dttm&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   temp_fahr &lt;dbl&gt;, temp_kelvin &lt;dbl&gt;</span></span>
 </code></pre></div>
     </div>
@@ -165,7 +180,7 @@
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Joseph Gaudard, Paul Efren, Micheal Mustri, Pekka O Niittynen, Richard J Telford.</p>
+  <p>Developed by Joseph Gaudard, Paul Efren, Michael Mustri, Pekka O Niittynen, Richard James Telford.</p>
 </div>
 
 <div class="pkgdown-footer-right">
