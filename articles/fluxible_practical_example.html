@@ -95,163 +95,513 @@ recorded in between.</p>
 <span><span class="co">#&gt;  $ conc     : num [1:89692] 468 469 468 468 468 ...</span></span>
 <span><span class="co">#&gt;  $ PAR      : num [1:89692] 2.59 NA NA NA NA NA NA NA NA NA ...</span></span>
 <span></span>
-<span><span class="va">conc_liahovden</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flux_match.html">flux_match</a></span><span class="op">(</span><span class="va">co2_liahovden</span>, <span class="va">record_liahovden</span><span class="op">)</span></span>
+<span><span class="va">conc_liahovden</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flux_match.html">flux_match</a></span><span class="op">(</span></span>
+<span>  raw_conc <span class="op">=</span> <span class="va">co2_liahovden</span>,</span>
+<span>  field_record <span class="op">=</span> <span class="va">record_liahovden</span>,</span>
+<span>  startcrop <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  measurement_length <span class="op">=</span> <span class="fl">220</span>,</span>
+<span>  ratio_threshold <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  time_diff <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  datetime_col <span class="op">=</span> <span class="st">"datetime"</span>,</span>
+<span>  conc_col <span class="op">=</span> <span class="st">"conc"</span>,</span>
+<span>  start_col <span class="op">=</span> <span class="st">"start"</span></span>
+<span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">conc_liahovden</span><span class="op">)</span></span>
-<span><span class="co">#&gt; tibble [28,929 × 13] (S3: tbl_df/tbl/data.frame)</span></span>
-<span><span class="co">#&gt;  $ f_datetime  : POSIXct[1:28929], format: "2022-07-27 05:37:40" "2022-07-27 05:37:41" ...</span></span>
-<span><span class="co">#&gt;  $ temp_air    : num [1:28929] NA NA NA NA NA NA NA NA NA 3.03 ...</span></span>
-<span><span class="co">#&gt;  $ temp_soil   : num [1:28929] NA NA NA NA NA NA NA NA NA 6.86 ...</span></span>
-<span><span class="co">#&gt;  $ f_conc      : num [1:28929] 465 465 465 464 464 ...</span></span>
-<span><span class="co">#&gt;  $ PAR         : num [1:28929] NA NA NA NA NA NA NA NA NA 20.6 ...</span></span>
-<span><span class="co">#&gt;  $ turfID      : chr [1:28929] "4 AN1C 4" "4 AN1C 4" "4 AN1C 4" "4 AN1C 4" ...</span></span>
-<span><span class="co">#&gt;  $ type        : chr [1:28929] "NEE" "NEE" "NEE" "NEE" ...</span></span>
-<span><span class="co">#&gt;  $ f_start     : POSIXct[1:28929], format: "2022-07-27 05:37:40" "2022-07-27 05:37:40" ...</span></span>
-<span><span class="co">#&gt;  $ f_end       : POSIXct[1:28929], format: "2022-07-27 05:41:10" "2022-07-27 05:41:10" ...</span></span>
+<span><span class="co">#&gt; tibble [30,281 × 13] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;  $ f_datetime  : POSIXct[1:30281], format: "2022-07-27 05:37:30" "2022-07-27 05:37:31" ...</span></span>
+<span><span class="co">#&gt;  $ temp_air    : num [1:30281] NA NA NA NA NA NA NA NA NA 3 ...</span></span>
+<span><span class="co">#&gt;  $ temp_soil   : num [1:30281] NA NA NA NA NA NA NA NA NA 6.83 ...</span></span>
+<span><span class="co">#&gt;  $ f_conc      : num [1:30281] 468 467 467 467 467 ...</span></span>
+<span><span class="co">#&gt;  $ PAR         : num [1:30281] NA NA NA NA NA ...</span></span>
+<span><span class="co">#&gt;  $ turfID      : chr [1:30281] "4 AN1C 4" "4 AN1C 4" "4 AN1C 4" "4 AN1C 4" ...</span></span>
+<span><span class="co">#&gt;  $ type        : chr [1:30281] "NEE" "NEE" "NEE" "NEE" ...</span></span>
+<span><span class="co">#&gt;  $ f_start     : POSIXct[1:30281], format: "2022-07-27 05:37:30" "2022-07-27 05:37:30" ...</span></span>
+<span><span class="co">#&gt;  $ f_end       : POSIXct[1:30281], format: "2022-07-27 05:41:10" "2022-07-27 05:41:10" ...</span></span>
 <span><span class="co">#&gt;  $ f_fluxID    : Factor w/ 138 levels "1","2","3","4",..: 1 1 1 1 1 1 1 1 1 1 ...</span></span>
-<span><span class="co">#&gt;  $ f_n_conc    : int [1:28929] 210 210 210 210 210 210 210 210 210 210 ...</span></span>
-<span><span class="co">#&gt;  $ f_ratio     : num [1:28929] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
-<span><span class="co">#&gt;  $ f_flag_match: chr [1:28929] NA NA NA NA ...</span></span></code></pre></div>
+<span><span class="co">#&gt;  $ f_n_conc    : int [1:30281] 220 220 220 220 220 220 220 220 220 220 ...</span></span>
+<span><span class="co">#&gt;  $ f_ratio     : num [1:30281] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;  $ f_flag_match: chr [1:30281] NA NA NA NA ...</span></span></code></pre></div>
 <p>Before calculating fluxes we need to fit a model to each measurement
 and estimate a slope of the concentration changing rate. We use the
 <code>flux_fitting</code> function with the model provided by <span class="citation">Zhao <em>et al.</em> (2018)</span>. The function
 <code>flux_fitting</code> also provides a quadratic and a linear
 fit.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">slopes_exp_liahovden</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flux_fitting.html">flux_fitting</a></span><span class="op">(</span><span class="va">conc_liahovden</span>, fit_type <span class="op">=</span> <span class="st">"exponential"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">slopes_exp_liahovden</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flux_fitting.html">flux_fitting</a></span><span class="op">(</span></span>
+<span>  conc_df <span class="op">=</span> <span class="va">conc_liahovden</span>,</span>
+<span>  start_cut <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  end_cut <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  start_col <span class="op">=</span> <span class="st">"f_start"</span>,</span>
+<span>  end_col <span class="op">=</span> <span class="st">"f_end"</span>,</span>
+<span>  datetime_col <span class="op">=</span> <span class="st">"f_datetime"</span>,</span>
+<span>  conc_col <span class="op">=</span> <span class="st">"f_conc"</span>,</span>
+<span>  fluxid_col <span class="op">=</span> <span class="st">"f_fluxID"</span>,</span>
+<span>  t_window <span class="op">=</span> <span class="fl">20</span>,</span>
+<span>  cz_window <span class="op">=</span> <span class="fl">15</span>,</span>
+<span>  b_window <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  a_window <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  roll_width <span class="op">=</span> <span class="fl">15</span>,</span>
+<span>  t_zero <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  fit_type <span class="op">=</span> <span class="st">"exponential"</span></span>
+<span><span class="op">)</span></span>
 <span><span class="co">#&gt; Cutting measurements...</span></span>
 <span><span class="co">#&gt; Estimating starting parameters for optimization...</span></span>
 <span><span class="co">#&gt; Optimizing fitting parameters...</span></span>
 <span><span class="co">#&gt; Calculating fits and slopes...</span></span>
 <span><span class="co">#&gt; Done.</span></span>
 <span><span class="co">#&gt; Warning in flux_fitting_exp(conc_df, start_cut = ((start_cut)), end_cut = ((end_cut)), : </span></span>
-<span><span class="co">#&gt;  fluxID 77 : slope was estimated on 194 points out of 210 seconds</span></span>
-<span><span class="co">#&gt;  fluxID 85 : slope was estimated on 175 points out of 210 seconds</span></span>
+<span><span class="co">#&gt;  fluxID 77 : slope was estimated on 194 points out of 220 seconds</span></span>
+<span><span class="co">#&gt;  fluxID 81 : slope was estimated on 217 points out of 220 seconds</span></span>
+<span><span class="co">#&gt;  fluxID 83 : slope was estimated on 215 points out of 220 seconds</span></span>
+<span><span class="co">#&gt;  fluxID 85 : slope was estimated on 175 points out of 220 seconds</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">slopes_exp_liahovden</span><span class="op">)</span></span>
-<span><span class="co">#&gt; tibble [28,929 × 30] (S3: tbl_df/tbl/data.frame)</span></span>
-<span><span class="co">#&gt;  $ f_datetime  : POSIXct[1:28929], format: "2022-07-27 05:37:40" "2022-07-27 05:37:41" ...</span></span>
-<span><span class="co">#&gt;  $ temp_air    : num [1:28929] NA NA NA NA NA NA NA NA NA 3.03 ...</span></span>
-<span><span class="co">#&gt;  $ temp_soil   : num [1:28929] NA NA NA NA NA NA NA NA NA 6.86 ...</span></span>
-<span><span class="co">#&gt;  $ f_conc      : num [1:28929] 465 465 465 464 464 ...</span></span>
-<span><span class="co">#&gt;  $ PAR         : num [1:28929] NA NA NA NA NA NA NA NA NA 20.6 ...</span></span>
-<span><span class="co">#&gt;  $ turfID      : chr [1:28929] "4 AN1C 4" "4 AN1C 4" "4 AN1C 4" "4 AN1C 4" ...</span></span>
-<span><span class="co">#&gt;  $ type        : chr [1:28929] "NEE" "NEE" "NEE" "NEE" ...</span></span>
-<span><span class="co">#&gt;  $ f_start     : POSIXct[1:28929], format: "2022-07-27 05:37:40" "2022-07-27 05:37:40" ...</span></span>
-<span><span class="co">#&gt;  $ f_end       : POSIXct[1:28929], format: "2022-07-27 05:41:10" "2022-07-27 05:41:10" ...</span></span>
+<span><span class="co">#&gt; tibble [30,281 × 30] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;  $ f_datetime  : POSIXct[1:30281], format: "2022-07-27 05:37:30" "2022-07-27 05:37:31" ...</span></span>
+<span><span class="co">#&gt;  $ temp_air    : num [1:30281] NA NA NA NA NA NA NA NA NA 3 ...</span></span>
+<span><span class="co">#&gt;  $ temp_soil   : num [1:30281] NA NA NA NA NA NA NA NA NA 6.83 ...</span></span>
+<span><span class="co">#&gt;  $ f_conc      : num [1:30281] 468 467 467 467 467 ...</span></span>
+<span><span class="co">#&gt;  $ PAR         : num [1:30281] NA NA NA NA NA ...</span></span>
+<span><span class="co">#&gt;  $ turfID      : chr [1:30281] "4 AN1C 4" "4 AN1C 4" "4 AN1C 4" "4 AN1C 4" ...</span></span>
+<span><span class="co">#&gt;  $ type        : chr [1:30281] "NEE" "NEE" "NEE" "NEE" ...</span></span>
+<span><span class="co">#&gt;  $ f_start     : POSIXct[1:30281], format: "2022-07-27 05:37:30" "2022-07-27 05:37:30" ...</span></span>
+<span><span class="co">#&gt;  $ f_end       : POSIXct[1:30281], format: "2022-07-27 05:41:10" "2022-07-27 05:41:10" ...</span></span>
 <span><span class="co">#&gt;  $ f_fluxID    : Factor w/ 138 levels "1","2","3","4",..: 1 1 1 1 1 1 1 1 1 1 ...</span></span>
-<span><span class="co">#&gt;  $ f_n_conc    : int [1:28929] 210 210 210 210 210 210 210 210 210 210 ...</span></span>
-<span><span class="co">#&gt;  $ f_ratio     : num [1:28929] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
-<span><span class="co">#&gt;  $ f_flag_match: chr [1:28929] NA NA NA NA ...</span></span>
-<span><span class="co">#&gt;  $ f_time      : num [1:28929] 0 1 2 3 4 5 6 7 8 9 ...</span></span>
+<span><span class="co">#&gt;  $ f_n_conc    : int [1:30281] 220 220 220 220 220 220 220 220 220 220 ...</span></span>
+<span><span class="co">#&gt;  $ f_ratio     : num [1:30281] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;  $ f_flag_match: chr [1:30281] NA NA NA NA ...</span></span>
+<span><span class="co">#&gt;  $ f_time      : num [1:30281] 0 1 2 3 4 5 6 7 8 9 ...</span></span>
 <span><span class="co">#&gt;  $ f_cut       : Factor w/ 1 level "keep": 1 1 1 1 1 1 1 1 1 1 ...</span></span>
-<span><span class="co">#&gt;  $ n_conc      : int [1:28929] 210 210 210 210 210 210 210 210 210 210 ...</span></span>
-<span><span class="co">#&gt;  $ Cm_est      : num [1:28929] 435 435 435 435 435 ...</span></span>
-<span><span class="co">#&gt;  $ a_est       : num [1:28929] -0.245 -0.245 -0.245 -0.245 -0.245 ...</span></span>
-<span><span class="co">#&gt;  $ b_est       : num [1:28929] -0.00319 -0.00319 -0.00319 -0.00319 -0.00319 ...</span></span>
-<span><span class="co">#&gt;  $ tz_est      : num [1:28929] 14 14 14 14 14 14 14 14 14 14 ...</span></span>
-<span><span class="co">#&gt;  $ f_Cz        : num [1:28929] 465 465 465 465 465 ...</span></span>
-<span><span class="co">#&gt;  $ time_diff   : num [1:28929] 0 0 0 0 0 0 0 0 0 0 ...</span></span>
-<span><span class="co">#&gt;  $ f_Cm        : num [1:28929] 304 304 304 304 304 ...</span></span>
-<span><span class="co">#&gt;  $ f_a         : num [1:28929] -0.4 -0.4 -0.4 -0.4 -0.4 ...</span></span>
-<span><span class="co">#&gt;  $ f_b         : num [1:28929] -0.00152 -0.00152 -0.00152 -0.00152 -0.00152 ...</span></span>
-<span><span class="co">#&gt;  $ f_tz        : num [1:28929] 11.3 11.3 11.3 11.3 11.3 ...</span></span>
-<span><span class="co">#&gt;  $ f_slope     : num [1:28929] -0.156 -0.156 -0.156 -0.156 -0.156 ...</span></span>
-<span><span class="co">#&gt;  $ f_fit       : num [1:28929] 466 466 466 466 466 ...</span></span>
-<span><span class="co">#&gt;  $ f_fit_slope : num [1:28929] 466 466 466 466 466 ...</span></span>
-<span><span class="co">#&gt;  $ f_start_z   : POSIXct[1:28929], format: "2022-07-27 05:37:51" "2022-07-27 05:37:51" ...</span></span>
-<span><span class="co">#&gt;  - attr(*, "fit_type")= chr "exponential"</span></span></code></pre></div>
+<span><span class="co">#&gt;  $ n_conc      : int [1:30281] 220 220 220 220 220 220 220 220 220 220 ...</span></span>
+<span><span class="co">#&gt;  $ Cm_est      : num [1:30281] 435 435 435 435 435 ...</span></span>
+<span><span class="co">#&gt;  $ a_est       : num [1:30281] -0.249 -0.249 -0.249 -0.249 -0.249 ...</span></span>
+<span><span class="co">#&gt;  $ b_est       : num [1:30281] -0.00288 -0.00288 -0.00288 -0.00288 -0.00288 ...</span></span>
+<span><span class="co">#&gt;  $ tz_est      : num [1:30281] 14 14 14 14 14 14 14 14 14 14 ...</span></span>
+<span><span class="co">#&gt;  $ f_Cz        : num [1:30281] 467 467 467 467 467 ...</span></span>
+<span><span class="co">#&gt;  $ time_diff   : num [1:30281] 0 0 0 0 0 0 0 0 0 0 ...</span></span>
+<span><span class="co">#&gt;  $ f_Cm        : num [1:30281] 372 372 372 372 372 ...</span></span>
+<span><span class="co">#&gt;  $ f_a         : num [1:30281] -0.402 -0.402 -0.402 -0.402 -0.402 ...</span></span>
+<span><span class="co">#&gt;  $ f_b         : num [1:30281] -0.00229 -0.00229 -0.00229 -0.00229 -0.00229 ...</span></span>
+<span><span class="co">#&gt;  $ f_tz        : num [1:30281] 13.2 13.2 13.2 13.2 13.2 ...</span></span>
+<span><span class="co">#&gt;  $ f_slope     : num [1:30281] -0.184 -0.184 -0.184 -0.184 -0.184 ...</span></span>
+<span><span class="co">#&gt;  $ f_fit       : num [1:30281] 470 470 470 469 469 ...</span></span>
+<span><span class="co">#&gt;  $ f_fit_slope : num [1:30281] 470 470 470 469 469 ...</span></span>
+<span><span class="co">#&gt;  $ f_start_z   : POSIXct[1:30281], format: "2022-07-27 05:37:43" "2022-07-27 05:37:43" ...</span></span>
+<span><span class="co">#&gt;  - attr(*, "fit_type")= chr "exponential"</span></span>
+<span></span>
+<span><span class="va">slopes_qua_liahovden</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flux_fitting.html">flux_fitting</a></span><span class="op">(</span></span>
+<span>  conc_df <span class="op">=</span> <span class="va">conc_liahovden</span>,</span>
+<span>  start_cut <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  end_cut <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  start_col <span class="op">=</span> <span class="st">"f_start"</span>,</span>
+<span>  end_col <span class="op">=</span> <span class="st">"f_end"</span>,</span>
+<span>  datetime_col <span class="op">=</span> <span class="st">"f_datetime"</span>,</span>
+<span>  conc_col <span class="op">=</span> <span class="st">"f_conc"</span>,</span>
+<span>  fluxid_col <span class="op">=</span> <span class="st">"f_fluxID"</span>,</span>
+<span>  t_window <span class="op">=</span> <span class="fl">20</span>,</span>
+<span>  cz_window <span class="op">=</span> <span class="fl">15</span>,</span>
+<span>  b_window <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  a_window <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  roll_width <span class="op">=</span> <span class="fl">15</span>,</span>
+<span>  t_zero <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>  fit_type <span class="op">=</span> <span class="st">"quadratic"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in flux_fitting_quadratic(conc_df, start_cut = ((start_cut)), end_cut = ((end_cut)), : </span></span>
+<span><span class="co">#&gt;  fluxID 77 : slope was estimated on 194 points out of 220 seconds because data are missing</span></span>
+<span><span class="co">#&gt;  fluxID 81 : slope was estimated on 217 points out of 220 seconds because data are missing</span></span>
+<span><span class="co">#&gt;  fluxID 83 : slope was estimated on 215 points out of 220 seconds because data are missing</span></span>
+<span><span class="co">#&gt;  fluxID 85 : slope was estimated on 175 points out of 220 seconds because data are missing</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">slopes_qua_liahovden</span><span class="op">)</span></span>
+<span><span class="co">#&gt; tibble [30,281 × 25] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;  $ f_datetime    : POSIXct[1:30281], format: "2022-07-27 05:37:30" "2022-07-27 05:37:31" ...</span></span>
+<span><span class="co">#&gt;  $ temp_air      : num [1:30281] NA NA NA NA NA NA NA NA NA 3 ...</span></span>
+<span><span class="co">#&gt;  $ temp_soil     : num [1:30281] NA NA NA NA NA NA NA NA NA 6.83 ...</span></span>
+<span><span class="co">#&gt;  $ f_conc        : num [1:30281] 468 467 467 467 467 ...</span></span>
+<span><span class="co">#&gt;  $ PAR           : num [1:30281] NA NA NA NA NA ...</span></span>
+<span><span class="co">#&gt;  $ turfID        : chr [1:30281] "4 AN1C 4" "4 AN1C 4" "4 AN1C 4" "4 AN1C 4" ...</span></span>
+<span><span class="co">#&gt;  $ type          : chr [1:30281] "NEE" "NEE" "NEE" "NEE" ...</span></span>
+<span><span class="co">#&gt;  $ f_start       : POSIXct[1:30281], format: "2022-07-27 05:37:30" "2022-07-27 05:37:30" ...</span></span>
+<span><span class="co">#&gt;  $ f_end         : POSIXct[1:30281], format: "2022-07-27 05:41:10" "2022-07-27 05:41:10" ...</span></span>
+<span><span class="co">#&gt;  $ f_fluxID      : Factor w/ 138 levels "1","2","3","4",..: 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;  $ f_n_conc      : int [1:30281] 220 220 220 220 220 220 220 220 220 220 ...</span></span>
+<span><span class="co">#&gt;  $ f_ratio       : num [1:30281] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;  $ f_flag_match  : chr [1:30281] NA NA NA NA ...</span></span>
+<span><span class="co">#&gt;  $ f_time        : num [1:30281] 0 1 2 3 4 5 6 7 8 9 ...</span></span>
+<span><span class="co">#&gt;  $ f_cut         : Factor w/ 1 level "keep": 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;  $ n_conc        : int [1:30281] 220 220 220 220 220 220 220 220 220 220 ...</span></span>
+<span><span class="co">#&gt;  $ f_rsquared    : num [1:30281] 0.967 0.967 0.967 0.967 0.967 ...</span></span>
+<span><span class="co">#&gt;  $ f_adj_rsquared: num [1:30281] 0.966 0.966 0.966 0.966 0.966 ...</span></span>
+<span><span class="co">#&gt;  $ f_pvalue      : Named num [1:30281] 9.07e-161 9.07e-161 9.07e-161 9.07e-161 9.07e-161 ...</span></span>
+<span><span class="co">#&gt;   ..- attr(*, "names")= chr [1:30281] "value" "value" "value" "value" ...</span></span>
+<span><span class="co">#&gt;  $ f_intercept   : num [1:30281] 465 465 465 465 465 ...</span></span>
+<span><span class="co">#&gt;  $ f_param1      : num [1:30281] -0.11 -0.11 -0.11 -0.11 -0.11 ...</span></span>
+<span><span class="co">#&gt;  $ f_param2      : num [1:30281] 3.9e-06 3.9e-06 3.9e-06 3.9e-06 3.9e-06 ...</span></span>
+<span><span class="co">#&gt;  $ f_slope       : num [1:30281] -0.11 -0.11 -0.11 -0.11 -0.11 ...</span></span>
+<span><span class="co">#&gt;  $ f_fit         : num [1:30281] 465 465 464 464 464 ...</span></span>
+<span><span class="co">#&gt;  $ f_fit_slope   : num [1:30281] 465 465 464 464 464 ...</span></span>
+<span><span class="co">#&gt;  - attr(*, "fit_type")= chr "quadratic"</span></span>
+<span></span>
+<span><span class="va">slopes_lin_liahovden</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flux_fitting.html">flux_fitting</a></span><span class="op">(</span></span>
+<span>  conc_df <span class="op">=</span> <span class="va">conc_liahovden</span>,</span>
+<span>  start_cut <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  end_cut <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  start_col <span class="op">=</span> <span class="st">"f_start"</span>,</span>
+<span>  end_col <span class="op">=</span> <span class="st">"f_end"</span>,</span>
+<span>  datetime_col <span class="op">=</span> <span class="st">"f_datetime"</span>,</span>
+<span>  conc_col <span class="op">=</span> <span class="st">"f_conc"</span>,</span>
+<span>  fluxid_col <span class="op">=</span> <span class="st">"f_fluxID"</span>,</span>
+<span>  t_window <span class="op">=</span> <span class="fl">20</span>,</span>
+<span>  cz_window <span class="op">=</span> <span class="fl">15</span>,</span>
+<span>  b_window <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  a_window <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  roll_width <span class="op">=</span> <span class="fl">15</span>,</span>
+<span>  t_zero <span class="op">=</span> <span class="fl">5</span>,</span>
+<span>  fit_type <span class="op">=</span> <span class="st">"linear"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; Warning in flux_fitting_lin(conc_df, start_cut = ((start_cut)), end_cut = ((end_cut)), : </span></span>
+<span><span class="co">#&gt;  fluxID 77 : slope was estimated on 194 points out of 220 seconds</span></span>
+<span><span class="co">#&gt;  fluxID 81 : slope was estimated on 217 points out of 220 seconds</span></span>
+<span><span class="co">#&gt;  fluxID 83 : slope was estimated on 215 points out of 220 seconds</span></span>
+<span><span class="co">#&gt;  fluxID 85 : slope was estimated on 175 points out of 220 seconds</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">slopes_lin_liahovden</span><span class="op">)</span></span>
+<span><span class="co">#&gt; tibble [30,281 × 22] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;  $ f_datetime    : POSIXct[1:30281], format: "2022-07-27 05:37:30" "2022-07-27 05:37:31" ...</span></span>
+<span><span class="co">#&gt;  $ temp_air      : num [1:30281] NA NA NA NA NA NA NA NA NA 3 ...</span></span>
+<span><span class="co">#&gt;  $ temp_soil     : num [1:30281] NA NA NA NA NA NA NA NA NA 6.83 ...</span></span>
+<span><span class="co">#&gt;  $ f_conc        : num [1:30281] 468 467 467 467 467 ...</span></span>
+<span><span class="co">#&gt;  $ PAR           : num [1:30281] NA NA NA NA NA ...</span></span>
+<span><span class="co">#&gt;  $ turfID        : chr [1:30281] "4 AN1C 4" "4 AN1C 4" "4 AN1C 4" "4 AN1C 4" ...</span></span>
+<span><span class="co">#&gt;  $ type          : chr [1:30281] "NEE" "NEE" "NEE" "NEE" ...</span></span>
+<span><span class="co">#&gt;  $ f_start       : POSIXct[1:30281], format: "2022-07-27 05:37:30" "2022-07-27 05:37:30" ...</span></span>
+<span><span class="co">#&gt;  $ f_end         : POSIXct[1:30281], format: "2022-07-27 05:41:10" "2022-07-27 05:41:10" ...</span></span>
+<span><span class="co">#&gt;  $ f_fluxID      : Factor w/ 138 levels "1","2","3","4",..: 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;  $ f_n_conc      : int [1:30281] 220 220 220 220 220 220 220 220 220 220 ...</span></span>
+<span><span class="co">#&gt;  $ f_ratio       : num [1:30281] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;  $ f_flag_match  : chr [1:30281] NA NA NA NA ...</span></span>
+<span><span class="co">#&gt;  $ f_time        : num [1:30281] 0 1 2 3 4 5 6 7 8 9 ...</span></span>
+<span><span class="co">#&gt;  $ f_cut         : Factor w/ 1 level "keep": 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;  $ n_conc        : int [1:30281] 220 220 220 220 220 220 220 220 220 220 ...</span></span>
+<span><span class="co">#&gt;  $ f_rsquared    : num [1:30281] 0.967 0.967 0.967 0.967 0.967 ...</span></span>
+<span><span class="co">#&gt;  $ f_adj_rsquared: num [1:30281] 0.966 0.966 0.966 0.966 0.966 ...</span></span>
+<span><span class="co">#&gt;  $ f_pvalue      : Named num [1:30281] 9.23e-163 9.23e-163 9.23e-163 9.23e-163 9.23e-163 ...</span></span>
+<span><span class="co">#&gt;   ..- attr(*, "names")= chr [1:30281] "value" "value" "value" "value" ...</span></span>
+<span><span class="co">#&gt;  $ f_intercept   : num [1:30281] 465 465 465 465 465 ...</span></span>
+<span><span class="co">#&gt;  $ f_slope       : num [1:30281] -0.109 -0.109 -0.109 -0.109 -0.109 ...</span></span>
+<span><span class="co">#&gt;  $ f_fit         : num [1:30281] 465 465 464 464 464 ...</span></span>
+<span><span class="co">#&gt;  - attr(*, "fit_type")= chr "linear"</span></span></code></pre></div>
 <p>The function <code>flux_quality</code> is used to provide diagnostics
 about the quality of the fit, eventually advising to discard some
 measurements or replace them by zero.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">slopes_exp_liahovden</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flux_quality.html">flux_quality</a></span><span class="op">(</span></span>
-<span>  <span class="va">slopes_exp_liahovden</span>,</span>
-<span>  fit_type <span class="op">=</span> <span class="st">"expo"</span>,</span>
-<span>  slope_col <span class="op">=</span> <span class="st">"f_slope"</span></span>
+<code class="sourceCode R"><span><span class="va">slopes_exp_liahovden_flag</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flux_quality.html">flux_quality</a></span><span class="op">(</span></span>
+<span>  slopes_df <span class="op">=</span> <span class="va">slopes_exp_liahovden</span>,</span>
+<span>  <span class="co"># fit_type is automatically provided as an attribute because</span></span>
+<span>  <span class="co"># slopes_exp_liahovden was produced with flux_fitting</span></span>
+<span>  ambient_conc <span class="op">=</span> <span class="fl">421</span>,</span>
+<span>  error <span class="op">=</span> <span class="fl">100</span>,</span>
+<span>  fluxid_col <span class="op">=</span> <span class="st">"f_fluxID"</span>,</span>
+<span>  slope_col <span class="op">=</span> <span class="st">"f_slope"</span>,</span>
+<span>  weird_fluxes_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  force_ok_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  ratio_threshold <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  conc_col <span class="op">=</span> <span class="st">"f_conc"</span>,</span>
+<span>  b_col <span class="op">=</span> <span class="st">"f_b"</span>,</span>
+<span>  time_col <span class="op">=</span> <span class="st">"f_time"</span>,</span>
+<span>  fit_col <span class="op">=</span> <span class="st">"f_fit"</span>,</span>
+<span>  cut_col <span class="op">=</span> <span class="st">"f_cut"</span>,</span>
+<span>  rmse_threshold <span class="op">=</span> <span class="fl">25</span>,</span>
+<span>  cor_threshold <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  b_threshold <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  cut_arg <span class="op">=</span> <span class="st">"cut"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  Total number of measurements: 138</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;  discard      1   1 %</span></span>
-<span><span class="co">#&gt;  ok   133     96 %</span></span>
+<span><span class="co">#&gt;  discard      4   3 %</span></span>
+<span><span class="co">#&gt;  ok   130     94 %</span></span>
 <span><span class="co">#&gt;  zero     4   3 %</span></span>
 <span><span class="co">#&gt;  weird_flux   0   0 %</span></span>
 <span><span class="co">#&gt;  start_error      0   0 %</span></span>
 <span><span class="co">#&gt;  no_data      0   0 %</span></span>
 <span><span class="co">#&gt;  force_ok     0   0 %</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">slopes_exp_liahovden</span><span class="op">)</span></span>
-<span><span class="co">#&gt; tibble [28,929 × 38] (S3: tbl_df/tbl/data.frame)</span></span>
-<span><span class="co">#&gt;  $ f_datetime    : POSIXct[1:28929], format: "2022-07-27 05:37:40" "2022-07-27 05:37:41" ...</span></span>
-<span><span class="co">#&gt;  $ temp_air      : num [1:28929] NA NA NA NA NA NA NA NA NA 3.03 ...</span></span>
-<span><span class="co">#&gt;  $ temp_soil     : num [1:28929] NA NA NA NA NA NA NA NA NA 6.86 ...</span></span>
-<span><span class="co">#&gt;  $ f_conc        : num [1:28929] 465 465 465 464 464 ...</span></span>
-<span><span class="co">#&gt;  $ PAR           : num [1:28929] NA NA NA NA NA NA NA NA NA 20.6 ...</span></span>
-<span><span class="co">#&gt;  $ turfID        : chr [1:28929] "4 AN1C 4" "4 AN1C 4" "4 AN1C 4" "4 AN1C 4" ...</span></span>
-<span><span class="co">#&gt;  $ type          : chr [1:28929] "NEE" "NEE" "NEE" "NEE" ...</span></span>
-<span><span class="co">#&gt;  $ f_start       : POSIXct[1:28929], format: "2022-07-27 05:37:40" "2022-07-27 05:37:40" ...</span></span>
-<span><span class="co">#&gt;  $ f_end         : POSIXct[1:28929], format: "2022-07-27 05:41:10" "2022-07-27 05:41:10" ...</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">slopes_exp_liahovden_flag</span><span class="op">)</span></span>
+<span><span class="co">#&gt; tibble [30,281 × 38] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;  $ f_datetime    : POSIXct[1:30281], format: "2022-07-27 05:37:30" "2022-07-27 05:37:31" ...</span></span>
+<span><span class="co">#&gt;  $ temp_air      : num [1:30281] NA NA NA NA NA NA NA NA NA 3 ...</span></span>
+<span><span class="co">#&gt;  $ temp_soil     : num [1:30281] NA NA NA NA NA NA NA NA NA 6.83 ...</span></span>
+<span><span class="co">#&gt;  $ f_conc        : num [1:30281] 468 467 467 467 467 ...</span></span>
+<span><span class="co">#&gt;  $ PAR           : num [1:30281] NA NA NA NA NA ...</span></span>
+<span><span class="co">#&gt;  $ turfID        : chr [1:30281] "4 AN1C 4" "4 AN1C 4" "4 AN1C 4" "4 AN1C 4" ...</span></span>
+<span><span class="co">#&gt;  $ type          : chr [1:30281] "NEE" "NEE" "NEE" "NEE" ...</span></span>
+<span><span class="co">#&gt;  $ f_start       : POSIXct[1:30281], format: "2022-07-27 05:37:30" "2022-07-27 05:37:30" ...</span></span>
+<span><span class="co">#&gt;  $ f_end         : POSIXct[1:30281], format: "2022-07-27 05:41:10" "2022-07-27 05:41:10" ...</span></span>
 <span><span class="co">#&gt;  $ f_fluxID      : Factor w/ 138 levels "1","2","3","4",..: 1 1 1 1 1 1 1 1 1 1 ...</span></span>
-<span><span class="co">#&gt;  $ f_n_conc      : int [1:28929] 210 210 210 210 210 210 210 210 210 210 ...</span></span>
-<span><span class="co">#&gt;  $ f_ratio       : num [1:28929] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
-<span><span class="co">#&gt;  $ f_flag_match  : chr [1:28929] NA NA NA NA ...</span></span>
-<span><span class="co">#&gt;  $ f_time        : num [1:28929] 0 1 2 3 4 5 6 7 8 9 ...</span></span>
+<span><span class="co">#&gt;  $ f_n_conc      : int [1:30281] 220 220 220 220 220 220 220 220 220 220 ...</span></span>
+<span><span class="co">#&gt;  $ f_ratio       : num [1:30281] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;  $ f_flag_match  : chr [1:30281] NA NA NA NA ...</span></span>
+<span><span class="co">#&gt;  $ f_time        : num [1:30281] 0 1 2 3 4 5 6 7 8 9 ...</span></span>
 <span><span class="co">#&gt;  $ f_cut         : Factor w/ 1 level "keep": 1 1 1 1 1 1 1 1 1 1 ...</span></span>
-<span><span class="co">#&gt;  $ n_conc        : int [1:28929] 210 210 210 210 210 210 210 210 210 210 ...</span></span>
-<span><span class="co">#&gt;  $ Cm_est        : num [1:28929] 435 435 435 435 435 ...</span></span>
-<span><span class="co">#&gt;  $ a_est         : num [1:28929] -0.245 -0.245 -0.245 -0.245 -0.245 ...</span></span>
-<span><span class="co">#&gt;  $ b_est         : num [1:28929] -0.00319 -0.00319 -0.00319 -0.00319 -0.00319 ...</span></span>
-<span><span class="co">#&gt;  $ tz_est        : num [1:28929] 14 14 14 14 14 14 14 14 14 14 ...</span></span>
-<span><span class="co">#&gt;  $ f_Cz          : num [1:28929] 465 465 465 465 465 ...</span></span>
-<span><span class="co">#&gt;  $ time_diff     : num [1:28929] 0 0 0 0 0 0 0 0 0 0 ...</span></span>
-<span><span class="co">#&gt;  $ f_Cm          : num [1:28929] 304 304 304 304 304 ...</span></span>
-<span><span class="co">#&gt;  $ f_a           : num [1:28929] -0.4 -0.4 -0.4 -0.4 -0.4 ...</span></span>
-<span><span class="co">#&gt;  $ f_b           : num [1:28929] -0.00152 -0.00152 -0.00152 -0.00152 -0.00152 ...</span></span>
-<span><span class="co">#&gt;  $ f_tz          : num [1:28929] 11.3 11.3 11.3 11.3 11.3 ...</span></span>
-<span><span class="co">#&gt;  $ f_slope       : num [1:28929] -0.156 -0.156 -0.156 -0.156 -0.156 ...</span></span>
-<span><span class="co">#&gt;  $ f_fit         : num [1:28929] 466 466 466 466 466 ...</span></span>
-<span><span class="co">#&gt;  $ f_fit_slope   : num [1:28929] 466 466 466 466 466 ...</span></span>
-<span><span class="co">#&gt;  $ f_start_z     : POSIXct[1:28929], format: "2022-07-27 05:37:51" "2022-07-27 05:37:51" ...</span></span>
-<span><span class="co">#&gt;  $ f_flag_ratio  : chr [1:28929] "ok" "ok" "ok" "ok" ...</span></span>
-<span><span class="co">#&gt;  $ f_start_error : chr [1:28929] "ok" "ok" "ok" "ok" ...</span></span>
-<span><span class="co">#&gt;  $ f_cor_coef    : num [1:28929] -0.982 -0.982 -0.982 -0.982 -0.982 ...</span></span>
-<span><span class="co">#&gt;  $ f_RMSE        : num [1:28929] 1.77 1.77 1.77 1.77 1.77 ...</span></span>
-<span><span class="co">#&gt;  $ f_fit_quality : chr [1:28929] NA NA NA NA ...</span></span>
-<span><span class="co">#&gt;  $ f_correlation : chr [1:28929] "yes" "yes" "yes" "yes" ...</span></span>
-<span><span class="co">#&gt;  $ f_quality_flag: chr [1:28929] "ok" "ok" "ok" "ok" ...</span></span>
-<span><span class="co">#&gt;  $ f_slope_corr  : num [1:28929] -0.156 -0.156 -0.156 -0.156 -0.156 ...</span></span>
-<span><span class="co">#&gt;  - attr(*, "fit_type")= chr "exponential"</span></span></code></pre></div>
+<span><span class="co">#&gt;  $ n_conc        : int [1:30281] 220 220 220 220 220 220 220 220 220 220 ...</span></span>
+<span><span class="co">#&gt;  $ Cm_est        : num [1:30281] 435 435 435 435 435 ...</span></span>
+<span><span class="co">#&gt;  $ a_est         : num [1:30281] -0.249 -0.249 -0.249 -0.249 -0.249 ...</span></span>
+<span><span class="co">#&gt;  $ b_est         : num [1:30281] -0.00288 -0.00288 -0.00288 -0.00288 -0.00288 ...</span></span>
+<span><span class="co">#&gt;  $ tz_est        : num [1:30281] 14 14 14 14 14 14 14 14 14 14 ...</span></span>
+<span><span class="co">#&gt;  $ f_Cz          : num [1:30281] 467 467 467 467 467 ...</span></span>
+<span><span class="co">#&gt;  $ time_diff     : num [1:30281] 0 0 0 0 0 0 0 0 0 0 ...</span></span>
+<span><span class="co">#&gt;  $ f_Cm          : num [1:30281] 372 372 372 372 372 ...</span></span>
+<span><span class="co">#&gt;  $ f_a           : num [1:30281] -0.402 -0.402 -0.402 -0.402 -0.402 ...</span></span>
+<span><span class="co">#&gt;  $ f_b           : num [1:30281] -0.00229 -0.00229 -0.00229 -0.00229 -0.00229 ...</span></span>
+<span><span class="co">#&gt;  $ f_tz          : num [1:30281] 13.2 13.2 13.2 13.2 13.2 ...</span></span>
+<span><span class="co">#&gt;  $ f_slope       : num [1:30281] -0.184 -0.184 -0.184 -0.184 -0.184 ...</span></span>
+<span><span class="co">#&gt;  $ f_fit         : num [1:30281] 470 470 470 469 469 ...</span></span>
+<span><span class="co">#&gt;  $ f_fit_slope   : num [1:30281] 470 470 470 469 469 ...</span></span>
+<span><span class="co">#&gt;  $ f_start_z     : POSIXct[1:30281], format: "2022-07-27 05:37:43" "2022-07-27 05:37:43" ...</span></span>
+<span><span class="co">#&gt;  $ f_flag_ratio  : chr [1:30281] "ok" "ok" "ok" "ok" ...</span></span>
+<span><span class="co">#&gt;  $ f_start_error : chr [1:30281] "ok" "ok" "ok" "ok" ...</span></span>
+<span><span class="co">#&gt;  $ f_cor_coef    : num [1:30281] -0.983 -0.983 -0.983 -0.983 -0.983 ...</span></span>
+<span><span class="co">#&gt;  $ f_RMSE        : num [1:30281] 2.25 2.25 2.25 2.25 2.25 ...</span></span>
+<span><span class="co">#&gt;  $ f_fit_quality : chr [1:30281] NA NA NA NA ...</span></span>
+<span><span class="co">#&gt;  $ f_correlation : chr [1:30281] "yes" "yes" "yes" "yes" ...</span></span>
+<span><span class="co">#&gt;  $ f_quality_flag: chr [1:30281] "ok" "ok" "ok" "ok" ...</span></span>
+<span><span class="co">#&gt;  $ f_slope_corr  : num [1:30281] -0.184 -0.184 -0.184 -0.184 -0.184 ...</span></span>
+<span><span class="co">#&gt;  - attr(*, "fit_type")= chr "exponential"</span></span>
+<span></span>
+<span><span class="va">slopes_qua_liahovden_flag</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flux_quality.html">flux_quality</a></span><span class="op">(</span></span>
+<span>  slopes_df <span class="op">=</span> <span class="va">slopes_qua_liahovden</span>,</span>
+<span>  <span class="co"># fit_type is automatically provided as an attribute because</span></span>
+<span>  <span class="co"># slopes_exp_liahovden was produced with flux_fitting</span></span>
+<span>  ambient_conc <span class="op">=</span> <span class="fl">421</span>,</span>
+<span>  error <span class="op">=</span> <span class="fl">100</span>,</span>
+<span>  fluxid_col <span class="op">=</span> <span class="st">"f_fluxID"</span>,</span>
+<span>  slope_col <span class="op">=</span> <span class="st">"f_slope"</span>,</span>
+<span>  weird_fluxes_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  force_ok_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  ratio_threshold <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  pvalue_col <span class="op">=</span> <span class="st">"f_pvalue"</span>,</span>
+<span>  rsquared_col <span class="op">=</span> <span class="st">"f_rsquared"</span>,</span>
+<span>  pvalue_threshold <span class="op">=</span> <span class="fl">0.3</span>,</span>
+<span>  rsquared_threshold <span class="op">=</span> <span class="fl">0.7</span>,</span>
+<span>  conc_col <span class="op">=</span> <span class="st">"f_conc"</span>,</span>
+<span>  time_col <span class="op">=</span> <span class="st">"f_time"</span>,</span>
+<span>  fit_col <span class="op">=</span> <span class="st">"f_fit"</span>,</span>
+<span>  cut_col <span class="op">=</span> <span class="st">"f_cut"</span>,</span>
+<span>  cut_arg <span class="op">=</span> <span class="st">"cut"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  Total number of measurements: 138</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  discard      1   1 %</span></span>
+<span><span class="co">#&gt;  ok   86      62 %</span></span>
+<span><span class="co">#&gt;  zero     51      37 %</span></span>
+<span><span class="co">#&gt;  weird_flux   0   0 %</span></span>
+<span><span class="co">#&gt;  start_error      0   0 %</span></span>
+<span><span class="co">#&gt;  no_data      0   0 %</span></span>
+<span><span class="co">#&gt;  force_ok     0   0 %</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">slopes_qua_liahovden_flag</span><span class="op">)</span></span>
+<span><span class="co">#&gt; tibble [30,281 × 29] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;  $ f_datetime    : POSIXct[1:30281], format: "2022-07-27 05:37:30" "2022-07-27 05:37:31" ...</span></span>
+<span><span class="co">#&gt;  $ temp_air      : num [1:30281] NA NA NA NA NA NA NA NA NA 3 ...</span></span>
+<span><span class="co">#&gt;  $ temp_soil     : num [1:30281] NA NA NA NA NA NA NA NA NA 6.83 ...</span></span>
+<span><span class="co">#&gt;  $ f_conc        : num [1:30281] 468 467 467 467 467 ...</span></span>
+<span><span class="co">#&gt;  $ PAR           : num [1:30281] NA NA NA NA NA ...</span></span>
+<span><span class="co">#&gt;  $ turfID        : chr [1:30281] "4 AN1C 4" "4 AN1C 4" "4 AN1C 4" "4 AN1C 4" ...</span></span>
+<span><span class="co">#&gt;  $ type          : chr [1:30281] "NEE" "NEE" "NEE" "NEE" ...</span></span>
+<span><span class="co">#&gt;  $ f_start       : POSIXct[1:30281], format: "2022-07-27 05:37:30" "2022-07-27 05:37:30" ...</span></span>
+<span><span class="co">#&gt;  $ f_end         : POSIXct[1:30281], format: "2022-07-27 05:41:10" "2022-07-27 05:41:10" ...</span></span>
+<span><span class="co">#&gt;  $ f_fluxID      : Factor w/ 138 levels "1","2","3","4",..: 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;  $ f_n_conc      : int [1:30281] 220 220 220 220 220 220 220 220 220 220 ...</span></span>
+<span><span class="co">#&gt;  $ f_ratio       : num [1:30281] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;  $ f_flag_match  : chr [1:30281] NA NA NA NA ...</span></span>
+<span><span class="co">#&gt;  $ f_time        : num [1:30281] 0 1 2 3 4 5 6 7 8 9 ...</span></span>
+<span><span class="co">#&gt;  $ f_cut         : Factor w/ 1 level "keep": 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;  $ n_conc        : int [1:30281] 220 220 220 220 220 220 220 220 220 220 ...</span></span>
+<span><span class="co">#&gt;  $ f_rsquared    : num [1:30281] 0.967 0.967 0.967 0.967 0.967 ...</span></span>
+<span><span class="co">#&gt;  $ f_adj_rsquared: num [1:30281] 0.966 0.966 0.966 0.966 0.966 ...</span></span>
+<span><span class="co">#&gt;  $ f_pvalue      : Named num [1:30281] 9.07e-161 9.07e-161 9.07e-161 9.07e-161 9.07e-161 ...</span></span>
+<span><span class="co">#&gt;   ..- attr(*, "names")= chr [1:30281] "value" "value" "value" "value" ...</span></span>
+<span><span class="co">#&gt;  $ f_intercept   : num [1:30281] 465 465 465 465 465 ...</span></span>
+<span><span class="co">#&gt;  $ f_param1      : num [1:30281] -0.11 -0.11 -0.11 -0.11 -0.11 ...</span></span>
+<span><span class="co">#&gt;  $ f_param2      : num [1:30281] 3.9e-06 3.9e-06 3.9e-06 3.9e-06 3.9e-06 ...</span></span>
+<span><span class="co">#&gt;  $ f_slope       : num [1:30281] -0.11 -0.11 -0.11 -0.11 -0.11 ...</span></span>
+<span><span class="co">#&gt;  $ f_fit         : num [1:30281] 465 465 464 464 464 ...</span></span>
+<span><span class="co">#&gt;  $ f_fit_slope   : num [1:30281] 465 465 464 464 464 ...</span></span>
+<span><span class="co">#&gt;  $ f_flag_ratio  : chr [1:30281] "ok" "ok" "ok" "ok" ...</span></span>
+<span><span class="co">#&gt;  $ f_start_error : chr [1:30281] "ok" "ok" "ok" "ok" ...</span></span>
+<span><span class="co">#&gt;  $ f_quality_flag: chr [1:30281] "ok" "ok" "ok" "ok" ...</span></span>
+<span><span class="co">#&gt;  $ f_slope_corr  : num [1:30281] -0.11 -0.11 -0.11 -0.11 -0.11 ...</span></span>
+<span><span class="co">#&gt;  - attr(*, "fit_type")= chr "quadratic"</span></span>
+<span></span>
+<span><span class="va">slopes_lin_liahovden_flag</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flux_quality.html">flux_quality</a></span><span class="op">(</span></span>
+<span>  slopes_df <span class="op">=</span> <span class="va">slopes_lin_liahovden</span>,</span>
+<span>  <span class="co"># fit_type is automatically provided as an attribute because</span></span>
+<span>  <span class="co"># slopes_exp_liahovden was produced with flux_fitting</span></span>
+<span>  ambient_conc <span class="op">=</span> <span class="fl">421</span>,</span>
+<span>  error <span class="op">=</span> <span class="fl">100</span>,</span>
+<span>  fluxid_col <span class="op">=</span> <span class="st">"f_fluxID"</span>,</span>
+<span>  slope_col <span class="op">=</span> <span class="st">"f_slope"</span>,</span>
+<span>  weird_fluxes_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  force_ok_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  ratio_threshold <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  pvalue_col <span class="op">=</span> <span class="st">"f_pvalue"</span>,</span>
+<span>  rsquared_col <span class="op">=</span> <span class="st">"f_rsquared"</span>,</span>
+<span>  pvalue_threshold <span class="op">=</span> <span class="fl">0.3</span>,</span>
+<span>  rsquared_threshold <span class="op">=</span> <span class="fl">0.7</span>,</span>
+<span>  conc_col <span class="op">=</span> <span class="st">"f_conc"</span>,</span>
+<span>  time_col <span class="op">=</span> <span class="st">"f_time"</span>,</span>
+<span>  fit_col <span class="op">=</span> <span class="st">"f_fit"</span>,</span>
+<span>  cut_col <span class="op">=</span> <span class="st">"f_cut"</span>,</span>
+<span>  cut_arg <span class="op">=</span> <span class="st">"cut"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  Total number of measurements: 138</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  discard      6   4 %</span></span>
+<span><span class="co">#&gt;  ok   52      38 %</span></span>
+<span><span class="co">#&gt;  zero     80      58 %</span></span>
+<span><span class="co">#&gt;  weird_flux   0   0 %</span></span>
+<span><span class="co">#&gt;  start_error      0   0 %</span></span>
+<span><span class="co">#&gt;  no_data      0   0 %</span></span>
+<span><span class="co">#&gt;  force_ok     0   0 %</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">slopes_lin_liahovden_flag</span><span class="op">)</span></span>
+<span><span class="co">#&gt; tibble [30,281 × 26] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;  $ f_datetime    : POSIXct[1:30281], format: "2022-07-27 05:37:30" "2022-07-27 05:37:31" ...</span></span>
+<span><span class="co">#&gt;  $ temp_air      : num [1:30281] NA NA NA NA NA NA NA NA NA 3 ...</span></span>
+<span><span class="co">#&gt;  $ temp_soil     : num [1:30281] NA NA NA NA NA NA NA NA NA 6.83 ...</span></span>
+<span><span class="co">#&gt;  $ f_conc        : num [1:30281] 468 467 467 467 467 ...</span></span>
+<span><span class="co">#&gt;  $ PAR           : num [1:30281] NA NA NA NA NA ...</span></span>
+<span><span class="co">#&gt;  $ turfID        : chr [1:30281] "4 AN1C 4" "4 AN1C 4" "4 AN1C 4" "4 AN1C 4" ...</span></span>
+<span><span class="co">#&gt;  $ type          : chr [1:30281] "NEE" "NEE" "NEE" "NEE" ...</span></span>
+<span><span class="co">#&gt;  $ f_start       : POSIXct[1:30281], format: "2022-07-27 05:37:30" "2022-07-27 05:37:30" ...</span></span>
+<span><span class="co">#&gt;  $ f_end         : POSIXct[1:30281], format: "2022-07-27 05:41:10" "2022-07-27 05:41:10" ...</span></span>
+<span><span class="co">#&gt;  $ f_fluxID      : Factor w/ 138 levels "1","2","3","4",..: 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;  $ f_n_conc      : int [1:30281] 220 220 220 220 220 220 220 220 220 220 ...</span></span>
+<span><span class="co">#&gt;  $ f_ratio       : num [1:30281] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;  $ f_flag_match  : chr [1:30281] NA NA NA NA ...</span></span>
+<span><span class="co">#&gt;  $ f_time        : num [1:30281] 0 1 2 3 4 5 6 7 8 9 ...</span></span>
+<span><span class="co">#&gt;  $ f_cut         : Factor w/ 1 level "keep": 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;  $ n_conc        : int [1:30281] 220 220 220 220 220 220 220 220 220 220 ...</span></span>
+<span><span class="co">#&gt;  $ f_rsquared    : num [1:30281] 0.967 0.967 0.967 0.967 0.967 ...</span></span>
+<span><span class="co">#&gt;  $ f_adj_rsquared: num [1:30281] 0.966 0.966 0.966 0.966 0.966 ...</span></span>
+<span><span class="co">#&gt;  $ f_pvalue      : Named num [1:30281] 9.23e-163 9.23e-163 9.23e-163 9.23e-163 9.23e-163 ...</span></span>
+<span><span class="co">#&gt;   ..- attr(*, "names")= chr [1:30281] "value" "value" "value" "value" ...</span></span>
+<span><span class="co">#&gt;  $ f_intercept   : num [1:30281] 465 465 465 465 465 ...</span></span>
+<span><span class="co">#&gt;  $ f_slope       : num [1:30281] -0.109 -0.109 -0.109 -0.109 -0.109 ...</span></span>
+<span><span class="co">#&gt;  $ f_fit         : num [1:30281] 465 465 464 464 464 ...</span></span>
+<span><span class="co">#&gt;  $ f_flag_ratio  : chr [1:30281] "ok" "ok" "ok" "ok" ...</span></span>
+<span><span class="co">#&gt;  $ f_start_error : chr [1:30281] "ok" "ok" "ok" "ok" ...</span></span>
+<span><span class="co">#&gt;  $ f_quality_flag: chr [1:30281] "ok" "ok" "ok" "ok" ...</span></span>
+<span><span class="co">#&gt;  $ f_slope_corr  : num [1:30281] -0.109 -0.109 -0.109 -0.109 -0.109 ...</span></span>
+<span><span class="co">#&gt;  - attr(*, "fit_type")= chr "linear"</span></span></code></pre></div>
 <p>The function <code>flux_plot</code> provides plots for a visual
 assessment of the measurements, explicitly displaying the quality flags
 from <code>flux_quality</code> and the cuts from
 <code>flux_fitting</code>.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">slopes_exp_liahovden</span> <span class="op">|&gt;</span></span>
+<code class="sourceCode R"><span><span class="va">slopes_exp_liahovden_flag</span> <span class="op">|&gt;</span></span>
 <span>  <span class="co"># we just show a sample of the plots to avoid slowing down the example</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">f_fluxID</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">54</span>, <span class="fl">95</span>, <span class="fl">100</span>, <span class="fl">101</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/flux_plot.html">flux_plot</a></span><span class="op">(</span></span>
-<span>    output <span class="op">=</span> <span class="st">"print_only"</span>,</span>
-<span>    f_ylim_lower <span class="op">=</span> <span class="fl">300</span>,</span>
+<span>    color_discard <span class="op">=</span> <span class="st">"#D55E00"</span>,</span>
+<span>    color_cut <span class="op">=</span> <span class="st">"#D55E00"</span>,</span>
+<span>    color_ok <span class="op">=</span> <span class="st">"#009E73"</span>,</span>
+<span>    color_zero <span class="op">=</span> <span class="st">"#CC79A7"</span>,</span>
+<span>    f_date_breaks <span class="op">=</span> <span class="st">"1 min"</span>,</span>
+<span>    f_minor_breaks <span class="op">=</span> <span class="st">"10 sec"</span>,</span>
+<span>    f_date_labels <span class="op">=</span> <span class="st">"%e/%m \n %H:%M"</span>,</span>
 <span>    f_ylim_upper <span class="op">=</span> <span class="fl">600</span>,</span>
-<span>    f_nrow <span class="op">=</span> <span class="fl">2</span>,</span>
-<span>    f_ncol <span class="op">=</span> <span class="fl">2</span>,</span>
-<span>    y_text_position <span class="op">=</span> <span class="fl">400</span></span>
+<span>    f_ylim_lower <span class="op">=</span> <span class="fl">300</span>,</span>
+<span>    f_plotname <span class="op">=</span> <span class="st">"plot_quality"</span>,</span>
+<span>    facet_wrap_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>      ncol <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>      nrow <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>      scales <span class="op">=</span> <span class="st">"free"</span></span>
+<span>    <span class="op">)</span>,</span>
+<span>    y_text_position <span class="op">=</span> <span class="fl">400</span>,</span>
+<span>    print_plot <span class="op">=</span> <span class="st">"FALSE"</span>,</span>
+<span>    output <span class="op">=</span> <span class="st">"print_only"</span>,</span>
+<span>    cut_arg <span class="op">=</span> <span class="st">"cut"</span>,</span>
+<span>    no_data_flag <span class="op">=</span> <span class="st">"no_data"</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="co">#&gt; Part of the fit will not be displayed</span></span>
+<span><span class="co">#&gt;     because f_ylim_upper is too low.</span></span>
+<span><span class="co">#&gt; Part of the fit will not be displayed</span></span>
+<span><span class="co">#&gt;     because f_ylim_lower is too high.</span></span>
+<span><span class="co">#&gt; Plotting in progress</span></span></code></pre></div>
+<p><img src="fluxible_practical_example_files/figure-html/plot_exp_qua_lin-1.png" width="768"></p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="va">slopes_qua_liahovden_flag</span> <span class="op">|&gt;</span></span>
+<span>  <span class="co"># we just show a sample of the plots to avoid slowing down the example</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">f_fluxID</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">54</span>, <span class="fl">95</span>, <span class="fl">100</span>, <span class="fl">101</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/flux_plot.html">flux_plot</a></span><span class="op">(</span></span>
+<span>    color_discard <span class="op">=</span> <span class="st">"#D55E00"</span>,</span>
+<span>    color_cut <span class="op">=</span> <span class="st">"#D55E00"</span>,</span>
+<span>    color_ok <span class="op">=</span> <span class="st">"#009E73"</span>,</span>
+<span>    color_zero <span class="op">=</span> <span class="st">"#CC79A7"</span>,</span>
+<span>    f_date_breaks <span class="op">=</span> <span class="st">"1 min"</span>,</span>
+<span>    f_minor_breaks <span class="op">=</span> <span class="st">"10 sec"</span>,</span>
+<span>    f_date_labels <span class="op">=</span> <span class="st">"%e/%m \n %H:%M"</span>,</span>
+<span>    f_ylim_upper <span class="op">=</span> <span class="fl">600</span>,</span>
+<span>    f_ylim_lower <span class="op">=</span> <span class="fl">300</span>,</span>
+<span>    f_plotname <span class="op">=</span> <span class="st">"plot_quality"</span>,</span>
+<span>    facet_wrap_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>      ncol <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>      nrow <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>      scales <span class="op">=</span> <span class="st">"free"</span></span>
+<span>    <span class="op">)</span>,</span>
+<span>    y_text_position <span class="op">=</span> <span class="fl">400</span>,</span>
+<span>    print_plot <span class="op">=</span> <span class="st">"FALSE"</span>,</span>
+<span>    output <span class="op">=</span> <span class="st">"print_only"</span>,</span>
+<span>    cut_arg <span class="op">=</span> <span class="st">"cut"</span>,</span>
+<span>    no_data_flag <span class="op">=</span> <span class="st">"no_data"</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="co">#&gt; Plotting in progress</span></span></code></pre></div>
-<p><img src="fluxible_practical_example_files/figure-html/plot_exp-1.png" width="768"></p>
+<p><img src="fluxible_practical_example_files/figure-html/plot_exp_qua_lin-2.png" width="768"></p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="va">slopes_lin_liahovden_flag</span> <span class="op">|&gt;</span></span>
+<span>  <span class="co"># we just show a sample of the plots to avoid slowing down the example</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">f_fluxID</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">54</span>, <span class="fl">95</span>, <span class="fl">100</span>, <span class="fl">101</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/flux_plot.html">flux_plot</a></span><span class="op">(</span></span>
+<span>    color_discard <span class="op">=</span> <span class="st">"#D55E00"</span>,</span>
+<span>    color_cut <span class="op">=</span> <span class="st">"#D55E00"</span>,</span>
+<span>    color_ok <span class="op">=</span> <span class="st">"#009E73"</span>,</span>
+<span>    color_zero <span class="op">=</span> <span class="st">"#CC79A7"</span>,</span>
+<span>    f_date_breaks <span class="op">=</span> <span class="st">"1 min"</span>,</span>
+<span>    f_minor_breaks <span class="op">=</span> <span class="st">"10 sec"</span>,</span>
+<span>    f_date_labels <span class="op">=</span> <span class="st">"%e/%m \n %H:%M"</span>,</span>
+<span>    f_ylim_upper <span class="op">=</span> <span class="fl">600</span>,</span>
+<span>    f_ylim_lower <span class="op">=</span> <span class="fl">300</span>,</span>
+<span>    f_plotname <span class="op">=</span> <span class="st">"plot_quality"</span>,</span>
+<span>    facet_wrap_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>      ncol <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>      nrow <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>      scales <span class="op">=</span> <span class="st">"free"</span></span>
+<span>    <span class="op">)</span>,</span>
+<span>    y_text_position <span class="op">=</span> <span class="fl">400</span>,</span>
+<span>    print_plot <span class="op">=</span> <span class="st">"FALSE"</span>,</span>
+<span>    output <span class="op">=</span> <span class="st">"print_only"</span>,</span>
+<span>    cut_arg <span class="op">=</span> <span class="st">"cut"</span>,</span>
+<span>    no_data_flag <span class="op">=</span> <span class="st">"no_data"</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="co">#&gt; Plotting in progress</span></span></code></pre></div>
+<p><img src="fluxible_practical_example_files/figure-html/plot_exp_qua_lin-3.png" width="768"></p>
 <p>Based on the quality flags and the plots, the user can decide to run
 <code>flux_fitting</code> again with different arguments. Here we will
 do it while cutting the last 60 seconds of the fluxes (cutting the last
-third). We also detected two fluxes (101 and 106) that do not look
-correct. Sometimes some measurements will pass the automated quality
-control but are obviously wrong for an experience user. That is what the
+third). We also detected fluxes that do not look correct. Sometimes some
+measurements will pass the automated quality control but are obviously
+wrong for an experience user. That is what the
 <code>weird_fluxesID</code> argument is for. For the sake of
 reproducibility, this argument should be the last option and be
 accompanied with a justification.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">slopes_exp_liahovden_60</span> <span class="op">&lt;-</span> <span class="va">conc_liahovden</span> <span class="op">|&gt;</span></span>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">slopes_exp_liahovden_flag_60</span> <span class="op">&lt;-</span> <span class="va">conc_liahovden</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/flux_fitting.html">flux_fitting</a></span><span class="op">(</span>fit_type <span class="op">=</span> <span class="st">"exp"</span>, end_cut <span class="op">=</span> <span class="fl">60</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/flux_quality.html">flux_quality</a></span><span class="op">(</span></span>
 <span>    slope_col <span class="op">=</span> <span class="st">"f_slope"</span>,</span>
 <span>    weird_fluxes_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>      <span class="fl">51</span>, <span class="co"># slope is much steeper than the flux because t zero was estimated</span></span>
+<span>      <span class="co"># at the very start of the measurement</span></span>
 <span>      <span class="fl">101</span>, <span class="co"># plot starts with a high peak: accumulation in the canopy?</span></span>
 <span>      <span class="fl">106</span> <span class="co"># peak at the beginning of the flux that is messing up the fit</span></span>
 <span>    <span class="op">)</span></span>
@@ -264,59 +614,217 @@ accompanied with a justification.</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  Total number of measurements: 138</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;  discard      2   1 %</span></span>
-<span><span class="co">#&gt;  ok   133     96 %</span></span>
-<span><span class="co">#&gt;  weird_flux   2   1 %</span></span>
-<span><span class="co">#&gt;  zero     1   1 %</span></span>
+<span><span class="co">#&gt;  discard      1   1 %</span></span>
+<span><span class="co">#&gt;  ok   131     95 %</span></span>
+<span><span class="co">#&gt;  weird_flux   3   2 %</span></span>
+<span><span class="co">#&gt;  zero     3   2 %</span></span>
 <span><span class="co">#&gt;  start_error      0   0 %</span></span>
 <span><span class="co">#&gt;  no_data      0   0 %</span></span>
 <span><span class="co">#&gt;  force_ok     0   0 %</span></span>
 <span></span>
-<span><span class="va">slopes_exp_liahovden_60</span> <span class="op">|&gt;</span></span>
+<span><span class="va">slopes_exp_liahovden_flag_60</span> <span class="op">|&gt;</span></span>
 <span>  <span class="co"># we just show a sample of the plots to avoid slowing down the example</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">f_fluxID</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">54</span>, <span class="fl">95</span>, <span class="fl">100</span>, <span class="fl">101</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/flux_plot.html">flux_plot</a></span><span class="op">(</span></span>
 <span>    f_ylim_lower <span class="op">=</span> <span class="fl">300</span>,</span>
 <span>    f_ylim_upper <span class="op">=</span> <span class="fl">600</span>,</span>
-<span>    f_nrow <span class="op">=</span> <span class="fl">2</span>,</span>
-<span>    f_ncol <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>    facet_wrap_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>      ncol <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>      nrow <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>      scales <span class="op">=</span> <span class="st">"free"</span></span>
+<span>    <span class="op">)</span>,</span>
+<span>    y_text_position <span class="op">=</span> <span class="fl">400</span>,</span>
+<span>    output <span class="op">=</span> <span class="st">"print_only"</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="co">#&gt; Part of the fit will not be displayed</span></span>
+<span><span class="co">#&gt;     because f_ylim_lower is too high.</span></span>
+<span><span class="co">#&gt; Plotting in progress</span></span></code></pre></div>
+<p><img src="fluxible_practical_example_files/figure-html/plot_exp_cut-1.png" width="768"></p>
+<p>We also apply a cut on the dataset that was fitted with a quadratic
+model. At this point it is up to the user to decide which model works
+the best for the entire dataset. The function flux_quality provides a
+count of the quality flags that can help to take a decision.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">slopes_qua_liahovden_flag_60</span> <span class="op">&lt;-</span> <span class="va">conc_liahovden</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/flux_fitting.html">flux_fitting</a></span><span class="op">(</span>fit_type <span class="op">=</span> <span class="st">"qua"</span>, end_cut <span class="op">=</span> <span class="fl">60</span>, t_zero <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/flux_quality.html">flux_quality</a></span><span class="op">(</span></span>
+<span>    slope_col <span class="op">=</span> <span class="st">"f_slope"</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  Total number of measurements: 138</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  ok   121     88 %</span></span>
+<span><span class="co">#&gt;  zero     17      12 %</span></span>
+<span><span class="co">#&gt;  discard      0   0 %</span></span>
+<span><span class="co">#&gt;  weird_flux   0   0 %</span></span>
+<span><span class="co">#&gt;  start_error      0   0 %</span></span>
+<span><span class="co">#&gt;  no_data      0   0 %</span></span>
+<span><span class="co">#&gt;  force_ok     0   0 %</span></span>
+<span></span>
+<span><span class="va">slopes_qua_liahovden_flag_60</span> <span class="op">|&gt;</span></span>
+<span>  <span class="co"># we just show a sample of the plots to avoid slowing down the example</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">f_fluxID</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">54</span>, <span class="fl">95</span>, <span class="fl">100</span>, <span class="fl">101</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/flux_plot.html">flux_plot</a></span><span class="op">(</span></span>
+<span>    f_ylim_lower <span class="op">=</span> <span class="fl">300</span>,</span>
+<span>    f_ylim_upper <span class="op">=</span> <span class="fl">600</span>,</span>
+<span>    facet_wrap_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>      ncol <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>      nrow <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>      scales <span class="op">=</span> <span class="st">"free"</span></span>
+<span>    <span class="op">)</span>,</span>
 <span>    y_text_position <span class="op">=</span> <span class="fl">400</span>,</span>
 <span>    output <span class="op">=</span> <span class="st">"print_only"</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="co">#&gt; Plotting in progress</span></span></code></pre></div>
-<p><img src="fluxible_practical_example_files/figure-html/plot_exp_cut-1.png" width="768"></p>
+<p><img src="fluxible_practical_example_files/figure-html/plot_qua_cut-1.png" width="768"></p>
+<p>When using a linear fit it is common to take only a short section of
+the measurement close to the start. Here we will cut 120 seconds at the
+end, effectively keeping only the first 90 seconds.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">slopes_lin_liahovden_flag_120</span> <span class="op">&lt;-</span> <span class="va">conc_liahovden</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/flux_fitting.html">flux_fitting</a></span><span class="op">(</span>fit_type <span class="op">=</span> <span class="st">"lin"</span>, end_cut <span class="op">=</span> <span class="fl">120</span>, t_zero <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/flux_quality.html">flux_quality</a></span><span class="op">(</span></span>
+<span>    slope_col <span class="op">=</span> <span class="st">"f_slope"</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  Total number of measurements: 138</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  discard      2   1 %</span></span>
+<span><span class="co">#&gt;  ok   109     79 %</span></span>
+<span><span class="co">#&gt;  zero     27      20 %</span></span>
+<span><span class="co">#&gt;  weird_flux   0   0 %</span></span>
+<span><span class="co">#&gt;  start_error      0   0 %</span></span>
+<span><span class="co">#&gt;  no_data      0   0 %</span></span>
+<span><span class="co">#&gt;  force_ok     0   0 %</span></span>
+<span></span>
+<span><span class="va">slopes_lin_liahovden_flag_120</span> <span class="op">|&gt;</span></span>
+<span>  <span class="co"># we just show a sample of the plots to avoid slowing down the example</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">f_fluxID</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">54</span>, <span class="fl">95</span>, <span class="fl">100</span>, <span class="fl">101</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/flux_plot.html">flux_plot</a></span><span class="op">(</span></span>
+<span>    f_ylim_lower <span class="op">=</span> <span class="fl">300</span>,</span>
+<span>    f_ylim_upper <span class="op">=</span> <span class="fl">600</span>,</span>
+<span>    facet_wrap_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>      ncol <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>      nrow <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>      scales <span class="op">=</span> <span class="st">"free"</span></span>
+<span>    <span class="op">)</span>,</span>
+<span>    y_text_position <span class="op">=</span> <span class="fl">400</span>,</span>
+<span>    output <span class="op">=</span> <span class="st">"print_only"</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="co">#&gt; Plotting in progress</span></span></code></pre></div>
+<p><img src="fluxible_practical_example_files/figure-html/plot_lin_cut-1.png" width="768"></p>
 <p>Once we are satisfied with the fit, we can calculate fluxes with
 <code>flux_calc</code>. Here the volume is defined as a constant for all
 the measurements but it is also possible to provide a specific volume
 for each plot in case that is different.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">fluxes_exp_liahovden_60</span> <span class="op">&lt;-</span> <span class="va">slopes_exp_liahovden_60</span> <span class="op">|&gt;</span></span>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">fluxes_exp_liahovden_60</span> <span class="op">&lt;-</span> <span class="va">slopes_exp_liahovden_flag_60</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/flux_calc.html">flux_calc</a></span><span class="op">(</span></span>
 <span>    slope_col <span class="op">=</span> <span class="st">"f_slope_corr"</span>, <span class="co"># we use the slopes provided by flux_quality</span></span>
-<span>    cols_keep <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"f_start"</span>, <span class="st">"type"</span><span class="op">)</span>,</span>
+<span>    datetime_col <span class="op">=</span> <span class="st">"f_datetime"</span>,</span>
 <span>    cut_col <span class="op">=</span> <span class="st">"f_cut"</span>,</span>
-<span>    keep_arg <span class="op">=</span> <span class="st">"keep"</span></span>
-<span>  <span class="op">)</span> <span class="co"># there is no need to specify the other arguments because the defaults are</span></span>
+<span>    keep_arg <span class="op">=</span> <span class="st">"keep"</span>,</span>
+<span>    chamber_volume <span class="op">=</span> <span class="fl">24.5</span>,</span>
+<span>    tube_volume <span class="op">=</span> <span class="fl">0.075</span>,</span>
+<span>    atm_pressure <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>    plot_area <span class="op">=</span> <span class="fl">0.0625</span>,</span>
+<span>    cols_keep <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"f_start"</span>, <span class="st">"type"</span><span class="op">)</span>,</span>
+<span>    cols_ave <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>    fluxid_col <span class="op">=</span> <span class="st">"f_fluxID"</span>,</span>
+<span>    temp_air_col <span class="op">=</span> <span class="st">"temp_air"</span>,</span>
+<span>    temp_air_unit <span class="op">=</span> <span class="st">"celsius"</span></span>
+<span>  <span class="op">)</span></span>
 <span><span class="co">#&gt; Cutting data according to 'keep_arg'...</span></span>
 <span><span class="co">#&gt; Averaging air temperature for each flux...</span></span>
 <span><span class="co">#&gt; Creating a df with the columns from 'cols_keep' argument...</span></span>
 <span><span class="co">#&gt; Calculating fluxes...</span></span>
-<span><span class="co"># for our experiment, other users might want to check that</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">fluxes_exp_liahovden_60</span><span class="op">)</span></span>
 <span><span class="co">#&gt; tibble [138 × 12] (S3: tbl_df/tbl/data.frame)</span></span>
-<span><span class="co">#&gt;  $ f_start       : POSIXct[1:138], format: "2022-07-27 05:37:40" "2022-07-27 05:42:10" ...</span></span>
+<span><span class="co">#&gt;  $ f_start       : POSIXct[1:138], format: "2022-07-27 05:37:30" "2022-07-27 05:42:00" ...</span></span>
 <span><span class="co">#&gt;  $ type          : chr [1:138] "NEE" "ER" "NEE" "ER" ...</span></span>
 <span><span class="co">#&gt;  $ f_fluxID      : Factor w/ 138 levels "1","2","3","4",..: 1 2 3 4 5 6 7 8 9 10 ...</span></span>
-<span><span class="co">#&gt;  $ f_slope_calc  : num [1:138] -0.1936 0.0682 -0.3113 0.156 -0.2318 ...</span></span>
+<span><span class="co">#&gt;  $ f_slope_calc  : num [1:138] -0.2258 0.0718 -0.3718 0.2433 -0.2865 ...</span></span>
 <span><span class="co">#&gt;  $ chamber_volume: num [1:138] 24.5 24.5 24.5 24.5 24.5 24.5 24.5 24.5 24.5 24.5 ...</span></span>
 <span><span class="co">#&gt;  $ tube_volume   : num [1:138] 0.075 0.075 0.075 0.075 0.075 0.075 0.075 0.075 0.075 0.075 ...</span></span>
 <span><span class="co">#&gt;  $ atm_pressure  : num [1:138] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
-<span><span class="co">#&gt;  $ temp_air_ave  : num [1:138] 3.23 3.3 3.16 2.97 2.82 ...</span></span>
-<span><span class="co">#&gt;  $ datetime      : POSIXct[1:138], format: "2022-07-27 05:37:40" "2022-07-27 05:42:10" ...</span></span>
+<span><span class="co">#&gt;  $ temp_air_ave  : num [1:138] 3.21 3.3 3.15 2.96 2.81 ...</span></span>
+<span><span class="co">#&gt;  $ datetime      : POSIXct[1:138], format: "2022-07-27 05:37:30" "2022-07-27 05:42:00" ...</span></span>
 <span><span class="co">#&gt;  $ volume_setup  : num [1:138] 24.6 24.6 24.6 24.6 24.6 ...</span></span>
-<span><span class="co">#&gt;  $ flux          : num [1:138] -12.09 4.26 -19.44 9.74 -14.49 ...</span></span>
+<span><span class="co">#&gt;  $ flux          : num [1:138] -14.09 4.48 -23.22 15.2 -17.91 ...</span></span>
 <span><span class="co">#&gt;  $ model         : chr [1:138] "exponential" "exponential" "exponential" "exponential" ...</span></span>
-<span><span class="co">#&gt;  - attr(*, "fit_type")= chr "exponential"</span></span></code></pre></div>
+<span><span class="co">#&gt;  - attr(*, "fit_type")= chr "exponential"</span></span>
+<span></span>
+<span><span class="va">fluxes_qua_liahovden_60</span> <span class="op">&lt;-</span> <span class="va">slopes_qua_liahovden_flag_60</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/flux_calc.html">flux_calc</a></span><span class="op">(</span></span>
+<span>    slope_col <span class="op">=</span> <span class="st">"f_slope_corr"</span>, <span class="co"># we use the slopes provided by flux_quality</span></span>
+<span>    datetime_col <span class="op">=</span> <span class="st">"f_datetime"</span>,</span>
+<span>    cut_col <span class="op">=</span> <span class="st">"f_cut"</span>,</span>
+<span>    keep_arg <span class="op">=</span> <span class="st">"keep"</span>,</span>
+<span>    chamber_volume <span class="op">=</span> <span class="fl">24.5</span>,</span>
+<span>    tube_volume <span class="op">=</span> <span class="fl">0.075</span>,</span>
+<span>    atm_pressure <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>    plot_area <span class="op">=</span> <span class="fl">0.0625</span>,</span>
+<span>    cols_keep <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"f_start"</span>, <span class="st">"type"</span><span class="op">)</span>,</span>
+<span>    cols_ave <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>    fluxid_col <span class="op">=</span> <span class="st">"f_fluxID"</span>,</span>
+<span>    temp_air_col <span class="op">=</span> <span class="st">"temp_air"</span>,</span>
+<span>    temp_air_unit <span class="op">=</span> <span class="st">"celsius"</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="co">#&gt; Cutting data according to 'keep_arg'...</span></span>
+<span><span class="co">#&gt; Averaging air temperature for each flux...</span></span>
+<span><span class="co">#&gt; Creating a df with the columns from 'cols_keep' argument...</span></span>
+<span><span class="co">#&gt; Calculating fluxes...</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">fluxes_qua_liahovden_60</span><span class="op">)</span></span>
+<span><span class="co">#&gt; tibble [138 × 12] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;  $ f_start       : POSIXct[1:138], format: "2022-07-27 05:37:30" "2022-07-27 05:42:00" ...</span></span>
+<span><span class="co">#&gt;  $ type          : chr [1:138] "NEE" "ER" "NEE" "ER" ...</span></span>
+<span><span class="co">#&gt;  $ f_fluxID      : Factor w/ 138 levels "1","2","3","4",..: 1 2 3 4 5 6 7 8 9 10 ...</span></span>
+<span><span class="co">#&gt;  $ f_slope_calc  : num [1:138] -0.1579 0.0589 -0.3782 0.1423 -0.1655 ...</span></span>
+<span><span class="co">#&gt;  $ chamber_volume: num [1:138] 24.5 24.5 24.5 24.5 24.5 24.5 24.5 24.5 24.5 24.5 ...</span></span>
+<span><span class="co">#&gt;  $ tube_volume   : num [1:138] 0.075 0.075 0.075 0.075 0.075 0.075 0.075 0.075 0.075 0.075 ...</span></span>
+<span><span class="co">#&gt;  $ atm_pressure  : num [1:138] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;  $ temp_air_ave  : num [1:138] 3.21 3.3 3.15 2.96 2.81 ...</span></span>
+<span><span class="co">#&gt;  $ datetime      : POSIXct[1:138], format: "2022-07-27 05:37:30" "2022-07-27 05:42:00" ...</span></span>
+<span><span class="co">#&gt;  $ volume_setup  : num [1:138] 24.6 24.6 24.6 24.6 24.6 ...</span></span>
+<span><span class="co">#&gt;  $ flux          : num [1:138] -9.85 3.67 -23.61 8.89 -10.35 ...</span></span>
+<span><span class="co">#&gt;  $ model         : chr [1:138] "quadratic" "quadratic" "quadratic" "quadratic" ...</span></span>
+<span><span class="co">#&gt;  - attr(*, "fit_type")= chr "quadratic"</span></span>
+<span></span>
+<span><span class="va">fluxes_lin_liahovden_120</span> <span class="op">&lt;-</span> <span class="va">slopes_lin_liahovden_flag_120</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/flux_calc.html">flux_calc</a></span><span class="op">(</span></span>
+<span>    slope_col <span class="op">=</span> <span class="st">"f_slope_corr"</span>, <span class="co"># we use the slopes provided by flux_quality</span></span>
+<span>    datetime_col <span class="op">=</span> <span class="st">"f_datetime"</span>,</span>
+<span>    cut_col <span class="op">=</span> <span class="st">"f_cut"</span>,</span>
+<span>    keep_arg <span class="op">=</span> <span class="st">"keep"</span>,</span>
+<span>    chamber_volume <span class="op">=</span> <span class="fl">24.5</span>,</span>
+<span>    tube_volume <span class="op">=</span> <span class="fl">0.075</span>,</span>
+<span>    atm_pressure <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>    plot_area <span class="op">=</span> <span class="fl">0.0625</span>,</span>
+<span>    cols_keep <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"f_start"</span>, <span class="st">"type"</span><span class="op">)</span>,</span>
+<span>    cols_ave <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>    fluxid_col <span class="op">=</span> <span class="st">"f_fluxID"</span>,</span>
+<span>    temp_air_col <span class="op">=</span> <span class="st">"temp_air"</span>,</span>
+<span>    temp_air_unit <span class="op">=</span> <span class="st">"celsius"</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="co">#&gt; Cutting data according to 'keep_arg'...</span></span>
+<span><span class="co">#&gt; Averaging air temperature for each flux...</span></span>
+<span><span class="co">#&gt; Creating a df with the columns from 'cols_keep' argument...</span></span>
+<span><span class="co">#&gt; Calculating fluxes...</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">fluxes_lin_liahovden_120</span><span class="op">)</span></span>
+<span><span class="co">#&gt; tibble [138 × 12] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;  $ f_start       : POSIXct[1:138], format: "2022-07-27 05:37:30" "2022-07-27 05:42:00" ...</span></span>
+<span><span class="co">#&gt;  $ type          : chr [1:138] "NEE" "ER" "NEE" "ER" ...</span></span>
+<span><span class="co">#&gt;  $ f_fluxID      : Factor w/ 138 levels "1","2","3","4",..: 1 2 3 4 5 6 7 8 9 10 ...</span></span>
+<span><span class="co">#&gt;  $ f_slope_calc  : num [1:138] -0.1276 0.0329 -0.2318 0.0972 0 ...</span></span>
+<span><span class="co">#&gt;  $ chamber_volume: num [1:138] 24.5 24.5 24.5 24.5 24.5 24.5 24.5 24.5 24.5 24.5 ...</span></span>
+<span><span class="co">#&gt;  $ tube_volume   : num [1:138] 0.075 0.075 0.075 0.075 0.075 0.075 0.075 0.075 0.075 0.075 ...</span></span>
+<span><span class="co">#&gt;  $ atm_pressure  : num [1:138] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;  $ temp_air_ave  : num [1:138] 3.14 3.26 3.13 2.94 2.76 ...</span></span>
+<span><span class="co">#&gt;  $ datetime      : POSIXct[1:138], format: "2022-07-27 05:37:30" "2022-07-27 05:42:00" ...</span></span>
+<span><span class="co">#&gt;  $ volume_setup  : num [1:138] 24.6 24.6 24.6 24.6 24.6 ...</span></span>
+<span><span class="co">#&gt;  $ flux          : num [1:138] -7.97 2.05 -14.47 6.08 0 ...</span></span>
+<span><span class="co">#&gt;  $ model         : chr [1:138] "linear" "linear" "linear" "linear" ...</span></span>
+<span><span class="co">#&gt;  - attr(*, "fit_type")= chr "linear"</span></span></code></pre></div>
 <p>The output is in mmol/m<sup>2</sup>/h and the calculation used is as
 follow:</p>
 <!-- <img src="https://render.githubusercontent.com/render/math?math=flux=slope\times \frac{P\times V}{R\times T\times A}"> -->
@@ -337,11 +845,25 @@ is included in the function.</p>
 <p>Fluxes were calculated in five steps from raw gas concentration data
 and the process is entirely reproducible. Here is a plot of the
 results.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">fluxes_exp_liahovden_60</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">type</span> <span class="op">==</span> <span class="st">"NEE"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">f_start</span>, <span class="va">flux</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">bind_rows</a></span><span class="op">(</span></span>
+<span>  <span class="va">fluxes_exp_liahovden_60</span>,</span>
+<span>  <span class="va">fluxes_qua_liahovden_60</span>,</span>
+<span>  <span class="va">fluxes_lin_liahovden_120</span></span>
+<span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">f_start</span>, y <span class="op">=</span> <span class="va">flux</span>, color <span class="op">=</span> <span class="va">model</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html" class="external-link">geom_smooth</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span></span>
+<span>    title <span class="op">=</span> <span class="st">"Net Ecosystem Exchange at Upper Site (Liahovden) during 24 hour"</span>,</span>
+<span>    x <span class="op">=</span> <span class="st">"Datetime"</span>,</span>
+<span>    y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/bquote.html" class="external-link">bquote</a></span><span class="op">(</span><span class="op">~</span> <span class="va">CO</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">~</span> <span class="st">"flux [mmol/"</span> <span class="op">*</span> <span class="va">m</span><span class="op">^</span><span class="fl">2</span> <span class="op">*</span> <span class="st">"/h]"</span><span class="op">)</span>,</span>
+<span>    color <span class="op">=</span> <span class="st">"Model used in flux_fitting"</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"bottom"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html" class="external-link">facet_grid</a></span><span class="op">(</span><span class="va">type</span> <span class="op">~</span> <span class="va">.</span>, scales <span class="op">=</span> <span class="st">"free"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="fluxible_practical_example_files/figure-html/24h_fluxes-1.png" width="768"></p>
 <div class="section level4 unnumbered">
 <h4 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
