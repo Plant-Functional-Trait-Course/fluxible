@@ -722,6 +722,8 @@ for each plot in case that is different.</p>
 <span>  <span class="fu"><a href="../reference/flux_calc.html">flux_calc</a></span><span class="op">(</span></span>
 <span>    slope_col <span class="op">=</span> <span class="st">"f_slope_corr"</span>, <span class="co"># we use the slopes provided by flux_quality</span></span>
 <span>    datetime_col <span class="op">=</span> <span class="st">"f_datetime"</span>,</span>
+<span>    conc_unit <span class="op">=</span> <span class="st">"ppm"</span>,</span>
+<span>    flux_unit <span class="op">=</span> <span class="st">"mmol"</span>,</span>
 <span>    cut_col <span class="op">=</span> <span class="st">"f_cut"</span>,</span>
 <span>    keep_arg <span class="op">=</span> <span class="st">"keep"</span>,</span>
 <span>    chamber_volume <span class="op">=</span> <span class="fl">24.5</span>,</span>
@@ -738,8 +740,11 @@ for each plot in case that is different.</p>
 <span><span class="co">#&gt; Averaging air temperature for each flux...</span></span>
 <span><span class="co">#&gt; Creating a df with the columns from 'cols_keep' argument...</span></span>
 <span><span class="co">#&gt; Calculating fluxes...</span></span>
+<span><span class="co">#&gt; R constant set to 0.082057</span></span>
+<span><span class="co">#&gt; Concentration was measured in ppm</span></span>
+<span><span class="co">#&gt; Fluxes are in mmol/m2/h</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">fluxes_exp_liahovden_60</span><span class="op">)</span></span>
-<span><span class="co">#&gt; tibble [138 × 12] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt; tibble [138 × 13] (S3: tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;  $ f_start       : POSIXct[1:138], format: "2022-07-27 05:37:30" "2022-07-27 05:42:00" ...</span></span>
 <span><span class="co">#&gt;  $ type          : chr [1:138] "NEE" "ER" "NEE" "ER" ...</span></span>
 <span><span class="co">#&gt;  $ f_fluxID      : Factor w/ 138 levels "1","2","3","4",..: 1 2 3 4 5 6 7 8 9 10 ...</span></span>
@@ -747,6 +752,7 @@ for each plot in case that is different.</p>
 <span><span class="co">#&gt;  $ chamber_volume: num [1:138] 24.5 24.5 24.5 24.5 24.5 24.5 24.5 24.5 24.5 24.5 ...</span></span>
 <span><span class="co">#&gt;  $ tube_volume   : num [1:138] 0.075 0.075 0.075 0.075 0.075 0.075 0.075 0.075 0.075 0.075 ...</span></span>
 <span><span class="co">#&gt;  $ atm_pressure  : num [1:138] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;  $ plot_area     : num [1:138] 0.0625 0.0625 0.0625 0.0625 0.0625 0.0625 0.0625 0.0625 0.0625 0.0625 ...</span></span>
 <span><span class="co">#&gt;  $ temp_air_ave  : num [1:138] 3.21 3.3 3.15 2.96 2.81 ...</span></span>
 <span><span class="co">#&gt;  $ datetime      : POSIXct[1:138], format: "2022-07-27 05:37:30" "2022-07-27 05:42:00" ...</span></span>
 <span><span class="co">#&gt;  $ volume_setup  : num [1:138] 24.6 24.6 24.6 24.6 24.6 ...</span></span>
@@ -758,6 +764,8 @@ for each plot in case that is different.</p>
 <span>  <span class="fu"><a href="../reference/flux_calc.html">flux_calc</a></span><span class="op">(</span></span>
 <span>    slope_col <span class="op">=</span> <span class="st">"f_slope_corr"</span>, <span class="co"># we use the slopes provided by flux_quality</span></span>
 <span>    datetime_col <span class="op">=</span> <span class="st">"f_datetime"</span>,</span>
+<span>    conc_unit <span class="op">=</span> <span class="st">"ppm"</span>,</span>
+<span>    flux_unit <span class="op">=</span> <span class="st">"mmol"</span>,</span>
 <span>    cut_col <span class="op">=</span> <span class="st">"f_cut"</span>,</span>
 <span>    keep_arg <span class="op">=</span> <span class="st">"keep"</span>,</span>
 <span>    chamber_volume <span class="op">=</span> <span class="fl">24.5</span>,</span>
@@ -774,8 +782,11 @@ for each plot in case that is different.</p>
 <span><span class="co">#&gt; Averaging air temperature for each flux...</span></span>
 <span><span class="co">#&gt; Creating a df with the columns from 'cols_keep' argument...</span></span>
 <span><span class="co">#&gt; Calculating fluxes...</span></span>
+<span><span class="co">#&gt; R constant set to 0.082057</span></span>
+<span><span class="co">#&gt; Concentration was measured in ppm</span></span>
+<span><span class="co">#&gt; Fluxes are in mmol/m2/h</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">fluxes_qua_liahovden_60</span><span class="op">)</span></span>
-<span><span class="co">#&gt; tibble [138 × 12] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt; tibble [138 × 13] (S3: tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;  $ f_start       : POSIXct[1:138], format: "2022-07-27 05:37:30" "2022-07-27 05:42:00" ...</span></span>
 <span><span class="co">#&gt;  $ type          : chr [1:138] "NEE" "ER" "NEE" "ER" ...</span></span>
 <span><span class="co">#&gt;  $ f_fluxID      : Factor w/ 138 levels "1","2","3","4",..: 1 2 3 4 5 6 7 8 9 10 ...</span></span>
@@ -783,6 +794,7 @@ for each plot in case that is different.</p>
 <span><span class="co">#&gt;  $ chamber_volume: num [1:138] 24.5 24.5 24.5 24.5 24.5 24.5 24.5 24.5 24.5 24.5 ...</span></span>
 <span><span class="co">#&gt;  $ tube_volume   : num [1:138] 0.075 0.075 0.075 0.075 0.075 0.075 0.075 0.075 0.075 0.075 ...</span></span>
 <span><span class="co">#&gt;  $ atm_pressure  : num [1:138] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;  $ plot_area     : num [1:138] 0.0625 0.0625 0.0625 0.0625 0.0625 0.0625 0.0625 0.0625 0.0625 0.0625 ...</span></span>
 <span><span class="co">#&gt;  $ temp_air_ave  : num [1:138] 3.21 3.3 3.15 2.96 2.81 ...</span></span>
 <span><span class="co">#&gt;  $ datetime      : POSIXct[1:138], format: "2022-07-27 05:37:30" "2022-07-27 05:42:00" ...</span></span>
 <span><span class="co">#&gt;  $ volume_setup  : num [1:138] 24.6 24.6 24.6 24.6 24.6 ...</span></span>
@@ -794,6 +806,8 @@ for each plot in case that is different.</p>
 <span>  <span class="fu"><a href="../reference/flux_calc.html">flux_calc</a></span><span class="op">(</span></span>
 <span>    slope_col <span class="op">=</span> <span class="st">"f_slope_corr"</span>, <span class="co"># we use the slopes provided by flux_quality</span></span>
 <span>    datetime_col <span class="op">=</span> <span class="st">"f_datetime"</span>,</span>
+<span>    conc_unit <span class="op">=</span> <span class="st">"ppm"</span>,</span>
+<span>    flux_unit <span class="op">=</span> <span class="st">"mmol"</span>,</span>
 <span>    cut_col <span class="op">=</span> <span class="st">"f_cut"</span>,</span>
 <span>    keep_arg <span class="op">=</span> <span class="st">"keep"</span>,</span>
 <span>    chamber_volume <span class="op">=</span> <span class="fl">24.5</span>,</span>
@@ -810,8 +824,11 @@ for each plot in case that is different.</p>
 <span><span class="co">#&gt; Averaging air temperature for each flux...</span></span>
 <span><span class="co">#&gt; Creating a df with the columns from 'cols_keep' argument...</span></span>
 <span><span class="co">#&gt; Calculating fluxes...</span></span>
+<span><span class="co">#&gt; R constant set to 0.082057</span></span>
+<span><span class="co">#&gt; Concentration was measured in ppm</span></span>
+<span><span class="co">#&gt; Fluxes are in mmol/m2/h</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">fluxes_lin_liahovden_120</span><span class="op">)</span></span>
-<span><span class="co">#&gt; tibble [138 × 12] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt; tibble [138 × 13] (S3: tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;  $ f_start       : POSIXct[1:138], format: "2022-07-27 05:37:30" "2022-07-27 05:42:00" ...</span></span>
 <span><span class="co">#&gt;  $ type          : chr [1:138] "NEE" "ER" "NEE" "ER" ...</span></span>
 <span><span class="co">#&gt;  $ f_fluxID      : Factor w/ 138 levels "1","2","3","4",..: 1 2 3 4 5 6 7 8 9 10 ...</span></span>
@@ -819,6 +836,7 @@ for each plot in case that is different.</p>
 <span><span class="co">#&gt;  $ chamber_volume: num [1:138] 24.5 24.5 24.5 24.5 24.5 24.5 24.5 24.5 24.5 24.5 ...</span></span>
 <span><span class="co">#&gt;  $ tube_volume   : num [1:138] 0.075 0.075 0.075 0.075 0.075 0.075 0.075 0.075 0.075 0.075 ...</span></span>
 <span><span class="co">#&gt;  $ atm_pressure  : num [1:138] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;  $ plot_area     : num [1:138] 0.0625 0.0625 0.0625 0.0625 0.0625 0.0625 0.0625 0.0625 0.0625 0.0625 ...</span></span>
 <span><span class="co">#&gt;  $ temp_air_ave  : num [1:138] 3.14 3.26 3.13 2.94 2.76 ...</span></span>
 <span><span class="co">#&gt;  $ datetime      : POSIXct[1:138], format: "2022-07-27 05:37:30" "2022-07-27 05:42:00" ...</span></span>
 <span><span class="co">#&gt;  $ volume_setup  : num [1:138] 24.6 24.6 24.6 24.6 24.6 ...</span></span>
