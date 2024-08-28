@@ -3,7 +3,7 @@ pkgdown: 2.1.0
 pkgdown_sha: ~
 articles:
   fluxible_practical_example: fluxible_practical_example.html
-last_built: 2024-08-27T13:33Z
+last_built: 2024-08-28T09:06Z
 urls:
   reference: https://jogaudard.github.io/fluxible/reference
   article: https://jogaudard.github.io/fluxible/articles

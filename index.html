@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,8 +63,11 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install the development version of fluxible from the <a href="https://github.com/Plant-Functional-Trait-Course/fluxible" class="external-link">GitHub repo</a> with:</p>
+<p>Fluxible can be installed from CRAN.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"fluxible"</span><span class="op">)</span></span></code></pre></div>
+<p>You can install the development version of fluxible from the <a href="https://github.com/Plant-Functional-Trait-Course/fluxible" class="external-link">GitHub repo</a> with:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"plant-functional-trait-course/fluxible"</span><span class="op">)</span></span></code></pre></div>
 </div>
@@ -73,8 +76,8 @@
 </h2>
 <p>For this example we will use the data that were recorded during the Plant Functional Traits Course 6 (PFTC6) in Norway in 2022 at the site called Liahovden. <!-- (CITE when data paper out). --> The CO<sub>2</sub> concentration data as well as air and soil temperature and photosynthetically active radiations (PAR) were recorded in a dataframe named <code>co2_liahovden</code>. The metadata for each measurements are in a dataframe called <code>record_liahovden</code>. This dataframe contains the starting time of each measurements, the type of measurement and the unique ID for each turf. The type of measurement describes if it was net ecosystem exchange (NEE), measured with a transparent chamber, or ecosystem respiration (ER), measured with a dark chamber.</p>
 <p>We use the <code>flux_match</code> function to slice the data from <code>co2_liahovden</code> into each measurement and discard what was recorded in between.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://plant-functional-trait-course.github.io/fluxible/" class="external-link">fluxible</a></span><span class="op">)</span></span>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://cran.r-project.org/package=fluxible" class="external-link">fluxible</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">record_liahovden</span><span class="op">)</span></span>
 <span><span class="co">#&gt; tibble [138 × 3] (S3: tbl_df/tbl/data.frame)</span></span>
@@ -116,7 +119,7 @@
 <span><span class="co">#&gt;  $ f_ratio     : num [1:30281] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
 <span><span class="co">#&gt;  $ f_flag_match: chr [1:30281] NA NA NA NA ...</span></span></code></pre></div>
 <p>Before calculating fluxes we need to fit a model to each measurement and estimate a slope of the concentration changing rate. We use the <code>flux_fitting</code> function with the model provided by Zhao <em>et al.</em> (2018). The function <code>flux_fitting</code> also provides a quadratic and a linear fit.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">slopes_exp_liahovden</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flux_fitting.html">flux_fitting</a></span><span class="op">(</span></span>
 <span>  conc_df <span class="op">=</span> <span class="va">conc_liahovden</span>,</span>
 <span>  start_cut <span class="op">=</span> <span class="fl">0</span>,</span>
@@ -279,7 +282,7 @@
 <span><span class="co">#&gt;  $ f_fit         : num [1:30281] 465 465 464 464 464 ...</span></span>
 <span><span class="co">#&gt;  - attr(*, "fit_type")= chr "linear"</span></span></code></pre></div>
 <p>The function <code>flux_quality</code> is used to provide diagnostics about the quality of the fit, eventually advising to discard some measurements or replace them by zero.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">slopes_exp_liahovden_flag</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flux_quality.html">flux_quality</a></span><span class="op">(</span></span>
 <span>  slopes_df <span class="op">=</span> <span class="va">slopes_exp_liahovden</span>,</span>
 <span>  <span class="co"># fit_type is automatically provided as an attribute because</span></span>
@@ -480,7 +483,7 @@
 <span><span class="co">#&gt;  $ f_slope_corr  : num [1:30281] -0.109 -0.109 -0.109 -0.109 -0.109 ...</span></span>
 <span><span class="co">#&gt;  - attr(*, "fit_type")= chr "linear"</span></span></code></pre></div>
 <p>The function <code>flux_plot</code> provides plots for a visual assessment of the measurements, explicitly displaying the quality flags from <code>flux_quality</code> and the cuts from <code>flux_fitting</code>.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">slopes_exp_liahovden_flag</span> <span class="op">|&gt;</span></span>
 <span>  <span class="co"># we just show a sample of the plots to avoid slowing down the example</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">f_fluxID</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">54</span>, <span class="fl">95</span>, <span class="fl">100</span>, <span class="fl">101</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -512,7 +515,7 @@
 <span><span class="co">#&gt;     because f_ylim_lower is too high.</span></span>
 <span><span class="co">#&gt; Plotting in progress</span></span></code></pre></div>
 <p><img src="reference/figures/README-plot_exp_qua_lin-1.png" width="100%"></p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">slopes_qua_liahovden_flag</span> <span class="op">|&gt;</span></span>
 <span>  <span class="co"># we just show a sample of the plots to avoid slowing down the example</span></span>
@@ -541,7 +544,7 @@
 <span>  <span class="op">)</span></span>
 <span><span class="co">#&gt; Plotting in progress</span></span></code></pre></div>
 <p><img src="reference/figures/README-plot_exp_qua_lin-2.png" width="100%"></p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">slopes_lin_liahovden_flag</span> <span class="op">|&gt;</span></span>
 <span>  <span class="co"># we just show a sample of the plots to avoid slowing down the example</span></span>
@@ -571,7 +574,7 @@
 <span><span class="co">#&gt; Plotting in progress</span></span></code></pre></div>
 <p><img src="reference/figures/README-plot_exp_qua_lin-3.png" width="100%"></p>
 <p>Based on the quality flags and the plots, the user can decide to run <code>flux_fitting</code> again with different arguments. Here we will do it while cutting the last 60 seconds of the fluxes (cutting the last third). We also detected fluxes that do not look correct. Sometimes some measurements will pass the automated quality control but are obviously wrong for an experience user. That is what the <code>weird_fluxesID</code> argument is for. For the sake of reproducibility, this argument should be the last option and be accompanied with a justification.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">slopes_exp_liahovden_flag_60</span> <span class="op">&lt;-</span> <span class="va">conc_liahovden</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="reference/flux_fitting.html">flux_fitting</a></span><span class="op">(</span>fit_type <span class="op">=</span> <span class="st">"exp"</span>, end_cut <span class="op">=</span> <span class="fl">60</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="reference/flux_quality.html">flux_quality</a></span><span class="op">(</span></span>
@@ -618,7 +621,7 @@
 <span><span class="co">#&gt; Plotting in progress</span></span></code></pre></div>
 <p><img src="reference/figures/README-plot_exp_cut-1.png" width="100%"></p>
 <p>We also apply a cut on the dataset that was fitted with a quadratic model. At this point it is up to the user to decide which model works the best for the entire dataset. The function flux_quality provides a count of the quality flags that can help to take a decision.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">slopes_qua_liahovden_flag_60</span> <span class="op">&lt;-</span> <span class="va">conc_liahovden</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="reference/flux_fitting.html">flux_fitting</a></span><span class="op">(</span>fit_type <span class="op">=</span> <span class="st">"qua"</span>, end_cut <span class="op">=</span> <span class="fl">60</span>, t_zero <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="reference/flux_quality.html">flux_quality</a></span><span class="op">(</span></span>
@@ -652,7 +655,7 @@
 <span><span class="co">#&gt; Plotting in progress</span></span></code></pre></div>
 <p><img src="reference/figures/README-plot_qua_cut-1.png" width="100%"></p>
 <p>When using a linear fit it is common to take only a short section of the measurement close to the start. Here we will cut 120 seconds at the end, effectively keeping only the first 90 seconds.</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">slopes_lin_liahovden_flag_120</span> <span class="op">&lt;-</span> <span class="va">conc_liahovden</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="reference/flux_fitting.html">flux_fitting</a></span><span class="op">(</span>fit_type <span class="op">=</span> <span class="st">"lin"</span>, end_cut <span class="op">=</span> <span class="fl">120</span>, t_zero <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="reference/flux_quality.html">flux_quality</a></span><span class="op">(</span></span>
@@ -686,7 +689,7 @@
 <span><span class="co">#&gt; Plotting in progress</span></span></code></pre></div>
 <p><img src="reference/figures/README-plot_lin_cut-1.png" width="100%"></p>
 <p>Once we are satisfied with the fit, we can calculate fluxes with <code>flux_calc</code>. Here the volume is defined as a constant for all the measurements but it is also possible to provide a specific volume for each plot in case that is different.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fluxes_exp_liahovden_60</span> <span class="op">&lt;-</span> <span class="va">slopes_exp_liahovden_flag_60</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="reference/flux_calc.html">flux_calc</a></span><span class="op">(</span></span>
 <span>    slope_col <span class="op">=</span> <span class="st">"f_slope_corr"</span>, <span class="co"># we use the slopes provided by flux_quality</span></span>
@@ -827,7 +830,7 @@
 <p>A: area of chamber frame base (m<sup>2</sup>)</p>
 <p>The conversion from micromol/m<sup>2</sup>/s to mmol/m<sup>2</sup>/h is included in the function.</p>
 <p>Fluxes were calculated in five steps from raw gas concentration data and the process is entirely reproducible. Here is a plot of the results.</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html" class="external-link">bind_rows</a></span><span class="op">(</span></span>
@@ -886,7 +889,14 @@ Zhao, P., Hammerle, A., Zeeman, M. and Wohlfahrt, G. (2018), “<a href="https:/
 </div>
 </div>
 </div>
-  </main><aside class="col-md-3"><div class="license">
+  </main><aside class="col-md-3"><div class="links">
+<h2 data-toc-skip>Links</h2>
+<ul class="list-unstyled">
+<li><a href="https://cloud.r-project.org/package=fluxible" class="external-link">View on CRAN</a></li>
+</ul>
+</div>
+
+<div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
