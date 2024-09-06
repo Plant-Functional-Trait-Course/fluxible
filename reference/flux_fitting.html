@@ -93,7 +93,9 @@ to calculate gas fluxes with flux_calc</p>
 
 
 <dt id="arg-datetime-col">datetime_col<a class="anchor" aria-label="anchor" href="#arg-datetime-col"></a></dt>
-<dd><p>column with datetime of each concentration measurement</p></dd>
+<dd><p>column with datetime of each concentration measurement
+Note that if there are duplicated datetime in the same f_fluxID only
+the first row will be kept</p></dd>
 
 
 <dt id="arg-conc-col">conc_col<a class="anchor" aria-label="anchor" href="#arg-conc-col"></a></dt>
