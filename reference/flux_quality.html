@@ -52,8 +52,8 @@ by 0 according to quality thresholds set by user</p>
 <span>  error <span class="op">=</span> <span class="fl">100</span>,</span>
 <span>  fluxid_col <span class="op">=</span> <span class="st">"f_fluxID"</span>,</span>
 <span>  slope_col <span class="op">=</span> <span class="st">"f_slope"</span>,</span>
-<span>  weird_fluxes_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  force_ok_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  force_discard <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  force_ok <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  ratio_threshold <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  pvalue_col <span class="op">=</span> <span class="st">"f_pvalue"</span>,</span>
 <span>  rsquared_col <span class="op">=</span> <span class="st">"f_rsquared"</span>,</span>
@@ -103,12 +103,12 @@ the starting values indicate a polluted setup</p></dd>
 (as calculated by the flux_fitting function)</p></dd>
 
 
-<dt id="arg-weird-fluxes-id">weird_fluxes_id<a class="anchor" aria-label="anchor" href="#arg-weird-fluxes-id"></a></dt>
+<dt id="arg-force-discard">force_discard<a class="anchor" aria-label="anchor" href="#arg-force-discard"></a></dt>
 <dd><p>vector of fluxIDs that should be discarded
 by the user's decision</p></dd>
 
 
-<dt id="arg-force-ok-id">force_ok_id<a class="anchor" aria-label="anchor" href="#arg-force-ok-id"></a></dt>
+<dt id="arg-force-ok">force_ok<a class="anchor" aria-label="anchor" href="#arg-force-ok"></a></dt>
 <dd><p>vector of fluxIDs for which the user wants to keep
 the calculated slope despite a bad quality flag</p></dd>
 
