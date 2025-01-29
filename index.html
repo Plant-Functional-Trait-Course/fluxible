@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,7 +35,9 @@
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="articles/fluxible_practical_example.html">Practical example: from raw gas concentration data to clean ecosystem gas fluxes.</a></li>
+<li><a class="dropdown-item" href="articles/data-prep.html">Preparing the data for fluxible</a></li>
+    <li><a class="dropdown-item" href="articles/fluxible_practical_example.html">Practical example: from raw gas concentration data to clean ecosystem gas fluxes.</a></li>
+    <li><a class="dropdown-item" href="articles/two-gases.html">Working with two gases measured simultaneously</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="news/index.html">Changelog</a></li>
@@ -54,7 +56,6 @@
   <main id="main" class="col-md-9"><div class="section level1">
 <div class="page-header"><h1 id="fluxible">Fluxible<a class="anchor" aria-label="anchor" href="#fluxible"></a>
 </h1></div>
-<p><strong>Note:</strong> fluxible is still in an early phase, it is fully functional but can be improved in many ways. Please get in touch for any problems or suggestions.</p>
 <!-- badges: start -->
 <!-- badges: end -->
 <p>The Fluxible R package is made to transform any dataset of gas concentration over time into a gas flux dataset. It was originally made to be used with a closed loop chamber system connected to a gas analyzer. A function for use with a tent (taking leakage into account) is in development (see further developments).</p>
@@ -102,7 +103,7 @@
 <span><span class="co">#&gt;  ok   6   100 %</span></span>
 <span><span class="co">#&gt;  discard      0   0 %</span></span>
 <span><span class="co">#&gt;  zero     0   0 %</span></span>
-<span><span class="co">#&gt;  weird_flux   0   0 %</span></span>
+<span><span class="co">#&gt;  force_discard    0   0 %</span></span>
 <span><span class="co">#&gt;  start_error      0   0 %</span></span>
 <span><span class="co">#&gt;  no_data      0   0 %</span></span>
 <span><span class="co">#&gt;  force_ok     0   0 %</span></span>
@@ -118,7 +119,7 @@
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; Plotting in progress</span></span></code></pre></div>
-<p><img src="reference/figures/README-short-exemple-1.png" width="100%"></p>
+<p><img src="reference/figures/README-short-example-1.png" width="100%"></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">fluxes</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flux_calc.html">flux_calc</a></span><span class="op">(</span></span>
