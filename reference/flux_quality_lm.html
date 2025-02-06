@@ -13,7 +13,7 @@ flux_quality_exp is for the exponential model."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,12 +21,11 @@ flux_quality_exp is for the exponential model."></head><body>
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+      <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../articles/fluxible.html">Get started</a></li>
+<li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/data-prep.html">Preparing the data for fluxible</a></li>
-    <li><a class="dropdown-item" href="../articles/fluxible_practical_example.html">Practical example: from raw gas concentration data to clean ecosystem gas fluxes.</a></li>
-    <li><a class="dropdown-item" href="../articles/two-gases.html">Working with two gases measured simultaneously</a></li>
   </ul></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
@@ -55,12 +54,17 @@ flux_quality_exp is for the exponential model.</p>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">flux_quality_lm</span><span class="op">(</span></span>
 <span>  <span class="va">slopes_df</span>,</span>
-<span>  force_discard <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  force_ok <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  pvalue_col <span class="op">=</span> <span class="st">"f_pvalue"</span>,</span>
-<span>  rsquared_col <span class="op">=</span> <span class="st">"f_rsquared"</span>,</span>
-<span>  pvalue_threshold <span class="op">=</span> <span class="fl">0.3</span>,</span>
-<span>  rsquared_threshold <span class="op">=</span> <span class="fl">0.7</span></span>
+<span>  <span class="va">conc_col</span>,</span>
+<span>  <span class="va">f_fluxid</span>,</span>
+<span>  <span class="va">f_slope</span>,</span>
+<span>  <span class="va">f_cut</span>,</span>
+<span>  <span class="va">f_pvalue</span>,</span>
+<span>  <span class="va">f_rsquared</span>,</span>
+<span>  <span class="va">force_discard</span>,</span>
+<span>  <span class="va">force_ok</span>,</span>
+<span>  <span class="va">pvalue_threshold</span>,</span>
+<span>  <span class="va">rsquared_threshold</span>,</span>
+<span>  <span class="va">name_df</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -70,6 +74,32 @@ flux_quality_exp is for the exponential model.</p>
 
 <dl><dt id="arg-slopes-df">slopes_df<a class="anchor" aria-label="anchor" href="#arg-slopes-df"></a></dt>
 <dd><p>dataset containing slopes, fluxID, p.value and r.squared</p></dd>
+
+
+<dt id="arg-conc-col">conc_col<a class="anchor" aria-label="anchor" href="#arg-conc-col"></a></dt>
+<dd><p>column with gas concentration</p></dd>
+
+
+<dt id="arg-f-fluxid">f_fluxid<a class="anchor" aria-label="anchor" href="#arg-f-fluxid"></a></dt>
+<dd><p>column of ID for each measurement</p></dd>
+
+
+<dt id="arg-f-slope">f_slope<a class="anchor" aria-label="anchor" href="#arg-f-slope"></a></dt>
+<dd><p>column containing the slope of each flux
+(as calculated by the flux_fitting function)</p></dd>
+
+
+<dt id="arg-f-cut">f_cut<a class="anchor" aria-label="anchor" href="#arg-f-cut"></a></dt>
+<dd><p>column containing the cutting information</p></dd>
+
+
+<dt id="arg-f-pvalue">f_pvalue<a class="anchor" aria-label="anchor" href="#arg-f-pvalue"></a></dt>
+<dd><p>column containing the p-value of each flux</p></dd>
+
+
+<dt id="arg-f-rsquared">f_rsquared<a class="anchor" aria-label="anchor" href="#arg-f-rsquared"></a></dt>
+<dd><p>column containing the r squared to be used for
+the quality assessment</p></dd>
 
 
 <dt id="arg-force-discard">force_discard<a class="anchor" aria-label="anchor" href="#arg-force-discard"></a></dt>
@@ -82,15 +112,6 @@ by the user's decision</p></dd>
 the calculated slope despite a bad quality flag</p></dd>
 
 
-<dt id="arg-pvalue-col">pvalue_col<a class="anchor" aria-label="anchor" href="#arg-pvalue-col"></a></dt>
-<dd><p>column containing the p-value of each flux</p></dd>
-
-
-<dt id="arg-rsquared-col">rsquared_col<a class="anchor" aria-label="anchor" href="#arg-rsquared-col"></a></dt>
-<dd><p>column containing the r squared to be used for
-the quality assessment</p></dd>
-
-
 <dt id="arg-pvalue-threshold">pvalue_threshold<a class="anchor" aria-label="anchor" href="#arg-pvalue-threshold"></a></dt>
 <dd><p>threshold of p-value below which the change
 of gas concentration over time is considered not significant (user decided)</p></dd>
@@ -99,6 +120,10 @@ of gas concentration over time is considered not significant (user decided)</p><
 <dt id="arg-rsquared-threshold">rsquared_threshold<a class="anchor" aria-label="anchor" href="#arg-rsquared-threshold"></a></dt>
 <dd><p>threshold of r squared value below which
 the linear model is considered an unsatisfactory fit</p></dd>
+
+
+<dt id="arg-name-df">name_df<a class="anchor" aria-label="anchor" href="#arg-name-df"></a></dt>
+<dd><p>name of slopes_df (used for error message)</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -111,7 +136,7 @@ the linear model is considered an unsatisfactory fit</p></dd>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Joseph Gaudard, Jonas Trepel, Hilary Rose Dawson, Michael Mustri, Pekka O Niittynen, Paul Efren Santos-Andrade, Richard James Telford.</p>
+  <p>Developed by Joseph Gaudard, Paul Efren Santos-Andrade, Richard James Telford.</p>
 </div>
 
 <div class="pkgdown-footer-right">

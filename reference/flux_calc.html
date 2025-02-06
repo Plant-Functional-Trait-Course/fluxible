@@ -9,7 +9,7 @@ of gas concentration over time"></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -17,12 +17,11 @@ of gas concentration over time"></head><body>
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+      <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../articles/fluxible.html">Get started</a></li>
+<li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/data-prep.html">Preparing the data for fluxible</a></li>
-    <li><a class="dropdown-item" href="../articles/fluxible_practical_example.html">Practical example: from raw gas concentration data to clean ecosystem gas fluxes.</a></li>
-    <li><a class="dropdown-item" href="../articles/two-gases.html">Working with two gases measured simultaneously</a></li>
   </ul></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
@@ -50,20 +49,21 @@ of gas concentration over time</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">flux_calc</span><span class="op">(</span></span>
 <span>  <span class="va">slopes_df</span>,</span>
 <span>  <span class="va">slope_col</span>,</span>
-<span>  datetime_col <span class="op">=</span> <span class="st">"f_datetime"</span>,</span>
+<span>  <span class="va">datetime_col</span>,</span>
+<span>  <span class="va">temp_air_col</span>,</span>
+<span>  <span class="va">chamber_volume</span>,</span>
+<span>  <span class="va">atm_pressure</span>,</span>
+<span>  <span class="va">plot_area</span>,</span>
+<span>  f_fluxid <span class="op">=</span> <span class="va">f_fluxid</span>,</span>
 <span>  <span class="va">conc_unit</span>,</span>
 <span>  <span class="va">flux_unit</span>,</span>
-<span>  cut_col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  keep_arg <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  chamber_volume <span class="op">=</span> <span class="fl">24.5</span>,</span>
-<span>  tube_volume <span class="op">=</span> <span class="fl">0.075</span>,</span>
-<span>  atm_pressure <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>  plot_area <span class="op">=</span> <span class="fl">0.0625</span>,</span>
 <span>  cols_keep <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  cols_ave <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  fluxid_col <span class="op">=</span> <span class="st">"f_fluxID"</span>,</span>
-<span>  temp_air_col <span class="op">=</span> <span class="st">"temp_air"</span>,</span>
+<span>  <span class="va">tube_volume</span>,</span>
 <span>  temp_air_unit <span class="op">=</span> <span class="st">"celsius"</span>,</span>
+<span>  f_cut <span class="op">=</span> <span class="va">f_cut</span>,</span>
+<span>  keep_arg <span class="op">=</span> <span class="st">"keep"</span>,</span>
+<span>  cut <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  fit_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -87,33 +87,14 @@ measurements in slopes_df. The first one after cutting will be kept as
 datetime of each flux in the output.</p></dd>
 
 
-<dt id="arg-conc-unit">conc_unit<a class="anchor" aria-label="anchor" href="#arg-conc-unit"></a></dt>
-<dd><p>unit in which the concentration of gas was measured
-ppm or ppb</p></dd>
-
-
-<dt id="arg-flux-unit">flux_unit<a class="anchor" aria-label="anchor" href="#arg-flux-unit"></a></dt>
-<dd><p>unit in which the calculated flux will be
-<code>mmol</code> outputs fluxes in mmol*m^(-2)<em>h^(-1);
-<code>micromol</code> outputs fluxes in micromol</em>m^(-2)*h^(-1)</p></dd>
-
-
-<dt id="arg-cut-col">cut_col<a class="anchor" aria-label="anchor" href="#arg-cut-col"></a></dt>
-<dd><p>column containing cutting information</p></dd>
-
-
-<dt id="arg-keep-arg">keep_arg<a class="anchor" aria-label="anchor" href="#arg-keep-arg"></a></dt>
-<dd><p>name in cut_col of data to keep</p></dd>
+<dt id="arg-temp-air-col">temp_air_col<a class="anchor" aria-label="anchor" href="#arg-temp-air-col"></a></dt>
+<dd><p>column containing the air temperature used
+to calculate fluxes. Will be averaged with NA removed.</p></dd>
 
 
 <dt id="arg-chamber-volume">chamber_volume<a class="anchor" aria-label="anchor" href="#arg-chamber-volume"></a></dt>
 <dd><p>volume of the flux chamber in L,
 default for Three-D project chamber (25x24.5x40cm),
-can also be a column in case it is a variable</p></dd>
-
-
-<dt id="arg-tube-volume">tube_volume<a class="anchor" aria-label="anchor" href="#arg-tube-volume"></a></dt>
-<dd><p>volume of the tubing in L, default for summer 2020 setup,
 can also be a column in case it is a variable</p></dd>
 
 
@@ -127,6 +108,21 @@ can be a constant (numerical) or a variable (column name)</p></dd>
 can also be a column in case it is a variable</p></dd>
 
 
+<dt id="arg-f-fluxid">f_fluxid<a class="anchor" aria-label="anchor" href="#arg-f-fluxid"></a></dt>
+<dd><p>column containing the fluxID</p></dd>
+
+
+<dt id="arg-conc-unit">conc_unit<a class="anchor" aria-label="anchor" href="#arg-conc-unit"></a></dt>
+<dd><p>unit in which the concentration of gas was measured
+ppm or ppb</p></dd>
+
+
+<dt id="arg-flux-unit">flux_unit<a class="anchor" aria-label="anchor" href="#arg-flux-unit"></a></dt>
+<dd><p>unit in which the calculated flux will be
+<code>mmol</code> outputs fluxes in mmol*m^(-2)<em>h^(-1);
+<code>micromol</code> outputs fluxes in micromol</em>m^(-2)*h^(-1)</p></dd>
+
+
 <dt id="arg-cols-keep">cols_keep<a class="anchor" aria-label="anchor" href="#arg-cols-keep"></a></dt>
 <dd><p>columns to keep from the input to the output.
 Those columns need to have unique values for each flux,
@@ -138,18 +134,29 @@ as distinct() is applied.</p></dd>
 for each flux in the output. Note that NA are removed in mean calculation.</p></dd>
 
 
-<dt id="arg-fluxid-col">fluxid_col<a class="anchor" aria-label="anchor" href="#arg-fluxid-col"></a></dt>
-<dd><p>column containing the fluxID</p></dd>
-
-
-<dt id="arg-temp-air-col">temp_air_col<a class="anchor" aria-label="anchor" href="#arg-temp-air-col"></a></dt>
-<dd><p>column containing the air temperature used
-to calculate fluxes. Will be averaged with NA removed.</p></dd>
+<dt id="arg-tube-volume">tube_volume<a class="anchor" aria-label="anchor" href="#arg-tube-volume"></a></dt>
+<dd><p>volume of the tubing in L, default for summer 2020 setup,
+can also be a column in case it is a variable</p></dd>
 
 
 <dt id="arg-temp-air-unit">temp_air_unit<a class="anchor" aria-label="anchor" href="#arg-temp-air-unit"></a></dt>
 <dd><p>units in which air temperature was measured.
 Has to be either Celsius, Fahrenheit or Kelvin.</p></dd>
+
+
+<dt id="arg-f-cut">f_cut<a class="anchor" aria-label="anchor" href="#arg-f-cut"></a></dt>
+<dd><p>column containing cutting information</p></dd>
+
+
+<dt id="arg-keep-arg">keep_arg<a class="anchor" aria-label="anchor" href="#arg-keep-arg"></a></dt>
+<dd><p>name in f_cut of data to keep</p></dd>
+
+
+<dt id="arg-cut">cut<a class="anchor" aria-label="anchor" href="#arg-cut"></a></dt>
+<dd><p>if 'TRUE' (default), the measurements will be cut according to
+'f_cut' before calculating fluxes. This had no influence on the flux itself
+since the slope is provided from <a href="flux_fitting.html">flux_fitting</a>,
+but it will influence the columns to average.</p></dd>
 
 
 <dt id="arg-fit-type">fit_type<a class="anchor" aria-label="anchor" href="#arg-fit-type"></a></dt>
@@ -172,25 +179,31 @@ and any columns specified in cols_keep and cols_ave.</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">slopes0</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">flux_calc</span><span class="op">(</span><span class="va">slopes0</span>,</span></span>
-<span class="r-in"><span>slope_col <span class="op">=</span> <span class="st">"f_slope"</span>,</span></span>
+<span class="r-in"><span><span class="va">f_slope</span>,</span></span>
+<span class="r-in"><span><span class="va">datetime</span>,</span></span>
+<span class="r-in"><span><span class="va">temp_air</span>,</span></span>
 <span class="r-in"><span>conc_unit <span class="op">=</span> <span class="st">"ppm"</span>,</span></span>
-<span class="r-in"><span>flux_unit <span class="op">=</span> <span class="st">"mmol"</span><span class="op">)</span></span></span>
+<span class="r-in"><span>flux_unit <span class="op">=</span> <span class="st">"mmol"</span>,</span></span>
+<span class="r-in"><span>chamber_volume <span class="op">=</span> <span class="fl">24.5</span>,</span></span>
+<span class="r-in"><span>tube_volume <span class="op">=</span> <span class="fl">0.075</span>,</span></span>
+<span class="r-in"><span>atm_pressure <span class="op">=</span> <span class="fl">1</span>,</span></span>
+<span class="r-in"><span>plot_area <span class="op">=</span> <span class="fl">0.0625</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Cutting data according to 'keep_arg'...</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Averaging air temperature for each flux...</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Calculating fluxes...</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> R constant set to 0.082057</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Concentration was measured in ppm</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Fluxes are in mmol/m2/h</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 11</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   f_fluxID f_slope_calc chamber_volume tube_volume atm_pressure plot_area</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>        1        1.56            24.5       0.075            1    0.062<span style="text-decoration: underline;">5</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>        2        0.853           24.5       0.075            1    0.062<span style="text-decoration: underline;">5</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>        3        0.303           24.5       0.075            1    0.062<span style="text-decoration: underline;">5</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>        4        1.13            24.5       0.075            1    0.062<span style="text-decoration: underline;">5</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>        5        1.46            24.5       0.075            1    0.062<span style="text-decoration: underline;">5</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span>        6        0.426           24.5       0.075            1    0.062<span style="text-decoration: underline;">5</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 5 more variables: temp_air_ave &lt;dbl&gt;, datetime &lt;dttm&gt;, volume_setup &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   flux &lt;dbl&gt;, model &lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 7</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   f_fluxid f_slope f_temp_air_ave datetime            f_volume_setup f_flux</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>                       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>        1   1.56            7.31 2022-07-28 <span style="color: #949494;">23:43:35</span>           24.6   95.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>        2   0.853           7.38 2022-07-28 <span style="color: #949494;">23:47:22</span>           24.6   52.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>        3   0.303           7.46 2022-07-28 <span style="color: #949494;">23:52:10</span>           24.6   18.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>        4   1.13            7.77 2022-07-28 <span style="color: #949494;">23:59:32</span>           24.6   69.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>        5   1.46            7.71 2022-07-29 <span style="color: #949494;">00:03:10</span>           24.6   89.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span>        6   0.426           7.75 2022-07-29 <span style="color: #949494;">00:06:35</span>           24.6   26.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1 more variable: f_model &lt;chr&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -198,7 +211,7 @@ and any columns specified in cols_keep and cols_ave.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Joseph Gaudard, Jonas Trepel, Hilary Rose Dawson, Michael Mustri, Pekka O Niittynen, Paul Efren Santos-Andrade, Richard James Telford.</p>
+  <p>Developed by Joseph Gaudard, Paul Efren Santos-Andrade, Richard James Telford.</p>
 </div>
 
 <div class="pkgdown-footer-right">

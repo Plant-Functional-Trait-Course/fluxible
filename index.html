@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,13 +31,12 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
+<li class="nav-item"><a class="nav-link" href="articles/fluxible.html">Get started</a></li>
 <li class="nav-item"><a class="nav-link" href="reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
 <li><a class="dropdown-item" href="articles/data-prep.html">Preparing the data for fluxible</a></li>
-    <li><a class="dropdown-item" href="articles/fluxible_practical_example.html">Practical example: from raw gas concentration data to clean ecosystem gas fluxes.</a></li>
-    <li><a class="dropdown-item" href="articles/two-gases.html">Working with two gases measured simultaneously</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="news/index.html">Changelog</a></li>
@@ -58,9 +57,8 @@
 </h1></div>
 <!-- badges: start -->
 <!-- badges: end -->
-<p>The Fluxible R package is made to transform any dataset of gas concentration over time into a gas flux dataset. It was originally made to be used with a closed loop chamber system connected to a gas analyzer. A function for use with a tent (taking leakage into account) is in development (see further developments).</p>
+<p>The Fluxible R package is made to transform any dataset of gas concentration over time into a gas flux dataset. It was originally made to be used with a closed loop chamber system connected to a gas analyzer.</p>
 <p>The goal of fluxible is to provide a workflow that removes individual evaluation of each flux, reduces risk of bias, and makes it reproducible. Users set specific data quality standards and selection parameters as function arguments that are applied to the entire dataset. The package runs the calculations automatically, without prompting the user to take decisions mid-way, and provides quality flags and plots at the end of the process for a visual check. This makes it easy to use with large flux datasets and to integrate into a reproducible workflow. Using the Fluxible R package makes the workflow reproducible, increases compatibility across studies, and is more time efficient.</p>
-<p>For a quick overview of how the package works, you can look at <a href="https://github.com/Plant-Functional-Trait-Course/fluxible/blob/main/dissemination/poster_EGU24_jgaudard.pdf" class="external-link">the poster</a> that was presented at the European Geosciences Union Annual Meeting 2024.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -78,13 +76,20 @@
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://cran.r-project.org/package=fluxible" class="external-link">fluxible</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">conc</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flux_match.html">flux_match</a></span><span class="op">(</span></span>
+<span><span class="va">conc_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flux_match.html">flux_match</a></span><span class="op">(</span></span>
 <span>  <span class="va">co2_df_short</span>,</span>
-<span>  <span class="va">record_short</span></span>
+<span>  <span class="va">record_short</span>,</span>
+<span>  <span class="va">datetime</span>,</span>
+<span>  <span class="va">start</span>,</span>
+<span>  <span class="va">conc</span>,</span>
+<span>  startcrop <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  measurement_length <span class="op">=</span> <span class="fl">220</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">slopes</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flux_fitting.html">flux_fitting</a></span><span class="op">(</span></span>
+<span><span class="va">slopes_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flux_fitting.html">flux_fitting</a></span><span class="op">(</span></span>
+<span>  <span class="va">conc_df</span>,</span>
 <span>  <span class="va">conc</span>,</span>
+<span>  <span class="va">datetime</span>,</span>
 <span>  fit_type <span class="op">=</span> <span class="st">"exp"</span>,</span>
 <span>  end_cut <span class="op">=</span> <span class="fl">30</span></span>
 <span><span class="op">)</span></span>
@@ -94,8 +99,9 @@
 <span><span class="co">#&gt; Calculating fits and slopes...</span></span>
 <span><span class="co">#&gt; Done.</span></span>
 <span></span>
-<span><span class="va">slopes_flag</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flux_quality.html">flux_quality</a></span><span class="op">(</span></span>
-<span>  <span class="va">slopes</span></span>
+<span><span class="va">slopes_flag_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flux_quality.html">flux_quality</a></span><span class="op">(</span></span>
+<span>  <span class="va">slopes_df</span>,</span>
+<span>  <span class="va">conc</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  Total number of measurements: 6</span></span>
@@ -109,7 +115,9 @@
 <span><span class="co">#&gt;  force_ok     0   0 %</span></span>
 <span></span>
 <span><span class="fu"><a href="reference/flux_plot.html">flux_plot</a></span><span class="op">(</span></span>
-<span>  <span class="va">slopes_flag</span>,</span>
+<span>  <span class="va">slopes_flag_df</span>,</span>
+<span>  <span class="va">conc</span>,</span>
+<span>  <span class="va">datetime</span>,</span>
 <span>  f_ylim_lower <span class="op">=</span> <span class="fl">390</span>,</span>
 <span>  f_ylim_upper <span class="op">=</span> <span class="fl">650</span>,</span>
 <span>  facet_wrap_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
@@ -122,15 +130,19 @@
 <p><img src="reference/figures/README-short-example-1.png" width="100%"></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
-<span><span class="va">fluxes</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flux_calc.html">flux_calc</a></span><span class="op">(</span></span>
-<span>  <span class="va">slopes_flag</span>,</span>
-<span>  slope_col <span class="op">=</span> <span class="st">"f_slope_corr"</span>,</span>
+<span><span class="va">fluxes_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flux_calc.html">flux_calc</a></span><span class="op">(</span></span>
+<span>  <span class="va">slopes_flag_df</span>,</span>
+<span>  <span class="va">f_slope_corr</span>,</span>
+<span>  <span class="va">datetime</span>,</span>
+<span>  <span class="va">temp_air</span>,</span>
 <span>  conc_unit <span class="op">=</span> <span class="st">"ppm"</span>,</span>
 <span>  flux_unit <span class="op">=</span> <span class="st">"mmol"</span>,</span>
 <span>  cols_keep <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"turfID"</span>, <span class="st">"type"</span><span class="op">)</span>,</span>
 <span>  cols_ave <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"temp_soil"</span>, <span class="st">"PAR"</span><span class="op">)</span>,</span>
-<span>  cut_col <span class="op">=</span> <span class="st">"f_cut"</span>,</span>
-<span>  keep_arg <span class="op">=</span> <span class="st">"keep"</span></span>
+<span>  chamber_volume <span class="op">=</span> <span class="fl">24.5</span>,</span>
+<span>  tube_volume <span class="op">=</span> <span class="fl">0.075</span>,</span>
+<span>  atm_pressure <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  plot_area <span class="op">=</span> <span class="fl">0.0625</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; Cutting data according to 'keep_arg'...</span></span>
 <span><span class="co">#&gt; Averaging air temperature for each flux...</span></span>
@@ -142,41 +154,37 @@
 <span><span class="co">#&gt; Fluxes are in mmol/m2/h</span></span>
 <span></span>
 <span><span class="va">fluxes_gep</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flux_gep.html">flux_gep</a></span><span class="op">(</span></span>
-<span>  <span class="va">fluxes</span>,</span>
+<span>  <span class="va">fluxes_df</span>,</span>
+<span>  <span class="va">type</span>,</span>
+<span>  <span class="va">PAR</span>,</span>
+<span>  <span class="va">datetime</span>,</span>
 <span>  id_cols <span class="op">=</span> <span class="st">"turfID"</span>,</span>
-<span>  flux_col <span class="op">=</span> <span class="st">"flux"</span>,</span>
-<span>  type_col <span class="op">=</span> <span class="st">"type"</span>,</span>
-<span>  datetime_col <span class="op">=</span> <span class="st">"datetime"</span>,</span>
-<span>  par_col <span class="op">=</span> <span class="st">"PAR"</span>,</span>
 <span>  cols_keep <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"temp_soil"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning in flux_gep(fluxes, id_cols = "turfID", flux_col = "flux", type_col = "type", : </span></span>
+<span><span class="co">#&gt; Warning in flux_gep(fluxes_df, type, PAR, datetime, id_cols = "turfID", : </span></span>
 <span><span class="co">#&gt;  NEE missing for measurement turfID: 156 AN2C 156</span></span>
 <span></span>
 <span><span class="va">fluxes_gep</span></span>
-<span><span class="co">#&gt; # A tibble: 9 × 15</span></span>
-<span><span class="co">#&gt;   datetime            turfID     PAR type   flux f_fluxID temp_soil f_slope_calc</span></span>
-<span><span class="co">#&gt;   &lt;dttm&gt;              &lt;chr&gt;    &lt;dbl&gt; &lt;chr&gt; &lt;dbl&gt; &lt;fct&gt;        &lt;dbl&gt;        &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 2022-07-28 23:47:22 74 WN2C…  2.19 GEP    10.3 &lt;NA&gt;          10.7       NA    </span></span>
-<span><span class="co">#&gt; 2 2022-07-28 23:59:32 109 AN3…  1.87 GEP   -27.2 &lt;NA&gt;          10.8       NA    </span></span>
-<span><span class="co">#&gt; 3 2022-07-29 00:06:35 29 WN3C…  1.61 GEP    NA   &lt;NA&gt;          12.2       NA    </span></span>
-<span><span class="co">#&gt; 4 2022-07-28 23:43:35 156 AN2…  1.88 ER     47.7 1             10.8        0.775</span></span>
-<span><span class="co">#&gt; 5 2022-07-28 23:47:22 74 WN2C…  2.19 NEE    31.0 2             10.7        0.504</span></span>
-<span><span class="co">#&gt; 6 2022-07-28 23:52:10 74 WN2C…  2.04 ER     20.7 3             10.7        0.337</span></span>
-<span><span class="co">#&gt; 7 2022-07-28 23:59:32 109 AN3…  1.87 NEE    41.5 4             10.8        0.676</span></span>
-<span><span class="co">#&gt; 8 2022-07-29 00:03:10 109 AN3…  1.69 ER     68.7 5             10.5        1.12 </span></span>
-<span><span class="co">#&gt; 9 2022-07-29 00:06:35 29 WN3C…  1.61 NEE    26.1 6             12.2        0.425</span></span>
-<span><span class="co">#&gt; # ℹ 7 more variables: chamber_volume &lt;dbl&gt;, tube_volume &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   atm_pressure &lt;dbl&gt;, plot_area &lt;dbl&gt;, temp_air_ave &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   volume_setup &lt;dbl&gt;, model &lt;chr&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt; # A tibble: 9 × 6</span></span>
+<span><span class="co">#&gt;     PAR datetime            type  f_flux temp_soil turfID      </span></span>
+<span><span class="co">#&gt;   &lt;dbl&gt; &lt;dttm&gt;              &lt;chr&gt;  &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;       </span></span>
+<span><span class="co">#&gt; 1  2.19 2022-07-28 23:47:22 GEP     10.3      10.7 74 WN2C 155 </span></span>
+<span><span class="co">#&gt; 2  1.87 2022-07-28 23:59:32 GEP    -27.2      10.8 109 AN3C 109</span></span>
+<span><span class="co">#&gt; 3  1.61 2022-07-29 00:06:35 GEP     NA        12.2 29 WN3C 106 </span></span>
+<span><span class="co">#&gt; 4  1.88 2022-07-28 23:43:35 ER      47.7      10.8 156 AN2C 156</span></span>
+<span><span class="co">#&gt; 5  2.19 2022-07-28 23:47:22 NEE     31.0      10.7 74 WN2C 155 </span></span>
+<span><span class="co">#&gt; 6  2.04 2022-07-28 23:52:10 ER      20.7      10.7 74 WN2C 155 </span></span>
+<span><span class="co">#&gt; 7  1.87 2022-07-28 23:59:32 NEE     41.5      10.8 109 AN3C 109</span></span>
+<span><span class="co">#&gt; 8  1.69 2022-07-29 00:03:10 ER      68.7      10.5 109 AN3C 109</span></span>
+<span><span class="co">#&gt; 9  1.61 2022-07-29 00:06:35 NEE     26.1      12.2 29 WN3C 106</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="further-developments">Further developments<a class="anchor" aria-label="anchor" href="#further-developments"></a>
 </h2>
 <div class="section level3">
-<h3 id="flux-tent">Flux tent<a class="anchor" aria-label="anchor" href="#flux-tent"></a>
+<h3 id="segmentation-tool">Segmentation tool<a class="anchor" aria-label="anchor" href="#segmentation-tool"></a>
 </h3>
-<p>Currently fluxible is thought for setups using a flux chamber. Flux chambers can be assumed to have no leak. As flux tents tend to leak, a different fitting function is needed to account for potential leaks.</p>
+<p>We are working on a tool to automatically select the window of the measurement on which to fit a model. This selection will be based on environmental variable, such as photosythetically active radiation (PAR), measured simultaneously.</p>
 </div>
 <div class="section level3">
 <h3 id="more-fits">More fits<a class="anchor" aria-label="anchor" href="#more-fits"></a>
@@ -189,18 +197,15 @@
 </h2>
 <p>Joseph Gaudard, University of Bergen, Norway</p>
 <p><a href="mailto:joseph.gaudard@pm.me" class="email">joseph.gaudard@pm.me</a></p>
-<p><a href="https://jogaudard.github.io/CV_jgaudard/" class="external-link">CV</a></p>
+<p><a href="https://github.com/jogaudard" class="external-link">GitHub profile</a></p>
 </div>
 <div class="section level2">
 <h2 id="dissemination">Dissemination<a class="anchor" aria-label="anchor" href="#dissemination"></a>
 </h2>
 <p>Gaudard, J., Telford, R., Vandvik, V., and Halbritter, A. H.: Fluxible: an R package to calculate ecosystem gas fluxes in a reproducible and automated workflow., EGU General Assembly 2024, Vienna, Austria, 14–19 Apr 2024, EGU24-956, <a href="https://doi.org/10.5194/egusphere-egu24-956" class="external-link uri">https://doi.org/10.5194/egusphere-egu24-956</a>, 2024.</p>
-<p><a href="https://github.com/Plant-Functional-Trait-Course/fluxible/blob/main/dissemination/poster_EGU24_jgaudard.pdf" class="external-link">Direct link to the poster</a></p>
+<!-- [Direct link to the poster](https://github.com/Plant-Functional-Trait-Course/fluxible/blob/main/dissemination/poster_EGU24_jgaudard.pdf) -->
 <!-- [Link to the abstract](https://meetingorganizer.copernicus.org/EGU24/EGU24-956.html) -->
-<div class="section level4">
-<h4 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
-</h4>
-</div>
+<!-- #### References -->
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
@@ -230,10 +235,6 @@
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Joseph Gaudard <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-6989-7624" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Jonas Trepel <br><small class="roles"> Author </small>  </li>
-<li>Hilary Rose Dawson <br><small class="roles"> Author </small>  </li>
-<li>Michael Mustri <br><small class="roles"> Author </small>  </li>
-<li>Pekka O Niittynen <br><small class="roles"> Author </small>  </li>
 <li>Paul Efren Santos-Andrade <br><small class="roles"> Author </small>  </li>
 <li>Richard James Telford <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-9826-3076" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 </ul>
@@ -246,7 +247,7 @@
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Joseph Gaudard, Jonas Trepel, Hilary Rose Dawson, Michael Mustri, Pekka O Niittynen, Paul Efren Santos-Andrade, Richard James Telford.</p>
+  <p>Developed by Joseph Gaudard, Paul Efren Santos-Andrade, Richard James Telford.</p>
 </div>
 
 <div class="pkgdown-footer-right">

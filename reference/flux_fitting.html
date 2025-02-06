@@ -11,7 +11,7 @@ to calculate gas fluxes with flux_calc"></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,12 +19,11 @@ to calculate gas fluxes with flux_calc"></head><body>
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+      <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../articles/fluxible.html">Get started</a></li>
+<li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/data-prep.html">Preparing the data for fluxible</a></li>
-    <li><a class="dropdown-item" href="../articles/fluxible_practical_example.html">Practical example: from raw gas concentration data to clean ecosystem gas fluxes.</a></li>
-    <li><a class="dropdown-item" href="../articles/two-gases.html">Working with two gases measured simultaneously</a></li>
   </ul></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
@@ -52,13 +51,13 @@ to calculate gas fluxes with flux_calc</p>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">flux_fitting</span><span class="op">(</span></span>
 <span>  <span class="va">conc_df</span>,</span>
+<span>  <span class="va">conc_col</span>,</span>
+<span>  <span class="va">datetime_col</span>,</span>
+<span>  f_start <span class="op">=</span> <span class="va">f_start</span>,</span>
+<span>  f_end <span class="op">=</span> <span class="va">f_end</span>,</span>
+<span>  f_fluxid <span class="op">=</span> <span class="va">f_fluxid</span>,</span>
 <span>  start_cut <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  end_cut <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>  start_col <span class="op">=</span> <span class="st">"f_start"</span>,</span>
-<span>  end_col <span class="op">=</span> <span class="st">"f_end"</span>,</span>
-<span>  datetime_col <span class="op">=</span> <span class="st">"f_datetime"</span>,</span>
-<span>  conc_col <span class="op">=</span> <span class="st">"f_conc"</span>,</span>
-<span>  fluxid_col <span class="op">=</span> <span class="st">"f_fluxID"</span>,</span>
 <span>  t_window <span class="op">=</span> <span class="fl">20</span>,</span>
 <span>  cz_window <span class="op">=</span> <span class="fl">15</span>,</span>
 <span>  b_window <span class="op">=</span> <span class="fl">10</span>,</span>
@@ -77,6 +76,28 @@ to calculate gas fluxes with flux_calc</p>
 <dd><p>dataframe of gas concentration over time</p></dd>
 
 
+<dt id="arg-conc-col">conc_col<a class="anchor" aria-label="anchor" href="#arg-conc-col"></a></dt>
+<dd><p>column with gas concentration data</p></dd>
+
+
+<dt id="arg-datetime-col">datetime_col<a class="anchor" aria-label="anchor" href="#arg-datetime-col"></a></dt>
+<dd><p>column with datetime of each concentration measurement
+Note that if there are duplicated datetime in the same f_fluxid only
+the first row will be kept</p></dd>
+
+
+<dt id="arg-f-start">f_start<a class="anchor" aria-label="anchor" href="#arg-f-start"></a></dt>
+<dd><p>column with datetime when the measurement started</p></dd>
+
+
+<dt id="arg-f-end">f_end<a class="anchor" aria-label="anchor" href="#arg-f-end"></a></dt>
+<dd><p>column with datetime when the measurement ended</p></dd>
+
+
+<dt id="arg-f-fluxid">f_fluxid<a class="anchor" aria-label="anchor" href="#arg-f-fluxid"></a></dt>
+<dd><p>column with ID of each flux</p></dd>
+
+
 <dt id="arg-start-cut">start_cut<a class="anchor" aria-label="anchor" href="#arg-start-cut"></a></dt>
 <dd><p>time to discard at the start of the measurements
 (in seconds)</p></dd>
@@ -84,28 +105,6 @@ to calculate gas fluxes with flux_calc</p>
 
 <dt id="arg-end-cut">end_cut<a class="anchor" aria-label="anchor" href="#arg-end-cut"></a></dt>
 <dd><p>time to discard at the end of the measurements (in seconds)</p></dd>
-
-
-<dt id="arg-start-col">start_col<a class="anchor" aria-label="anchor" href="#arg-start-col"></a></dt>
-<dd><p>column with datetime when the measurement started</p></dd>
-
-
-<dt id="arg-end-col">end_col<a class="anchor" aria-label="anchor" href="#arg-end-col"></a></dt>
-<dd><p>column with datetime when the measurement ended</p></dd>
-
-
-<dt id="arg-datetime-col">datetime_col<a class="anchor" aria-label="anchor" href="#arg-datetime-col"></a></dt>
-<dd><p>column with datetime of each concentration measurement
-Note that if there are duplicated datetime in the same f_fluxID only
-the first row will be kept</p></dd>
-
-
-<dt id="arg-conc-col">conc_col<a class="anchor" aria-label="anchor" href="#arg-conc-col"></a></dt>
-<dd><p>column with gas concentration data</p></dd>
-
-
-<dt id="arg-fluxid-col">fluxid_col<a class="anchor" aria-label="anchor" href="#arg-fluxid-col"></a></dt>
-<dd><p>column with ID of each flux</p></dd>
 
 
 <dt id="arg-t-window">t_window<a class="anchor" aria-label="anchor" href="#arg-t-window"></a></dt>
@@ -158,7 +157,7 @@ https://doi.org/10.1016/j.agrformet.2018.08.022</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">co2_conc</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">flux_fitting</span><span class="op">(</span><span class="va">co2_conc</span>, fit_type <span class="op">=</span> <span class="st">"exp"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">flux_fitting</span><span class="op">(</span><span class="va">co2_conc</span>, <span class="va">conc</span>, <span class="va">datetime</span>, fit_type <span class="op">=</span> <span class="st">"exp"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Cutting measurements...</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Estimating starting parameters for optimization...</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Optimizing fitting parameters...</span>
@@ -167,45 +166,45 @@ https://doi.org/10.1016/j.agrformet.2018.08.022</p>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span>  fluxID 5 : slope was estimated on 205 points out of 210 seconds</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span>  fluxID 6 : slope was estimated on 206 points out of 210 seconds</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,251 × 29</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    f_datetime          temp_air temp_soil f_conc   PAR turfID       type </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 2022-07-28 <span style="color: #949494;">23:43:35</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>     447. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 2022-07-28 <span style="color: #949494;">23:43:36</span>     7.22      10.9   447.  1.68 156 AN2C 156 ER   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 2022-07-28 <span style="color: #949494;">23:43:37</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>     448. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 2022-07-28 <span style="color: #949494;">23:43:38</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>     449. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 2022-07-28 <span style="color: #949494;">23:43:39</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>     449. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 2022-07-28 <span style="color: #949494;">23:43:40</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>     450. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 2022-07-28 <span style="color: #949494;">23:43:41</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>     451. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 2022-07-28 <span style="color: #949494;">23:43:42</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>     451. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 2022-07-28 <span style="color: #949494;">23:43:43</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>     453. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 2022-07-28 <span style="color: #949494;">23:43:44</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>     453. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,251 × 23</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    datetime            temp_air temp_soil  conc   PAR turfID       type </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 2022-07-28 <span style="color: #949494;">23:43:35</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>    447. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 2022-07-28 <span style="color: #949494;">23:43:36</span>     7.22      10.9  447.  1.68 156 AN2C 156 ER   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 2022-07-28 <span style="color: #949494;">23:43:37</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>    448. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 2022-07-28 <span style="color: #949494;">23:43:38</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>    449. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 2022-07-28 <span style="color: #949494;">23:43:39</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>    449. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 2022-07-28 <span style="color: #949494;">23:43:40</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>    450. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 2022-07-28 <span style="color: #949494;">23:43:41</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>    451. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 2022-07-28 <span style="color: #949494;">23:43:42</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>    451. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 2022-07-28 <span style="color: #949494;">23:43:43</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>    453. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 2022-07-28 <span style="color: #949494;">23:43:44</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>    453. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1,241 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 22 more variables: f_start &lt;dttm&gt;, f_end &lt;dttm&gt;, f_fluxID &lt;fct&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   n_conc &lt;int&gt;, ratio &lt;dbl&gt;, flag &lt;chr&gt;, f_time &lt;dbl&gt;, f_cut &lt;fct&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   Cm_est &lt;dbl&gt;, a_est &lt;dbl&gt;, b_est &lt;dbl&gt;, tz_est &lt;dbl&gt;, f_Cz &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   time_diff &lt;dbl&gt;, f_Cm &lt;dbl&gt;, f_a &lt;dbl&gt;, f_b &lt;dbl&gt;, f_tz &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   f_slope &lt;dbl&gt;, f_fit &lt;dbl&gt;, f_fit_slope &lt;dbl&gt;, f_start_z &lt;dttm&gt;</span></span>
-<span class="r-in"><span><span class="fu">flux_fitting</span><span class="op">(</span><span class="va">co2_conc</span>, fit_type <span class="op">=</span> <span class="st">"quadratic"</span>, t_zero <span class="op">=</span> <span class="fl">10</span>, end_cut <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 16 more variables: f_start &lt;dttm&gt;, f_end &lt;dttm&gt;, f_fluxid &lt;fct&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   f_ratio &lt;dbl&gt;, f_flag_match &lt;chr&gt;, f_time &lt;dbl&gt;, f_cut &lt;fct&gt;, f_Cz &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   f_Cm &lt;dbl&gt;, f_a &lt;dbl&gt;, f_b &lt;dbl&gt;, f_tz &lt;dbl&gt;, f_slope &lt;dbl&gt;, f_fit &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   f_fit_slope &lt;dbl&gt;, f_start_z &lt;dttm&gt;</span></span>
+<span class="r-in"><span><span class="fu">flux_fitting</span><span class="op">(</span><span class="va">co2_conc</span>, <span class="va">conc</span>, <span class="va">datetime</span>,  fit_type <span class="op">=</span> <span class="st">"quadratic"</span>,</span></span>
+<span class="r-in"><span>t_zero <span class="op">=</span> <span class="fl">10</span>, end_cut <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,251 × 24</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    f_datetime          temp_air temp_soil f_conc   PAR turfID       type </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 2022-07-28 <span style="color: #949494;">23:43:35</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>     447. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 2022-07-28 <span style="color: #949494;">23:43:36</span>     7.22      10.9   447.  1.68 156 AN2C 156 ER   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 2022-07-28 <span style="color: #949494;">23:43:37</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>     448. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 2022-07-28 <span style="color: #949494;">23:43:38</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>     449. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 2022-07-28 <span style="color: #949494;">23:43:39</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>     449. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 2022-07-28 <span style="color: #949494;">23:43:40</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>     450. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 2022-07-28 <span style="color: #949494;">23:43:41</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>     451. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 2022-07-28 <span style="color: #949494;">23:43:42</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>     451. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 2022-07-28 <span style="color: #949494;">23:43:43</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>     453. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 2022-07-28 <span style="color: #949494;">23:43:44</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>     453. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    datetime            temp_air temp_soil  conc   PAR turfID       type </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 2022-07-28 <span style="color: #949494;">23:43:35</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>    447. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 2022-07-28 <span style="color: #949494;">23:43:36</span>     7.22      10.9  447.  1.68 156 AN2C 156 ER   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 2022-07-28 <span style="color: #949494;">23:43:37</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>    448. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 2022-07-28 <span style="color: #949494;">23:43:38</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>    449. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 2022-07-28 <span style="color: #949494;">23:43:39</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>    449. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 2022-07-28 <span style="color: #949494;">23:43:40</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>    450. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 2022-07-28 <span style="color: #949494;">23:43:41</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>    451. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 2022-07-28 <span style="color: #949494;">23:43:42</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>    451. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 2022-07-28 <span style="color: #949494;">23:43:43</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>    453. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 2022-07-28 <span style="color: #949494;">23:43:44</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>    453. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1,241 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 17 more variables: f_start &lt;dttm&gt;, f_end &lt;dttm&gt;, f_fluxID &lt;fct&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   n_conc &lt;int&gt;, ratio &lt;dbl&gt;, flag &lt;chr&gt;, f_time &lt;dbl&gt;, f_cut &lt;fct&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   f_rsquared &lt;dbl&gt;, f_adj_rsquared &lt;dbl&gt;, f_pvalue &lt;dbl&gt;, f_intercept &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   f_param1 &lt;dbl&gt;, f_param2 &lt;dbl&gt;, f_slope &lt;dbl&gt;, f_fit &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   f_fit_slope &lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 17 more variables: f_start &lt;dttm&gt;, f_end &lt;dttm&gt;, f_fluxid &lt;fct&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   f_ratio &lt;dbl&gt;, f_flag_match &lt;chr&gt;, f_time &lt;dbl&gt;, f_cut &lt;fct&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   f_param1 &lt;dbl&gt;, f_param2 &lt;dbl&gt;, f_rsquared &lt;dbl&gt;, f_adj_rsquared &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   f_intercept &lt;dbl&gt;, f_pvalue &lt;dbl&gt;, f_slope &lt;dbl&gt;, f_fit &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   f_fit_slope &lt;dbl&gt;, f_start_z &lt;dttm&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -213,7 +212,7 @@ https://doi.org/10.1016/j.agrformet.2018.08.022</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Joseph Gaudard, Jonas Trepel, Hilary Rose Dawson, Michael Mustri, Pekka O Niittynen, Paul Efren Santos-Andrade, Richard James Telford.</p>
+  <p>Developed by Joseph Gaudard, Paul Efren Santos-Andrade, Richard James Telford.</p>
 </div>
 
 <div class="pkgdown-footer-right">

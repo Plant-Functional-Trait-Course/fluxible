@@ -13,7 +13,7 @@ measurement. If it is missing, GEP will be dropped for that pair."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,12 +21,11 @@ measurement. If it is missing, GEP will be dropped for that pair."></head><body>
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
-      <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+      <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../articles/fluxible.html">Get started</a></li>
+<li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/data-prep.html">Preparing the data for fluxible</a></li>
-    <li><a class="dropdown-item" href="../articles/fluxible_practical_example.html">Practical example: from raw gas concentration data to clean ecosystem gas fluxes.</a></li>
-    <li><a class="dropdown-item" href="../articles/two-gases.html">Working with two gases measured simultaneously</a></li>
   </ul></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
@@ -55,11 +54,11 @@ measurement. If it is missing, GEP will be dropped for that pair.</p>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">flux_gep</span><span class="op">(</span></span>
 <span>  <span class="va">fluxes_df</span>,</span>
-<span>  <span class="va">id_cols</span>,</span>
-<span>  <span class="va">flux_col</span>,</span>
 <span>  <span class="va">type_col</span>,</span>
 <span>  <span class="va">datetime_col</span>,</span>
 <span>  <span class="va">par_col</span>,</span>
+<span>  f_flux <span class="op">=</span> <span class="va">f_flux</span>,</span>
+<span>  <span class="va">id_cols</span>,</span>
 <span>  nee_arg <span class="op">=</span> <span class="st">"NEE"</span>,</span>
 <span>  er_arg <span class="op">=</span> <span class="st">"ER"</span>,</span>
 <span>  cols_keep <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -74,14 +73,6 @@ measurement. If it is missing, GEP will be dropped for that pair.</p>
 <dd><p>a dataframe containing NEE and ER</p></dd>
 
 
-<dt id="arg-id-cols">id_cols<a class="anchor" aria-label="anchor" href="#arg-id-cols"></a></dt>
-<dd><p>columns used to identify each pair of ER and NEE</p></dd>
-
-
-<dt id="arg-flux-col">flux_col<a class="anchor" aria-label="anchor" href="#arg-flux-col"></a></dt>
-<dd><p>column containing flux values</p></dd>
-
-
 <dt id="arg-type-col">type_col<a class="anchor" aria-label="anchor" href="#arg-type-col"></a></dt>
 <dd><p>column containing type of flux (NEE or ER)</p></dd>
 
@@ -92,6 +83,14 @@ measurement. If it is missing, GEP will be dropped for that pair.</p>
 
 <dt id="arg-par-col">par_col<a class="anchor" aria-label="anchor" href="#arg-par-col"></a></dt>
 <dd><p>column containing PAR values for each flux</p></dd>
+
+
+<dt id="arg-f-flux">f_flux<a class="anchor" aria-label="anchor" href="#arg-f-flux"></a></dt>
+<dd><p>column containing flux values</p></dd>
+
+
+<dt id="arg-id-cols">id_cols<a class="anchor" aria-label="anchor" href="#arg-id-cols"></a></dt>
+<dd><p>columns used to identify each pair of ER and NEE</p></dd>
 
 
 <dt id="arg-nee-arg">nee_arg<a class="anchor" aria-label="anchor" href="#arg-nee-arg"></a></dt>
@@ -116,24 +115,22 @@ measurement for each pair of ER and NEE</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">co2_fluxes</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">flux_gep</span><span class="op">(</span><span class="va">co2_fluxes</span>, id_cols <span class="op">=</span> <span class="st">"turfID"</span>, flux_col <span class="op">=</span> <span class="st">"flux"</span>,</span></span>
-<span class="r-in"><span>type_col <span class="op">=</span> <span class="st">"type"</span>, datetime_col <span class="op">=</span> <span class="st">"f_start"</span>, par_col <span class="op">=</span> <span class="st">"PAR"</span>,</span></span>
+<span class="r-in"><span><span class="fu">flux_gep</span><span class="op">(</span><span class="va">co2_fluxes</span>, <span class="va">type</span>, <span class="va">f_start</span>, <span class="va">PAR</span>, <span class="va">f_flux</span>, id_cols <span class="op">=</span> <span class="st">"turfID"</span>,</span></span>
 <span class="r-in"><span>cols_keep <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"temp_soil"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span>  NEE missing for measurement turfID: 156 AN2C 156</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 9 × 11</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   datetime            turfID    PAR type   flux f_fluxID f_slope_tz temp_air_ave</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 2022-07-28 <span style="color: #949494;">23:47:22</span> 74 WN2…  2.11 GEP    33.8 <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>            <span style="color: #BB0000;">NA</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 2022-07-28 <span style="color: #949494;">23:59:32</span> 109 AN…  1.84 GEP   -<span style="color: #BB0000;">20.5</span> <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>            <span style="color: #BB0000;">NA</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 2022-07-29 <span style="color: #949494;">00:06:35</span> 29 WN3…  1.78 GEP    <span style="color: #BB0000;">NA</span>   <span style="color: #BB0000;">NA</span>           <span style="color: #BB0000;">NA</span>            <span style="color: #BB0000;">NA</span>   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 2022-07-28 <span style="color: #949494;">23:43:35</span> 156 AN…  1.95 ER     95.6 1             1.56          7.31</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 2022-07-28 <span style="color: #949494;">23:47:22</span> 74 WN2…  2.11 NEE    52.4 2             0.853         7.38</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> 2022-07-28 <span style="color: #949494;">23:52:10</span> 74 WN2…  2.04 ER     18.6 3             0.303         7.46</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> 2022-07-28 <span style="color: #949494;">23:59:32</span> 109 AN…  1.84 NEE    69.4 4             1.13          7.77</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">8</span> 2022-07-29 <span style="color: #949494;">00:03:10</span> 109 AN…  1.66 ER     89.9 5             1.46          7.71</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">9</span> 2022-07-29 <span style="color: #949494;">00:06:35</span> 29 WN3…  1.78 NEE    26.2 6             0.426         7.75</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 3 more variables: temp_soil &lt;dbl&gt;, temp_fahr &lt;dbl&gt;, temp_kelvin &lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 9 × 6</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   f_start               PAR type  f_flux temp_soil turfID      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 2022-07-28 <span style="color: #949494;">23:47:22</span>  2.11 GEP     33.8      10.7 74 WN2C 155 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 2022-07-28 <span style="color: #949494;">23:59:32</span>  1.84 GEP    -<span style="color: #BB0000;">20.5</span>      10.8 109 AN3C 109</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 2022-07-29 <span style="color: #949494;">00:06:35</span>  1.78 GEP     <span style="color: #BB0000;">NA</span>        12.2 29 WN3C 106 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 2022-07-28 <span style="color: #949494;">23:43:35</span>  1.95 ER      95.6      10.8 156 AN2C 156</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 2022-07-28 <span style="color: #949494;">23:47:22</span>  2.11 NEE     52.4      10.7 74 WN2C 155 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> 2022-07-28 <span style="color: #949494;">23:52:10</span>  2.04 ER      18.6      10.7 74 WN2C 155 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> 2022-07-28 <span style="color: #949494;">23:59:32</span>  1.84 NEE     69.4      10.8 109 AN3C 109</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">8</span> 2022-07-29 <span style="color: #949494;">00:03:10</span>  1.66 ER      89.9      10.6 109 AN3C 109</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">9</span> 2022-07-29 <span style="color: #949494;">00:06:35</span>  1.78 NEE     26.2      12.2 29 WN3C 106 </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -141,7 +138,7 @@ measurement for each pair of ER and NEE</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Joseph Gaudard, Jonas Trepel, Hilary Rose Dawson, Michael Mustri, Pekka O Niittynen, Paul Efren Santos-Andrade, Richard James Telford.</p>
+  <p>Developed by Joseph Gaudard, Paul Efren Santos-Andrade, Richard James Telford.</p>
 </div>
 
 <div class="pkgdown-footer-right">
