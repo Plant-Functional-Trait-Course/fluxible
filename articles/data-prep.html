@@ -276,7 +276,56 @@ all the files in “ex_data/” that contains “CO2” in their names.</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 2021-06-04 <span style="color: #949494;">16:12:45</span>  480.</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 2021-06-04 <span style="color: #949494;">16:12:46</span>  480.</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 2021-06-04 <span style="color: #949494;">16:12:47</span>  479.</span></span></code></pre></div>
-<!-- # The one file per flux approach -->
+</div>
+<div class="section level2">
+<h2 id="the-one-file-per-flux-approach">The one file per flux approach<a class="anchor" aria-label="anchor" href="#the-one-file-per-flux-approach"></a>
+</h2>
+<p>The Fluxible R package is designed to process data that were measured
+continuously (in a single or several files) and a
+<code>field_record</code> that records what was measured when. Another
+strategy while measuring gas fluxes on the field is to create a new file
+for each measurement, with the file name as the flux ID. The approach is
+similar to reading multiple files, except we add a column with the file
+name, and then can by-pass <code>flux_match</code>.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lubridate.tidyverse.org" class="external-link">lubridate</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://fs.r-lib.org" class="external-link">fs</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">raw_conc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://fs.r-lib.org/reference/dir_ls.html" class="external-link">dir_ls</a></span><span class="op">(</span> <span class="co">#listing all the files</span></span>
+<span>  <span class="st">"ex_data/field_campaign"</span> <span class="co"># at location "ex_data/field_campaign"</span></span>
+<span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html" class="external-link">map_dfr</a></span><span class="op">(</span> <span class="co"># we map read_tsv on all the files</span></span>
+<span>    <span class="va">read_tsv</span>, <span class="co"># read_tsv is for tab separated value files</span></span>
+<span>    skip <span class="op">=</span> <span class="fl">3</span>,</span>
+<span>    id <span class="op">=</span> <span class="st">"filename"</span> <span class="co"># column with the filename, that we can use as flux ID</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span> <span class="co"># a bit of renaming to make the columns more practical</span></span>
+<span>    co2_conc <span class="op">=</span> <span class="st">"CO2 (umol/mol)"</span>,</span>
+<span>    h2o_conc <span class="op">=</span> <span class="st">"H2O (mmol/mol)"</span>,</span>
+<span>    air_temp <span class="op">=</span> <span class="st">"Temperature (C)"</span>,</span>
+<span>    pressure <span class="op">=</span> <span class="st">"Pressure (kPa)"</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
+<span>    datetime <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">Date</span>, <span class="va">Time</span><span class="op">)</span>,</span>
+<span>    datetime <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/as.POSIXlt.html" class="external-link">as.POSIXct</a></span><span class="op">(</span></span>
+<span>      <span class="va">datetime</span>, format <span class="op">=</span> <span class="st">"%Y-%m-%d %H:%M:%OS"</span></span>
+<span>    <span class="op">)</span>, <span class="co"># we get rid of the milliseconds</span></span>
+<span>    pressure <span class="op">=</span> <span class="va">pressure</span> <span class="op">/</span> <span class="fl">101.325</span>, <span class="co"># conversion from kPa to atm</span></span>
+<span>    filename <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/substr.html" class="external-link">substr</a></span><span class="op">(</span><span class="va">filename</span>, <span class="fl">24</span>, <span class="fl">70</span><span class="op">)</span> <span class="co"># removing folder names</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">datetime</span>, <span class="va">co2_conc</span>, <span class="va">h2o_conc</span>, <span class="va">air_temp</span>, <span class="va">pressure</span>, <span class="va">filename</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">raw_conc</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 6 × 6</span></span></span>
+<span><span class="co">#&gt;   datetime            co2_conc h2o_conc air_temp pressure filename              </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 2023-12-14 <span style="color: #949494;">10:57:01</span>     416.     22.7     22.4    0.790 1_2000_east_1_day_a-2…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2023-12-14 <span style="color: #949494;">10:57:02</span>     407.     22.5     22.4    0.791 1_2000_east_1_day_a-2…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 2023-12-14 <span style="color: #949494;">10:57:03</span>     404.     23.0     22.4    0.790 1_2000_east_1_day_a-2…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 2023-12-14 <span style="color: #949494;">10:57:04</span>     421.     22.6     22.3    0.790 1_2000_east_1_day_a-2…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> 2023-12-14 <span style="color: #949494;">10:57:05</span>     411.     22.8     22.3    0.791 1_2000_east_1_day_a-2…</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">6</span> 2023-12-14 <span style="color: #949494;">10:57:06</span>     401.     23.0     22.3    0.790 1_2000_east_1_day_a-2…</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="the-tricky-one">The tricky one<a class="anchor" aria-label="anchor" href="#the-tricky-one"></a>
@@ -298,7 +347,7 @@ Gnnnnnnn</div>
 </div>
 <p><br>
 Let’s try the usual way first:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="va">raw_conc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span> <span class="co"># read_csv is the same as read_delim(delim = ",")</span></span>
 <span>  <span class="st">"ex_data/011023001.#01"</span>,</span>
@@ -322,7 +371,7 @@ Let’s try the usual way first:</p>
 comma as separators, and made a mess. Let’s see if we can skipped the
 header and then assemble the columns with left and right side of the
 decimal point:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">raw_conc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span></span>
 <span>  <span class="st">"ex_data/011023001.#01"</span>,</span>
 <span>  skip <span class="op">=</span> <span class="fl">1</span>, <span class="co"># this time we skip the row with the column names</span></span>
@@ -350,7 +399,7 @@ reprocess your raw file with a european csv output, or anything that is
 not comma separated, or set the decimal point as a… point. But for the
 sake of it, let’s pretend that it is not an option and solve that issue
 in R:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># we read each row of our file as an element of a list</span></span>
 <span><span class="va">list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readLines.html" class="external-link">readLines</a></span><span class="op">(</span><span class="st">"ex_data/011023001.#01"</span><span class="op">)</span></span>
 <span><span class="va">list</span> <span class="op">&lt;-</span> <span class="va">list</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span> <span class="co"># removing the first element with the column names</span></span>
