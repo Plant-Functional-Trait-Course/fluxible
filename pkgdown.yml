@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   data-prep: data-prep.html
   fluxible: fluxible.html
-last_built: 2025-02-06T17:08Z
+last_built: 2025-02-07T17:33Z
 urls:
   reference: https://plant-functional-trait-course.github.io/fluxible/index.html/reference
   article: https://plant-functional-trait-course.github.io/fluxible/index.html/articles

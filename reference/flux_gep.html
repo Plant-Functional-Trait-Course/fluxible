@@ -13,7 +13,7 @@ measurement. If it is missing, GEP will be dropped for that pair."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,7 +61,7 @@ measurement. If it is missing, GEP will be dropped for that pair.</p>
 <span>  <span class="va">id_cols</span>,</span>
 <span>  nee_arg <span class="op">=</span> <span class="st">"NEE"</span>,</span>
 <span>  er_arg <span class="op">=</span> <span class="st">"ER"</span>,</span>
-<span>  cols_keep <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span></span>
+<span>  cols_keep <span class="op">=</span> <span class="st">"none"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -103,7 +103,9 @@ measurement. If it is missing, GEP will be dropped for that pair.</p>
 
 <dt id="arg-cols-keep">cols_keep<a class="anchor" aria-label="anchor" href="#arg-cols-keep"></a></dt>
 <dd><p>columns to keep from fluxes_df. Values from NEE row will be
-filled in GEP row.</p></dd>
+filled in GEP row. <code>none</code> (default) keeps only the columns in <code>id_cols</code> and
+those used by <code>flux_gep</code>; <code>all</code> keeps all the columns;
+can also be a vector of column names.</p></dd>
 
 </dl></div>
     <div class="section level2">

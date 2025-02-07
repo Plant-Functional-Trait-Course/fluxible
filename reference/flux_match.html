@@ -13,7 +13,7 @@ Extra variables in both dataframes are kept in the output."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -126,8 +126,8 @@ of data, and any variables present in one of the inputs.</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">co2_df_short</span>, <span class="va">record_short</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">flux_match</span><span class="op">(</span><span class="va">co2_df_short</span>, <span class="va">record_short</span>, <span class="va">datetime</span>, <span class="va">start</span>, <span class="va">conc</span>, startcrop <span class="op">=</span> <span class="fl">10</span>,</span></span>
-<span class="r-in"><span>measurement_length <span class="op">=</span> <span class="fl">220</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,251 × 14</span></span>
+<span class="r-in"><span>measurement_length <span class="op">=</span> <span class="fl">180</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,020 × 14</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    datetime            temp_air temp_soil  conc   PAR turfID       type </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 2022-07-28 <span style="color: #949494;">23:43:35</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>    447. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
@@ -140,8 +140,8 @@ of data, and any variables present in one of the inputs.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 2022-07-28 <span style="color: #949494;">23:43:42</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>    451. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 2022-07-28 <span style="color: #949494;">23:43:43</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>    453. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 2022-07-28 <span style="color: #949494;">23:43:44</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>    453. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1,241 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 7 more variables: start &lt;dttm&gt;, f_end &lt;dttm&gt;, f_start &lt;dttm&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1,010 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 7 more variables: start &lt;dttm&gt;, f_start &lt;dttm&gt;, f_end &lt;dttm&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   f_fluxid &lt;fct&gt;, f_n_conc &lt;int&gt;, f_ratio &lt;dbl&gt;, f_flag_match &lt;chr&gt;</span></span>
 </code></pre></div>
     </div>
