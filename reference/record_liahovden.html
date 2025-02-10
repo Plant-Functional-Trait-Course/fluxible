@@ -55,6 +55,9 @@
 <dd><p>Type of measurement: ecosystems respiration (ER)
 or net ecosystem exchange (NEE).</p></dd>
 
+<dt>round</dt>
+<dd><p>Round of measurement.</p></dd>
+
 <dt>start</dt>
 <dd><p>Datetime at which the measurement was started.</p></dd>
 
@@ -64,19 +67,19 @@ or net ecosystem exchange (NEE).</p></dd>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">record_liahovden</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 138 × 3</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    turfID     type  start              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 4 AN1C 4   NEE   2022-07-27 <span style="color: #949494;">05:37:30</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 4 AN1C 4   ER    2022-07-27 <span style="color: #949494;">05:42:00</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 27 AN3C 27 NEE   2022-07-27 <span style="color: #949494;">05:46:55</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 27 AN3C 27 ER    2022-07-27 <span style="color: #949494;">05:50:45</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 77 AN2C 77 NEE   2022-07-27 <span style="color: #949494;">05:57:30</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 77 AN2C 77 ER    2022-07-27 <span style="color: #949494;">06:02:00</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 4 AN1C 4   NEE   2022-07-27 <span style="color: #949494;">06:32:00</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 4 AN1C 4   ER    2022-07-27 <span style="color: #949494;">06:36:30</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 27 AN3C 27 NEE   2022-07-27 <span style="color: #949494;">06:41:15</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 27 AN3C 27 ER    2022-07-27 <span style="color: #949494;">06:45:50</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 138 × 4</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    turfID     type  round start              </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 4 AN1C 4   NEE       1 2022-07-27 <span style="color: #949494;">05:37:30</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 4 AN1C 4   ER        1 2022-07-27 <span style="color: #949494;">05:42:00</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 27 AN3C 27 NEE       1 2022-07-27 <span style="color: #949494;">05:46:55</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 27 AN3C 27 ER        1 2022-07-27 <span style="color: #949494;">05:50:45</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 77 AN2C 77 NEE       1 2022-07-27 <span style="color: #949494;">05:57:30</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 77 AN2C 77 ER        1 2022-07-27 <span style="color: #949494;">06:02:00</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 4 AN1C 4   NEE       2 2022-07-27 <span style="color: #949494;">06:32:00</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 4 AN1C 4   ER        2 2022-07-27 <span style="color: #949494;">06:36:30</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 27 AN3C 27 NEE       2 2022-07-27 <span style="color: #949494;">06:41:15</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 27 AN3C 27 ER        2 2022-07-27 <span style="color: #949494;">06:45:50</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 128 more rows</span></span>
 </code></pre></div>
     </div>
