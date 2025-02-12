@@ -10,9 +10,7 @@
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><script src="two-gases_files/libs/quarto-html/popper.min.js"></script><script src="two-gases_files/libs/quarto-html/tippy.umd.min.js"></script><link href="two-gases_files/libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="two-gases_files/libs/quarto-html/light-border.css" rel="stylesheet">
-<!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Working with two gases measured simultaneously">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Working with two gases measured simultaneously">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -22,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,12 +29,12 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
+<li class="nav-item"><a class="nav-link" href="../articles/fluxible.html">Get started</a></li>
 <li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="active nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
 <li><a class="dropdown-item" href="../articles/data-prep.html">Preparing the data for fluxible</a></li>
-    <li><a class="dropdown-item" href="../articles/fluxible_practical_example.html">Practical example: from raw gas concentration data to clean ecosystem gas fluxes.</a></li>
     <li><a class="dropdown-item" href="../articles/two-gases.html">Working with two gases measured simultaneously</a></li>
   </ul>
 </li>
@@ -51,135 +49,235 @@
 
 
   </div>
-</nav><div class="container template-quarto">
+</nav><div class="container template-article">
+
+
+
+
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
 
       <h1>Working with two gases measured simultaneously</h1>
+            
+      
 
-
-
-
-
-      <div class="d-none name"><code></code></div>
+      <div class="d-none name"><code>two-gases.Rmd</code></div>
     </div>
 
-
-
-
-
-
-    <p>This vignette will describe how to use Fluxible when working with several gases measured simultaneously.</p>
-
-
-
-<script id="quarto-html-after-body" type="application/javascript">
-window.document.addEventListener("DOMContentLoaded", function (event) {
-  const toggleBodyColorMode = (bsSheetEl) => {
-    const mode = bsSheetEl.getAttribute("data-mode");
-    const bodyEl = window.document.querySelector("body");
-    if (mode === "dark") {
-      bodyEl.classList.add("quarto-dark");
-      bodyEl.classList.remove("quarto-light");
-    } else {
-      bodyEl.classList.add("quarto-light");
-      bodyEl.classList.remove("quarto-dark");
-    }
-  }
-  const toggleBodyColorPrimary = () => {
-    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
-    if (bsSheetEl) {
-      toggleBodyColorMode(bsSheetEl);
-    }
-  }
-  toggleBodyColorPrimary();
-    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
-    var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp('/' + window.location.host + '/');
-    var isInternal = (href) => {
-        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
-    }
-    // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
-    for (var i=0; i<links.length; i++) {
-      const link = links[i];
-      if (!isInternal(link.href)) {
-        // undo the damage that might have been done by quarto-nav.js in the case of
-        // links that we want to consider external
-        if (link.dataset.originalHref !== undefined) {
-          link.href = link.dataset.originalHref;
-        }
-      }
-    }
-  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
-    const config = {
-      allowHTML: true,
-      maxWidth: 500,
-      delay: 100,
-      arrow: false,
-      appendTo: function(el) {
-          return el.parentElement;
-      },
-      interactive: true,
-      interactiveBorder: 10,
-      theme: 'light-border',
-      placement: 'bottom-start',
-    };
-    if (contentFn) {
-      config.content = contentFn;
-    }
-    if (onTriggerFn) {
-      config.onTrigger = onTriggerFn;
-    }
-    if (onUntriggerFn) {
-      config.onUntrigger = onUntriggerFn;
-    }
-    window.tippy(el, config);
-  }
-  const findCites = (el) => {
-    const parentEl = el.parentElement;
-    if (parentEl) {
-      const cites = parentEl.dataset.cites;
-      if (cites) {
-        return {
-          el,
-          cites: cites.split(' ')
-        };
-      } else {
-        return findCites(el.parentElement)
-      }
-    } else {
-      return undefined;
-    }
-  };
-  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
-  for (var i=0; i<bibliorefs.length; i++) {
-    const ref = bibliorefs[i];
-    const citeInfo = findCites(ref);
-    if (citeInfo) {
-      tippyHover(citeInfo.el, function() {
-        var popup = window.document.createElement('div');
-        citeInfo.cites.forEach(function(cite) {
-          var citeDiv = window.document.createElement('div');
-          citeDiv.classList.add('hanging-indent');
-          citeDiv.classList.add('csl-entry');
-          var biblioDiv = window.document.getElementById('ref-' + cite);
-          if (biblioDiv) {
-            citeDiv.innerHTML = biblioDiv.innerHTML;
-          }
-          popup.appendChild(citeDiv);
-        });
-        return popup.innerHTML;
-      });
-    }
-  }
-});
-</script></main>
+    
+    
+<p>In this example we will process the <code>raw_twogases</code> dataset
+which contains both CO<sub>2</sub> and CH<sub>4</sub> concentrations
+measured simultaneoulsy.
+<!-- The measurements starting time are in `twogases_record`. --> The
+aim is a single dataset of fluxes in which the CH<sub>4</sub> fluxes
+where also discarded when the CO<sub>2</sub> fluxes were discarded.</p>
+<p>The concept is that we will treat the dataset twice, once for each
+gas, and then join them again in the end. Because <code>f_fluxid</code>
+is produced in chronological order based on start datetime in
+<code>field_record</code>, the fluxes measured at the same time have the
+same <code>f_fluxid</code>.</p>
+<p>First we use <code>flux_match</code> to slice the raw concentration
+data and attribute a unique ID to each measurement. At this stage it
+does not matter which concentration columns we use.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://cran.r-project.org/package=fluxible" class="external-link">fluxible</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">conc_twogases</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flux_match.html">flux_match</a></span><span class="op">(</span></span>
+<span>  <span class="va">raw_twogases</span>,</span>
+<span>  <span class="va">twogases_record</span>,</span>
+<span>  <span class="va">datetime</span>,</span>
+<span>  <span class="va">start</span>,</span>
+<span>  <span class="va">co2_conc</span>,</span>
+<span>  startcrop <span class="op">=</span> <span class="fl">10</span>,</span>
+<span>  measurement_length <span class="op">=</span> <span class="fl">180</span>,</span>
+<span>  ratio_threshold <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  time_diff <span class="op">=</span> <span class="fl">0</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>Then we fit a model to the raw data for each gas:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">slopes_twogases_co2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flux_fitting.html">flux_fitting</a></span><span class="op">(</span></span>
+<span>  <span class="va">conc_twogases</span>,</span>
+<span>  <span class="va">co2_conc</span>,</span>
+<span>  <span class="va">datetime</span>,</span>
+<span>  fit_type <span class="op">=</span> <span class="st">"exponential"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; Cutting measurements...</span></span>
+<span><span class="co">#&gt; Estimating starting parameters for optimization...</span></span>
+<span><span class="co">#&gt; Optimizing fitting parameters...</span></span>
+<span><span class="co">#&gt; Calculating fits and slopes...</span></span>
+<span><span class="co">#&gt; Done.</span></span>
+<span></span>
+<span><span class="va">slopes_twogases_ch4</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flux_fitting.html">flux_fitting</a></span><span class="op">(</span></span>
+<span>  <span class="va">conc_twogases</span>,</span>
+<span>  <span class="va">ch4_conc</span>,</span>
+<span>  <span class="va">datetime</span>,</span>
+<span>  fit_type <span class="op">=</span> <span class="st">"exponential"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; Cutting measurements...</span></span>
+<span><span class="co">#&gt; Estimating starting parameters for optimization...</span></span>
+<span><span class="co">#&gt; Optimizing fitting parameters...</span></span>
+<span><span class="co">#&gt; Calculating fits and slopes...</span></span>
+<span><span class="co">#&gt; Done.</span></span></code></pre></div>
+<p>Same with the quality, we do it once for each gas:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">flag_twogases_co2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flux_quality.html">flux_quality</a></span><span class="op">(</span></span>
+<span>  <span class="va">slopes_twogases_co2</span>,</span>
+<span>  <span class="va">co2_conc</span>,</span>
+<span>  force_discard <span class="op">=</span> <span class="st">"8"</span> <span class="co"># there is a peak at the start that looks like an error</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  Total number of measurements: 12</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  ok   11      92 %</span></span>
+<span><span class="co">#&gt;  force_discard    1   8 %</span></span>
+<span><span class="co">#&gt;  discard      0   0 %</span></span>
+<span><span class="co">#&gt;  zero     0   0 %</span></span>
+<span><span class="co">#&gt;  start_error      0   0 %</span></span>
+<span><span class="co">#&gt;  no_data      0   0 %</span></span>
+<span><span class="co">#&gt;  force_ok     0   0 %</span></span>
+<span></span>
+<span><span class="va">flag_twogases_ch4</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flux_quality.html">flux_quality</a></span><span class="op">(</span></span>
+<span>  <span class="va">slopes_twogases_ch4</span>,</span>
+<span>  <span class="va">ch4_conc</span>,</span>
+<span>  ambient_conc <span class="op">=</span> <span class="fl">2000</span> <span class="co"># the default is for CO2</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  Total number of measurements: 12</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;  ok   9   75 %</span></span>
+<span><span class="co">#&gt;  zero     3   25 %</span></span>
+<span><span class="co">#&gt;  discard      0   0 %</span></span>
+<span><span class="co">#&gt;  force_discard    0   0 %</span></span>
+<span><span class="co">#&gt;  start_error      0   0 %</span></span>
+<span><span class="co">#&gt;  no_data      0   0 %</span></span>
+<span><span class="co">#&gt;  force_ok     0   0 %</span></span></code></pre></div>
+<p>We check the fits with <code>flux_plot</code>:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">flag_twogases_co2</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/flux_plot.html">flux_plot</a></span><span class="op">(</span></span>
+<span>    <span class="va">co2_conc</span>,</span>
+<span>    <span class="va">datetime</span>,</span>
+<span>    f_ylim_upper <span class="op">=</span> <span class="fl">500</span>,</span>
+<span>    f_ylim_lower <span class="op">=</span> <span class="fl">425</span>,</span>
+<span>    y_text_position <span class="op">=</span> <span class="fl">460</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="co">#&gt; Plotting in progress</span></span></code></pre></div>
+<p><img src="two-gases_files/figure-html/plot-co2-1.png" width="768"></p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="va">flag_twogases_ch4</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/flux_plot.html">flux_plot</a></span><span class="op">(</span></span>
+<span>    <span class="va">ch4_conc</span>,</span>
+<span>    <span class="va">datetime</span>,</span>
+<span>    f_ylim_upper <span class="op">=</span> <span class="fl">2000</span>,</span>
+<span>    f_ylim_lower <span class="op">=</span> <span class="fl">1995</span>,</span>
+<span>    y_text_position <span class="op">=</span> <span class="fl">1997</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="co">#&gt; Plotting in progress</span></span></code></pre></div>
+<p><img src="two-gases_files/figure-html/plot-ch4-1.png" width="768"></p>
+<p>After calculating the fluxes, we need to rename the
+<code>f_flux</code> column to avoid confusion when joining the
+datasets:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">fluxes_twogases_co2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flux_calc.html">flux_calc</a></span><span class="op">(</span></span>
+<span>  <span class="va">flag_twogases_co2</span>,</span>
+<span>  <span class="va">f_slope_corr</span>,</span>
+<span>  <span class="va">datetime</span>,</span>
+<span>  <span class="va">temp_air</span>,</span>
+<span>  conc_unit <span class="op">=</span> <span class="st">"ppm"</span>,</span>
+<span>  flux_unit <span class="op">=</span> <span class="st">"mmol"</span>,</span>
+<span>  chamber_volume <span class="op">=</span> <span class="fl">6.3</span>,</span>
+<span>  tube_volume <span class="op">=</span> <span class="fl">0.01</span>,</span>
+<span>  atm_pressure <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  plot_area <span class="op">=</span> <span class="fl">0.31</span>,</span>
+<span>  cols_keep <span class="op">=</span> <span class="st">"f_quality_flag"</span> <span class="co"># to use the flags of CO2 to discard CH4 fluxes</span></span>
+<span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span> <span class="co"># to avoid any confusion, we rename the flux column</span></span>
+<span>    flux_co2 <span class="op">=</span> <span class="st">"f_flux"</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span> <span class="co"># and we remove the slope one</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">!</span><span class="va">f_slope_corr</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Cutting data according to 'keep_arg'...</span></span>
+<span><span class="co">#&gt; Averaging air temperature for each flux...</span></span>
+<span><span class="co">#&gt; Creating a df with the columns from 'cols_keep' argument...</span></span>
+<span><span class="co">#&gt; Calculating fluxes...</span></span>
+<span><span class="co">#&gt; R constant set to 0.082057</span></span>
+<span><span class="co">#&gt; Concentration was measured in ppm</span></span>
+<span><span class="co">#&gt; Fluxes are in mmol/m2/h</span></span>
+<span></span>
+<span><span class="va">fluxes_twogases_ch4</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flux_calc.html">flux_calc</a></span><span class="op">(</span></span>
+<span>  <span class="va">flag_twogases_ch4</span>,</span>
+<span>  <span class="va">f_slope_corr</span>,</span>
+<span>  <span class="va">datetime</span>,</span>
+<span>  <span class="va">temp_air</span>,</span>
+<span>  conc_unit <span class="op">=</span> <span class="st">"ppb"</span>, <span class="co"># ch4 is measured in ppb</span></span>
+<span>  flux_unit <span class="op">=</span> <span class="st">"micromol"</span>, <span class="co"># we want a flux in umol/m2/h</span></span>
+<span>  chamber_volume <span class="op">=</span> <span class="fl">6.3</span>,</span>
+<span>  tube_volume <span class="op">=</span> <span class="fl">0.01</span>,</span>
+<span>  atm_pressure <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  plot_area <span class="op">=</span> <span class="fl">0.31</span></span>
+<span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span> <span class="co"># to avoid any confusion, we rename the flux column</span></span>
+<span>    flux_ch4 <span class="op">=</span> <span class="st">"f_flux"</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span> <span class="co"># and we remove the slope one</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">!</span><span class="va">f_slope_corr</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Cutting data according to 'keep_arg'...</span></span>
+<span><span class="co">#&gt; Averaging air temperature for each flux...</span></span>
+<span><span class="co">#&gt; Calculating fluxes...</span></span>
+<span><span class="co">#&gt; R constant set to 0.082057</span></span>
+<span><span class="co">#&gt; Concentration was measured in ppb</span></span>
+<span><span class="co">#&gt; Fluxes are in micromol/m2/h</span></span></code></pre></div>
+<p>Then we can join the datasets. If the final dataset ends up being
+longer, it probably means that some values in columns that should be
+equal are not, adding rows (<code>f_temp_air_ave</code> for example). It
+is a good way to check that the two gases have been processed
+similarly.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="va">fluxes_twogases</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span></span>
+<span>  <span class="va">fluxes_twogases_co2</span>,</span>
+<span>  <span class="va">fluxes_twogases_ch4</span>,</span>
+<span>  by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>    <span class="st">"f_fluxid"</span>,</span>
+<span>    <span class="st">"f_temp_air_ave"</span>,</span>
+<span>    <span class="st">"datetime"</span>,</span>
+<span>    <span class="st">"f_model"</span>,</span>
+<span>    <span class="st">"f_volume_setup"</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span> <span class="co"># we discard the CH4 fluxes based on CO2 fluxes quality flags</span></span>
+<span>    flux_ch4 <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html" class="external-link">case_when</a></span><span class="op">(</span></span>
+<span>      <span class="va">f_quality_flag</span> <span class="op">!=</span> <span class="st">"ok"</span> <span class="op">~</span> <span class="cn">NA</span>,</span>
+<span>      <span class="cn">TRUE</span> <span class="op">~</span> <span class="va">flux_ch4</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">fluxes_twogases</span><span class="op">)</span> <span class="co"># Et voilà!</span></span>
+<span><span class="co">#&gt; tibble [12 × 8] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;  $ f_quality_flag: chr [1:12] "ok" "ok" "ok" "ok" ...</span></span>
+<span><span class="co">#&gt;  $ f_fluxid      : Factor w/ 12 levels "1","2","3","4",..: 1 2 3 4 5 6 7 8 9 10 ...</span></span>
+<span><span class="co">#&gt;  $ f_temp_air_ave: num [1:12] 13.4 16.5 17.1 14.4 15 ...</span></span>
+<span><span class="co">#&gt;  $ datetime      : POSIXct[1:12], format: "2024-06-18 10:04:37" "2024-06-18 11:12:52" ...</span></span>
+<span><span class="co">#&gt;  $ f_volume_setup: num [1:12] 6.31 6.31 6.31 6.31 6.31 6.31 6.31 6.31 6.31 6.31 ...</span></span>
+<span><span class="co">#&gt;  $ flux_co2      : num [1:12] 0.08292 0.38505 0.43518 0.00108 0.06371 ...</span></span>
+<span><span class="co">#&gt;  $ f_model       : chr [1:12] "exponential" "exponential" "exponential" "exponential" ...</span></span>
+<span><span class="co">#&gt;  $ flux_ch4      : num [1:12] -0.04873 0.01165 0 -0.00649 0 ...</span></span>
+<span><span class="co">#&gt;  - attr(*, "fit_type")= chr "exponential"</span></span></code></pre></div>
+<p>In this example we calculated the fluxes for two gases measured
+simultaneously by repeating the process for each gas, and in the end we
+joined them and applied a rule that discarded the fluxes of one gas
+based on the quality flags of the other. It is of course totally
+possible to apply other rules, or to just keep the fluxes as provided by
+<code>fluxible</code>.</p>
+  </main>
 </div>
 
 
+
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Joseph Gaudard, Jonas Trepel, Hilary Rose Dawson, Michael Mustri, Pekka O Niittynen, Paul Efren Santos-Andrade, Richard James Telford.</p>
+  <p>Developed by Joseph Gaudard, Paul Efren Santos-Andrade, Richard James Telford.</p>
 </div>
 
 <div class="pkgdown-footer-right">
