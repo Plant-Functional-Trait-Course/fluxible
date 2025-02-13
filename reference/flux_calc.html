@@ -79,7 +79,7 @@ of gas concentration over time</p>
 
 <dt id="arg-slope-col">slope_col<a class="anchor" aria-label="anchor" href="#arg-slope-col"></a></dt>
 <dd><p>column containing the slope to calculate the flux
-(in ppm*s^(-1))</p></dd>
+(in ppm<em>s^(-1) or ppb</em>s^(-1))</p></dd>
 
 
 <dt id="arg-datetime-col">datetime_col<a class="anchor" aria-label="anchor" href="#arg-datetime-col"></a></dt>
@@ -95,33 +95,32 @@ to calculate fluxes. Will be averaged with NA removed.</p></dd>
 
 <dt id="arg-chamber-volume">chamber_volume<a class="anchor" aria-label="anchor" href="#arg-chamber-volume"></a></dt>
 <dd><p>volume of the flux chamber in L,
-default for Three-D project chamber (25x24.5x40cm),
 can also be a column in case it is a variable</p></dd>
 
 
 <dt id="arg-atm-pressure">atm_pressure<a class="anchor" aria-label="anchor" href="#arg-atm-pressure"></a></dt>
-<dd><p>atmospheric pressure, assumed 1 atm,
+<dd><p>atmospheric pressure,
 can be a constant (numerical) or a variable (column name)</p></dd>
 
 
 <dt id="arg-plot-area">plot_area<a class="anchor" aria-label="anchor" href="#arg-plot-area"></a></dt>
-<dd><p>area of the plot in m^2, default for Three-D,
+<dd><p>area of the plot in m^2,
 can also be a column in case it is a variable</p></dd>
 
 
 <dt id="arg-f-fluxid">f_fluxid<a class="anchor" aria-label="anchor" href="#arg-f-fluxid"></a></dt>
-<dd><p>column containing the fluxID</p></dd>
+<dd><p>column containing the flux IDs</p></dd>
 
 
 <dt id="arg-conc-unit">conc_unit<a class="anchor" aria-label="anchor" href="#arg-conc-unit"></a></dt>
 <dd><p>unit in which the concentration of gas was measured
-ppm or ppb</p></dd>
+<code>ppm</code> or <code>ppb</code></p></dd>
 
 
 <dt id="arg-flux-unit">flux_unit<a class="anchor" aria-label="anchor" href="#arg-flux-unit"></a></dt>
 <dd><p>unit in which the calculated flux will be
-<code>mmol</code> outputs fluxes in mmol*m^(-2)<em>h^(-1);
-<code>micromol</code> outputs fluxes in micromol</em>m^(-2)*h^(-1)</p></dd>
+<code>mmol</code> outputs fluxes in mmol * m^(-2)*h^(-1);
+<code>micromol</code> outputs fluxes in micromol * m^(-2)*h^(-1)</p></dd>
 
 
 <dt id="arg-cols-keep">cols_keep<a class="anchor" aria-label="anchor" href="#arg-cols-keep"></a></dt>
@@ -136,13 +135,13 @@ for each flux in the output. Note that NA are removed in mean calculation.</p></
 
 
 <dt id="arg-tube-volume">tube_volume<a class="anchor" aria-label="anchor" href="#arg-tube-volume"></a></dt>
-<dd><p>volume of the tubing in L, default for summer 2020 setup,
+<dd><p>volume of the tubing in L,
 can also be a column in case it is a variable</p></dd>
 
 
 <dt id="arg-temp-air-unit">temp_air_unit<a class="anchor" aria-label="anchor" href="#arg-temp-air-unit"></a></dt>
 <dd><p>units in which air temperature was measured.
-Has to be either Celsius, Fahrenheit or Kelvin.</p></dd>
+Has to be either <code>celsius</code> (default), <code>fahrenheit</code> or <code>kelvin.</code></p></dd>
 
 
 <dt id="arg-f-cut">f_cut<a class="anchor" aria-label="anchor" href="#arg-f-cut"></a></dt>
@@ -150,30 +149,32 @@ Has to be either Celsius, Fahrenheit or Kelvin.</p></dd>
 
 
 <dt id="arg-keep-arg">keep_arg<a class="anchor" aria-label="anchor" href="#arg-keep-arg"></a></dt>
-<dd><p>name in f_cut of data to keep</p></dd>
+<dd><p>name in <code>f_cut</code> of data to keep</p></dd>
 
 
 <dt id="arg-cut">cut<a class="anchor" aria-label="anchor" href="#arg-cut"></a></dt>
 <dd><p>if 'TRUE' (default), the measurements will be cut according to
-'f_cut' before calculating fluxes. This had no influence on the flux itself
+'f_cut' before calculating fluxes. This has no influence on the flux itself
 since the slope is provided from <a href="flux_fitting.html">flux_fitting</a>,
-but it will influence the columns to average.</p></dd>
+but it will influence the values of the columns in <code>cols_ave</code>.</p></dd>
 
 
 <dt id="arg-fit-type">fit_type<a class="anchor" aria-label="anchor" href="#arg-fit-type"></a></dt>
 <dd><p>(optional) model used in flux_fitting, exponential,
 quadratic or linear.
-Will be automatically filled if slopes_df was produced using flux_quality().</p></dd>
+Will be automatically filled if slopes_df was produced using
+<a href="flux_quality.html">flux_quality</a>.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>a dataframe containing fluxID, fluxes (in mmol*m^(-2)<em>h^(-1)
-or micromol</em>m^(-2)*h^(-1), depending on the value of <code>flux_unit</code>),
-temperature average for each flux,
-slope used for each flux calculation,
-the model used in <code>flux_fitting</code>,
-and any columns specified in cols_keep and cols_ave.</p>
+    <p>a dataframe containing flux IDs, datetime of measurements' starts,
+fluxes in mmol*m^(-2)<em>h^(-1) or micromol</em>m^(-2)*h^(-1) (<code>f_flux</code>) according
+to <code>flux_unit</code>, temperature average for each flux in Kelvin (<code>f_temp_ave</code>),
+the total volume of the setup for each measurement (<code>f_volume_setup</code>),
+the model used in <a href="flux_fitting.html">flux_fitting</a>,
+any column specified in <code>cols_keep</code>, any column specified in <code>cols_ave</code> with
+their value averaged over the measurement after cuts and discarding NA.</p>
     </div>
 
     <div class="section level2">

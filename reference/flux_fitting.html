@@ -138,14 +138,19 @@ ideally same as cz_window (exponential fit)</p></dd>
 
 
 <dt id="arg-fit-type">fit_type<a class="anchor" aria-label="anchor" href="#arg-fit-type"></a></dt>
-<dd><p>exponential, quadratic or linear.
+<dd><p><code>exponential</code>, <code>quadratic</code> or <code>linear.</code>
 Exponential is using the exponential model from Zhao et al (2018)</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>a dataframe with the slope at t zero,
-and parameters of a model of gas concentration over time</p>
+    <p>a dataframe with the slope at t zero (<code>f_slope</code>),
+a datetime column of t zero (<code>f_start_z</code>), a factor column indicating the
+cuts (<code>f_cut</code>), the time in seconds since the start of the measurement
+(<code>f_time</code>), the modeled fit (<code>f_fit</code>), the modeled slope (<code>f_fit_slope</code>),
+the parameters of the fit depending on the model used,
+and any columns present in the input.
+The type of fit is added as an attribute for use by the other functions.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>

@@ -67,7 +67,7 @@
     
     
 <p>Providing functions to read data files directly from loggers or
-instruments would be an endless tasks, as there are countless variaties
+instruments would be an endless tasks, as there are countless varieties
 of formats. Additionally, such a function already exists:
 <code><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">readr::read_delim</a></code> (<span class="citation">Wickham <em>et
 al.</em> (2024)</span>).</p>
@@ -87,7 +87,7 @@ inputs: <code>row_conc</code> and <code>field_record</code>.</p>
 concentration measured over time, typically the file exported by the
 logger or instrument.</p>
 <ul>
-<li>Colum that will be used in <code>fluxible</code> do not contain
+<li>Column that will be used in <code>fluxible</code> do not contain
 space or special characters;</li>
 <li>A gas concentration column as numeric;</li>
 <li>A column in datetime format (<code>yyyy-mm-dd hh:mm:ss</code>)
@@ -101,15 +101,15 @@ corresponding to each concentration data points.</li>
 sample or plot was measured when, and eventually providing other meta
 data, such as campaign, site, type of measurement and so on.</p>
 <ul>
-<li>Colum that will be used in <code>fluxible</code> do not contain
+<li>Column that will be used in <code>fluxible</code> do not contain
 space or special characters;</li>
-<li>A colum indicating the start of each measurement in datetime format
+<li>A column indicating the start of each measurement in datetime format
 (<code>yyyy-mm-dd hh:mm:ss</code>).</li>
 </ul>
 <p>Note that the current version of <code>flux_match</code> does not
 support non fixed measurement length, indicating an end column instead
 of the <code>measurement_length</code> argument. But it is possible to
-mimick <code>flux_match</code> and directly start with
+mimic <code>flux_match</code> and directly start with
 <code>flux_fitting</code> (see below).</p>
 </div>
 <div class="section level3">
@@ -121,15 +121,15 @@ setup, this step might not be necessary. The <code>flux_fitting</code>
 function is the step after <code>flux_match</code> and its input should
 check the following points:</p>
 <ul>
-<li>Colum that will be used in <code>fluxible</code> do not contain
+<li>Column that will be used in <code>fluxible</code> do not contain
 space or special characters;</li>
 <li>A gas concentration column as numeric;</li>
 <li>A column in datetime format (<code>yyyy-mm-dd hh:mm:ss</code>)
 corresponding to each concentration data points;</li>
 <li>A column with a unique ID for each measurements;</li>
-<li>A colum indicating the start of each measurement in datetime format
+<li>A column indicating the start of each measurement in datetime format
 (<code>yyyy-mm-dd hh:mm:ss</code>);</li>
-<li>A colum indicating the end of each measurement in datetime format
+<li>A column indicating the end of each measurement in datetime format
 (<code>yyyy-mm-dd hh:mm:ss</code>).</li>
 </ul>
 </div>

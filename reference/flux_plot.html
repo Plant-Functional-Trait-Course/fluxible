@@ -4,13 +4,13 @@ with color code indicating quality flags
 This function takes time to run and is optional in the workflow,
 but it is still highly recommended to use it to visually check
 the measurements.
-Note that 'flux_plot' is taylored for 'fluxible' functions and
+Note that 'flux_plot' is specific to the 'fluxible' package and
 will work best with datasets produced following a fluxible workflow."><meta property="og:description" content="plots the fluxes, fit and slope in facets
 with color code indicating quality flags
 This function takes time to run and is optional in the workflow,
 but it is still highly recommended to use it to visually check
 the measurements.
-Note that 'flux_plot' is taylored for 'fluxible' functions and
+Note that 'flux_plot' is specific to the 'fluxible' package and
 will work best with datasets produced following a fluxible workflow."></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
@@ -56,7 +56,7 @@ with color code indicating quality flags
 This function takes time to run and is optional in the workflow,
 but it is still highly recommended to use it to visually check
 the measurements.
-Note that 'flux_plot' is taylored for 'fluxible' functions and
+Note that 'flux_plot' is specific to the 'fluxible' package and
 will work best with datasets produced following a fluxible workflow.</p>
     </div>
 
@@ -144,14 +144,14 @@ if empty, the name of <code>slopes_df</code> will be used</p></dd>
 
 
 <dt id="arg-print-plot">print_plot<a class="anchor" aria-label="anchor" href="#arg-print-plot"></a></dt>
-<dd><p>FALSE or TRUE, if TRUE it prints the plot in R
+<dd><p>logical, if TRUE it prints the plot as a ggplot object
 but will take time depending on the size of the dataset</p></dd>
 
 
 <dt id="arg-output">output<a class="anchor" aria-label="anchor" href="#arg-output"></a></dt>
-<dd><p>"pdfpages", the plots are saved as A4 landscape pdf pages;
-"ggsave", the plots can be saved with the ggsave function;
-"print_only" (default) prints the plot without creating a file
+<dd><p><code>pdfpages</code>, the plots are saved as A4 landscape pdf pages;
+<code>ggsave</code>, the plots can be saved with the ggsave function;
+<code>print_only</code> (default) prints the plot without creating a file
 (independently from 'print_plot' being TRUE or FALSE)</p></dd>
 
 
@@ -162,9 +162,13 @@ but will take time depending on the size of the dataset</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>a ggplot object if <code>print_plot = TRUE</code>,
+    <p>plots of fluxes, with raw concentration data points, fit, slope,
+and color code indicating quality flags and cuts. The plots are organized
+in facets according to flux ID, and a text box display the quality flag and
+diagnostics of each measurement.
+The plots are returned as a ggplot object if <code>print_plot = TRUE</code>;
 if <code>print_plot = FALSE</code> it will not return anything but will produce a file
-depending on <code>output</code></p>
+according to the <code>output</code> argument.</p>
     </div>
 
     <div class="section level2">

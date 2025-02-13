@@ -119,8 +119,11 @@ For situations where the time was not synchronized correctly.</p></dd>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>a dataframe with concentration measurements, corresponding datetime,
-flux ID, measurements start and end, flags in case of no data or low number
-of data, and any variables present in one of the inputs.</p>
+flux ID (<code>f_fluxid</code>), measurements start (<code>f_start</code>) and end (<code>f_end</code>),
+flags in case of no data or low number of data (<code>f_flag_match</code>),
+the number of datapoints per measurement (<code>f_n_conc</code>),
+the ratio of number of datapoints over the length of each measurement
+in seconds (<code>f_ratio</code>), and any variables present in one of the inputs.</p>
     </div>
 
     <div class="section level2">
