@@ -9,7 +9,7 @@ by 0 according to quality thresholds set by user"></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,6 +63,7 @@ by 0 according to quality thresholds set by user</p>
 <span>  f_b <span class="op">=</span> <span class="va">f_b</span>,</span>
 <span>  force_discard <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  force_ok <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  force_zero <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  ratio_threshold <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  fit_type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  ambient_conc <span class="op">=</span> <span class="fl">421</span>,</span>
@@ -146,6 +147,11 @@ by the user's decision</p></dd>
 the calculated slope despite a bad quality flag</p></dd>
 
 
+<dt id="arg-force-zero">force_zero<a class="anchor" aria-label="anchor" href="#arg-force-zero"></a></dt>
+<dd><p>vector of fluxIDs that should be replaced by zero by
+the user's decision</p></dd>
+
+
 <dt id="arg-ratio-threshold">ratio_threshold<a class="anchor" aria-label="anchor" href="#arg-ratio-threshold"></a></dt>
 <dd><p>ratio of gas concentration data points over length of
 measurement (in seconds) below which the measurement will be considered as
@@ -221,6 +227,7 @@ some diagnostics depending on the fit, and any columns present in the input.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>  start_error 	 0 	 0 %</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>  no_data 	 0 	 0 %</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>  force_ok 	 0 	 0 %</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>  force_zero 	 0 	 0 %</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,251 × 22</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    datetime            temp_air temp_soil  conc   PAR turfID       type </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span></span>
@@ -251,6 +258,7 @@ some diagnostics depending on the fit, and any columns present in the input.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>  start_error 	 0 	 0 %</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>  no_data 	 0 	 0 %</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>  force_ok 	 0 	 0 %</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>  force_zero 	 0 	 0 %</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,251 × 27</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    datetime            temp_air temp_soil  conc   PAR turfID       type </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>

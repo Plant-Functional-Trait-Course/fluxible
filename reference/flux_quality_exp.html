@@ -13,7 +13,7 @@ flux_quality_exp is for the exponential model."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -65,6 +65,7 @@ flux_quality_exp is for the exponential model.</p>
 <span>  <span class="va">f_b</span>,</span>
 <span>  <span class="va">force_discard</span>,</span>
 <span>  <span class="va">force_ok</span>,</span>
+<span>  <span class="va">force_zero</span>,</span>
 <span>  <span class="va">rmse_threshold</span>,</span>
 <span>  <span class="va">cor_threshold</span>,</span>
 <span>  <span class="va">b_threshold</span></span>
@@ -117,6 +118,11 @@ by the user's decision</p></dd>
 <dt id="arg-force-ok">force_ok<a class="anchor" aria-label="anchor" href="#arg-force-ok"></a></dt>
 <dd><p>vector of fluxIDs for which the user wants to keep
 the calculated slope despite a bad quality flag</p></dd>
+
+
+<dt id="arg-force-zero">force_zero<a class="anchor" aria-label="anchor" href="#arg-force-zero"></a></dt>
+<dd><p>vector of fluxIDs that should be replaced by zero by
+the user's decision</p></dd>
 
 
 <dt id="arg-rmse-threshold">rmse_threshold<a class="anchor" aria-label="anchor" href="#arg-rmse-threshold"></a></dt>
