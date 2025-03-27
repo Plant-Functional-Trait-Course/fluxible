@@ -13,7 +13,7 @@ Extra variables in both dataframes are kept in the output."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -84,15 +84,15 @@ and any other column identifying the measurements.</p></dd>
 
 
 <dt id="arg-datetime-col">datetime_col<a class="anchor" aria-label="anchor" href="#arg-datetime-col"></a></dt>
-<dd><p>datetime column in raw_conc (dmy_hms format)</p></dd>
+<dd><p>datetime column in raw_conc (<code>ymd_hms</code> format)</p></dd>
 
 
 <dt id="arg-start-col">start_col<a class="anchor" aria-label="anchor" href="#arg-start-col"></a></dt>
-<dd><p>start column in field_record (dmy_hms format)</p></dd>
+<dd><p>start column in field_record (<code>ymd_hms</code> format)</p></dd>
 
 
 <dt id="arg-conc-col">conc_col<a class="anchor" aria-label="anchor" href="#arg-conc-col"></a></dt>
-<dd><p>concentration column in raw_conc</p></dd>
+<dd><p>concentration column in <code>raw_conc</code></p></dd>
 
 
 <dt id="arg-startcrop">startcrop<a class="anchor" aria-label="anchor" href="#arg-startcrop"></a></dt>
@@ -102,7 +102,7 @@ the measurement</p></dd>
 
 <dt id="arg-measurement-length">measurement_length<a class="anchor" aria-label="anchor" href="#arg-measurement-length"></a></dt>
 <dd><p>length of the measurement (in seconds)
-from the start specified in the field_record</p></dd>
+from the start specified in the <code>field_record</code></p></dd>
 
 
 <dt id="arg-ratio-threshold">ratio_threshold<a class="anchor" aria-label="anchor" href="#arg-ratio-threshold"></a></dt>
@@ -113,7 +113,7 @@ too little</p></dd>
 
 <dt id="arg-time-diff">time_diff<a class="anchor" aria-label="anchor" href="#arg-time-diff"></a></dt>
 <dd><p>time difference (in seconds) between the two datasets.
-Will be added to the datetime column of the raw_conc dataset.
+Will be added to the datetime column of the <code>raw_conc</code> dataset.
 For situations where the time was not synchronized correctly.</p></dd>
 
 </dl></div>

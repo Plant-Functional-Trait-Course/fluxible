@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -265,9 +265,9 @@ similarly.</p>
 <span><span class="co">#&gt;  $ datetime      : POSIXct[1:12], format: "2024-06-18 10:04:37" "2024-06-18 11:12:52" ...</span></span>
 <span><span class="co">#&gt;  $ f_volume_setup: num [1:12] 6.31 6.31 6.31 6.31 6.31 6.31 6.31 6.31 6.31 6.31 ...</span></span>
 <span><span class="co">#&gt;  $ flux_co2      : num [1:12] 0.08292 0.38505 0.43518 0.00108 0.06371 ...</span></span>
-<span><span class="co">#&gt;  $ f_model       : chr [1:12] "exponential" "exponential" "exponential" "exponential" ...</span></span>
+<span><span class="co">#&gt;  $ f_model       : chr [1:12] "exp_zhao18" "exp_zhao18" "exp_zhao18" "exp_zhao18" ...</span></span>
 <span><span class="co">#&gt;  $ flux_ch4      : num [1:12] -0.04873 0.01165 0 -0.00649 0 ...</span></span>
-<span><span class="co">#&gt;  - attr(*, "fit_type")= chr "exponential"</span></span></code></pre></div>
+<span><span class="co">#&gt;  - attr(*, "fit_type")= chr "exp_zhao18"</span></span></code></pre></div>
 <p>In this example we calculated the fluxes for two gases measured
 simultaneously by repeating the process for each gas, and in the end we
 joined them and applied a rule that discarded the fluxes of one gas

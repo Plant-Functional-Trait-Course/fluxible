@@ -9,7 +9,7 @@ of gas concentration over time"></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -80,12 +80,12 @@ of gas concentration over time</p>
 
 <dt id="arg-slope-col">slope_col<a class="anchor" aria-label="anchor" href="#arg-slope-col"></a></dt>
 <dd><p>column containing the slope to calculate the flux
-(in ppm<em>s^(-1) or ppb</em>s^(-1))</p></dd>
+(in \(ppm * s^{-1}\) or \(ppb * s^{-1}\))</p></dd>
 
 
 <dt id="arg-datetime-col">datetime_col<a class="anchor" aria-label="anchor" href="#arg-datetime-col"></a></dt>
 <dd><p>column containing the datetime of each gas concentration
-measurements in slopes_df. The first one after cutting will be kept as
+measurements in <code>slopes_df</code>. The first one after cutting will be kept as
 datetime of each flux in the output.</p></dd>
 
 
@@ -120,14 +120,14 @@ can also be a column in case it is a variable</p></dd>
 
 <dt id="arg-flux-unit">flux_unit<a class="anchor" aria-label="anchor" href="#arg-flux-unit"></a></dt>
 <dd><p>unit in which the calculated flux will be
-<code>mmol</code> outputs fluxes in mmol * m^(-2)*h^(-1);
-<code>micromol</code> outputs fluxes in micromol * m^(-2)*h^(-1)</p></dd>
+<code>mmol</code> outputs fluxes in \(mmol * m^{-2} * h^{-1}\);
+<code>micromol</code> outputs fluxes in \(micromol * m^{-2}*h^{-1}\)</p></dd>
 
 
 <dt id="arg-cols-keep">cols_keep<a class="anchor" aria-label="anchor" href="#arg-cols-keep"></a></dt>
 <dd><p>columns to keep from the input to the output.
 Those columns need to have unique values for each flux,
-as distinct() is applied.</p></dd>
+as <a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external-link">distinct</a> is applied.</p></dd>
 
 
 <dt id="arg-cols-ave">cols_ave<a class="anchor" aria-label="anchor" href="#arg-cols-ave"></a></dt>
@@ -161,20 +161,20 @@ but it will influence the values of the columns in <code>cols_ave</code>.</p></d
 
 
 <dt id="arg-fit-type">fit_type<a class="anchor" aria-label="anchor" href="#arg-fit-type"></a></dt>
-<dd><p>(optional) model used in flux_fitting, exponential,
-quadratic or linear.
-Will be automatically filled if slopes_df was produced using
-<a href="flux_quality.html">flux_quality</a>.</p></dd>
+<dd><p>(optional) model used in
+<a href="flux_fitting.html">flux_fitting</a>. Will be automatically filled if
+<code>slopes_df</code> was produced using <a href="flux_fitting.html">flux_fitting</a>.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>a dataframe containing flux IDs, datetime of measurements' starts,
-fluxes in mmol*m^(-2)<em>h^(-1) or micromol</em>m^(-2)*h^(-1) (<code>f_flux</code>) according
-to <code>flux_unit</code>, temperature average for each flux in Kelvin (<code>f_temp_ave</code>),
-the total volume of the setup for each measurement (<code>f_volume_setup</code>),
-the model used in <a href="flux_fitting.html">flux_fitting</a>,
-any column specified in <code>cols_keep</code>, any column specified in <code>cols_ave</code> with
+fluxes in \(mmol*m^{-2}*h^{-1}\) or \(micromol*m^{-2}*h^{-1}\)
+(<code>f_flux</code>) according to <code>flux_unit</code>, temperature average for each flux in
+Kelvin (<code>f_temp_ave</code>), the total volume of the setup for each measurement
+(<code>f_volume_setup</code>), the model used in
+<a href="flux_fitting.html">flux_fitting</a>, any column specified in
+<code>cols_keep</code>, any column specified in <code>cols_ave</code> with
 their value averaged over the measurement after cuts and discarding NA.</p>
     </div>
 

@@ -9,7 +9,7 @@ by 0 according to quality thresholds set by user"></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -36,7 +36,7 @@ by 0 according to quality thresholds set by user"></head><body>
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
 
-      <h1>assessing quality of slopes calculated with flux_fitting</h1>
+      <h1>assessing quality of slopes calculated with <a href="flux_fitting.html">flux_fitting</a></h1>
       <small class="dont-index">Source: <a href="https://github.com/Plant-Functional-Trait-Course/fluxible/blob/main/R/flux_quality.R" class="external-link"><code>R/flux_quality.R</code></a></small>
       <div class="d-none name"><code>flux_quality.Rd</code></div>
     </div>
@@ -96,7 +96,7 @@ by 0 according to quality thresholds set by user</p>
 
 <dt id="arg-f-slope">f_slope<a class="anchor" aria-label="anchor" href="#arg-f-slope"></a></dt>
 <dd><p>column containing the slope of each flux
-(as calculated by the flux_fitting function)</p></dd>
+(as calculated by the <a href="flux_fitting.html">flux_fitting</a> function)</p></dd>
 
 
 <dt id="arg-f-time">f_time<a class="anchor" aria-label="anchor" href="#arg-f-time"></a></dt>
@@ -160,7 +160,8 @@ not having enough data points to be considered for calculations</p></dd>
 
 <dt id="arg-fit-type">fit_type<a class="anchor" aria-label="anchor" href="#arg-fit-type"></a></dt>
 <dd><p>model fitted to the data, linear, quadratic or exponential.
-Will be automatically filled if slopes_df was produced using flux_fitting()</p></dd>
+Will be automatically filled if <code>slopes_df</code> was produced using
+<a href="flux_fitting.html">flux_fitting</a></p></dd>
 
 
 <dt id="arg-ambient-conc">ambient_conc<a class="anchor" aria-label="anchor" href="#arg-ambient-conc"></a></dt>
@@ -210,7 +211,10 @@ considered good enough (exponential fit)</p></dd>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>a dataframe with added columns of quality flags (<code>f_quality_flag</code>),
 the slope corrected according to the quality flags (<code>f_slope_corr</code>),
-some diagnostics depending on the fit, and any columns present in the input.</p>
+and any columns present in the input.
+It will also print a summary of the quality flags. This summary can also
+be exported as a dataframe using
+<a href="flux_flag_count.html">flux_flag_count</a></p>
     </div>
 
     <div class="section level2">

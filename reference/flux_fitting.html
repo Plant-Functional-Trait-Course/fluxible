@@ -11,7 +11,7 @@ to calculate gas fluxes with flux_calc"></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,7 +46,7 @@ to calculate gas fluxes with flux_calc"></head><body>
     <div class="ref-description section level2">
     <p>fits gas concentration over time data with a model
 (exponential, quadratic or linear) and provides the slope later used
-to calculate gas fluxes with flux_calc</p>
+to calculate gas fluxes with <a href="flux_calc.html">flux_calc</a></p>
     </div>
 
     <div class="section level2">
@@ -60,7 +60,6 @@ to calculate gas fluxes with flux_calc</p>
 <span>  f_fluxid <span class="op">=</span> <span class="va">f_fluxid</span>,</span>
 <span>  start_cut <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  end_cut <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>  t_window <span class="op">=</span> <span class="fl">20</span>,</span>
 <span>  cz_window <span class="op">=</span> <span class="fl">15</span>,</span>
 <span>  b_window <span class="op">=</span> <span class="fl">10</span>,</span>
 <span>  a_window <span class="op">=</span> <span class="fl">10</span>,</span>
@@ -84,16 +83,16 @@ to calculate gas fluxes with flux_calc</p>
 
 <dt id="arg-datetime-col">datetime_col<a class="anchor" aria-label="anchor" href="#arg-datetime-col"></a></dt>
 <dd><p>column with datetime of each concentration measurement
-Note that if there are duplicated datetime in the same f_fluxid only
+Note that if there are duplicated datetime in the same <code>f_fluxid</code> only
 the first row will be kept</p></dd>
 
 
 <dt id="arg-f-start">f_start<a class="anchor" aria-label="anchor" href="#arg-f-start"></a></dt>
-<dd><p>column with datetime when the measurement started</p></dd>
+<dd><p>column with datetime when the measurement started (<code>ymd_hms</code>)</p></dd>
 
 
 <dt id="arg-f-end">f_end<a class="anchor" aria-label="anchor" href="#arg-f-end"></a></dt>
-<dd><p>column with datetime when the measurement ended</p></dd>
+<dd><p>column with datetime when the measurement ended (<code>ymd_hms</code>)</p></dd>
 
 
 <dt id="arg-f-fluxid">f_fluxid<a class="anchor" aria-label="anchor" href="#arg-f-fluxid"></a></dt>
@@ -107,11 +106,6 @@ the first row will be kept</p></dd>
 
 <dt id="arg-end-cut">end_cut<a class="anchor" aria-label="anchor" href="#arg-end-cut"></a></dt>
 <dd><p>time to discard at the end of the measurements (in seconds)</p></dd>
-
-
-<dt id="arg-t-window">t_window<a class="anchor" aria-label="anchor" href="#arg-t-window"></a></dt>
-<dd><p>enlarge focus window before and after tmin and tmax
-(exponential fit)</p></dd>
 
 
 <dt id="arg-cz-window">cz_window<a class="anchor" aria-label="anchor" href="#arg-cz-window"></a></dt>
@@ -129,18 +123,22 @@ it is assumed that the model fits the data perfectly (exponential fit)</p></dd>
 
 
 <dt id="arg-roll-width">roll_width<a class="anchor" aria-label="anchor" href="#arg-roll-width"></a></dt>
-<dd><p>width of the rolling mean for CO2 when looking for tz,
-ideally same as cz_window (exponential fit)</p></dd>
+<dd><p>width of the rolling mean for CO2 when looking for <code>tz</code>,
+ideally same as <code>cz_window</code> (exponential fit)</p></dd>
 
 
 <dt id="arg-t-zero">t_zero<a class="anchor" aria-label="anchor" href="#arg-t-zero"></a></dt>
 <dd><p>time at which the slope should be calculated
-(for quadratic fit)</p></dd>
+(for <code>quadratic</code> and <code>exp_tz</code> fits)</p></dd>
 
 
 <dt id="arg-fit-type">fit_type<a class="anchor" aria-label="anchor" href="#arg-fit-type"></a></dt>
-<dd><p><code>exponential</code>, <code>quadratic</code> or <code>linear.</code>
-Exponential is using the exponential model from Zhao et al (2018)</p></dd>
+<dd><p><code>exp_zhao18</code>, <code>exp_tz</code>, <code>quadratic</code> or <code>linear.</code>
+<code>exp_zhao18</code> is using the exponential model
+\(C(t) = C_m + a (t - t_z) + (C_z - C_m) \exp(-b (t - t_z))\)
+from Zhao et al (2018).
+<code>expt_tz</code> is a modified version which allows the user to fix <code>t_zero</code>:
+\(C(t) = C~m~ + a * t + (C_z - C_m) \exp(-b * t)\).</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -158,13 +156,14 @@ The type of fit is added as an attribute for use by the other functions.</p>
     <p>Zhao, P., Hammerle, A., Zeeman, M., Wohlfahrt, G., 2018.
 On the calculation of daytime CO2 fluxes measured by automated closed
 transparent chambers. Agricultural and Forest Meteorology 263, 267–275.
-https://doi.org/10.1016/j.agrformet.2018.08.022</p>
+https://doi.org/10.1016/j.agrformet.2018.08.022
+<code>exponential</code> is equal to <code>exp_zhao18</code>, for backwards compatibility</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">co2_conc</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">flux_fitting</span><span class="op">(</span><span class="va">co2_conc</span>, <span class="va">conc</span>, <span class="va">datetime</span>, fit_type <span class="op">=</span> <span class="st">"exp"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu">flux_fitting</span><span class="op">(</span><span class="va">co2_conc</span>, <span class="va">conc</span>, <span class="va">datetime</span>, fit_type <span class="op">=</span> <span class="st">"exp_zhao18"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Cutting measurements...</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Estimating starting parameters for optimization...</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Optimizing fitting parameters...</span>

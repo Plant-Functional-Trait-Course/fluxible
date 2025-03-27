@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,6 +54,12 @@
 
         </dt>
         <dd>CO2 concentration</dd>
+      </dl><dl><dt>
+
+          <code><a href="co2_conc_mid_missing.html">co2_conc_mid_missing</a></code>
+
+        </dt>
+        <dd>CO2 concentration with missing data</dd>
       </dl><dl><dt>
 
           <code><a href="co2_conc_missing.html">co2_conc_missing</a></code>
@@ -122,10 +128,10 @@
         <dd>Fitting a model to concentration data and estimating the slope</dd>
       </dl><dl><dt>
 
-          <code><a href="flux_fitting_exp.html">flux_fitting_exp()</a></code>
+          <code><a href="flux_fitting_exptz.html">flux_fitting_exptz()</a></code>
 
         </dt>
-        <dd>Fitting a model to the gas concentration curve and estimating the slope over time, using the exponential model from Zhao et al (2018)</dd>
+        <dd>Fitting a model to the gas concentration curve and estimating the slope over time, using a modified version of the model from Zhao et al (2018) that allows the user to fix <code>t_zero</code>.</dd>
       </dl><dl><dt>
 
           <code><a href="flux_fitting_lin.html">flux_fitting_lin()</a></code>
@@ -138,6 +144,12 @@
 
         </dt>
         <dd>quadratic fit to gas concentration over time</dd>
+      </dl><dl><dt>
+
+          <code><a href="flux_fitting_zhao18.html">flux_fitting_zhao18()</a></code>
+
+        </dt>
+        <dd>Fitting a model to the gas concentration curve and estimating the slope over time, using the exponential model from Zhao et al (2018)</dd>
       </dl><dl><dt>
 
           <code><a href="flux_flag_count.html">flux_flag_count()</a></code>
@@ -209,7 +221,7 @@
           <code><a href="flux_quality.html">flux_quality()</a></code>
 
         </dt>
-        <dd>assessing quality of slopes calculated with flux_fitting</dd>
+        <dd>assessing quality of slopes calculated with <a href="https://plant-functional-trait-course.github.io/fluxible/index.html/reference/flux_fitting.html">flux_fitting</a></dd>
       </dl><dl><dt>
 
           <code><a href="flux_quality_exp.html">flux_quality_exp()</a></code>
@@ -324,6 +336,12 @@
 
         </dt>
         <dd>Slopes for each flux</dd>
+      </dl><dl><dt>
+
+          <code><a href="stupeflux.html">stupeflux()</a></code>
+
+        </dt>
+        <dd>From raw gas concentration over time to clean fluxes</dd>
       </dl><dl><dt>
 
           <code><a href="twogases_record.html">twogases_record</a></code>

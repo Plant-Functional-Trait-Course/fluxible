@@ -9,6 +9,7 @@
 <url><loc>https://plant-functional-trait-course.github.io/fluxible/index.html/index.html</loc></url>
 <url><loc>https://plant-functional-trait-course.github.io/fluxible/index.html/news/index.html</loc></url>
 <url><loc>https://plant-functional-trait-course.github.io/fluxible/index.html/reference/co2_conc.html</loc></url>
+<url><loc>https://plant-functional-trait-course.github.io/fluxible/index.html/reference/co2_conc_mid_missing.html</loc></url>
 <url><loc>https://plant-functional-trait-course.github.io/fluxible/index.html/reference/co2_conc_missing.html</loc></url>
 <url><loc>https://plant-functional-trait-course.github.io/fluxible/index.html/reference/co2_df_missing.html</loc></url>
 <url><loc>https://plant-functional-trait-course.github.io/fluxible/index.html/reference/co2_df_short.html</loc></url>
@@ -20,9 +21,10 @@
 <url><loc>https://plant-functional-trait-course.github.io/fluxible/index.html/reference/flux_cut.html</loc></url>
 <url><loc>https://plant-functional-trait-course.github.io/fluxible/index.html/reference/flux_fit_type.html</loc></url>
 <url><loc>https://plant-functional-trait-course.github.io/fluxible/index.html/reference/flux_fitting.html</loc></url>
-<url><loc>https://plant-functional-trait-course.github.io/fluxible/index.html/reference/flux_fitting_exp.html</loc></url>
+<url><loc>https://plant-functional-trait-course.github.io/fluxible/index.html/reference/flux_fitting_exptz.html</loc></url>
 <url><loc>https://plant-functional-trait-course.github.io/fluxible/index.html/reference/flux_fitting_lin.html</loc></url>
 <url><loc>https://plant-functional-trait-course.github.io/fluxible/index.html/reference/flux_fitting_quadratic.html</loc></url>
+<url><loc>https://plant-functional-trait-course.github.io/fluxible/index.html/reference/flux_fitting_zhao18.html</loc></url>
 <url><loc>https://plant-functional-trait-course.github.io/fluxible/index.html/reference/flux_flag_count.html</loc></url>
 <url><loc>https://plant-functional-trait-course.github.io/fluxible/index.html/reference/flux_fun_check.html</loc></url>
 <url><loc>https://plant-functional-trait-course.github.io/fluxible/index.html/reference/flux_gep.html</loc></url>
@@ -56,6 +58,7 @@
 <url><loc>https://plant-functional-trait-course.github.io/fluxible/index.html/reference/slopes30qua_flag.html</loc></url>
 <url><loc>https://plant-functional-trait-course.github.io/fluxible/index.html/reference/slopes60.html</loc></url>
 <url><loc>https://plant-functional-trait-course.github.io/fluxible/index.html/reference/slopes60lin.html</loc></url>
+<url><loc>https://plant-functional-trait-course.github.io/fluxible/index.html/reference/stupeflux.html</loc></url>
 <url><loc>https://plant-functional-trait-course.github.io/fluxible/index.html/reference/twogases_record.html</loc></url>
 </urlset>
 
