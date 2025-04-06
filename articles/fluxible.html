@@ -114,7 +114,7 @@ recorded in between.</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">conc_liahovden</span><span class="op">)</span></span>
-<span><span class="co">#&gt; tibble [30,281 × 15] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt; tibble [30,281 × 16] (S3: tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;  $ datetime    : POSIXct[1:30281], format: "2022-07-27 05:37:30" "2022-07-27 05:37:31" ...</span></span>
 <span><span class="co">#&gt;  $ temp_air    : num [1:30281] NA NA NA NA NA NA NA NA NA 3 ...</span></span>
 <span><span class="co">#&gt;  $ temp_soil   : num [1:30281] NA NA NA NA NA NA NA NA NA 6.83 ...</span></span>
@@ -125,9 +125,10 @@ recorded in between.</p>
 <span><span class="co">#&gt;  $ round       : num [1:30281] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
 <span><span class="co">#&gt;  $ start       : POSIXct[1:30281], format: "2022-07-27 05:37:30" "2022-07-27 05:37:30" ...</span></span>
 <span><span class="co">#&gt;  $ f_start     : POSIXct[1:30281], format: "2022-07-27 05:37:30" "2022-07-27 05:37:30" ...</span></span>
-<span><span class="co">#&gt;  $ f_end       : POSIXct[1:30281], format: "2022-07-27 05:41:10" "2022-07-27 05:41:10" ...</span></span>
 <span><span class="co">#&gt;  $ f_fluxid    : Factor w/ 138 levels "1","2","3","4",..: 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;  $ f_end       : POSIXct[1:30281], format: "2022-07-27 05:41:10" "2022-07-27 05:41:10" ...</span></span>
 <span><span class="co">#&gt;  $ f_n_conc    : int [1:30281] 220 220 220 220 220 220 220 220 220 220 ...</span></span>
+<span><span class="co">#&gt;  $ f_length    : num [1:30281] 220 220 220 220 220 220 220 220 220 220 ...</span></span>
 <span><span class="co">#&gt;  $ f_ratio     : num [1:30281] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
 <span><span class="co">#&gt;  $ f_flag_match: chr [1:30281] NA NA NA NA ...</span></span></code></pre></div>
 <p>Before calculating fluxes we need to fit a model to each measurement
@@ -154,7 +155,7 @@ fit.</p>
 <span><span class="co">#&gt;  fluxID 83 : slope was estimated on 215 points out of 220 seconds</span></span>
 <span><span class="co">#&gt;  fluxID 85 : slope was estimated on 175 points out of 220 seconds</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">slopes_exp_liahovden</span><span class="op">)</span></span>
-<span><span class="co">#&gt; tibble [30,281 × 31] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt; tibble [30,281 × 32] (S3: tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;  $ datetime         : POSIXct[1:30281], format: "2022-07-27 05:37:30" "2022-07-27 05:37:31" ...</span></span>
 <span><span class="co">#&gt;  $ temp_air         : num [1:30281] NA NA NA NA NA NA NA NA NA 3 ...</span></span>
 <span><span class="co">#&gt;  $ temp_soil        : num [1:30281] NA NA NA NA NA NA NA NA NA 6.83 ...</span></span>
@@ -165,8 +166,9 @@ fit.</p>
 <span><span class="co">#&gt;  $ round            : num [1:30281] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
 <span><span class="co">#&gt;  $ start            : POSIXct[1:30281], format: "2022-07-27 05:37:30" "2022-07-27 05:37:30" ...</span></span>
 <span><span class="co">#&gt;  $ f_start          : POSIXct[1:30281], format: "2022-07-27 05:37:30" "2022-07-27 05:37:30" ...</span></span>
-<span><span class="co">#&gt;  $ f_end            : POSIXct[1:30281], format: "2022-07-27 05:41:10" "2022-07-27 05:41:10" ...</span></span>
 <span><span class="co">#&gt;  $ f_fluxid         : Factor w/ 138 levels "1","2","3","4",..: 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;  $ f_end            : POSIXct[1:30281], format: "2022-07-27 05:41:10" "2022-07-27 05:41:10" ...</span></span>
+<span><span class="co">#&gt;  $ f_length         : num [1:30281] 220 220 220 220 220 220 220 220 220 220 ...</span></span>
 <span><span class="co">#&gt;  $ f_ratio          : num [1:30281] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
 <span><span class="co">#&gt;  $ f_flag_match     : chr [1:30281] NA NA NA NA ...</span></span>
 <span><span class="co">#&gt;  $ f_time           : num [1:30281] 0 1 2 3 4 5 6 7 8 9 ...</span></span>
@@ -201,7 +203,7 @@ fit.</p>
 <span><span class="co">#&gt;  fluxID 83 : slope was estimated on 215 points out of 220 seconds</span></span>
 <span><span class="co">#&gt;  fluxID 85 : slope was estimated on 175 points out of 220 seconds</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">slopes_qua_liahovden</span><span class="op">)</span></span>
-<span><span class="co">#&gt; tibble [30,281 × 32] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt; tibble [30,281 × 33] (S3: tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;  $ datetime         : POSIXct[1:30281], format: "2022-07-27 05:37:30" "2022-07-27 05:37:31" ...</span></span>
 <span><span class="co">#&gt;  $ temp_air         : num [1:30281] NA NA NA NA NA NA NA NA NA 3 ...</span></span>
 <span><span class="co">#&gt;  $ temp_soil        : num [1:30281] NA NA NA NA NA NA NA NA NA 6.83 ...</span></span>
@@ -212,8 +214,9 @@ fit.</p>
 <span><span class="co">#&gt;  $ round            : num [1:30281] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
 <span><span class="co">#&gt;  $ start            : POSIXct[1:30281], format: "2022-07-27 05:37:30" "2022-07-27 05:37:30" ...</span></span>
 <span><span class="co">#&gt;  $ f_start          : POSIXct[1:30281], format: "2022-07-27 05:37:30" "2022-07-27 05:37:30" ...</span></span>
-<span><span class="co">#&gt;  $ f_end            : POSIXct[1:30281], format: "2022-07-27 05:41:10" "2022-07-27 05:41:10" ...</span></span>
 <span><span class="co">#&gt;  $ f_fluxid         : Factor w/ 138 levels "1","2","3","4",..: 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;  $ f_end            : POSIXct[1:30281], format: "2022-07-27 05:41:10" "2022-07-27 05:41:10" ...</span></span>
+<span><span class="co">#&gt;  $ f_length         : num [1:30281] 220 220 220 220 220 220 220 220 220 220 ...</span></span>
 <span><span class="co">#&gt;  $ f_ratio          : num [1:30281] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
 <span><span class="co">#&gt;  $ f_flag_match     : chr [1:30281] NA NA NA NA ...</span></span>
 <span><span class="co">#&gt;  $ f_time           : num [1:30281] 0 1 2 3 4 5 6 7 8 9 ...</span></span>
@@ -250,7 +253,7 @@ fit.</p>
 <span><span class="co">#&gt;  fluxID 83 : slope was estimated on 215 points out of 220 seconds</span></span>
 <span><span class="co">#&gt;  fluxID 85 : slope was estimated on 175 points out of 220 seconds</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">slopes_lin_liahovden</span><span class="op">)</span></span>
-<span><span class="co">#&gt; tibble [30,281 × 22] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt; tibble [30,281 × 23] (S3: tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;  $ datetime      : POSIXct[1:30281], format: "2022-07-27 05:37:30" "2022-07-27 05:37:31" ...</span></span>
 <span><span class="co">#&gt;  $ temp_air      : num [1:30281] NA NA NA NA NA NA NA NA NA 3 ...</span></span>
 <span><span class="co">#&gt;  $ temp_soil     : num [1:30281] NA NA NA NA NA NA NA NA NA 6.83 ...</span></span>
@@ -261,8 +264,9 @@ fit.</p>
 <span><span class="co">#&gt;  $ round         : num [1:30281] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
 <span><span class="co">#&gt;  $ start         : POSIXct[1:30281], format: "2022-07-27 05:37:30" "2022-07-27 05:37:30" ...</span></span>
 <span><span class="co">#&gt;  $ f_start       : POSIXct[1:30281], format: "2022-07-27 05:37:30" "2022-07-27 05:37:30" ...</span></span>
-<span><span class="co">#&gt;  $ f_end         : POSIXct[1:30281], format: "2022-07-27 05:41:10" "2022-07-27 05:41:10" ...</span></span>
 <span><span class="co">#&gt;  $ f_fluxid      : Factor w/ 138 levels "1","2","3","4",..: 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;  $ f_end         : POSIXct[1:30281], format: "2022-07-27 05:41:10" "2022-07-27 05:41:10" ...</span></span>
+<span><span class="co">#&gt;  $ f_length      : num [1:30281] 220 220 220 220 220 220 220 220 220 220 ...</span></span>
 <span><span class="co">#&gt;  $ f_ratio       : num [1:30281] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
 <span><span class="co">#&gt;  $ f_flag_match  : chr [1:30281] NA NA NA NA ...</span></span>
 <span><span class="co">#&gt;  $ f_time        : num [1:30281] 0 1 2 3 4 5 6 7 8 9 ...</span></span>
@@ -297,7 +301,7 @@ measurements or replace them by zero.</p>
 <span><span class="co">#&gt;  force_zero   0   0 %</span></span>
 <span><span class="co">#&gt;  force_lm     0   0 %</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">slopes_exp_liahovden_flag</span><span class="op">)</span></span>
-<span><span class="co">#&gt; tibble [30,281 × 36] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt; tibble [30,281 × 37] (S3: tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;  $ datetime         : POSIXct[1:30281], format: "2022-07-27 05:37:30" "2022-07-27 05:37:31" ...</span></span>
 <span><span class="co">#&gt;  $ temp_air         : num [1:30281] NA NA NA NA NA NA NA NA NA 3 ...</span></span>
 <span><span class="co">#&gt;  $ temp_soil        : num [1:30281] NA NA NA NA NA NA NA NA NA 6.83 ...</span></span>
@@ -308,8 +312,9 @@ measurements or replace them by zero.</p>
 <span><span class="co">#&gt;  $ round            : num [1:30281] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
 <span><span class="co">#&gt;  $ start            : POSIXct[1:30281], format: "2022-07-27 05:37:30" "2022-07-27 05:37:30" ...</span></span>
 <span><span class="co">#&gt;  $ f_start          : POSIXct[1:30281], format: "2022-07-27 05:37:30" "2022-07-27 05:37:30" ...</span></span>
-<span><span class="co">#&gt;  $ f_end            : POSIXct[1:30281], format: "2022-07-27 05:41:10" "2022-07-27 05:41:10" ...</span></span>
 <span><span class="co">#&gt;  $ f_fluxid         : Factor w/ 138 levels "1","2","3","4",..: 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;  $ f_end            : POSIXct[1:30281], format: "2022-07-27 05:41:10" "2022-07-27 05:41:10" ...</span></span>
+<span><span class="co">#&gt;  $ f_length         : num [1:30281] 220 220 220 220 220 220 220 220 220 220 ...</span></span>
 <span><span class="co">#&gt;  $ f_ratio          : num [1:30281] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
 <span><span class="co">#&gt;  $ f_flag_match     : chr [1:30281] NA NA NA NA ...</span></span>
 <span><span class="co">#&gt;  $ f_time           : num [1:30281] 0 1 2 3 4 5 6 7 8 9 ...</span></span>
@@ -354,7 +359,7 @@ measurements or replace them by zero.</p>
 <span><span class="co">#&gt;  force_zero   0   0 %</span></span>
 <span><span class="co">#&gt;  force_lm     0   0 %</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">slopes_qua_liahovden_flag</span><span class="op">)</span></span>
-<span><span class="co">#&gt; tibble [30,281 × 35] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt; tibble [30,281 × 36] (S3: tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;  $ datetime         : POSIXct[1:30281], format: "2022-07-27 05:37:30" "2022-07-27 05:37:31" ...</span></span>
 <span><span class="co">#&gt;  $ temp_air         : num [1:30281] NA NA NA NA NA NA NA NA NA 3 ...</span></span>
 <span><span class="co">#&gt;  $ temp_soil        : num [1:30281] NA NA NA NA NA NA NA NA NA 6.83 ...</span></span>
@@ -365,8 +370,9 @@ measurements or replace them by zero.</p>
 <span><span class="co">#&gt;  $ round            : num [1:30281] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
 <span><span class="co">#&gt;  $ start            : POSIXct[1:30281], format: "2022-07-27 05:37:30" "2022-07-27 05:37:30" ...</span></span>
 <span><span class="co">#&gt;  $ f_start          : POSIXct[1:30281], format: "2022-07-27 05:37:30" "2022-07-27 05:37:30" ...</span></span>
-<span><span class="co">#&gt;  $ f_end            : POSIXct[1:30281], format: "2022-07-27 05:41:10" "2022-07-27 05:41:10" ...</span></span>
 <span><span class="co">#&gt;  $ f_fluxid         : Factor w/ 138 levels "1","2","3","4",..: 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;  $ f_end            : POSIXct[1:30281], format: "2022-07-27 05:41:10" "2022-07-27 05:41:10" ...</span></span>
+<span><span class="co">#&gt;  $ f_length         : num [1:30281] 220 220 220 220 220 220 220 220 220 220 ...</span></span>
 <span><span class="co">#&gt;  $ f_ratio          : num [1:30281] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
 <span><span class="co">#&gt;  $ f_flag_match     : chr [1:30281] NA NA NA NA ...</span></span>
 <span><span class="co">#&gt;  $ f_time           : num [1:30281] 0 1 2 3 4 5 6 7 8 9 ...</span></span>
@@ -411,7 +417,7 @@ measurements or replace them by zero.</p>
 <span><span class="co">#&gt;  force_zero   0   0 %</span></span>
 <span><span class="co">#&gt;  force_lm     0   0 %</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">slopes_lin_liahovden_flag</span><span class="op">)</span></span>
-<span><span class="co">#&gt; tibble [30,281 × 24] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt; tibble [30,281 × 25] (S3: tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;  $ datetime      : POSIXct[1:30281], format: "2022-07-27 05:37:30" "2022-07-27 05:37:31" ...</span></span>
 <span><span class="co">#&gt;  $ temp_air      : num [1:30281] NA NA NA NA NA NA NA NA NA 3 ...</span></span>
 <span><span class="co">#&gt;  $ temp_soil     : num [1:30281] NA NA NA NA NA NA NA NA NA 6.83 ...</span></span>
@@ -422,8 +428,9 @@ measurements or replace them by zero.</p>
 <span><span class="co">#&gt;  $ round         : num [1:30281] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
 <span><span class="co">#&gt;  $ start         : POSIXct[1:30281], format: "2022-07-27 05:37:30" "2022-07-27 05:37:30" ...</span></span>
 <span><span class="co">#&gt;  $ f_start       : POSIXct[1:30281], format: "2022-07-27 05:37:30" "2022-07-27 05:37:30" ...</span></span>
-<span><span class="co">#&gt;  $ f_end         : POSIXct[1:30281], format: "2022-07-27 05:41:10" "2022-07-27 05:41:10" ...</span></span>
 <span><span class="co">#&gt;  $ f_fluxid      : Factor w/ 138 levels "1","2","3","4",..: 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">#&gt;  $ f_end         : POSIXct[1:30281], format: "2022-07-27 05:41:10" "2022-07-27 05:41:10" ...</span></span>
+<span><span class="co">#&gt;  $ f_length      : num [1:30281] 220 220 220 220 220 220 220 220 220 220 ...</span></span>
 <span><span class="co">#&gt;  $ f_ratio       : num [1:30281] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
 <span><span class="co">#&gt;  $ f_flag_match  : chr [1:30281] NA NA NA NA ...</span></span>
 <span><span class="co">#&gt;  $ f_time        : num [1:30281] 0 1 2 3 4 5 6 7 8 9 ...</span></span>
