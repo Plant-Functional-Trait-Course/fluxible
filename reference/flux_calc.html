@@ -61,6 +61,8 @@ of gas concentration over time</p>
 <span>  <span class="va">flux_unit</span>,</span>
 <span>  cols_keep <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  cols_ave <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  cols_sum <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  cols_med <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  <span class="va">tube_volume</span>,</span>
 <span>  temp_air_unit <span class="op">=</span> <span class="st">"celsius"</span>,</span>
 <span>  f_cut <span class="op">=</span> <span class="va">f_cut</span>,</span>
@@ -133,6 +135,16 @@ as <a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external
 <dt id="arg-cols-ave">cols_ave<a class="anchor" aria-label="anchor" href="#arg-cols-ave"></a></dt>
 <dd><p>columns with values that should be averaged
 for each flux in the output. Note that NA are removed in mean calculation.</p></dd>
+
+
+<dt id="arg-cols-sum">cols_sum<a class="anchor" aria-label="anchor" href="#arg-cols-sum"></a></dt>
+<dd><p>columns with values for which is sum is provided
+for each flux in the output. Note that NA are removed in sum calculation.</p></dd>
+
+
+<dt id="arg-cols-med">cols_med<a class="anchor" aria-label="anchor" href="#arg-cols-med"></a></dt>
+<dd><p>columns with values for which is median is provided
+for each flux in the output. Note that NA are removed in median calculation.</p></dd>
 
 
 <dt id="arg-tube-volume">tube_volume<a class="anchor" aria-label="anchor" href="#arg-tube-volume"></a></dt>

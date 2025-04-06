@@ -53,6 +53,7 @@ the step-by-step workflow for more control over the process.</p>
 <span>  <span class="va">field_record</span>,</span>
 <span>  <span class="va">datetime_col</span>,</span>
 <span>  <span class="va">start_col</span>,</span>
+<span>  <span class="va">end_col</span>,</span>
 <span>  <span class="va">conc_col</span>,</span>
 <span>  <span class="va">startcrop</span>,</span>
 <span>  <span class="va">measurement_length</span>,</span>
@@ -63,8 +64,11 @@ the step-by-step workflow for more control over the process.</p>
 <span>  <span class="va">plot_area</span>,</span>
 <span>  <span class="va">conc_unit</span>,</span>
 <span>  <span class="va">flux_unit</span>,</span>
+<span>  fixed_length <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  cols_keep <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  cols_ave <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  cols_sum <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  cols_med <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  <span class="va">tube_volume</span>,</span>
 <span>  ratio_threshold <span class="op">=</span> <span class="fl">0.5</span>,</span>
 <span>  time_diff <span class="op">=</span> <span class="fl">0</span>,</span>
@@ -113,6 +117,10 @@ and any other column identifying the measurements.</p></dd>
 
 <dt id="arg-start-col">start_col<a class="anchor" aria-label="anchor" href="#arg-start-col"></a></dt>
 <dd><p>start column in field_record (dmy_hms format)</p></dd>
+
+
+<dt id="arg-end-col">end_col<a class="anchor" aria-label="anchor" href="#arg-end-col"></a></dt>
+<dd><p>end columne in field_record (<code>ymd_hms</code> format)</p></dd>
 
 
 <dt id="arg-conc-col">conc_col<a class="anchor" aria-label="anchor" href="#arg-conc-col"></a></dt>
@@ -169,6 +177,11 @@ can also be a column in case it is a variable</p></dd>
 <code>micromol</code> outputs fluxes in micromol * m^(-2)*h^(-1)</p></dd>
 
 
+<dt id="arg-fixed-length">fixed_length<a class="anchor" aria-label="anchor" href="#arg-fixed-length"></a></dt>
+<dd><p>if <code>TRUE</code> (default), the <code>measurement_length</code> is used to
+create the end column. If <code>FALSE</code>, <code>end_col</code> has to be provided.</p></dd>
+
+
 <dt id="arg-cols-keep">cols_keep<a class="anchor" aria-label="anchor" href="#arg-cols-keep"></a></dt>
 <dd><p>columns to keep from the input to the output.
 Those columns need to have unique values for each flux,
@@ -178,6 +191,16 @@ as distinct() is applied.</p></dd>
 <dt id="arg-cols-ave">cols_ave<a class="anchor" aria-label="anchor" href="#arg-cols-ave"></a></dt>
 <dd><p>columns with values that should be averaged
 for each flux in the output. Note that NA are removed in mean calculation.</p></dd>
+
+
+<dt id="arg-cols-sum">cols_sum<a class="anchor" aria-label="anchor" href="#arg-cols-sum"></a></dt>
+<dd><p>columns with values for which is sum is provided
+for each flux in the output. Note that NA are removed in sum calculation.</p></dd>
+
+
+<dt id="arg-cols-med">cols_med<a class="anchor" aria-label="anchor" href="#arg-cols-med"></a></dt>
+<dd><p>columns with values for which is median is provided
+for each flux in the output. Note that NA are removed in median calculation.</p></dd>
 
 
 <dt id="arg-tube-volume">tube_volume<a class="anchor" aria-label="anchor" href="#arg-tube-volume"></a></dt>
