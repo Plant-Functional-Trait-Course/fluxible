@@ -9,7 +9,7 @@ of gas concentration over time"></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -180,8 +180,17 @@ their value averaged over the measurement after cuts and discarding NA.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">slopes0</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">flux_calc</span><span class="op">(</span><span class="va">slopes0</span>,</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">co2_conc</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">slopes</span> <span class="op">&lt;-</span> <span class="fu"><a href="flux_fitting.html">flux_fitting</a></span><span class="op">(</span><span class="va">co2_conc</span>, <span class="va">conc</span>, <span class="va">datetime</span>, fit_type <span class="op">=</span> <span class="st">"exp_zhao18"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Cutting measurements...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Estimating starting parameters for optimization...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Optimizing fitting parameters...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Calculating fits and slopes...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Done.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span>  fluxID 5 : slope was estimated on 205 points out of 210 seconds</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span>  fluxID 6 : slope was estimated on 206 points out of 210 seconds</span>
+<span class="r-in"><span><span class="fu">flux_calc</span><span class="op">(</span><span class="va">slopes</span>,</span></span>
 <span class="r-in"><span><span class="va">f_slope</span>,</span></span>
 <span class="r-in"><span><span class="va">datetime</span>,</span></span>
 <span class="r-in"><span><span class="va">temp_air</span>,</span></span>
@@ -199,13 +208,13 @@ their value averaged over the measurement after cuts and discarding NA.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Fluxes are in mmol/m2/h</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 7</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   f_fluxid f_slope f_temp_air_ave datetime            f_volume_setup f_flux</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>                       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>        1   1.56            7.31 2022-07-28 <span style="color: #949494;">23:43:35</span>           24.6   95.6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>        2   0.853           7.38 2022-07-28 <span style="color: #949494;">23:47:22</span>           24.6   52.4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>        3   0.303           7.46 2022-07-28 <span style="color: #949494;">23:52:10</span>           24.6   18.6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>        4   1.13            7.77 2022-07-28 <span style="color: #949494;">23:59:32</span>           24.6   69.4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>        5   1.46            7.71 2022-07-29 <span style="color: #949494;">00:03:10</span>           24.6   89.9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span>        6   0.426           7.75 2022-07-29 <span style="color: #949494;">00:06:35</span>           24.6   26.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>                       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 1          1.56            7.31 2022-07-28 <span style="color: #949494;">23:43:35</span>           24.6   95.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 2          0.853           7.38 2022-07-28 <span style="color: #949494;">23:47:22</span>           24.6   52.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 3          0.303           7.46 2022-07-28 <span style="color: #949494;">23:52:10</span>           24.6   18.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 4          1.13            7.77 2022-07-28 <span style="color: #949494;">23:59:32</span>           24.6   69.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 5          1.46            7.71 2022-07-29 <span style="color: #949494;">00:03:10</span>           24.6   89.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> 6          0.426           7.75 2022-07-29 <span style="color: #949494;">00:06:35</span>           24.6   26.2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1 more variable: f_model &lt;chr&gt;</span></span>
 </code></pre></div>
     </div>

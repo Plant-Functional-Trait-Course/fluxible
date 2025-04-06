@@ -13,7 +13,7 @@ but can be used alone to extract a dataframe with the flag count."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -60,7 +60,7 @@ but can be used alone to extract a dataframe with the flag count.</p>
 <span>  f_quality_flag <span class="op">=</span> <span class="va">f_quality_flag</span>,</span>
 <span>  f_cut <span class="op">=</span> <span class="va">f_cut</span>,</span>
 <span>  f_flags <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ok"</span>, <span class="st">"discard"</span>, <span class="st">"zero"</span>, <span class="st">"force_discard"</span>, <span class="st">"start_error"</span>, <span class="st">"no_data"</span>,</span>
-<span>    <span class="st">"force_ok"</span>, <span class="st">"force_zero"</span><span class="op">)</span>,</span>
+<span>    <span class="st">"force_ok"</span>, <span class="st">"force_zero"</span>, <span class="st">"force_lm"</span><span class="op">)</span>,</span>
 <span>  cut_arg <span class="op">=</span> <span class="st">"cut"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -108,19 +108,42 @@ and their proportion to the total</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">slopes30qua_flag</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">flux_flag_count</span><span class="op">(</span><span class="va">slopes30qua_flag</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 8 × 3</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">co2_conc</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">slopes</span> <span class="op">&lt;-</span> <span class="fu"><a href="flux_fitting.html">flux_fitting</a></span><span class="op">(</span><span class="va">co2_conc</span>, <span class="va">conc</span>, <span class="va">datetime</span>, fit_type <span class="op">=</span> <span class="st">"exp_zhao18"</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Cutting measurements...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Estimating starting parameters for optimization...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Optimizing fitting parameters...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Calculating fits and slopes...</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Done.</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span></span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span>  fluxID 5 : slope was estimated on 205 points out of 210 seconds</span>
+<span class="r-wrn co"><span class="r-pr">#&gt;</span>  fluxID 6 : slope was estimated on 206 points out of 210 seconds</span>
+<span class="r-in"><span><span class="va">slopes_flag</span> <span class="op">&lt;-</span> <span class="fu"><a href="flux_quality.html">flux_quality</a></span><span class="op">(</span><span class="va">slopes</span>, <span class="va">conc</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>  Total number of measurements: 6</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>  discard 	 3 	 50 %</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>  ok 	 3 	 50 %</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>  zero 	 0 	 0 %</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>  force_discard 	 0 	 0 %</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>  start_error 	 0 	 0 %</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>  no_data 	 0 	 0 %</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>  force_ok 	 0 	 0 %</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>  force_zero 	 0 	 0 %</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>  force_lm 	 0 	 0 %</span>
+<span class="r-in"><span><span class="fu">flux_flag_count</span><span class="op">(</span><span class="va">slopes_flag</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 9 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   f_quality_flag     n ratio</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> ok                 6     1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> discard            0     0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> zero               0     0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> force_discard      0     0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> start_error        0     0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> no_data            0     0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> force_ok           0     0</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">8</span> force_zero         0     0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> discard            3   0.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> ok                 3   0.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> zero               0   0  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> force_discard      0   0  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> start_error        0   0  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> no_data            0   0  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> force_ok           0   0  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">8</span> force_zero         0   0  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">9</span> force_lm           0   0  </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

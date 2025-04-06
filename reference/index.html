@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -92,12 +92,6 @@
         <dd>CO2 concentration at Liahovden</dd>
       </dl><dl><dt>
 
-          <code><a href="conc_poster.html">conc_poster</a></code>
-
-        </dt>
-        <dd>CO2 concentration</dd>
-      </dl><dl><dt>
-
           <code><a href="flux_calc.html">flux_calc()</a></code>
 
         </dt>
@@ -134,7 +128,13 @@
         <dd>Fitting a model to the gas concentration curve and estimating the slope over time, using a modified version of the model from Zhao et al (2018) that allows the user to fix <code>t_zero</code>.</dd>
       </dl><dl><dt>
 
-          <code><a href="flux_fitting_lin.html">flux_fitting_lin()</a></code>
+          <code><a href="flux_fitting_hm.html">flux_fitting_hm()</a></code>
+
+        </dt>
+        <dd>Fitting a model to the gas concentration curve and estimating the slope over time, using the HM model (Pedersen et al., 2010; Hutchinson and Mosier, 1981).</dd>
+      </dl><dl><dt>
+
+          <code><a href="flux_fitting_lm.html">flux_fitting_lm()</a></code>
 
         </dt>
         <dd>linear fit to gas concentration over time</dd>
@@ -182,7 +182,19 @@
         <dd>prepares text to print for flux_plot function</dd>
       </dl><dl><dt>
 
+          <code><a href="flux_param_kappamax.html">flux_param_kappamax()</a></code>
+
+        </dt>
+        <dd>prepares text to print for flux_plot function</dd>
+      </dl><dl><dt>
+
           <code><a href="flux_param_lm.html">flux_param_lm()</a></code>
+
+        </dt>
+        <dd>prepares text to print in flux_plot</dd>
+      </dl><dl><dt>
+
+          <code><a href="flux_param_qua.html">flux_param_qua()</a></code>
 
         </dt>
         <dd>prepares text to print in flux_plot</dd>
@@ -230,7 +242,19 @@
         <dd>quality assessment for the slopes estimated by flux_fitting</dd>
       </dl><dl><dt>
 
+          <code><a href="flux_quality_kappamax.html">flux_quality_kappamax()</a></code>
+
+        </dt>
+        <dd>selecting linear slope with kappamax method</dd>
+      </dl><dl><dt>
+
           <code><a href="flux_quality_lm.html">flux_quality_lm()</a></code>
+
+        </dt>
+        <dd>quality assessment for the slopes estimated by flux_fitting</dd>
+      </dl><dl><dt>
+
+          <code><a href="flux_quality_qua.html">flux_quality_qua()</a></code>
 
         </dt>
         <dd>quality assessment for the slopes estimated by flux_fitting</dd>
@@ -254,85 +278,7 @@
         <dd>Measurements meta data</dd>
       </dl><dl><dt>
 
-          <code><a href="slopes0.html">slopes0</a></code>
-
-        </dt>
-        <dd>Slopes for each flux</dd>
-      </dl><dl><dt>
-
-          <code><a href="slopes0_flag.html">slopes0_flag</a></code>
-
-        </dt>
-        <dd>Slopes for each flux</dd>
-      </dl><dl><dt>
-
           <code><a href="slopes0_temp.html">slopes0_temp</a></code>
-
-        </dt>
-        <dd>Slopes for each flux</dd>
-      </dl><dl><dt>
-
-          <code><a href="slopes0_vol.html">slopes0_vol</a></code>
-
-        </dt>
-        <dd>Slopes for each flux</dd>
-      </dl><dl><dt>
-
-          <code><a href="slopes0lin.html">slopes0lin</a></code>
-
-        </dt>
-        <dd>Slopes for each flux</dd>
-      </dl><dl><dt>
-
-          <code><a href="slopes0lin_flag.html">slopes0lin_flag</a></code>
-
-        </dt>
-        <dd>Slopes for each flux</dd>
-      </dl><dl><dt>
-
-          <code><a href="slopes30.html">slopes30</a></code>
-
-        </dt>
-        <dd>Slopes for each flux</dd>
-      </dl><dl><dt>
-
-          <code><a href="slopes30_flag.html">slopes30_flag</a></code>
-
-        </dt>
-        <dd>Slopes for each flux</dd>
-      </dl><dl><dt>
-
-          <code><a href="slopes30lin.html">slopes30lin</a></code>
-
-        </dt>
-        <dd>Slopes for each flux</dd>
-      </dl><dl><dt>
-
-          <code><a href="slopes30lin_flag.html">slopes30lin_flag</a></code>
-
-        </dt>
-        <dd>Slopes for each flux</dd>
-      </dl><dl><dt>
-
-          <code><a href="slopes30qua.html">slopes30qua</a></code>
-
-        </dt>
-        <dd>Slopes for each flux</dd>
-      </dl><dl><dt>
-
-          <code><a href="slopes30qua_flag.html">slopes30qua_flag</a></code>
-
-        </dt>
-        <dd>Slopes for each flux</dd>
-      </dl><dl><dt>
-
-          <code><a href="slopes60.html">slopes60</a></code>
-
-        </dt>
-        <dd>Slopes for each flux</dd>
-      </dl><dl><dt>
-
-          <code><a href="slopes60lin.html">slopes60lin</a></code>
 
         </dt>
         <dd>Slopes for each flux</dd>

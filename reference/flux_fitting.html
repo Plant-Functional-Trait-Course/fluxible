@@ -11,7 +11,7 @@ to calculate gas fluxes with flux_calc"></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -133,12 +133,15 @@ ideally same as <code>cz_window</code> (exponential fit)</p></dd>
 
 
 <dt id="arg-fit-type">fit_type<a class="anchor" aria-label="anchor" href="#arg-fit-type"></a></dt>
-<dd><p><code>exp_zhao18</code>, <code>exp_tz</code>, <code>quadratic</code> or <code>linear.</code>
+<dd><p><code>exp_zhao18</code>, <code>exp_tz</code>, <code>exp_hm</code>, <code>quadratic</code> or <code>linear.</code>
 <code>exp_zhao18</code> is using the exponential model
 \(C(t) = C_m + a (t - t_z) + (C_z - C_m) \exp(-b (t - t_z))\)
 from Zhao et al (2018).
 <code>expt_tz</code> is a modified version which allows the user to fix <code>t_zero</code>:
-\(C(t) = C~m~ + a * t + (C_z - C_m) \exp(-b * t)\).</p></dd>
+\(C(t) = C~m~ + a * t + (C_z - C_m) \exp(-b * t)\).
+<code>exp_hm</code> is using the HM model
+(Pedersen et al., 2010; Hutchinson and Mosier, 1981)
+\(C(t) = C~m~ + (C~z~ - C~m~) \exp(-b * t)\)</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -153,11 +156,23 @@ The type of fit is added as an attribute for use by the other functions.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
-    <p>Zhao, P., Hammerle, A., Zeeman, M., Wohlfahrt, G., 2018.
+    <p>Pedersen, A.R., Petersen, S.O., Schelde, K., 2010.
+A comprehensive approach to soil-atmosphere trace-gas flux estimation with
+static chambers. European Journal of Soil Science 61, 888–902.
+https://doi.org/10.1111/j.1365-2389.2010.01291.x</p>
+<p>Hutchinson, G.L., Mosier, A.R., 1981. Improved Soil Cover Method
+for Field Measurement of Nitrous Oxide Fluxes.
+Soil Science Society of America Journal 45, 311–316.
+https://doi.org/10.2136/sssaj1981.03615995004500020017x</p>
+<p>Zhao, P., Hammerle, A., Zeeman, M., Wohlfahrt, G., 2018.
 On the calculation of daytime CO2 fluxes measured by automated closed
 transparent chambers. Agricultural and Forest Meteorology 263, 267–275.
 https://doi.org/10.1016/j.agrformet.2018.08.022
 <code>exponential</code> is equal to <code>exp_zhao18</code>, for backwards compatibility</p>
+    </div>
+    <div class="section level2">
+    <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
+    <div class="dont-index"><p>selectfluxes HMR</p></div>
     </div>
 
     <div class="section level2">
@@ -172,7 +187,7 @@ https://doi.org/10.1016/j.agrformet.2018.08.022
 <span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span></span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span>  fluxID 5 : slope was estimated on 205 points out of 210 seconds</span>
 <span class="r-wrn co"><span class="r-pr">#&gt;</span>  fluxID 6 : slope was estimated on 206 points out of 210 seconds</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,251 × 23</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,251 × 29</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    datetime            temp_air temp_soil  conc   PAR turfID       type </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 2022-07-28 <span style="color: #949494;">23:43:35</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>    447. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
@@ -186,13 +201,15 @@ https://doi.org/10.1016/j.agrformet.2018.08.022
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 2022-07-28 <span style="color: #949494;">23:43:43</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>    453. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 2022-07-28 <span style="color: #949494;">23:43:44</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>    453. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1,241 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 16 more variables: f_start &lt;dttm&gt;, f_end &lt;dttm&gt;, f_fluxid &lt;fct&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   f_ratio &lt;dbl&gt;, f_flag_match &lt;chr&gt;, f_time &lt;dbl&gt;, f_cut &lt;fct&gt;, f_Cz &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 22 more variables: f_start &lt;dttm&gt;, f_end &lt;dttm&gt;, f_fluxid &lt;fct&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   f_ratio &lt;dbl&gt;, f_flag_match &lt;chr&gt;, f_time &lt;dbl&gt;, f_cut &lt;fct&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   f_rsquared_lm &lt;dbl&gt;, f_adj_rsquared_lm &lt;dbl&gt;, f_slope_lm &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   f_intercept_lm &lt;dbl&gt;, f_pvalue_lm &lt;dbl&gt;, f_fit_lm &lt;dbl&gt;, f_Cz &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   f_Cm &lt;dbl&gt;, f_a &lt;dbl&gt;, f_b &lt;dbl&gt;, f_tz &lt;dbl&gt;, f_slope &lt;dbl&gt;, f_fit &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   f_fit_slope &lt;dbl&gt;, f_start_z &lt;dttm&gt;</span></span>
 <span class="r-in"><span><span class="fu">flux_fitting</span><span class="op">(</span><span class="va">co2_conc</span>, <span class="va">conc</span>, <span class="va">datetime</span>,  fit_type <span class="op">=</span> <span class="st">"quadratic"</span>,</span></span>
 <span class="r-in"><span>t_zero <span class="op">=</span> <span class="fl">10</span>, end_cut <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,251 × 24</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,251 × 30</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    datetime            temp_air temp_soil  conc   PAR turfID       type </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 2022-07-28 <span style="color: #949494;">23:43:35</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>    447. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
@@ -206,11 +223,12 @@ https://doi.org/10.1016/j.agrformet.2018.08.022
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 2022-07-28 <span style="color: #949494;">23:43:43</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>    453. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 2022-07-28 <span style="color: #949494;">23:43:44</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>    453. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1,241 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 17 more variables: f_start &lt;dttm&gt;, f_end &lt;dttm&gt;, f_fluxid &lt;fct&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 23 more variables: f_start &lt;dttm&gt;, f_end &lt;dttm&gt;, f_fluxid &lt;fct&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   f_ratio &lt;dbl&gt;, f_flag_match &lt;chr&gt;, f_time &lt;dbl&gt;, f_cut &lt;fct&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   f_param1 &lt;dbl&gt;, f_param2 &lt;dbl&gt;, f_rsquared &lt;dbl&gt;, f_adj_rsquared &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   f_intercept &lt;dbl&gt;, f_pvalue &lt;dbl&gt;, f_slope &lt;dbl&gt;, f_fit &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   f_fit_slope &lt;dbl&gt;, f_start_z &lt;dttm&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   f_rsquared_lm &lt;dbl&gt;, f_adj_rsquared_lm &lt;dbl&gt;, f_slope_lm &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   f_intercept_lm &lt;dbl&gt;, f_pvalue_lm &lt;dbl&gt;, f_fit_lm &lt;dbl&gt;, f_param1 &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   f_param2 &lt;dbl&gt;, f_rsquared &lt;dbl&gt;, f_adj_rsquared &lt;dbl&gt;, f_intercept &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   f_pvalue &lt;dbl&gt;, f_slope &lt;dbl&gt;, f_fit &lt;dbl&gt;, f_fit_slope &lt;dbl&gt;, …</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,6 +38,23 @@
       <small>Source: <a href="https://github.com/Plant-Functional-Trait-Course/fluxible/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.0.4" id="fluxible-104">fluxible 1.0.4<a class="anchor" aria-label="anchor" href="#fluxible-104"></a></h2>
+<ul><li>
+<code>flux_fitting</code>:
+<ul><li>
+<code>exp_hm</code> to use the HM model (Pedersen et al., 2010; Hutchinson and Mosier, 1981).</li>
+<li>returns the linear slope besides the chosen method.</li>
+</ul></li>
+<li>
+<code>flux_quality</code>:
+<ul><li>
+<code>kappamax = TRUE</code> to apply the kappamax method (Hüppi et al., 2018) on any of the exponential fits.</li>
+<li>g-factor in the output shows the ratio of slope over the linear slope.</li>
+<li>
+<code>force_linear</code> and <code>force_exp</code> to force the use of the linear or exponential slope (kappamax method).</li>
+</ul></li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.0.3" id="fluxible-103">fluxible 1.0.3<a class="anchor" aria-label="anchor" href="#fluxible-103"></a></h2>
 <ul><li>
