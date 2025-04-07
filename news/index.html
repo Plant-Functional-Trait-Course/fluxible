@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.5</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,6 +38,11 @@
       <small>Source: <a href="https://github.com/Plant-Functional-Trait-Course/fluxible/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.0.5" id="fluxible-105">fluxible 1.0.5<a class="anchor" aria-label="anchor" href="#fluxible-105"></a></h2>
+<ul><li>
+<code>flux_quality</code>: fluxes with bad fit are now flagged as zero if their linear slope is below the minimal detectable slope (calculated as <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>2</mn><mo>×</mo><mtext mathvariant="normal">instrument error</mtext><mi>/</mi><mtext mathvariant="normal">length of flux</mtext></mrow><annotation encoding="application/x-tex">2 \times \text{instrument error} / \text{length of flux}</annotation></semantics></math>) instead of discard.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.0.4" id="fluxible-104">fluxible 1.0.4<a class="anchor" aria-label="anchor" href="#fluxible-104"></a></h2>
 <ul><li>

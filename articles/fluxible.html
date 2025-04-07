@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.5</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -292,8 +292,8 @@ measurements or replace them by zero.</p>
 <span><span class="co">#&gt;  Total number of measurements: 138</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  ok   109     79 %</span></span>
-<span><span class="co">#&gt;  discard      28      20 %</span></span>
-<span><span class="co">#&gt;  zero     1   1 %</span></span>
+<span><span class="co">#&gt;  zero     27      20 %</span></span>
+<span><span class="co">#&gt;  discard      2   1 %</span></span>
 <span><span class="co">#&gt;  force_discard    0   0 %</span></span>
 <span><span class="co">#&gt;  start_error      0   0 %</span></span>
 <span><span class="co">#&gt;  no_data      0   0 %</span></span>
@@ -301,7 +301,7 @@ measurements or replace them by zero.</p>
 <span><span class="co">#&gt;  force_zero   0   0 %</span></span>
 <span><span class="co">#&gt;  force_lm     0   0 %</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">slopes_exp_liahovden_flag</span><span class="op">)</span></span>
-<span><span class="co">#&gt; tibble [30,281 × 37] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt; tibble [30,281 × 38] (S3: tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;  $ datetime         : POSIXct[1:30281], format: "2022-07-27 05:37:30" "2022-07-27 05:37:31" ...</span></span>
 <span><span class="co">#&gt;  $ temp_air         : num [1:30281] NA NA NA NA NA NA NA NA NA 3 ...</span></span>
 <span><span class="co">#&gt;  $ temp_soil        : num [1:30281] NA NA NA NA NA NA NA NA NA 6.83 ...</span></span>
@@ -335,6 +335,7 @@ measurements or replace them by zero.</p>
 <span><span class="co">#&gt;  $ f_fit            : num [1:30281] 470 470 470 469 469 ...</span></span>
 <span><span class="co">#&gt;  $ f_fit_slope      : num [1:30281] 470 470 470 469 469 ...</span></span>
 <span><span class="co">#&gt;  $ f_start_z        : POSIXct[1:30281], format: "2022-07-27 05:37:43" "2022-07-27 05:37:43" ...</span></span>
+<span><span class="co">#&gt;  $ f_min_slope      : num [1:30281] 0.0457 0.0457 0.0457 0.0457 0.0457 ...</span></span>
 <span><span class="co">#&gt;  $ f_cor_coef       : num [1:30281] -0.983 -0.983 -0.983 -0.983 -0.983 ...</span></span>
 <span><span class="co">#&gt;  $ f_RMSE           : num [1:30281] 2.25 2.25 2.25 2.25 2.25 ...</span></span>
 <span><span class="co">#&gt;  $ f_gfactor        : num [1:30281] 1.69 1.69 1.69 1.69 1.69 ...</span></span>
@@ -350,8 +351,8 @@ measurements or replace them by zero.</p>
 <span><span class="co">#&gt;  Total number of measurements: 138</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  ok   82      59 %</span></span>
-<span><span class="co">#&gt;  discard      56      41 %</span></span>
-<span><span class="co">#&gt;  zero     0   0 %</span></span>
+<span><span class="co">#&gt;  discard      13      9 %</span></span>
+<span><span class="co">#&gt;  zero     43      31 %</span></span>
 <span><span class="co">#&gt;  force_discard    0   0 %</span></span>
 <span><span class="co">#&gt;  start_error      0   0 %</span></span>
 <span><span class="co">#&gt;  no_data      0   0 %</span></span>
@@ -359,7 +360,7 @@ measurements or replace them by zero.</p>
 <span><span class="co">#&gt;  force_zero   0   0 %</span></span>
 <span><span class="co">#&gt;  force_lm     0   0 %</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">slopes_qua_liahovden_flag</span><span class="op">)</span></span>
-<span><span class="co">#&gt; tibble [30,281 × 36] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt; tibble [30,281 × 37] (S3: tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;  $ datetime         : POSIXct[1:30281], format: "2022-07-27 05:37:30" "2022-07-27 05:37:31" ...</span></span>
 <span><span class="co">#&gt;  $ temp_air         : num [1:30281] NA NA NA NA NA NA NA NA NA 3 ...</span></span>
 <span><span class="co">#&gt;  $ temp_soil        : num [1:30281] NA NA NA NA NA NA NA NA NA 6.83 ...</span></span>
@@ -395,6 +396,7 @@ measurements or replace them by zero.</p>
 <span><span class="co">#&gt;  $ f_fit            : num [1:30281] 465 465 464 464 464 ...</span></span>
 <span><span class="co">#&gt;  $ f_fit_slope      : num [1:30281] 465 465 464 464 464 ...</span></span>
 <span><span class="co">#&gt;  $ f_start_z        : POSIXct[1:30281], format: "2022-07-27 05:37:30" "2022-07-27 05:37:30" ...</span></span>
+<span><span class="co">#&gt;  $ f_min_slope      : num [1:30281] 0.0457 0.0457 0.0457 0.0457 0.0457 ...</span></span>
 <span><span class="co">#&gt;  $ f_gfactor        : num [1:30281] 1.01 1.01 1.01 1.01 1.01 ...</span></span>
 <span><span class="co">#&gt;  $ f_quality_flag   : chr [1:30281] "ok" "ok" "ok" "ok" ...</span></span>
 <span><span class="co">#&gt;  $ f_slope_corr     : num [1:30281] -0.11 -0.11 -0.11 -0.11 -0.11 ...</span></span>
@@ -408,8 +410,8 @@ measurements or replace them by zero.</p>
 <span><span class="co">#&gt;  Total number of measurements: 138</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  ok   52      38 %</span></span>
-<span><span class="co">#&gt;  discard      80      58 %</span></span>
-<span><span class="co">#&gt;  zero     6   4 %</span></span>
+<span><span class="co">#&gt;  discard      34      25 %</span></span>
+<span><span class="co">#&gt;  zero     52      38 %</span></span>
 <span><span class="co">#&gt;  force_discard    0   0 %</span></span>
 <span><span class="co">#&gt;  start_error      0   0 %</span></span>
 <span><span class="co">#&gt;  no_data      0   0 %</span></span>
@@ -417,7 +419,7 @@ measurements or replace them by zero.</p>
 <span><span class="co">#&gt;  force_zero   0   0 %</span></span>
 <span><span class="co">#&gt;  force_lm     0   0 %</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">slopes_lin_liahovden_flag</span><span class="op">)</span></span>
-<span><span class="co">#&gt; tibble [30,281 × 25] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt; tibble [30,281 × 26] (S3: tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;  $ datetime      : POSIXct[1:30281], format: "2022-07-27 05:37:30" "2022-07-27 05:37:31" ...</span></span>
 <span><span class="co">#&gt;  $ temp_air      : num [1:30281] NA NA NA NA NA NA NA NA NA 3 ...</span></span>
 <span><span class="co">#&gt;  $ temp_soil     : num [1:30281] NA NA NA NA NA NA NA NA NA 6.83 ...</span></span>
@@ -442,6 +444,7 @@ measurements or replace them by zero.</p>
 <span><span class="co">#&gt;  $ f_pvalue      : Named num [1:30281] 9.23e-163 9.23e-163 9.23e-163 9.23e-163 9.23e-163 ...</span></span>
 <span><span class="co">#&gt;   ..- attr(*, "names")= chr [1:30281] "value" "value" "value" "value" ...</span></span>
 <span><span class="co">#&gt;  $ f_fit         : num [1:30281] 465 465 464 464 464 ...</span></span>
+<span><span class="co">#&gt;  $ f_min_slope   : num [1:30281] 0.0457 0.0457 0.0457 0.0457 0.0457 ...</span></span>
 <span><span class="co">#&gt;  $ f_quality_flag: chr [1:30281] "ok" "ok" "ok" "ok" ...</span></span>
 <span><span class="co">#&gt;  $ f_slope_corr  : num [1:30281] -0.109 -0.109 -0.109 -0.109 -0.109 ...</span></span>
 <span><span class="co">#&gt;  - attr(*, "fit_type")= chr "linear"</span></span></code></pre></div>
@@ -547,9 +550,9 @@ accompanied with a justification.</p>
 <span><span class="co">#&gt;  Total number of measurements: 138</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  ok   127     92 %</span></span>
-<span><span class="co">#&gt;  discard      11      8 %</span></span>
-<span><span class="co">#&gt;  zero     0   0 %</span></span>
-<span><span class="co">#&gt;  force_discard    0   0 %</span></span>
+<span><span class="co">#&gt;  zero     8   6 %</span></span>
+<span><span class="co">#&gt;  force_discard    2   1 %</span></span>
+<span><span class="co">#&gt;  discard      1   1 %</span></span>
 <span><span class="co">#&gt;  start_error      0   0 %</span></span>
 <span><span class="co">#&gt;  no_data      0   0 %</span></span>
 <span><span class="co">#&gt;  force_ok     0   0 %</span></span>
@@ -596,8 +599,8 @@ count of the quality flags that can help to take a decision.</p>
 <span><span class="co">#&gt;  Total number of measurements: 138</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  ok   120     87 %</span></span>
-<span><span class="co">#&gt;  discard      18      13 %</span></span>
-<span><span class="co">#&gt;  zero     0   0 %</span></span>
+<span><span class="co">#&gt;  zero     14      10 %</span></span>
+<span><span class="co">#&gt;  discard      4   3 %</span></span>
 <span><span class="co">#&gt;  force_discard    0   0 %</span></span>
 <span><span class="co">#&gt;  start_error      0   0 %</span></span>
 <span><span class="co">#&gt;  no_data      0   0 %</span></span>
@@ -642,8 +645,8 @@ end, effectively keeping only the first 90 seconds.</p>
 <span><span class="co">#&gt;  Total number of measurements: 138</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  ok   109     79 %</span></span>
-<span><span class="co">#&gt;  discard      27      20 %</span></span>
-<span><span class="co">#&gt;  zero     2   1 %</span></span>
+<span><span class="co">#&gt;  zero     24      17 %</span></span>
+<span><span class="co">#&gt;  discard      5   4 %</span></span>
 <span><span class="co">#&gt;  force_discard    0   0 %</span></span>
 <span><span class="co">#&gt;  start_error      0   0 %</span></span>
 <span><span class="co">#&gt;  no_data      0   0 %</span></span>
