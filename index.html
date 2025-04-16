@@ -108,14 +108,15 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  Total number of measurements: 6</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;  ok   6   100 %</span></span>
+<span><span class="co">#&gt;  ok   5   83 %</span></span>
+<span><span class="co">#&gt;  zero     1   17 %</span></span>
 <span><span class="co">#&gt;  discard      0   0 %</span></span>
-<span><span class="co">#&gt;  zero     0   0 %</span></span>
 <span><span class="co">#&gt;  force_discard    0   0 %</span></span>
 <span><span class="co">#&gt;  start_error      0   0 %</span></span>
 <span><span class="co">#&gt;  no_data      0   0 %</span></span>
 <span><span class="co">#&gt;  force_ok     0   0 %</span></span>
 <span><span class="co">#&gt;  force_zero   0   0 %</span></span>
+<span><span class="co">#&gt;  force_lm     0   0 %</span></span>
 <span></span>
 <span><span class="fu"><a href="reference/flux_plot.html">flux_plot</a></span><span class="op">(</span></span>
 <span>  <span class="va">slopes_flag_df</span>,</span>
@@ -174,15 +175,20 @@
 <span><span class="co">#&gt; 2 2022-07-28 23:47:22 GEP     10.3      10.7 74 WN2C 155 </span></span>
 <span><span class="co">#&gt; 3 2022-07-28 23:47:22 NEE     31.0      10.7 74 WN2C 155 </span></span>
 <span><span class="co">#&gt; 4 2022-07-28 23:52:10 ER      20.7      10.7 74 WN2C 155 </span></span>
-<span><span class="co">#&gt; 5 2022-07-28 23:59:32 GEP    -27.2      10.8 109 AN3C 109</span></span>
+<span><span class="co">#&gt; 5 2022-07-28 23:59:32 GEP     41.5      10.8 109 AN3C 109</span></span>
 <span><span class="co">#&gt; 6 2022-07-28 23:59:32 NEE     41.5      10.8 109 AN3C 109</span></span>
-<span><span class="co">#&gt; 7 2022-07-29 00:03:10 ER      68.7      10.5 109 AN3C 109</span></span>
+<span><span class="co">#&gt; 7 2022-07-29 00:03:10 ER       0        10.5 109 AN3C 109</span></span>
 <span><span class="co">#&gt; 8 2022-07-29 00:06:35 GEP     NA        12.2 29 WN3C 106 </span></span>
 <span><span class="co">#&gt; 9 2022-07-29 00:06:35 NEE     26.1      12.2 29 WN3C 106</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="further-developments">Further developments<a class="anchor" aria-label="anchor" href="#further-developments"></a>
 </h2>
+<div class="section level3">
+<h3 id="the-licoread-r-package">The licoread R package<a class="anchor" aria-label="anchor" href="#the-licoread-r-package"></a>
+</h3>
+<p>The <a href="licoread%20R%20package">https://jogaudard.github.io/licoread/index.html</a>, currently under development in collaboration with <a href="Li-COR">https://www.licor.com/</a>, will provide an easy way to import raw files from Li-COR gas analyzers as R objects that can be used directly with the Fluxible package.</p>
+</div>
 <div class="section level3">
 <h3 id="segmentation-tool">Segmentation tool<a class="anchor" aria-label="anchor" href="#segmentation-tool"></a>
 </h3>
@@ -249,7 +255,6 @@ Brummer, A.B., Enquist, B.J. and Santos-Andrade, P.E. (2023), <em>Co2fluxtent: T
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Joseph Gaudard <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-6989-7624" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Paul Efren Santos-Andrade <br><small class="roles"> Author </small>  </li>
 <li>Richard James Telford <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-9826-3076" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 </ul>
 </div>
@@ -268,7 +273,7 @@ Brummer, A.B., Enquist, B.J. and Santos-Andrade, P.E. (2023), <em>Co2fluxtent: T
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Joseph Gaudard, Paul Efren Santos-Andrade, Richard James Telford.</p>
+  <p>Developed by Joseph Gaudard, Richard James Telford.</p>
 </div>
 
 <div class="pkgdown-footer-right">
