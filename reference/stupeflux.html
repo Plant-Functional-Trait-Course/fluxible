@@ -51,10 +51,10 @@ the step-by-step workflow for more control over the process.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">stupeflux</span><span class="op">(</span></span>
 <span>  <span class="va">raw_conc</span>,</span>
 <span>  <span class="va">field_record</span>,</span>
-<span>  <span class="va">datetime_col</span>,</span>
+<span>  <span class="va">f_datetime</span>,</span>
 <span>  <span class="va">start_col</span>,</span>
 <span>  <span class="va">end_col</span>,</span>
-<span>  <span class="va">conc_col</span>,</span>
+<span>  <span class="va">f_conc</span>,</span>
 <span>  <span class="va">startcrop</span>,</span>
 <span>  <span class="va">measurement_length</span>,</span>
 <span>  <span class="va">fit_type</span>,</span>
@@ -111,7 +111,7 @@ Has to contain at least a column containing the start of each measurement,
 and any other column identifying the measurements.</p></dd>
 
 
-<dt id="arg-datetime-col">datetime_col<a class="anchor" aria-label="anchor" href="#arg-datetime-col"></a></dt>
+<dt id="arg-f-datetime">f_datetime<a class="anchor" aria-label="anchor" href="#arg-f-datetime"></a></dt>
 <dd><p>datetime column in raw_conc (dmy_hms format)</p></dd>
 
 
@@ -123,7 +123,7 @@ and any other column identifying the measurements.</p></dd>
 <dd><p>end columne in field_record (<code>ymd_hms</code> format)</p></dd>
 
 
-<dt id="arg-conc-col">conc_col<a class="anchor" aria-label="anchor" href="#arg-conc-col"></a></dt>
+<dt id="arg-f-conc">f_conc<a class="anchor" aria-label="anchor" href="#arg-f-conc"></a></dt>
 <dd><p>concentration column in raw_conc</p></dd>
 
 
@@ -350,9 +350,9 @@ https://doi.org/10.1016/j.agrformet.2018.08.022
 <span class="r-in"><span><span class="fu">stupeflux</span><span class="op">(</span></span></span>
 <span class="r-in"><span>raw_conc <span class="op">=</span> <span class="va">co2_df_short</span>,</span></span>
 <span class="r-in"><span>field_record <span class="op">=</span> <span class="va">record_short</span>,</span></span>
-<span class="r-in"><span>datetime_col <span class="op">=</span> <span class="va">datetime</span>,</span></span>
+<span class="r-in"><span>f_datetime <span class="op">=</span> <span class="va">datetime</span>,</span></span>
 <span class="r-in"><span>start_col <span class="op">=</span> <span class="va">start</span>,</span></span>
-<span class="r-in"><span>conc_col <span class="op">=</span> <span class="va">conc</span>,</span></span>
+<span class="r-in"><span>f_conc <span class="op">=</span> <span class="va">conc</span>,</span></span>
 <span class="r-in"><span>startcrop <span class="op">=</span> <span class="fl">10</span>,</span></span>
 <span class="r-in"><span>measurement_length <span class="op">=</span> <span class="fl">180</span>,</span></span>
 <span class="r-in"><span>fit_type <span class="op">=</span> <span class="st">"exp_zhao18"</span>,</span></span>

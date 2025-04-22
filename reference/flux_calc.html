@@ -51,7 +51,7 @@ of gas concentration over time</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">flux_calc</span><span class="op">(</span></span>
 <span>  <span class="va">slopes_df</span>,</span>
 <span>  <span class="va">slope_col</span>,</span>
-<span>  <span class="va">datetime_col</span>,</span>
+<span>  <span class="va">f_datetime</span>,</span>
 <span>  <span class="va">temp_air_col</span>,</span>
 <span>  <span class="va">chamber_volume</span>,</span>
 <span>  <span class="va">atm_pressure</span>,</span>
@@ -85,7 +85,7 @@ of gas concentration over time</p>
 (in \(ppm * s^{-1}\) or \(ppb * s^{-1}\))</p></dd>
 
 
-<dt id="arg-datetime-col">datetime_col<a class="anchor" aria-label="anchor" href="#arg-datetime-col"></a></dt>
+<dt id="arg-f-datetime">f_datetime<a class="anchor" aria-label="anchor" href="#arg-f-datetime"></a></dt>
 <dd><p>column containing the datetime of each gas concentration
 measurements in <code>slopes_df</code>. The first one after cutting will be kept as
 datetime of each flux in the output.</p></dd>

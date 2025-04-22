@@ -57,9 +57,9 @@ Extra variables in both dataframes are kept in the output.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">flux_match</span><span class="op">(</span></span>
 <span>  <span class="va">raw_conc</span>,</span>
 <span>  <span class="va">field_record</span>,</span>
-<span>  <span class="va">datetime_col</span>,</span>
+<span>  <span class="va">f_datetime</span>,</span>
 <span>  <span class="va">start_col</span>,</span>
-<span>  <span class="va">conc_col</span>,</span>
+<span>  <span class="va">f_conc</span>,</span>
 <span>  <span class="va">end_col</span>,</span>
 <span>  <span class="va">startcrop</span>,</span>
 <span>  <span class="va">measurement_length</span>,</span>
@@ -85,7 +85,7 @@ Has to contain at least a column containing the start of each measurement,
 and any other column identifying the measurements.</p></dd>
 
 
-<dt id="arg-datetime-col">datetime_col<a class="anchor" aria-label="anchor" href="#arg-datetime-col"></a></dt>
+<dt id="arg-f-datetime">f_datetime<a class="anchor" aria-label="anchor" href="#arg-f-datetime"></a></dt>
 <dd><p>datetime column in raw_conc (<code>ymd_hms</code> format)</p></dd>
 
 
@@ -93,7 +93,7 @@ and any other column identifying the measurements.</p></dd>
 <dd><p>start column in field_record (<code>ymd_hms</code> format)</p></dd>
 
 
-<dt id="arg-conc-col">conc_col<a class="anchor" aria-label="anchor" href="#arg-conc-col"></a></dt>
+<dt id="arg-f-conc">f_conc<a class="anchor" aria-label="anchor" href="#arg-f-conc"></a></dt>
 <dd><p>concentration column in <code>raw_conc</code></p></dd>
 
 
