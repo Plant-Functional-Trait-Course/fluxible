@@ -1,11 +1,11 @@
 pandoc: 3.1.11
-pkgdown: 2.1.1
+pkgdown: 2.1.2
 pkgdown_sha: ~
 articles:
   data-prep: data-prep.html
   fluxible: fluxible.html
   two-gases: two-gases.html
-last_built: 2025-04-22T08:37Z
+last_built: 2025-05-09T15:40Z
 urls:
   reference: https://plant-functional-trait-course.github.io/fluxible/index.html/reference
   article: https://plant-functional-trait-course.github.io/fluxible/index.html/articles
