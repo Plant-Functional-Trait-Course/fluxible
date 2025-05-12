@@ -9,7 +9,7 @@ the step-by-step workflow for more control over the process."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -138,12 +138,15 @@ from the start specified in the field_record</p></dd>
 
 
 <dt id="arg-fit-type">fit_type<a class="anchor" aria-label="anchor" href="#arg-fit-type"></a></dt>
-<dd><p><code>exp_zhao18</code>, <code>exp_tz</code>, <code>quadratic</code> or <code>linear.</code>
+<dd><p><code>exp_zhao18</code>, <code>exp_tz</code>, <code>exp_hm</code>, <code>quadratic</code> or <code>linear.</code>
 <code>exp_zhao18</code> is using the exponential model
-<code>C(t) = C_m + a (t - t_z) + (C_z - C_m) exp(-b (t - t_z))</code>
+C(t) = C_m + a (t - t_z) + (C_z - C_m) exp(-b (t - t_z))
 from Zhao et al (2018).
 <code>expt_tz</code> is a modified version which allows the user to fix <code>t_zero</code>:
-<code>C(t) = C_m + a * t + (C_z - C_m) exp(-b * t)</code>.</p></dd>
+C(t) = C_m + a * t + (C_z - C_m) exp(-b * t)
+<code>exp_hm</code> is using the HM model
+(Pedersen et al., 2010; Hutchinson and Mosier, 1981)
+C(t) = C_m + (C_z - C_m) exp(-b * t)</p></dd>
 
 
 <dt id="arg-temp-air-col">temp_air_col<a class="anchor" aria-label="anchor" href="#arg-temp-air-col"></a></dt>
@@ -173,8 +176,10 @@ can also be a column in case it is a variable</p></dd>
 
 <dt id="arg-flux-unit">flux_unit<a class="anchor" aria-label="anchor" href="#arg-flux-unit"></a></dt>
 <dd><p>unit in which the calculated flux will be
-<code>mmol</code> outputs fluxes in mmol * m^(-2)*h^(-1);
-<code>micromol</code> outputs fluxes in micromol * m^(-2)*h^(-1)</p></dd>
+<code>mmol</code> outputs fluxes in
+mmol * m<sup>-2</sup> * h<sup>-1</sup>;
+<code>micromol</code> outputs fluxes in
+micromol * m<sup>-2</sup> * h<sup>-1</sup></p></dd>
 
 
 <dt id="arg-fixed-length">fixed_length<a class="anchor" aria-label="anchor" href="#arg-fixed-length"></a></dt>
@@ -327,20 +332,31 @@ the slope corrected according to the recommandations of the quality flags.</p></
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>a dataframe containing flux IDs, datetime of measurements' starts,
-fluxes in mmol*m^(-2)<em>h^(-1) or micromol</em>m^(-2)*h^(-1) (<code>f_flux</code>) according
-to <code>flux_unit</code>, temperature average for each flux in Kelvin (<code>f_temp_ave</code>),
-the total volume of the setup for each measurement (<code>f_volume_setup</code>),
-the model used in <a href="flux_fitting.html">flux_fitting</a>,
-any column specified in <code>cols_keep</code>, any column specified in <code>cols_ave</code> with
+fluxes in
+mmol * m<sup>-2</sup> * h<sup>-1</sup>
+or
+micromol * m<sup>-2</sup> * h<sup>-1</sup>
+(<code>f_flux</code>) according to <code>flux_unit</code>, temperature average for each flux in
+Kelvin (<code>f_temp_ave</code>), the total volume of the setup for each measurement
+(<code>f_volume_setup</code>), the model used in
+<a href="flux_fitting.html">flux_fitting</a>, any column specified in
+<code>cols_keep</code>, any column specified in <code>cols_ave</code> with
 their value averaged over the measurement after cuts and discarding NA.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
-    <p>Zhao, P., Hammerle, A., Zeeman, M., Wohlfahrt, G., 2018.
+    <p>Pedersen, A.R., Petersen, S.O., Schelde, K., 2010.
+A comprehensive approach to soil-atmosphere trace-gas flux estimation with
+static chambers. European Journal of Soil Science 61, 888–902.
+https://doi.org/10.1111/j.1365-2389.2010.01291.x</p>
+<p>Hutchinson, G.L., Mosier, A.R., 1981. Improved Soil Cover Method
+for Field Measurement of Nitrous Oxide Fluxes.
+Soil Science Society of America Journal 45, 311–316.
+https://doi.org/10.2136/sssaj1981.03615995004500020017x</p>
+<p>Zhao, P., Hammerle, A., Zeeman, M., Wohlfahrt, G., 2018.
 On the calculation of daytime CO2 fluxes measured by automated closed
 transparent chambers. Agricultural and Forest Meteorology 263, 267–275.
-https://doi.org/10.1016/j.agrformet.2018.08.022
-<code>exponential</code> is equal to <code>exp_zhao18</code>, for backwards compatibility</p>
+https://doi.org/10.1016/j.agrformet.2018.08.022</p>
     </div>
 
     <div class="section level2">
