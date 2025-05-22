@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -301,7 +301,7 @@ measurements or replace them by zero.</p>
 <span><span class="co">#&gt;  force_zero   0   0 %</span></span>
 <span><span class="co">#&gt;  force_lm     0   0 %</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">slopes_exp_liahovden_flag</span><span class="op">)</span></span>
-<span><span class="co">#&gt; tibble [30,281 × 38] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt; tibble [30,281 × 39] (S3: tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;  $ datetime         : POSIXct[1:30281], format: "2022-07-27 05:37:30" "2022-07-27 05:37:31" ...</span></span>
 <span><span class="co">#&gt;  $ temp_air         : num [1:30281] NA NA NA NA NA NA NA NA NA 3 ...</span></span>
 <span><span class="co">#&gt;  $ temp_soil        : num [1:30281] NA NA NA NA NA NA NA NA NA 6.83 ...</span></span>
@@ -341,6 +341,7 @@ measurements or replace them by zero.</p>
 <span><span class="co">#&gt;  $ f_gfactor        : num [1:30281] 1.69 1.69 1.69 1.69 1.69 ...</span></span>
 <span><span class="co">#&gt;  $ f_quality_flag   : chr [1:30281] "ok" "ok" "ok" "ok" ...</span></span>
 <span><span class="co">#&gt;  $ f_slope_corr     : num [1:30281] -0.184 -0.184 -0.184 -0.184 -0.184 ...</span></span>
+<span><span class="co">#&gt;  $ f_start_error    : chr [1:30281] NA NA NA NA ...</span></span>
 <span><span class="co">#&gt;  - attr(*, "fit_type")= chr "exp_zhao18"</span></span>
 <span></span>
 <span><span class="va">slopes_qua_liahovden_flag</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flux_quality.html">flux_quality</a></span><span class="op">(</span></span>
@@ -351,8 +352,8 @@ measurements or replace them by zero.</p>
 <span><span class="co">#&gt;  Total number of measurements: 138</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  ok   82      59 %</span></span>
-<span><span class="co">#&gt;  discard      13      9 %</span></span>
 <span><span class="co">#&gt;  zero     43      31 %</span></span>
+<span><span class="co">#&gt;  discard      13      9 %</span></span>
 <span><span class="co">#&gt;  force_discard    0   0 %</span></span>
 <span><span class="co">#&gt;  start_error      0   0 %</span></span>
 <span><span class="co">#&gt;  no_data      0   0 %</span></span>
@@ -360,7 +361,7 @@ measurements or replace them by zero.</p>
 <span><span class="co">#&gt;  force_zero   0   0 %</span></span>
 <span><span class="co">#&gt;  force_lm     0   0 %</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">slopes_qua_liahovden_flag</span><span class="op">)</span></span>
-<span><span class="co">#&gt; tibble [30,281 × 37] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt; tibble [30,281 × 38] (S3: tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;  $ datetime         : POSIXct[1:30281], format: "2022-07-27 05:37:30" "2022-07-27 05:37:31" ...</span></span>
 <span><span class="co">#&gt;  $ temp_air         : num [1:30281] NA NA NA NA NA NA NA NA NA 3 ...</span></span>
 <span><span class="co">#&gt;  $ temp_soil        : num [1:30281] NA NA NA NA NA NA NA NA NA 6.83 ...</span></span>
@@ -400,6 +401,7 @@ measurements or replace them by zero.</p>
 <span><span class="co">#&gt;  $ f_gfactor        : num [1:30281] 1.01 1.01 1.01 1.01 1.01 ...</span></span>
 <span><span class="co">#&gt;  $ f_quality_flag   : chr [1:30281] "ok" "ok" "ok" "ok" ...</span></span>
 <span><span class="co">#&gt;  $ f_slope_corr     : num [1:30281] -0.11 -0.11 -0.11 -0.11 -0.11 ...</span></span>
+<span><span class="co">#&gt;  $ f_start_error    : chr [1:30281] NA NA NA NA ...</span></span>
 <span><span class="co">#&gt;  - attr(*, "fit_type")= chr "quadratic"</span></span>
 <span></span>
 <span><span class="va">slopes_lin_liahovden_flag</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flux_quality.html">flux_quality</a></span><span class="op">(</span></span>
@@ -410,8 +412,8 @@ measurements or replace them by zero.</p>
 <span><span class="co">#&gt;  Total number of measurements: 138</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  ok   52      38 %</span></span>
-<span><span class="co">#&gt;  discard      34      25 %</span></span>
 <span><span class="co">#&gt;  zero     52      38 %</span></span>
+<span><span class="co">#&gt;  discard      34      25 %</span></span>
 <span><span class="co">#&gt;  force_discard    0   0 %</span></span>
 <span><span class="co">#&gt;  start_error      0   0 %</span></span>
 <span><span class="co">#&gt;  no_data      0   0 %</span></span>
@@ -419,7 +421,7 @@ measurements or replace them by zero.</p>
 <span><span class="co">#&gt;  force_zero   0   0 %</span></span>
 <span><span class="co">#&gt;  force_lm     0   0 %</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">slopes_lin_liahovden_flag</span><span class="op">)</span></span>
-<span><span class="co">#&gt; tibble [30,281 × 26] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt; tibble [30,281 × 27] (S3: tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;  $ datetime      : POSIXct[1:30281], format: "2022-07-27 05:37:30" "2022-07-27 05:37:31" ...</span></span>
 <span><span class="co">#&gt;  $ temp_air      : num [1:30281] NA NA NA NA NA NA NA NA NA 3 ...</span></span>
 <span><span class="co">#&gt;  $ temp_soil     : num [1:30281] NA NA NA NA NA NA NA NA NA 6.83 ...</span></span>
@@ -447,6 +449,7 @@ measurements or replace them by zero.</p>
 <span><span class="co">#&gt;  $ f_min_slope   : num [1:30281] 0.0457 0.0457 0.0457 0.0457 0.0457 ...</span></span>
 <span><span class="co">#&gt;  $ f_quality_flag: chr [1:30281] "ok" "ok" "ok" "ok" ...</span></span>
 <span><span class="co">#&gt;  $ f_slope_corr  : num [1:30281] -0.109 -0.109 -0.109 -0.109 -0.109 ...</span></span>
+<span><span class="co">#&gt;  $ f_start_error : chr [1:30281] NA NA NA NA ...</span></span>
 <span><span class="co">#&gt;  - attr(*, "fit_type")= chr "linear"</span></span></code></pre></div>
 <p>The function <code>flux_plot</code> provides plots for a visual
 assessment of the measurements, explicitly displaying the quality flags
