@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -776,7 +776,7 @@ results:</p>
 <span>    <span class="va">type</span>,</span>
 <span>    <span class="va">datetime</span>,</span>
 <span>    id_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"round"</span>, <span class="st">"turfID"</span><span class="op">)</span>,</span>
-<span>    cols_keep <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"temp_soil"</span>, <span class="st">"f_model"</span>, <span class="st">"PAR"</span><span class="op">)</span></span>
+<span>    cols_keep <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"temp_soil_ave"</span>, <span class="st">"f_model"</span>, <span class="st">"PAR_ave"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="co">#&gt; Warning in flux_gep(fluxes_exp_liahovden_60, type, datetime, id_cols = c("round", : 'flux_gep' is deprecated.</span></span>
 <span><span class="co">#&gt; Use 'flux_gpp' instead.</span></span>
@@ -784,21 +784,21 @@ results:</p>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">fluxes_exp_liahovden_60_gep</span><span class="op">)</span></span>
 <span><span class="co">#&gt; tibble [207 × 8] (S3: tbl_df/tbl/data.frame)</span></span>
-<span><span class="co">#&gt;  $ datetime : POSIXct[1:207], format: "2022-07-27 05:37:30" "2022-07-27 05:37:30" ...</span></span>
-<span><span class="co">#&gt;  $ type     : chr [1:207] "GEP" "NEE" "ER" "GEP" ...</span></span>
-<span><span class="co">#&gt;  $ f_flux   : num [1:207] -18.57 -14.09 4.48 -38.42 -23.22 ...</span></span>
-<span><span class="co">#&gt;  $ temp_soil: num [1:207] 6.96 6.96 7.01 6.83 6.83 ...</span></span>
-<span><span class="co">#&gt;  $ f_model  : chr [1:207] "exp_zhao18" "exp_zhao18" "exp_zhao18" "exp_zhao18" ...</span></span>
-<span><span class="co">#&gt;  $ PAR      : num [1:207] 24.24 24.24 1.05 28.81 28.81 ...</span></span>
-<span><span class="co">#&gt;  $ round    : num [1:207] 1 1 1 1 1 1 1 1 1 2 ...</span></span>
-<span><span class="co">#&gt;  $ turfID   : chr [1:207] "4 AN1C 4" "4 AN1C 4" "4 AN1C 4" "27 AN3C 27" ...</span></span>
+<span><span class="co">#&gt;  $ datetime     : POSIXct[1:207], format: "2022-07-27 05:37:30" "2022-07-27 05:37:30" ...</span></span>
+<span><span class="co">#&gt;  $ type         : chr [1:207] "GEP" "NEE" "ER" "GEP" ...</span></span>
+<span><span class="co">#&gt;  $ f_flux       : num [1:207] -18.57 -14.09 4.48 -38.42 -23.22 ...</span></span>
+<span><span class="co">#&gt;  $ temp_soil_ave: num [1:207] 6.96 6.96 7.01 6.83 6.83 ...</span></span>
+<span><span class="co">#&gt;  $ f_model      : chr [1:207] "exp_zhao18" "exp_zhao18" "exp_zhao18" "exp_zhao18" ...</span></span>
+<span><span class="co">#&gt;  $ PAR_ave      : num [1:207] 24.24 24.24 1.05 28.81 28.81 ...</span></span>
+<span><span class="co">#&gt;  $ round        : num [1:207] 1 1 1 1 1 1 1 1 1 2 ...</span></span>
+<span><span class="co">#&gt;  $ turfID       : chr [1:207] "4 AN1C 4" "4 AN1C 4" "4 AN1C 4" "27 AN3C 27" ...</span></span>
 <span></span>
 <span><span class="va">fluxes_qua_liahovden_60_gep</span> <span class="op">&lt;-</span> <span class="va">fluxes_qua_liahovden_60</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/flux_gep.html">flux_gep</a></span><span class="op">(</span></span>
 <span>    <span class="va">type</span>,</span>
 <span>    <span class="va">datetime</span>,</span>
 <span>    id_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"round"</span>, <span class="st">"turfID"</span><span class="op">)</span>,</span>
-<span>    cols_keep <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"temp_soil"</span>, <span class="st">"f_model"</span>, <span class="st">"PAR"</span><span class="op">)</span></span>
+<span>    cols_keep <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"temp_soil_ave"</span>, <span class="st">"f_model"</span>, <span class="st">"PAR_ave"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="co">#&gt; Warning in flux_gep(fluxes_qua_liahovden_60, type, datetime, id_cols = c("round", : 'flux_gep' is deprecated.</span></span>
 <span><span class="co">#&gt; Use 'flux_gpp' instead.</span></span>
@@ -806,21 +806,21 @@ results:</p>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">fluxes_qua_liahovden_60_gep</span><span class="op">)</span></span>
 <span><span class="co">#&gt; tibble [207 × 8] (S3: tbl_df/tbl/data.frame)</span></span>
-<span><span class="co">#&gt;  $ datetime : POSIXct[1:207], format: "2022-07-27 05:37:30" "2022-07-27 05:37:30" ...</span></span>
-<span><span class="co">#&gt;  $ type     : chr [1:207] "GEP" "NEE" "ER" "GEP" ...</span></span>
-<span><span class="co">#&gt;  $ f_flux   : num [1:207] -13.94 -10.07 3.87 -34.04 -24.8 ...</span></span>
-<span><span class="co">#&gt;  $ temp_soil: num [1:207] 6.96 6.96 7.01 6.83 6.83 ...</span></span>
-<span><span class="co">#&gt;  $ f_model  : chr [1:207] "quadratic" "quadratic" "quadratic" "quadratic" ...</span></span>
-<span><span class="co">#&gt;  $ PAR      : num [1:207] 24.24 24.24 1.05 28.81 28.81 ...</span></span>
-<span><span class="co">#&gt;  $ round    : num [1:207] 1 1 1 1 1 1 1 1 1 2 ...</span></span>
-<span><span class="co">#&gt;  $ turfID   : chr [1:207] "4 AN1C 4" "4 AN1C 4" "4 AN1C 4" "27 AN3C 27" ...</span></span>
+<span><span class="co">#&gt;  $ datetime     : POSIXct[1:207], format: "2022-07-27 05:37:30" "2022-07-27 05:37:30" ...</span></span>
+<span><span class="co">#&gt;  $ type         : chr [1:207] "GEP" "NEE" "ER" "GEP" ...</span></span>
+<span><span class="co">#&gt;  $ f_flux       : num [1:207] -13.94 -10.07 3.87 -34.04 -24.8 ...</span></span>
+<span><span class="co">#&gt;  $ temp_soil_ave: num [1:207] 6.96 6.96 7.01 6.83 6.83 ...</span></span>
+<span><span class="co">#&gt;  $ f_model      : chr [1:207] "quadratic" "quadratic" "quadratic" "quadratic" ...</span></span>
+<span><span class="co">#&gt;  $ PAR_ave      : num [1:207] 24.24 24.24 1.05 28.81 28.81 ...</span></span>
+<span><span class="co">#&gt;  $ round        : num [1:207] 1 1 1 1 1 1 1 1 1 2 ...</span></span>
+<span><span class="co">#&gt;  $ turfID       : chr [1:207] "4 AN1C 4" "4 AN1C 4" "4 AN1C 4" "27 AN3C 27" ...</span></span>
 <span></span>
 <span><span class="va">fluxes_lin_liahovden_120_gep</span> <span class="op">&lt;-</span> <span class="va">fluxes_lin_liahovden_120</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/flux_gep.html">flux_gep</a></span><span class="op">(</span></span>
 <span>    <span class="va">type</span>,</span>
 <span>    <span class="va">datetime</span>,</span>
 <span>    id_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"round"</span>, <span class="st">"turfID"</span><span class="op">)</span>,</span>
-<span>    cols_keep <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"temp_soil"</span>, <span class="st">"f_model"</span>, <span class="st">"PAR"</span><span class="op">)</span></span>
+<span>    cols_keep <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"temp_soil_ave"</span>, <span class="st">"f_model"</span>, <span class="st">"PAR_ave"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="co">#&gt; Warning in flux_gep(fluxes_lin_liahovden_120, type, datetime, id_cols = c("round", : 'flux_gep' is deprecated.</span></span>
 <span><span class="co">#&gt; Use 'flux_gpp' instead.</span></span>
@@ -828,14 +828,14 @@ results:</p>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">fluxes_lin_liahovden_120_gep</span><span class="op">)</span></span>
 <span><span class="co">#&gt; tibble [207 × 8] (S3: tbl_df/tbl/data.frame)</span></span>
-<span><span class="co">#&gt;  $ datetime : POSIXct[1:207], format: "2022-07-27 05:37:30" "2022-07-27 05:37:30" ...</span></span>
-<span><span class="co">#&gt;  $ type     : chr [1:207] "GEP" "NEE" "ER" "GEP" ...</span></span>
-<span><span class="co">#&gt;  $ f_flux   : num [1:207] -10.02 -7.97 2.05 -20.55 -14.47 ...</span></span>
-<span><span class="co">#&gt;  $ temp_soil: num [1:207] 6.93 6.93 7.01 6.82 6.82 ...</span></span>
-<span><span class="co">#&gt;  $ f_model  : chr [1:207] "linear" "linear" "linear" "linear" ...</span></span>
-<span><span class="co">#&gt;  $ PAR      : num [1:207] 23.025 23.025 0.795 28.181 28.181 ...</span></span>
-<span><span class="co">#&gt;  $ round    : num [1:207] 1 1 1 1 1 1 1 1 1 2 ...</span></span>
-<span><span class="co">#&gt;  $ turfID   : chr [1:207] "4 AN1C 4" "4 AN1C 4" "4 AN1C 4" "27 AN3C 27" ...</span></span></code></pre></div>
+<span><span class="co">#&gt;  $ datetime     : POSIXct[1:207], format: "2022-07-27 05:37:30" "2022-07-27 05:37:30" ...</span></span>
+<span><span class="co">#&gt;  $ type         : chr [1:207] "GEP" "NEE" "ER" "GEP" ...</span></span>
+<span><span class="co">#&gt;  $ f_flux       : num [1:207] -10.02 -7.97 2.05 -20.55 -14.47 ...</span></span>
+<span><span class="co">#&gt;  $ temp_soil_ave: num [1:207] 6.93 6.93 7.01 6.82 6.82 ...</span></span>
+<span><span class="co">#&gt;  $ f_model      : chr [1:207] "linear" "linear" "linear" "linear" ...</span></span>
+<span><span class="co">#&gt;  $ PAR_ave      : num [1:207] 23.025 23.025 0.795 28.181 28.181 ...</span></span>
+<span><span class="co">#&gt;  $ round        : num [1:207] 1 1 1 1 1 1 1 1 1 2 ...</span></span>
+<span><span class="co">#&gt;  $ turfID       : chr [1:207] "4 AN1C 4" "4 AN1C 4" "4 AN1C 4" "27 AN3C 27" ...</span></span></code></pre></div>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span></span>
@@ -879,7 +879,7 @@ Meteorology</em>, Vol. 263, pp. 267–275.
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer>

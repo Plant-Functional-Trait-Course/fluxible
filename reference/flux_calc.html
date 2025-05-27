@@ -9,7 +9,7 @@ of gas concentration over time"></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.1.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -63,6 +63,7 @@ of gas concentration over time</p>
 <span>  cols_ave <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  cols_sum <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  cols_med <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  cols_nest <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  <span class="va">tube_volume</span>,</span>
 <span>  temp_air_unit <span class="op">=</span> <span class="st">"celsius"</span>,</span>
 <span>  f_cut <span class="op">=</span> <span class="va">f_cut</span>,</span>
@@ -101,7 +102,7 @@ can also be a column in case it is a variable</p></dd>
 
 
 <dt id="arg-atm-pressure">atm_pressure<a class="anchor" aria-label="anchor" href="#arg-atm-pressure"></a></dt>
-<dd><p>atmospheric pressure,
+<dd><p>atmospheric pressure in atm,
 can be a constant (numerical) or a variable (column name)</p></dd>
 
 
@@ -135,17 +136,25 @@ as <a href="https://dplyr.tidyverse.org/reference/distinct.html" class="external
 
 <dt id="arg-cols-ave">cols_ave<a class="anchor" aria-label="anchor" href="#arg-cols-ave"></a></dt>
 <dd><p>columns with values that should be averaged
-for each flux in the output. Note that NA are removed in mean calculation.</p></dd>
+for each flux in the output. Note that NA are removed in mean calculation.
+Those columns will get the <code>_ave</code> suffix in the output.</p></dd>
 
 
 <dt id="arg-cols-sum">cols_sum<a class="anchor" aria-label="anchor" href="#arg-cols-sum"></a></dt>
 <dd><p>columns with values for which is sum is provided
-for each flux in the output. Note that NA are removed in sum calculation.</p></dd>
+for each flux in the output. Those columns will get the <code>_sum</code> suffix in the
+output.</p></dd>
 
 
 <dt id="arg-cols-med">cols_med<a class="anchor" aria-label="anchor" href="#arg-cols-med"></a></dt>
 <dd><p>columns with values for which is median is provided
-for each flux in the output. Note that NA are removed in median calculation.</p></dd>
+for each flux in the output. Note that NA are removed in median calculation.
+Those columns will get the <code>_med</code> suffix in the output.</p></dd>
+
+
+<dt id="arg-cols-nest">cols_nest<a class="anchor" aria-label="anchor" href="#arg-cols-nest"></a></dt>
+<dd><p>columns to nest in <code>nested_variables</code> for each flux in the
+output.</p></dd>
 
 
 <dt id="arg-tube-volume">tube_volume<a class="anchor" aria-label="anchor" href="#arg-tube-volume"></a></dt>
@@ -170,7 +179,8 @@ Has to be either <code>celsius</code> (default), <code>fahrenheit</code> or <cod
 <dd><p>if 'TRUE' (default), the measurements will be cut according to
 'f_cut' before calculating fluxes. This has no influence on the flux itself
 since the slope is provided from <a href="flux_fitting.html">flux_fitting</a>,
-but it will influence the values of the columns in <code>cols_ave</code>.</p></dd>
+but it will influence the values of the variables in <code>cols_ave</code>, <code>cols_cum</code>,
+and <code>cols_med</code>.</p></dd>
 
 
 <dt id="arg-fit-type">fit_type<a class="anchor" aria-label="anchor" href="#arg-fit-type"></a></dt>
@@ -243,7 +253,7 @@ their value averaged over the measurement after cuts and discarding NA.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.2.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
 </div>
 
     </footer></div>
