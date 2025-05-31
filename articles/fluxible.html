@@ -784,14 +784,16 @@ results:</p>
 <span>    id_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"round"</span>, <span class="st">"turfID"</span><span class="op">)</span>,</span>
 <span>    cols_keep <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"temp_soil_ave"</span>, <span class="st">"f_model"</span>, <span class="st">"PAR_ave"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
-<span><span class="co">#&gt; Warning in flux_gep(fluxes_exp_liahovden_60, type, datetime, id_cols = c("round", : 'flux_gep' is deprecated.</span></span>
-<span><span class="co">#&gt; Use 'flux_gpp' instead.</span></span>
-<span><span class="co">#&gt; See help("Deprecated")</span></span>
+<span><span class="co">#&gt; Warning: `flux_gep()` was deprecated in fluxible 1.1.1.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Please use `flux_gpp()` instead.</span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">This warning is displayed once every 8 hours.</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">Call `lifecycle::last_lifecycle_warnings()` to see where this warning was</span></span></span>
+<span><span class="co">#&gt; <span style="color: #555555;">generated.</span></span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">fluxes_exp_liahovden_60_gep</span><span class="op">)</span></span>
 <span><span class="co">#&gt; tibble [207 × 8] (S3: tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;  $ datetime     : POSIXct[1:207], format: "2022-07-27 05:37:30" "2022-07-27 05:37:30" ...</span></span>
-<span><span class="co">#&gt;  $ type         : chr [1:207] "GEP" "NEE" "ER" "GEP" ...</span></span>
+<span><span class="co">#&gt;  $ type         : chr [1:207] "GPP" "NEE" "ER" "GPP" ...</span></span>
 <span><span class="co">#&gt;  $ f_flux       : num [1:207] -18.57 -14.09 4.48 -38.42 -23.22 ...</span></span>
 <span><span class="co">#&gt;  $ temp_soil_ave: num [1:207] 6.96 6.96 7.01 6.83 6.83 ...</span></span>
 <span><span class="co">#&gt;  $ f_model      : chr [1:207] "exp_zhao18" "exp_zhao18" "exp_zhao18" "exp_zhao18" ...</span></span>
@@ -806,14 +808,11 @@ results:</p>
 <span>    id_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"round"</span>, <span class="st">"turfID"</span><span class="op">)</span>,</span>
 <span>    cols_keep <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"temp_soil_ave"</span>, <span class="st">"f_model"</span>, <span class="st">"PAR_ave"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
-<span><span class="co">#&gt; Warning in flux_gep(fluxes_qua_liahovden_60, type, datetime, id_cols = c("round", : 'flux_gep' is deprecated.</span></span>
-<span><span class="co">#&gt; Use 'flux_gpp' instead.</span></span>
-<span><span class="co">#&gt; See help("Deprecated")</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">fluxes_qua_liahovden_60_gep</span><span class="op">)</span></span>
 <span><span class="co">#&gt; tibble [207 × 8] (S3: tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;  $ datetime     : POSIXct[1:207], format: "2022-07-27 05:37:30" "2022-07-27 05:37:30" ...</span></span>
-<span><span class="co">#&gt;  $ type         : chr [1:207] "GEP" "NEE" "ER" "GEP" ...</span></span>
+<span><span class="co">#&gt;  $ type         : chr [1:207] "GPP" "NEE" "ER" "GPP" ...</span></span>
 <span><span class="co">#&gt;  $ f_flux       : num [1:207] -13.94 -10.07 3.87 -34.04 -24.8 ...</span></span>
 <span><span class="co">#&gt;  $ temp_soil_ave: num [1:207] 6.96 6.96 7.01 6.83 6.83 ...</span></span>
 <span><span class="co">#&gt;  $ f_model      : chr [1:207] "quadratic" "quadratic" "quadratic" "quadratic" ...</span></span>
@@ -828,14 +827,11 @@ results:</p>
 <span>    id_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"round"</span>, <span class="st">"turfID"</span><span class="op">)</span>,</span>
 <span>    cols_keep <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"temp_soil_ave"</span>, <span class="st">"f_model"</span>, <span class="st">"PAR_ave"</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
-<span><span class="co">#&gt; Warning in flux_gep(fluxes_lin_liahovden_120, type, datetime, id_cols = c("round", : 'flux_gep' is deprecated.</span></span>
-<span><span class="co">#&gt; Use 'flux_gpp' instead.</span></span>
-<span><span class="co">#&gt; See help("Deprecated")</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">fluxes_lin_liahovden_120_gep</span><span class="op">)</span></span>
 <span><span class="co">#&gt; tibble [207 × 8] (S3: tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;  $ datetime     : POSIXct[1:207], format: "2022-07-27 05:37:30" "2022-07-27 05:37:30" ...</span></span>
-<span><span class="co">#&gt;  $ type         : chr [1:207] "GEP" "NEE" "ER" "GEP" ...</span></span>
+<span><span class="co">#&gt;  $ type         : chr [1:207] "GPP" "NEE" "ER" "GPP" ...</span></span>
 <span><span class="co">#&gt;  $ f_flux       : num [1:207] -10.02 -7.97 2.05 -20.55 -14.47 ...</span></span>
 <span><span class="co">#&gt;  $ temp_soil_ave: num [1:207] 6.93 6.93 7.01 6.82 6.82 ...</span></span>
 <span><span class="co">#&gt;  $ f_model      : chr [1:207] "linear" "linear" "linear" "linear" ...</span></span>

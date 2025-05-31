@@ -55,7 +55,7 @@ the step-by-step workflow for more control over the process.</p>
 <span>  <span class="va">start_col</span>,</span>
 <span>  <span class="va">end_col</span>,</span>
 <span>  <span class="va">f_conc</span>,</span>
-<span>  <span class="va">startcrop</span>,</span>
+<span>  startcrop <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  <span class="va">measurement_length</span>,</span>
 <span>  <span class="va">fit_type</span>,</span>
 <span>  <span class="va">temp_air_col</span>,</span>
@@ -128,8 +128,8 @@ and any other column identifying the measurements.</p></dd>
 
 
 <dt id="arg-startcrop">startcrop<a class="anchor" aria-label="anchor" href="#arg-startcrop"></a></dt>
-<dd><p>how many seconds should be discarded at the beginning of
-the measurement</p></dd>
+<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> <code>startcrop</code> is no longer
+supported. Please use <code>start_cut</code> in <code>flux_fitting</code> instead.</p></dd>
 
 
 <dt id="arg-measurement-length">measurement_length<a class="anchor" aria-label="anchor" href="#arg-measurement-length"></a></dt>
@@ -369,7 +369,6 @@ https://doi.org/10.1016/j.agrformet.2018.08.022</p>
 <span class="r-in"><span>f_datetime <span class="op">=</span> <span class="va">datetime</span>,</span></span>
 <span class="r-in"><span>start_col <span class="op">=</span> <span class="va">start</span>,</span></span>
 <span class="r-in"><span>f_conc <span class="op">=</span> <span class="va">conc</span>,</span></span>
-<span class="r-in"><span>startcrop <span class="op">=</span> <span class="fl">10</span>,</span></span>
 <span class="r-in"><span>measurement_length <span class="op">=</span> <span class="fl">180</span>,</span></span>
 <span class="r-in"><span>fit_type <span class="op">=</span> <span class="st">"exp_zhao18"</span>,</span></span>
 <span class="r-in"><span>temp_air_col <span class="op">=</span> <span class="va">temp_air</span>,</span></span>
@@ -389,8 +388,8 @@ https://doi.org/10.1016/j.agrformet.2018.08.022</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>  Total number of measurements: 6</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>  ok 	 5 	 83 %</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>  zero 	 1 	 17 %</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span>  discard 	 0 	 0 %</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>  discard 	 1 	 17 %</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span>  zero 	 0 	 0 %</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>  force_discard 	 0 	 0 %</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>  start_error 	 0 	 0 %</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span>  no_data 	 0 	 0 %</span>
@@ -407,12 +406,12 @@ https://doi.org/10.1016/j.agrformet.2018.08.022</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 7</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   f_fluxid f_slope_corr f_temp_air_ave datetime            f_volume_setup f_flux</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>                       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 1               0.785           7.28 2022-07-28 <span style="color: #949494;">23:43:35</span>           24.6   48.3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 2               0.503           7.37 2022-07-28 <span style="color: #949494;">23:47:22</span>           24.6   30.9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 3               0.344           7.45 2022-07-28 <span style="color: #949494;">23:52:10</span>           24.6   21.1</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 4               0.693           7.77 2022-07-28 <span style="color: #949494;">23:59:32</span>           24.6   42.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 5               0               7.69 2022-07-29 <span style="color: #949494;">00:03:10</span>           24.6    0  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> 6               0.433           7.74 2022-07-29 <span style="color: #949494;">00:06:35</span>           24.6   26.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 1               0.817           7.28 2022-07-28 <span style="color: #949494;">23:43:25</span>           24.6   50.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 2               0.508           7.37 2022-07-28 <span style="color: #949494;">23:47:12</span>           24.6   31.3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 3               0.328           7.44 2022-07-28 <span style="color: #949494;">23:52:00</span>           24.6   20.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 4               0.703           7.78 2022-07-28 <span style="color: #949494;">23:59:22</span>           24.6   43.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 5              <span style="color: #BB0000;">NA</span>               7.69 2022-07-29 <span style="color: #949494;">00:03:00</span>           24.6   <span style="color: #BB0000;">NA</span>  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> 6               0.510           7.74 2022-07-29 <span style="color: #949494;">00:06:25</span>           24.6   31.3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1 more variable: f_model &lt;chr&gt;</span></span>
 </code></pre></div>
     </div>

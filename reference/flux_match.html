@@ -61,7 +61,7 @@ Extra variables in both dataframes are kept in the output.</p>
 <span>  <span class="va">start_col</span>,</span>
 <span>  <span class="va">f_conc</span>,</span>
 <span>  <span class="va">end_col</span>,</span>
-<span>  <span class="va">startcrop</span>,</span>
+<span>  startcrop <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  <span class="va">measurement_length</span>,</span>
 <span>  fixed_length <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  ratio_threshold <span class="op">=</span> <span class="fl">0.5</span>,</span>
@@ -103,8 +103,8 @@ Only needed if <code>fixed_length = "FALSE"</code>.</p></dd>
 
 
 <dt id="arg-startcrop">startcrop<a class="anchor" aria-label="anchor" href="#arg-startcrop"></a></dt>
-<dd><p>how many seconds should be discarded at the beginning of
-the measurement</p></dd>
+<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> <code>startcrop</code> is no longer
+supported. Please use <code>start_cut</code> in <code>flux_fitting</code> instead.</p></dd>
 
 
 <dt id="arg-measurement-length">measurement_length<a class="anchor" aria-label="anchor" href="#arg-measurement-length"></a></dt>
@@ -142,22 +142,22 @@ in seconds (<code>f_ratio</code>), and any variables present in one of the input
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">co2_df_short</span>, <span class="va">record_short</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">flux_match</span><span class="op">(</span><span class="va">co2_df_short</span>, <span class="va">record_short</span>, <span class="va">datetime</span>, <span class="va">start</span>, <span class="va">conc</span>, startcrop <span class="op">=</span> <span class="fl">10</span>,</span></span>
+<span class="r-in"><span><span class="fu">flux_match</span><span class="op">(</span><span class="va">co2_df_short</span>, <span class="va">record_short</span>, <span class="va">datetime</span>, <span class="va">start</span>, <span class="va">conc</span>,</span></span>
 <span class="r-in"><span>measurement_length <span class="op">=</span> <span class="fl">180</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,020 × 15</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,080 × 15</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    datetime            temp_air temp_soil  conc   PAR turfID       type </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 2022-07-28 <span style="color: #949494;">23:43:35</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>    447. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 2022-07-28 <span style="color: #949494;">23:43:36</span>     7.22      10.9  447.  1.68 156 AN2C 156 ER   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 2022-07-28 <span style="color: #949494;">23:43:37</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>    448. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 2022-07-28 <span style="color: #949494;">23:43:38</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>    449. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 2022-07-28 <span style="color: #949494;">23:43:39</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>    449. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 2022-07-28 <span style="color: #949494;">23:43:40</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>    450. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 2022-07-28 <span style="color: #949494;">23:43:41</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>    451. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 2022-07-28 <span style="color: #949494;">23:43:42</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>    451. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 2022-07-28 <span style="color: #949494;">23:43:43</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>    453. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 2022-07-28 <span style="color: #949494;">23:43:44</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>    453. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1,010 more rows</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 2022-07-28 <span style="color: #949494;">23:43:25</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>    439. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 2022-07-28 <span style="color: #949494;">23:43:26</span>     7.21      10.9  440.  2.29 156 AN2C 156 ER   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 2022-07-28 <span style="color: #949494;">23:43:27</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>    441. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 2022-07-28 <span style="color: #949494;">23:43:28</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>    441. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 2022-07-28 <span style="color: #949494;">23:43:29</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>    442. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 2022-07-28 <span style="color: #949494;">23:43:30</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>    443. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 2022-07-28 <span style="color: #949494;">23:43:31</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>    443. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 2022-07-28 <span style="color: #949494;">23:43:32</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>    444. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 2022-07-28 <span style="color: #949494;">23:43:33</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>    446. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 2022-07-28 <span style="color: #949494;">23:43:34</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>    446. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1,070 more rows</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 8 more variables: start &lt;dttm&gt;, f_start &lt;dttm&gt;, f_fluxid &lt;fct&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   f_end &lt;dttm&gt;, f_n_conc &lt;int&gt;, f_length &lt;dbl&gt;, f_ratio &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   f_flag_match &lt;chr&gt;</span></span>
