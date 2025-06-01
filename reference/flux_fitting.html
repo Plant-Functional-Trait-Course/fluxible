@@ -11,7 +11,7 @@ to calculate gas fluxes with flux_calc"></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -58,14 +58,14 @@ to calculate gas fluxes with <a href="flux_calc.html">flux_calc</a></p>
 <span>  f_start <span class="op">=</span> <span class="va">f_start</span>,</span>
 <span>  f_end <span class="op">=</span> <span class="va">f_end</span>,</span>
 <span>  f_fluxid <span class="op">=</span> <span class="va">f_fluxid</span>,</span>
+<span>  <span class="va">fit_type</span>,</span>
 <span>  start_cut <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  end_cut <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  t_zero <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  cz_window <span class="op">=</span> <span class="fl">15</span>,</span>
 <span>  b_window <span class="op">=</span> <span class="fl">10</span>,</span>
 <span>  a_window <span class="op">=</span> <span class="fl">10</span>,</span>
-<span>  roll_width <span class="op">=</span> <span class="fl">15</span>,</span>
-<span>  t_zero <span class="op">=</span> <span class="fl">0</span>,</span>
-<span>  <span class="va">fit_type</span></span>
+<span>  roll_width <span class="op">=</span> <span class="fl">15</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -99,39 +99,6 @@ the first row will be kept</p></dd>
 <dd><p>column with ID of each flux</p></dd>
 
 
-<dt id="arg-start-cut">start_cut<a class="anchor" aria-label="anchor" href="#arg-start-cut"></a></dt>
-<dd><p>time to discard at the start of the measurements
-(in seconds)</p></dd>
-
-
-<dt id="arg-end-cut">end_cut<a class="anchor" aria-label="anchor" href="#arg-end-cut"></a></dt>
-<dd><p>time to discard at the end of the measurements (in seconds)</p></dd>
-
-
-<dt id="arg-cz-window">cz_window<a class="anchor" aria-label="anchor" href="#arg-cz-window"></a></dt>
-<dd><p>window used to calculate Cz, at the beginning of cut window
-(exponential fit)</p></dd>
-
-
-<dt id="arg-b-window">b_window<a class="anchor" aria-label="anchor" href="#arg-b-window"></a></dt>
-<dd><p>window to estimate b. It is an interval after tz where
-it is assumed that the model fits the data perfectly (exponential fit)</p></dd>
-
-
-<dt id="arg-a-window">a_window<a class="anchor" aria-label="anchor" href="#arg-a-window"></a></dt>
-<dd><p>window at the end of the flux to estimate a (exponential fit)</p></dd>
-
-
-<dt id="arg-roll-width">roll_width<a class="anchor" aria-label="anchor" href="#arg-roll-width"></a></dt>
-<dd><p>width of the rolling mean for CO2 when looking for <code>tz</code>,
-ideally same as <code>cz_window</code> (exponential fit)</p></dd>
-
-
-<dt id="arg-t-zero">t_zero<a class="anchor" aria-label="anchor" href="#arg-t-zero"></a></dt>
-<dd><p>time at which the slope should be calculated
-(for <code>quadratic</code>, <code>exp_tz</code> and <code>exp_hm</code> fits)</p></dd>
-
-
 <dt id="arg-fit-type">fit_type<a class="anchor" aria-label="anchor" href="#arg-fit-type"></a></dt>
 <dd><p><code>exp_zhao18</code>, <code>exp_tz</code>, <code>exp_hm</code>, <code>quadratic</code> or <code>linear.</code>
 <code>exp_zhao18</code> is using the exponential model
@@ -143,6 +110,42 @@ C(t) = C_m + a * t + (C_z - C_m) exp(-b * t)
 (Pedersen et al., 2010; Hutchinson and Mosier, 1981)
 C(t) = C_m + (C_z - C_m) exp(-b * t)
 <code>exponential</code> is equal to <code>exp_zhao18</code>, for backwards compatibility</p></dd>
+
+
+<dt id="arg-start-cut">start_cut<a class="anchor" aria-label="anchor" href="#arg-start-cut"></a></dt>
+<dd><p>time to discard at the start of the measurements
+(in seconds)</p></dd>
+
+
+<dt id="arg-end-cut">end_cut<a class="anchor" aria-label="anchor" href="#arg-end-cut"></a></dt>
+<dd><p>time to discard at the end of the measurements (in seconds)</p></dd>
+
+
+<dt id="arg-t-zero">t_zero<a class="anchor" aria-label="anchor" href="#arg-t-zero"></a></dt>
+<dd><p>time at which the slope should be calculated
+(for <code>quadratic</code>, <code>exp_tz</code> and <code>exp_hm</code> fits)</p></dd>
+
+
+<dt id="arg-cz-window">cz_window<a class="anchor" aria-label="anchor" href="#arg-cz-window"></a></dt>
+<dd><p>window used to calculate Cz, at the beginning of cut window
+(<code>exp_zhao18</code> and <code>exp_tz</code> fits)</p></dd>
+
+
+<dt id="arg-b-window">b_window<a class="anchor" aria-label="anchor" href="#arg-b-window"></a></dt>
+<dd><p>window to estimate b. It is an interval after tz where
+it is assumed that the model fits the data perfectly
+(<code>exp_zhao18</code> and <code>exp_tz</code> fits)</p></dd>
+
+
+<dt id="arg-a-window">a_window<a class="anchor" aria-label="anchor" href="#arg-a-window"></a></dt>
+<dd><p>window at the end of the flux to estimate a
+(<code>exp_zhao18</code> and <code>exp_tz</code> fits)</p></dd>
+
+
+<dt id="arg-roll-width">roll_width<a class="anchor" aria-label="anchor" href="#arg-roll-width"></a></dt>
+<dd><p>width of the rolling mean for gas concentration when
+looking for <code>tz</code>, ideally same as <code>cz_window</code>
+(<code>exp_zhao18</code> and <code>exp_tz</code> fits)</p></dd>
 
 </dl></div>
     <div class="section level2">

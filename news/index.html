@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,6 +38,25 @@
       <small>Source: <a href="https://github.com/Plant-Functional-Trait-Course/fluxible/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.2.2" id="fluxible-122">fluxible 1.2.2<a class="anchor" aria-label="anchor" href="#fluxible-122"></a></h2>
+<ul><li>
+<code>flux_calc</code>:
+<ul><li>
+<code>chamber_volume</code> and <code>tube_volume</code> are deprecated, use <code>setup_volume</code> instead</li>
+<li>
+<code>cols_nest = "all"</code> allows to nest all the columns, to keep raw data</li>
+</ul></li>
+<li>
+<code>flux_match</code>:
+<ul><li>
+<code>ratio_threshold</code> is deprecated, use <code>ratio_threshold</code> in <code><a href="../reference/flux_quality.html">flux_quality()</a></code> instead</li>
+<li>
+<code>f_conc</code> is no longer needed, deprecated</li>
+</ul></li>
+<li>
+<code>flux_quality</code>: <code>ratio_threshold</code> default value is now 0.5, was 0 previously, which does not make sense</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.2.1" id="fluxible-121">fluxible 1.2.1<a class="anchor" aria-label="anchor" href="#fluxible-121"></a></h2>
 <ul><li>

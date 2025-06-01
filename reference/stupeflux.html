@@ -9,7 +9,7 @@ the step-by-step workflow for more control over the process."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,11 +55,10 @@ the step-by-step workflow for more control over the process.</p>
 <span>  <span class="va">start_col</span>,</span>
 <span>  <span class="va">end_col</span>,</span>
 <span>  <span class="va">f_conc</span>,</span>
-<span>  startcrop <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  <span class="va">setup_volume</span>,</span>
 <span>  <span class="va">measurement_length</span>,</span>
 <span>  <span class="va">fit_type</span>,</span>
 <span>  <span class="va">temp_air_col</span>,</span>
-<span>  <span class="va">chamber_volume</span>,</span>
 <span>  <span class="va">atm_pressure</span>,</span>
 <span>  <span class="va">plot_area</span>,</span>
 <span>  <span class="va">conc_unit</span>,</span>
@@ -69,7 +68,6 @@ the step-by-step workflow for more control over the process.</p>
 <span>  cols_ave <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  cols_sum <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  cols_med <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  <span class="va">tube_volume</span>,</span>
 <span>  ratio_threshold <span class="op">=</span> <span class="fl">0.5</span>,</span>
 <span>  time_diff <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  start_cut <span class="op">=</span> <span class="fl">0</span>,</span>
@@ -127,9 +125,9 @@ and any other column identifying the measurements.</p></dd>
 <dd><p>concentration column in raw_conc</p></dd>
 
 
-<dt id="arg-startcrop">startcrop<a class="anchor" aria-label="anchor" href="#arg-startcrop"></a></dt>
-<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> <code>startcrop</code> is no longer
-supported. Please use <code>start_cut</code> in <code>flux_fitting</code> instead.</p></dd>
+<dt id="arg-setup-volume">setup_volume<a class="anchor" aria-label="anchor" href="#arg-setup-volume"></a></dt>
+<dd><p>volume of the flux chamber and instrument together in L,
+can also be a column in case it is a variable</p></dd>
 
 
 <dt id="arg-measurement-length">measurement_length<a class="anchor" aria-label="anchor" href="#arg-measurement-length"></a></dt>
@@ -152,11 +150,6 @@ C(t) = C_m + (C_z - C_m) exp(-b * t)</p></dd>
 <dt id="arg-temp-air-col">temp_air_col<a class="anchor" aria-label="anchor" href="#arg-temp-air-col"></a></dt>
 <dd><p>column containing the air temperature used
 to calculate fluxes. Will be averaged with NA removed.</p></dd>
-
-
-<dt id="arg-chamber-volume">chamber_volume<a class="anchor" aria-label="anchor" href="#arg-chamber-volume"></a></dt>
-<dd><p>volume of the flux chamber in L,
-can also be a column in case it is a variable</p></dd>
 
 
 <dt id="arg-atm-pressure">atm_pressure<a class="anchor" aria-label="anchor" href="#arg-atm-pressure"></a></dt>
@@ -208,11 +201,6 @@ for each flux in the output. Note that NA are removed in sum calculation.</p></d
 for each flux in the output. Note that NA are removed in median calculation.</p></dd>
 
 
-<dt id="arg-tube-volume">tube_volume<a class="anchor" aria-label="anchor" href="#arg-tube-volume"></a></dt>
-<dd><p>volume of the tubing in L,
-can also be a column in case it is a variable</p></dd>
-
-
 <dt id="arg-ratio-threshold">ratio_threshold<a class="anchor" aria-label="anchor" href="#arg-ratio-threshold"></a></dt>
 <dd><p>ratio of gas concentration data points over length of
 measurement (in seconds) below which the measurement will be considered as
@@ -236,21 +224,23 @@ For situations where the time was not synchronized correctly.</p></dd>
 
 <dt id="arg-cz-window">cz_window<a class="anchor" aria-label="anchor" href="#arg-cz-window"></a></dt>
 <dd><p>window used to calculate Cz, at the beginning of cut window
-(exponential fit)</p></dd>
+(<code>exp_zhao18</code> and <code>exp_tz</code> fits)</p></dd>
 
 
 <dt id="arg-b-window">b_window<a class="anchor" aria-label="anchor" href="#arg-b-window"></a></dt>
 <dd><p>window to estimate b. It is an interval after tz where
-it is assumed that the model fits the data perfectly (exponential fit)</p></dd>
+it is assumed that the model fits the data perfectly
+(<code>exp_zhao18</code> and <code>exp_tz</code> fits)</p></dd>
 
 
 <dt id="arg-a-window">a_window<a class="anchor" aria-label="anchor" href="#arg-a-window"></a></dt>
-<dd><p>window at the end of the flux to estimate a (exponential fit)</p></dd>
+<dd><p>window at the end of the flux to estimate a
+(<code>exp_zhao18</code> and <code>exp_tz</code> fits)</p></dd>
 
 
 <dt id="arg-roll-width">roll_width<a class="anchor" aria-label="anchor" href="#arg-roll-width"></a></dt>
 <dd><p>width of the rolling mean for CO2 when looking for tz,
-ideally same as cz_window (exponential fit)</p></dd>
+ideally same as cz_window (<code>exp_zhao18</code> and <code>exp_tz</code> fits)</p></dd>
 
 
 <dt id="arg-t-zero">t_zero<a class="anchor" aria-label="anchor" href="#arg-t-zero"></a></dt>
@@ -297,19 +287,19 @@ the linear model is considered an unsatisfactory fit
 
 <dt id="arg-rmse-threshold">rmse_threshold<a class="anchor" aria-label="anchor" href="#arg-rmse-threshold"></a></dt>
 <dd><p>threshold for the RMSE of each flux above which
-the fit is considered unsatisfactory (exponential fit)</p></dd>
+the fit is considered unsatisfactory (<code>exp_zhao18</code> and <code>exp_tz</code> fits)</p></dd>
 
 
 <dt id="arg-cor-threshold">cor_threshold<a class="anchor" aria-label="anchor" href="#arg-cor-threshold"></a></dt>
 <dd><p>threshold for the correlation coefficient of
 gas concentration with time below which the correlation
-is considered not significant (exponential fit)</p></dd>
+is considered not significant (<code>exp_zhao18</code> and <code>exp_tz</code> fits)</p></dd>
 
 
 <dt id="arg-b-threshold">b_threshold<a class="anchor" aria-label="anchor" href="#arg-b-threshold"></a></dt>
 <dd><p>threshold for the b parameter.
 Defines a window with its opposite inside which the fit is
-considered good enough (exponential fit)</p></dd>
+considered good enough (<code>exp_zhao18</code> and <code>exp_tz</code> fits)</p></dd>
 
 
 <dt id="arg-temp-air-unit">temp_air_unit<a class="anchor" aria-label="anchor" href="#arg-temp-air-unit"></a></dt>
@@ -374,8 +364,7 @@ https://doi.org/10.1016/j.agrformet.2018.08.022</p>
 <span class="r-in"><span>temp_air_col <span class="op">=</span> <span class="va">temp_air</span>,</span></span>
 <span class="r-in"><span>conc_unit <span class="op">=</span> <span class="st">"ppm"</span>,</span></span>
 <span class="r-in"><span>flux_unit <span class="op">=</span> <span class="st">"mmol"</span>,</span></span>
-<span class="r-in"><span>chamber_volume <span class="op">=</span> <span class="fl">24.5</span>,</span></span>
-<span class="r-in"><span>tube_volume <span class="op">=</span> <span class="fl">0.075</span>,</span></span>
+<span class="r-in"><span>setup_volume <span class="op">=</span> <span class="fl">24.575</span>,</span></span>
 <span class="r-in"><span>atm_pressure <span class="op">=</span> <span class="fl">1</span>,</span></span>
 <span class="r-in"><span>plot_area <span class="op">=</span> <span class="fl">0.0625</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
@@ -403,16 +392,15 @@ https://doi.org/10.1016/j.agrformet.2018.08.022</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> R constant set to 0.082057</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Concentration was measured in ppm</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Fluxes are in mmol/m2/h</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 7</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   f_fluxid f_slope_corr f_temp_air_ave datetime            f_volume_setup f_flux</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>                       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 1               0.817           7.28 2022-07-28 <span style="color: #949494;">23:43:25</span>           24.6   50.3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 2               0.508           7.37 2022-07-28 <span style="color: #949494;">23:47:12</span>           24.6   31.3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 3               0.328           7.44 2022-07-28 <span style="color: #949494;">23:52:00</span>           24.6   20.2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 4               0.703           7.78 2022-07-28 <span style="color: #949494;">23:59:22</span>           24.6   43.2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 5              <span style="color: #BB0000;">NA</span>               7.69 2022-07-29 <span style="color: #949494;">00:03:00</span>           24.6   <span style="color: #BB0000;">NA</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> 6               0.510           7.74 2022-07-29 <span style="color: #949494;">00:06:25</span>           24.6   31.3</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1 more variable: f_model &lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 6</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   f_fluxid f_slope_corr f_temp_air_ave datetime            f_flux f_model   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 1               0.817           7.28 2022-07-28 <span style="color: #949494;">23:43:25</span>   50.3 exp_zhao18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 2               0.508           7.37 2022-07-28 <span style="color: #949494;">23:47:12</span>   31.3 exp_zhao18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 3               0.328           7.44 2022-07-28 <span style="color: #949494;">23:52:00</span>   20.2 exp_zhao18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 4               0.703           7.78 2022-07-28 <span style="color: #949494;">23:59:22</span>   43.2 exp_zhao18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 5              <span style="color: #BB0000;">NA</span>               7.69 2022-07-29 <span style="color: #949494;">00:03:00</span>   <span style="color: #BB0000;">NA</span>   exp_zhao18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> 6               0.510           7.74 2022-07-29 <span style="color: #949494;">00:06:25</span>   31.3 exp_zhao18</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

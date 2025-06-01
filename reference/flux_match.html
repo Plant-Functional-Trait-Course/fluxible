@@ -13,7 +13,7 @@ Extra variables in both dataframes are kept in the output."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,13 +59,13 @@ Extra variables in both dataframes are kept in the output.</p>
 <span>  <span class="va">field_record</span>,</span>
 <span>  <span class="va">f_datetime</span>,</span>
 <span>  <span class="va">start_col</span>,</span>
-<span>  <span class="va">f_conc</span>,</span>
 <span>  <span class="va">end_col</span>,</span>
-<span>  startcrop <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  <span class="va">measurement_length</span>,</span>
 <span>  fixed_length <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  ratio_threshold <span class="op">=</span> <span class="fl">0.5</span>,</span>
-<span>  time_diff <span class="op">=</span> <span class="fl">0</span></span>
+<span>  time_diff <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  startcrop <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>  ratio_threshold <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  f_conc <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -93,18 +93,9 @@ and any other column identifying the measurements.</p></dd>
 <dd><p>start column in field_record (<code>ymd_hms</code> format)</p></dd>
 
 
-<dt id="arg-f-conc">f_conc<a class="anchor" aria-label="anchor" href="#arg-f-conc"></a></dt>
-<dd><p>concentration column in <code>raw_conc</code></p></dd>
-
-
 <dt id="arg-end-col">end_col<a class="anchor" aria-label="anchor" href="#arg-end-col"></a></dt>
 <dd><p>end columne in field_record (<code>ymd_hms</code> format).
 Only needed if <code>fixed_length = "FALSE"</code>.</p></dd>
-
-
-<dt id="arg-startcrop">startcrop<a class="anchor" aria-label="anchor" href="#arg-startcrop"></a></dt>
-<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> <code>startcrop</code> is no longer
-supported. Please use <code>start_cut</code> in <code>flux_fitting</code> instead.</p></dd>
 
 
 <dt id="arg-measurement-length">measurement_length<a class="anchor" aria-label="anchor" href="#arg-measurement-length"></a></dt>
@@ -117,16 +108,25 @@ from the start specified in the <code>field_record</code></p></dd>
 create the end column. If <code>FALSE</code>, <code>end_col</code> has to be provided.</p></dd>
 
 
-<dt id="arg-ratio-threshold">ratio_threshold<a class="anchor" aria-label="anchor" href="#arg-ratio-threshold"></a></dt>
-<dd><p>ratio (number of concentration measurement compared to
-length of measurement in seconds) below which the data should be flagged as
-too little</p></dd>
-
-
 <dt id="arg-time-diff">time_diff<a class="anchor" aria-label="anchor" href="#arg-time-diff"></a></dt>
 <dd><p>time difference (in seconds) between the two datasets.
 Will be added to the datetime column of the <code>raw_conc</code> dataset.
 For situations where the time was not synchronized correctly.</p></dd>
+
+
+<dt id="arg-startcrop">startcrop<a class="anchor" aria-label="anchor" href="#arg-startcrop"></a></dt>
+<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> <code>startcrop</code> is no longer
+supported. Please use <code>start_cut</code> in <code>flux_fitting</code> instead.</p></dd>
+
+
+<dt id="arg-ratio-threshold">ratio_threshold<a class="anchor" aria-label="anchor" href="#arg-ratio-threshold"></a></dt>
+<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> <code>ratio_threshold</code> is no longer
+supported. Please use <code>ratio_threshold</code> in <code>flux_quality</code> instead.</p></dd>
+
+
+<dt id="arg-f-conc">f_conc<a class="anchor" aria-label="anchor" href="#arg-f-conc"></a></dt>
+<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> <code>f_conc</code> is no longer
+required</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -142,9 +142,9 @@ in seconds (<code>f_ratio</code>), and any variables present in one of the input
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">co2_df_short</span>, <span class="va">record_short</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">flux_match</span><span class="op">(</span><span class="va">co2_df_short</span>, <span class="va">record_short</span>, <span class="va">datetime</span>, <span class="va">start</span>, <span class="va">conc</span>,</span></span>
+<span class="r-in"><span><span class="fu">flux_match</span><span class="op">(</span><span class="va">co2_df_short</span>, <span class="va">record_short</span>, <span class="va">datetime</span>, <span class="va">start</span>,</span></span>
 <span class="r-in"><span>measurement_length <span class="op">=</span> <span class="fl">180</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,080 × 15</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1,080 × 11</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    datetime            temp_air temp_soil  conc   PAR turfID       type </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 2022-07-28 <span style="color: #949494;">23:43:25</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>    439. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
@@ -158,9 +158,8 @@ in seconds (<code>f_ratio</code>), and any variables present in one of the input
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 2022-07-28 <span style="color: #949494;">23:43:33</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>    446. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 2022-07-28 <span style="color: #949494;">23:43:34</span>    <span style="color: #BB0000;">NA</span>         <span style="color: #BB0000;">NA</span>    446. <span style="color: #BB0000;">NA</span>    156 AN2C 156 ER   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1,070 more rows</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 8 more variables: start &lt;dttm&gt;, f_start &lt;dttm&gt;, f_fluxid &lt;fct&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   f_end &lt;dttm&gt;, f_n_conc &lt;int&gt;, f_length &lt;dbl&gt;, f_ratio &lt;dbl&gt;,</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   f_flag_match &lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 4 more variables: start &lt;dttm&gt;, f_start &lt;dttm&gt;, f_fluxid &lt;fct&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   f_end &lt;dttm&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

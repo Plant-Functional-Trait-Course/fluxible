@@ -9,7 +9,7 @@ of gas concentration over time"></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,7 +53,8 @@ of gas concentration over time</p>
 <span>  <span class="va">slope_col</span>,</span>
 <span>  f_datetime <span class="op">=</span> <span class="va">f_datetime</span>,</span>
 <span>  <span class="va">temp_air_col</span>,</span>
-<span>  <span class="va">chamber_volume</span>,</span>
+<span>  chamber_volume <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  <span class="va">setup_volume</span>,</span>
 <span>  <span class="va">atm_pressure</span>,</span>
 <span>  <span class="va">plot_area</span>,</span>
 <span>  f_fluxid <span class="op">=</span> <span class="va">f_fluxid</span>,</span>
@@ -63,8 +64,8 @@ of gas concentration over time</p>
 <span>  cols_ave <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  cols_sum <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  cols_med <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  cols_nest <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>  <span class="va">tube_volume</span>,</span>
+<span>  cols_nest <span class="op">=</span> <span class="st">"none"</span>,</span>
+<span>  tube_volume <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  temp_air_unit <span class="op">=</span> <span class="st">"celsius"</span>,</span>
 <span>  f_cut <span class="op">=</span> <span class="va">f_cut</span>,</span>
 <span>  keep_arg <span class="op">=</span> <span class="st">"keep"</span>,</span>
@@ -97,7 +98,11 @@ to calculate fluxes. Will be averaged with NA removed.</p></dd>
 
 
 <dt id="arg-chamber-volume">chamber_volume<a class="anchor" aria-label="anchor" href="#arg-chamber-volume"></a></dt>
-<dd><p>volume of the flux chamber in L,
+<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> see <code>setup_volume</code></p></dd>
+
+
+<dt id="arg-setup-volume">setup_volume<a class="anchor" aria-label="anchor" href="#arg-setup-volume"></a></dt>
+<dd><p>volume of the flux chamber and instrument together in L,
 can also be a column in case it is a variable</p></dd>
 
 
@@ -154,12 +159,12 @@ Those columns will get the <code>_med</code> suffix in the output.</p></dd>
 
 <dt id="arg-cols-nest">cols_nest<a class="anchor" aria-label="anchor" href="#arg-cols-nest"></a></dt>
 <dd><p>columns to nest in <code>nested_variables</code> for each flux in the
-output.</p></dd>
+output. Can be character vector of column names, <code>"none"</code> (default) selects
+none, or <code>"all"</code> selects all the column except those in <code>cols_keep</code>.</p></dd>
 
 
 <dt id="arg-tube-volume">tube_volume<a class="anchor" aria-label="anchor" href="#arg-tube-volume"></a></dt>
-<dd><p>volume of the tubing in L,
-can also be a column in case it is a variable</p></dd>
+<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> see <code>setup_volume</code></p></dd>
 
 
 <dt id="arg-temp-air-unit">temp_air_unit<a class="anchor" aria-label="anchor" href="#arg-temp-air-unit"></a></dt>
@@ -222,8 +227,7 @@ their value averaged over the measurement after cuts and discarding NA.</p>
 <span class="r-in"><span><span class="va">temp_air</span>,</span></span>
 <span class="r-in"><span>conc_unit <span class="op">=</span> <span class="st">"ppm"</span>,</span></span>
 <span class="r-in"><span>flux_unit <span class="op">=</span> <span class="st">"mmol"</span>,</span></span>
-<span class="r-in"><span>chamber_volume <span class="op">=</span> <span class="fl">24.5</span>,</span></span>
-<span class="r-in"><span>tube_volume <span class="op">=</span> <span class="fl">0.075</span>,</span></span>
+<span class="r-in"><span>setup_volume <span class="op">=</span> <span class="fl">24.575</span>,</span></span>
 <span class="r-in"><span>atm_pressure <span class="op">=</span> <span class="fl">1</span>,</span></span>
 <span class="r-in"><span>plot_area <span class="op">=</span> <span class="fl">0.0625</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Cutting data according to 'keep_arg'...</span>
@@ -232,16 +236,15 @@ their value averaged over the measurement after cuts and discarding NA.</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> R constant set to 0.082057</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Concentration was measured in ppm</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Fluxes are in mmol/m2/h</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 7</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   f_fluxid f_slope f_temp_air_ave datetime            f_volume_setup f_flux</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>                       <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 1          1.56            7.31 2022-07-28 <span style="color: #949494;">23:43:35</span>           24.6   95.6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 2          0.853           7.38 2022-07-28 <span style="color: #949494;">23:47:22</span>           24.6   52.4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 3          0.303           7.46 2022-07-28 <span style="color: #949494;">23:52:10</span>           24.6   18.6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 4          1.13            7.77 2022-07-28 <span style="color: #949494;">23:59:32</span>           24.6   69.4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 5          1.46            7.71 2022-07-29 <span style="color: #949494;">00:03:10</span>           24.6   89.9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> 6          0.426           7.75 2022-07-29 <span style="color: #949494;">00:06:35</span>           24.6   26.2</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1 more variable: f_model &lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 6</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   f_fluxid f_slope f_temp_air_ave datetime            f_flux f_model   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 1          1.56            7.31 2022-07-28 <span style="color: #949494;">23:43:35</span>   95.6 exp_zhao18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 2          0.853           7.38 2022-07-28 <span style="color: #949494;">23:47:22</span>   52.4 exp_zhao18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 3          0.303           7.46 2022-07-28 <span style="color: #949494;">23:52:10</span>   18.6 exp_zhao18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 4          1.13            7.77 2022-07-28 <span style="color: #949494;">23:59:32</span>   69.4 exp_zhao18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 5          1.46            7.71 2022-07-29 <span style="color: #949494;">00:03:10</span>   89.9 exp_zhao18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> 6          0.426           7.75 2022-07-29 <span style="color: #949494;">00:06:35</span>   26.2 exp_zhao18</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
