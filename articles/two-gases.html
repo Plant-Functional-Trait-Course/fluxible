@@ -79,54 +79,43 @@ is produced in chronological order based on start datetime in
 <code>field_record</code>, the fluxes measured at the same time have the
 same <code>f_fluxid</code>.</p>
 <p>First we use <code>flux_match</code> to slice the raw concentration
-data and attribute a unique ID to each measurement. At this stage it
-does not matter which concentration columns we use.</p>
+data and attribute a unique ID to each measurement.
+<!-- At this stage it does not matter which concentration columns we use. --></p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://plant-functional-trait-course.github.io/fluxible/" class="external-link">fluxible</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://plant-functional-trait-course.github.io/fluxible/" class="external-link">fluxible</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">conc_twogases</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flux_match.html">flux_match</a></span><span class="op">(</span></span>
-<span>  <span class="va">raw_twogases</span>,</span>
-<span>  <span class="va">twogases_record</span>,</span>
-<span>  <span class="va">datetime</span>,</span>
-<span>  <span class="va">start</span>,</span>
+<span>  raw_conc <span class="op">=</span> <span class="va">raw_twogases</span>,</span>
+<span>  field_record <span class="op">=</span> <span class="va">twogases_record</span>,</span>
+<span>  f_datetime <span class="op">=</span> <span class="va">datetime</span>,</span>
+<span>  start_col <span class="op">=</span> <span class="va">start</span>,</span>
 <span>  measurement_length <span class="op">=</span> <span class="fl">180</span>,</span>
 <span>  time_diff <span class="op">=</span> <span class="fl">0</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Then we fit a model to the raw data for each gas:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">slopes_twogases_co2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flux_fitting.html">flux_fitting</a></span><span class="op">(</span></span>
-<span>  <span class="va">conc_twogases</span>,</span>
-<span>  <span class="va">co2_conc</span>,</span>
-<span>  <span class="va">datetime</span>,</span>
+<span>  conc_df <span class="op">=</span> <span class="va">conc_twogases</span>,</span>
+<span>  f_conc <span class="op">=</span> <span class="va">co2_conc</span>,</span>
+<span>  f_datetime <span class="op">=</span> <span class="va">datetime</span>,</span>
 <span>  fit_type <span class="op">=</span> <span class="st">"exp_zhao18"</span>,</span>
 <span>  start_cut <span class="op">=</span> <span class="fl">10</span></span>
 <span><span class="op">)</span></span>
-<span><span class="co">#&gt; Cutting measurements...</span></span>
-<span><span class="co">#&gt; Estimating starting parameters for optimization...</span></span>
-<span><span class="co">#&gt; Optimizing fitting parameters...</span></span>
-<span><span class="co">#&gt; Calculating fits and slopes...</span></span>
-<span><span class="co">#&gt; Done.</span></span>
 <span></span>
 <span><span class="va">slopes_twogases_ch4</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flux_fitting.html">flux_fitting</a></span><span class="op">(</span></span>
-<span>  <span class="va">conc_twogases</span>,</span>
-<span>  <span class="va">ch4_conc</span>,</span>
-<span>  <span class="va">datetime</span>,</span>
+<span>  conc_df <span class="op">=</span> <span class="va">conc_twogases</span>,</span>
+<span>  f_conc <span class="op">=</span> <span class="va">ch4_conc</span>,</span>
+<span>  f_datetime <span class="op">=</span> <span class="va">datetime</span>,</span>
 <span>  fit_type <span class="op">=</span> <span class="st">"exp_zhao18"</span>,</span>
 <span>  start_cut <span class="op">=</span> <span class="fl">10</span></span>
-<span><span class="op">)</span></span>
-<span><span class="co">#&gt; Cutting measurements...</span></span>
-<span><span class="co">#&gt; Estimating starting parameters for optimization...</span></span>
-<span><span class="co">#&gt; Optimizing fitting parameters...</span></span>
-<span><span class="co">#&gt; Calculating fits and slopes...</span></span>
-<span><span class="co">#&gt; Done.</span></span></code></pre></div>
+<span><span class="op">)</span></span></code></pre></div>
 <p>Same with the quality, we do it once for each gas:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">flag_twogases_co2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flux_quality.html">flux_quality</a></span><span class="op">(</span></span>
-<span>  <span class="va">slopes_twogases_co2</span>,</span>
-<span>  <span class="va">co2_conc</span>,</span>
-<span>  force_discard <span class="op">=</span> <span class="st">"8"</span> <span class="co"># there is a peak at the start that looks like an error</span></span>
+<span>  slopes_df <span class="op">=</span> <span class="va">slopes_twogases_co2</span>,</span>
+<span>  f_conc <span class="op">=</span> <span class="va">co2_conc</span>,</span>
+<span>  force_discard <span class="op">=</span> <span class="st">"8"</span> <span class="co"># peak at the start that is probably an error</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  Total number of measurements: 12</span></span>
@@ -143,9 +132,9 @@ does not matter which concentration columns we use.</p>
 <span><span class="co">#&gt;  no_slope     0   0 %</span></span>
 <span></span>
 <span><span class="va">flag_twogases_ch4</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flux_quality.html">flux_quality</a></span><span class="op">(</span></span>
-<span>  <span class="va">slopes_twogases_ch4</span>,</span>
-<span>  <span class="va">ch4_conc</span>,</span>
-<span>  ambient_conc <span class="op">=</span> <span class="fl">2000</span> <span class="co"># the default is for CO2</span></span>
+<span>  slopes_df <span class="op">=</span> <span class="va">slopes_twogases_ch4</span>,</span>
+<span>  f_conc <span class="op">=</span> <span class="va">ch4_conc</span>,</span>
+<span>  ambient_conc <span class="op">=</span> <span class="fl">2000</span> <span class="co"># default is for CO2</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  Total number of measurements: 12</span></span>
@@ -164,65 +153,58 @@ does not matter which concentration columns we use.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">flag_twogases_co2</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/flux_plot.html">flux_plot</a></span><span class="op">(</span></span>
-<span>    <span class="va">co2_conc</span>,</span>
-<span>    <span class="va">datetime</span>,</span>
+<span>    f_conc <span class="op">=</span> <span class="va">co2_conc</span>,</span>
+<span>    f_datetime <span class="op">=</span> <span class="va">datetime</span>,</span>
 <span>    f_ylim_upper <span class="op">=</span> <span class="fl">500</span>,</span>
 <span>    f_ylim_lower <span class="op">=</span> <span class="fl">425</span>,</span>
 <span>    y_text_position <span class="op">=</span> <span class="fl">460</span></span>
-<span>  <span class="op">)</span></span>
-<span><span class="co">#&gt; Plotting in progress</span></span></code></pre></div>
-<p><img src="two-gases_files/figure-html/plot-co2-1.png" width="768"></p>
+<span>  <span class="op">)</span></span></code></pre></div>
+<div class="figure">
+<img src="two-gases_files/figure-html/plot-co2-twogases-1.png" alt="CO~2~ measurements with quality flags." width="960"><p class="caption">
+CO<sub>2</sub> measurements with quality flags.
+</p>
+</div>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="va">flag_twogases_ch4</span> <span class="op">|&gt;</span></span>
+<code class="sourceCode R"><span><span class="va">flag_twogases_ch4</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/flux_plot.html">flux_plot</a></span><span class="op">(</span></span>
-<span>    <span class="va">ch4_conc</span>,</span>
-<span>    <span class="va">datetime</span>,</span>
+<span>    f_conc <span class="op">=</span> <span class="va">ch4_conc</span>,</span>
+<span>    f_datetime <span class="op">=</span> <span class="va">datetime</span>,</span>
 <span>    f_ylim_upper <span class="op">=</span> <span class="fl">2000</span>,</span>
 <span>    f_ylim_lower <span class="op">=</span> <span class="fl">1995</span>,</span>
 <span>    y_text_position <span class="op">=</span> <span class="fl">1997</span></span>
-<span>  <span class="op">)</span></span>
-<span><span class="co">#&gt; Some concentration data points will not be displayed</span></span>
-<span><span class="co">#&gt;     because f_ylim_upper is too low.</span></span>
-<span><span class="co">#&gt; Part of the fit will not be displayed</span></span>
-<span><span class="co">#&gt;     because f_ylim_upper is too low.</span></span>
-<span><span class="co">#&gt; Part of the fit will not be displayed</span></span>
-<span><span class="co">#&gt;     because f_ylim_lower is too high.</span></span>
-<span><span class="co">#&gt; Plotting in progress</span></span></code></pre></div>
-<p><img src="two-gases_files/figure-html/plot-ch4-1.png" width="768"></p>
+<span>  <span class="op">)</span></span></code></pre></div>
+<div class="figure">
+<img src="two-gases_files/figure-html/plot-ch4-twogases-1.png" alt="CH~4~ measurements with quality flags." width="960"><p class="caption">
+CH<sub>4</sub> measurements with quality flags.
+</p>
+</div>
 <p>After calculating the fluxes, we need to rename the
 <code>f_flux</code> column to avoid confusion when joining the
 datasets:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fluxes_twogases_co2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flux_calc.html">flux_calc</a></span><span class="op">(</span></span>
-<span>  <span class="va">flag_twogases_co2</span>,</span>
-<span>  <span class="va">f_slope_corr</span>,</span>
-<span>  <span class="va">datetime</span>,</span>
-<span>  <span class="va">temp_air</span>,</span>
+<span>  slopes_df <span class="op">=</span> <span class="va">flag_twogases_co2</span>,</span>
+<span>  slope_col <span class="op">=</span> <span class="va">f_slope_corr</span>,</span>
+<span>  f_datetime <span class="op">=</span> <span class="va">datetime</span>,</span>
+<span>  temp_air_col <span class="op">=</span> <span class="va">temp_air</span>,</span>
 <span>  conc_unit <span class="op">=</span> <span class="st">"ppm"</span>,</span>
 <span>  flux_unit <span class="op">=</span> <span class="st">"mmol"</span>,</span>
 <span>  setup_volume <span class="op">=</span> <span class="fl">6.31</span>,</span>
 <span>  atm_pressure <span class="op">=</span> <span class="fl">1</span>,</span>
 <span>  plot_area <span class="op">=</span> <span class="fl">0.31</span>,</span>
-<span>  cols_keep <span class="op">=</span> <span class="st">"f_quality_flag"</span> <span class="co"># to use the flags of CO2 to discard CH4 fluxes</span></span>
+<span>  <span class="co"># we want to use the quality flags of CO2 to eventally discard CH4 fluxes</span></span>
+<span>  cols_keep <span class="op">=</span> <span class="st">"f_quality_flag"</span></span>
 <span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span> <span class="co"># to avoid any confusion, we rename the flux column</span></span>
 <span>    flux_co2 <span class="op">=</span> <span class="st">"f_flux"</span></span>
 <span>  <span class="op">)</span> <span class="op">|&gt;</span> <span class="co"># and we remove the slope one</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">!</span><span class="va">f_slope_corr</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Cutting data according to 'keep_arg'...</span></span>
-<span><span class="co">#&gt; Averaging air temperature for each flux...</span></span>
-<span><span class="co">#&gt; Creating a df with the columns from 'cols_keep' argument...</span></span>
-<span><span class="co">#&gt; Calculating fluxes...</span></span>
-<span><span class="co">#&gt; R constant set to 0.082057</span></span>
-<span><span class="co">#&gt; Concentration was measured in ppm</span></span>
-<span><span class="co">#&gt; Fluxes are in mmol/m2/h</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">f_slope_corr</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">fluxes_twogases_ch4</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flux_calc.html">flux_calc</a></span><span class="op">(</span></span>
-<span>  <span class="va">flag_twogases_ch4</span>,</span>
-<span>  <span class="va">f_slope_corr</span>,</span>
-<span>  <span class="va">datetime</span>,</span>
-<span>  <span class="va">temp_air</span>,</span>
+<span>  slopes_df <span class="op">=</span> <span class="va">flag_twogases_ch4</span>,</span>
+<span>  slope_col <span class="op">=</span> <span class="va">f_slope_corr</span>,</span>
+<span>  f_datetime <span class="op">=</span> <span class="va">datetime</span>,</span>
+<span>  temp_air_col <span class="op">=</span> <span class="va">temp_air</span>,</span>
 <span>  conc_unit <span class="op">=</span> <span class="st">"ppb"</span>, <span class="co"># ch4 is measured in ppb</span></span>
 <span>  flux_unit <span class="op">=</span> <span class="st">"micromol"</span>, <span class="co"># we want a flux in umol/m2/h</span></span>
 <span>  setup_volume <span class="op">=</span> <span class="fl">6.31</span>,</span>
@@ -232,24 +214,19 @@ datasets:</p>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/rename.html" class="external-link">rename</a></span><span class="op">(</span> <span class="co"># to avoid any confusion, we rename the flux column</span></span>
 <span>    flux_ch4 <span class="op">=</span> <span class="st">"f_flux"</span></span>
 <span>  <span class="op">)</span> <span class="op">|&gt;</span> <span class="co"># and we remove the slope one</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">!</span><span class="va">f_slope_corr</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Cutting data according to 'keep_arg'...</span></span>
-<span><span class="co">#&gt; Averaging air temperature for each flux...</span></span>
-<span><span class="co">#&gt; Calculating fluxes...</span></span>
-<span><span class="co">#&gt; R constant set to 0.082057</span></span>
-<span><span class="co">#&gt; Concentration was measured in ppb</span></span>
-<span><span class="co">#&gt; Fluxes are in micromol/m2/h</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">f_slope_corr</span><span class="op">)</span></span></code></pre></div>
 <p>Then we can join the datasets. If the final dataset ends up being
 longer, it probably means that some values in columns that should be
-equal are not, adding rows (<code>f_temp_air_ave</code> for example). It
-is a good way to check that the two gases have been processed
-similarly.</p>
+equal (<code>f_temp_air_ave</code> for example) are in fact not equal,
+which leads to additional rows when joining the dataframes.
+<!-- It is a good way to check that the two gases have been processed similarly. --></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="va">fluxes_twogases</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">fluxes_twogases</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html" class="external-link">left_join</a></span><span class="op">(</span></span>
 <span>  <span class="va">fluxes_twogases_co2</span>,</span>
 <span>  <span class="va">fluxes_twogases_ch4</span>,</span>
 <span>  by <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>    <span class="co"># if that does not work, then it means that we did</span></span>
+<span>    <span class="co"># something different for one of the gases</span></span>
 <span>    <span class="st">"f_fluxid"</span>,</span>
 <span>    <span class="st">"f_temp_air_ave"</span>,</span>
 <span>    <span class="st">"datetime"</span>,</span>
@@ -258,27 +235,25 @@ similarly.</p>
 <span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span> <span class="co"># we discard the CH4 fluxes based on CO2 fluxes quality flags</span></span>
 <span>    flux_ch4 <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html" class="external-link">case_when</a></span><span class="op">(</span></span>
-<span>      <span class="va">f_quality_flag</span> <span class="op">!=</span> <span class="st">"ok"</span> <span class="op">~</span> <span class="cn">NA</span>,</span>
-<span>      <span class="cn">TRUE</span> <span class="op">~</span> <span class="va">flux_ch4</span></span>
+<span>      <span class="va">f_quality_flag</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"discard"</span>, <span class="st">"force_discard"</span><span class="op">)</span> <span class="op">~</span> <span class="cn">NA</span>,</span>
+<span>      .default <span class="op">=</span> <span class="va">flux_ch4</span></span>
 <span>    <span class="op">)</span></span>
-<span>  <span class="op">)</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">fluxes_twogases</span><span class="op">)</span> <span class="co"># Et voilà!</span></span>
-<span><span class="co">#&gt; tibble [12 × 7] (S3: tbl_df/tbl/data.frame)</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<p>Structure of <code>fluxes_twogases</code>:</p>
+<pre><code><span><span class="co">#&gt; tibble [12 × 7] (S3: tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;  $ f_quality_flag: chr [1:12] "ok" "ok" "ok" "ok" ...</span></span>
-<span><span class="co">#&gt;  $ f_fluxid      : Factor w/ 12 levels "1","2","3","4",..: 1 2 3 4 5 6 7 8 9 10 ...</span></span>
+<span><span class="co">#&gt;  $ f_fluxid      : Factor w/ 12 levels "1","2","3","4",..: 1 2 3 4 5..</span></span>
 <span><span class="co">#&gt;  $ f_temp_air_ave: num [1:12] 13.4 16.5 17.1 14.4 15 ...</span></span>
-<span><span class="co">#&gt;  $ datetime      : POSIXct[1:12], format: "2024-06-18 10:04:37" "2024-06-18 11:12:52" ...</span></span>
-<span><span class="co">#&gt;  $ flux_co2      : num [1:12] 0.08292 0.38505 0.43518 0.00108 0.06371 ...</span></span>
-<span><span class="co">#&gt;  $ f_model       : chr [1:12] "exp_zhao18" "exp_zhao18" "exp_zhao18" "exp_zhao18" ...</span></span>
-<span><span class="co">#&gt;  $ flux_ch4      : num [1:12] -0.04873 0.01165 0 -0.00649 0 ...</span></span>
-<span><span class="co">#&gt;  - attr(*, "fit_type")= chr "exp_zhao18"</span></span></code></pre></div>
+<span><span class="co">#&gt;  $ datetime      : POSIXct[1:12], format: "2024-06-18 10:04:37" ...</span></span>
+<span><span class="co">#&gt;  $ flux_co2      : num [1:12] 0.08292 0.38505 0.43518 0.00108 0.0637..</span></span>
+<span><span class="co">#&gt;  $ f_model       : chr [1:12] "exp_zhao18" "exp_zhao18" "exp_zhao18"..</span></span>
+<span><span class="co">#&gt;  $ flux_ch4      : num [1:12] -0.04873 0.01165 0 -0.00649 0 ...</span></span></code></pre>
 <p>In this example we calculated the fluxes for two gases measured
 simultaneously by repeating the process for each gas, and in the end we
 joined them and applied a rule that discarded the fluxes of one gas
 based on the quality flags of the other. It is of course totally
 possible to apply other rules, or to just keep the fluxes as provided by
-<code>fluxible</code>.</p>
+Fluxible.</p>
   </main>
 </div>
 
