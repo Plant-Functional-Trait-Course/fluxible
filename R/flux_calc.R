@@ -57,11 +57,11 @@
 #' or
 #' \ifelse{html}{\out{micromol * m<sup>-2</sup> * h<sup>-1</sup>}}{\eqn{micromol*m^{-2}*h^{-1}}{ASCII}}
 #' (`f_flux`) according to `flux_unit`, temperature average for each flux in
-#' Kelvin (`f_temp_ave`), the total volume of the setup for each measurement
-#' (`f_volume_setup`), the model used in
+#' Kelvin (`f_temp_ave`), the model used in
 #' \link[fluxible:flux_fitting]{flux_fitting}, any column specified in
-#' `cols_keep`, any column specified in `cols_ave` with
-#' their value averaged over the measurement after cuts and discarding NA.
+#' `cols_keep`, any column specified in `cols_ave`, `cols_med` or `cols_sum`
+#' with their values treated accordingly over the measurement after cuts, and a
+#' column `nested_variables` with the variables specified in `cols_nest`.
 #' @importFrom rlang .data :=
 #' @importFrom dplyr select group_by summarise rename_with nest_by
 #' ungroup mutate case_when distinct left_join across everything

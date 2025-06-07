@@ -4,7 +4,7 @@ on:
   push:
     branches: [main, anonymous]
   pull_request:
-    branches: main
+    branches: [main, anonymous]
 
 name: R-CMD-check.yaml
 

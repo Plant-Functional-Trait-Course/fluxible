@@ -109,11 +109,11 @@ fluxes in
 or
 \ifelse{html}{\out{micromol * m<sup>-2</sup> * h<sup>-1</sup>}}{\eqn{micromol*m^{-2}*h^{-1}}{ASCII}}
 (\code{f_flux}) according to \code{flux_unit}, temperature average for each flux in
-Kelvin (\code{f_temp_ave}), the total volume of the setup for each measurement
-(\code{f_volume_setup}), the model used in
+Kelvin (\code{f_temp_ave}), the model used in
 \link[fluxible:flux_fitting]{flux_fitting}, any column specified in
-\code{cols_keep}, any column specified in \code{cols_ave} with
-their value averaged over the measurement after cuts and discarding NA.
+\code{cols_keep}, any column specified in \code{cols_ave}, \code{cols_med} or \code{cols_sum}
+with their values treated accordingly over the measurement after cuts, and a
+column \code{nested_variables} with the variables specified in \code{cols_nest}.
 }
 \description{
 Calculates a flux based on the rate of change
