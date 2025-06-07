@@ -28,11 +28,7 @@
 #' @param fixed_length if `TRUE` (default), the `measurement_length` is used to
 #' create the end column. If `FALSE`, `end_col` has to be provided.
 #' @return a dataframe with concentration measurements, corresponding datetime,
-#' flux ID (`f_fluxid`), measurements start (`f_start`) and end (`f_end`),
-#' flags in case of no data or low number of data (`f_flag_match`),
-#' the number of datapoints per measurement (`f_n_conc`),
-#' the ratio of number of datapoints over the length of each measurement
-#' in seconds (`f_ratio`), and any variables present in one of the inputs.
+#' flux ID (`f_fluxid`), measurements start (`f_start`) and end (`f_end`).
 #' @importFrom dplyr arrange mutate row_number full_join case_when
 #' group_by filter ungroup select distinct pull join_by coalesce
 #' @importFrom tidyr fill drop_na
