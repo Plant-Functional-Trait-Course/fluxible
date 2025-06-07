@@ -202,11 +202,11 @@ mmol * m<sup>-2</sup> * h<sup>-1</sup>
 or
 micromol * m<sup>-2</sup> * h<sup>-1</sup>
 (<code>f_flux</code>) according to <code>flux_unit</code>, temperature average for each flux in
-Kelvin (<code>f_temp_ave</code>), the total volume of the setup for each measurement
-(<code>f_volume_setup</code>), the model used in
+Kelvin (<code>f_temp_ave</code>), the model used in
 <a href="flux_fitting.html">flux_fitting</a>, any column specified in
-<code>cols_keep</code>, any column specified in <code>cols_ave</code> with
-their value averaged over the measurement after cuts and discarding NA.</p>
+<code>cols_keep</code>, any column specified in <code>cols_ave</code>, <code>cols_med</code> or <code>cols_sum</code>
+with their values treated accordingly over the measurement after cuts, and a
+column <code>nested_variables</code> with the variables specified in <code>cols_nest</code>.</p>
     </div>
 
     <div class="section level2">
