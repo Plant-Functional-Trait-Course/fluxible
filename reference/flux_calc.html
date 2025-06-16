@@ -9,7 +9,7 @@ of gas concentration over time"></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -126,11 +126,10 @@ can also be a column in case it is a variable</p></dd>
 
 
 <dt id="arg-flux-unit">flux_unit<a class="anchor" aria-label="anchor" href="#arg-flux-unit"></a></dt>
-<dd><p>unit in which the calculated flux will be:
-<code>mmol</code> outputs fluxes in
-mmol * m<sup>-2</sup> * h<sup>-1</sup>
-; <code>micromol</code> outputs fluxes in
-micromol * m<sup>-2</sup> * h<sup>-1</sup></p></dd>
+<dd><p>desired units for the calculated fluxes. Has to be of the
+form amount/surface/time. Amount can be <code>mol</code>, <code>mmol</code>, <code>umol</code>, <code>nmol</code> or
+<code>pmol</code>. Time can be <code>d</code> (day), <code>h</code> (hour), <code>mn</code> (minute) or <code>s</code> (seconds).
+Surface can be <code>m2</code>, <code>dm2</code> or <code>cm2</code>.</p></dd>
 
 
 <dt id="arg-cols-keep">cols_keep<a class="anchor" aria-label="anchor" href="#arg-cols-keep"></a></dt>
@@ -226,7 +225,7 @@ column <code>nested_variables</code> with the variables specified in <code>cols_
 <span class="r-in"><span><span class="va">datetime</span>,</span></span>
 <span class="r-in"><span><span class="va">temp_air</span>,</span></span>
 <span class="r-in"><span>conc_unit <span class="op">=</span> <span class="st">"ppm"</span>,</span></span>
-<span class="r-in"><span>flux_unit <span class="op">=</span> <span class="st">"mmol"</span>,</span></span>
+<span class="r-in"><span>flux_unit <span class="op">=</span> <span class="st">"mmol/m2/h"</span>,</span></span>
 <span class="r-in"><span>setup_volume <span class="op">=</span> <span class="fl">24.575</span>,</span></span>
 <span class="r-in"><span>atm_pressure <span class="op">=</span> <span class="fl">1</span>,</span></span>
 <span class="r-in"><span>plot_area <span class="op">=</span> <span class="fl">0.0625</span><span class="op">)</span></span></span>
