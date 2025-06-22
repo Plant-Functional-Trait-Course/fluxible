@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.6</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -47,6 +47,8 @@
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">flux_units</span><span class="op">(</span></span>
 <span>  <span class="va">flux_units</span>,</span>
+<span>  <span class="va">conc_units</span>,</span>
+<span>  conc_units_list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ppm"</span>, <span class="st">"ppb"</span>, <span class="st">"ppt"</span><span class="op">)</span>,</span>
 <span>  amount_units <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mol"</span>, <span class="st">"mmol"</span>, <span class="st">"umol"</span>, <span class="st">"nmol"</span>, <span class="st">"pmol"</span><span class="op">)</span>,</span>
 <span>  surface_units <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"m2"</span>, <span class="st">"dm2"</span>, <span class="st">"cm2"</span><span class="op">)</span>,</span>
 <span>  time_units <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"d"</span>, <span class="st">"h"</span>, <span class="st">"mn"</span>, <span class="st">"s"</span><span class="op">)</span></span>
@@ -62,6 +64,14 @@
 form amount/time/surface. Amount can be <code>mol</code>, <code>mmol</code>, <code>umol</code>, <code>nmol</code> or
 <code>pmol</code>. Time can be <code>d</code> (day), <code>h</code> (hour), <code>mn</code> (minute) or <code>s</code> (seconds).
 Surface can be <code>m2</code>, <code>dm2</code> or <code>cm2</code>.</p></dd>
+
+
+<dt id="arg-conc-units">conc_units<a class="anchor" aria-label="anchor" href="#arg-conc-units"></a></dt>
+<dd><p>units of gas concentration <code>ppm</code>, <code>ppb</code> or <code>ppt</code>.</p></dd>
+
+
+<dt id="arg-conc-units-list">conc_units_list<a class="anchor" aria-label="anchor" href="#arg-conc-units-list"></a></dt>
+<dd><p>list of possible units for gas concentration.</p></dd>
 
 
 <dt id="arg-amount-units">amount_units<a class="anchor" aria-label="anchor" href="#arg-amount-units"></a></dt>
@@ -82,12 +92,13 @@ Surface can be <code>m2</code>, <code>dm2</code> or <code>cm2</code>.</p></dd>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>The conversion is done from umol/s/m2.</p>
+    <p>The conversion is done from umol/s/m2 and gas concentration
+measured in ppm.</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">flux_units</span><span class="op">(</span><span class="st">"mol/m2/mn"</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">flux_units</span><span class="op">(</span><span class="st">"mol/m2/mn"</span>, <span class="st">"ppm"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 6e-05</span>
 </code></pre></div>
     </div>
