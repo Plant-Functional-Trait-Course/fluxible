@@ -13,7 +13,7 @@ Extra variables in both dataframes are kept in the output."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.7</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,7 +61,7 @@ Extra variables in both dataframes are kept in the output.</p>
 <span>  <span class="va">start_col</span>,</span>
 <span>  <span class="va">end_col</span>,</span>
 <span>  <span class="va">measurement_length</span>,</span>
-<span>  fixed_length <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  fixed_length <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  time_diff <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  startcrop <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  ratio_threshold <span class="op">=</span> <span class="fu">deprecated</span><span class="op">(</span><span class="op">)</span>,</span>
@@ -94,18 +94,20 @@ and any other column identifying the measurements.</p></dd>
 
 
 <dt id="arg-end-col">end_col<a class="anchor" aria-label="anchor" href="#arg-end-col"></a></dt>
-<dd><p>end columne in field_record (<code>ymd_hms</code> format).
-Only needed if <code>fixed_length = "FALSE"</code>.</p></dd>
+<dd><p>end column in field_record (<code>ymd_hms</code> format), if present
+(see <code>measurement_length</code>).</p></dd>
 
 
 <dt id="arg-measurement-length">measurement_length<a class="anchor" aria-label="anchor" href="#arg-measurement-length"></a></dt>
-<dd><p>length of the measurement (in seconds)
-from the start specified in the <code>field_record</code></p></dd>
+<dd><p>length of the measurements (in seconds)
+from the start specified in the <code>field_record</code>. Use <code>measurement_length</code> if
+all the measurements have the same length and no end column is present in
+<code>field_record</code>.</p></dd>
 
 
 <dt id="arg-fixed-length">fixed_length<a class="anchor" aria-label="anchor" href="#arg-fixed-length"></a></dt>
-<dd><p>if <code>TRUE</code> (default), the <code>measurement_length</code> is used to
-create the end column. If <code>FALSE</code>, <code>end_col</code> has to be provided.</p></dd>
+<dd><p><a href="https://lifecycle.r-lib.org/articles/stages.html#deprecated" class="external-link"><img src="figures/lifecycle-deprecated.svg" alt="[Deprecated]"></a> no longer required.
+<code>flux_match</code> will detect if <code>end_col</code> or <code>measurement_length</code> are provided.</p></dd>
 
 
 <dt id="arg-time-diff">time_diff<a class="anchor" aria-label="anchor" href="#arg-time-diff"></a></dt>
@@ -134,6 +136,12 @@ required</p></dd>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>a dataframe with concentration measurements, corresponding datetime,
 flux ID (<code>f_fluxid</code>), measurements start (<code>f_start</code>) and end (<code>f_end</code>).</p>
+    </div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>If both <code>end_col</code> and <code>measurement_length</code> are provided, <code>end_col</code>
+will be ignored. Measurements either all have the same length (provide
+<code>measurement_length</code>), or the length varies and <code>end_col</code> has to be provided.</p>
     </div>
 
     <div class="section level2">
