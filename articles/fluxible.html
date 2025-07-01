@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.8</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.9</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -319,8 +319,12 @@ respectively.</p>
 Output of <code>flux_plot</code> for fluxid 54, 95, 100 and 101.
 </p>
 </div>
-<p>To export the plots as pdf without printing them in one’s R session,
-which we recommend for large datasets, the code looks like this:</p>
+<!-- To export the plots as pdf without printing them in one's R session, which we recommend for large datasets, the code looks like this: -->
+<p>The plots can be directly exported without printing them in the R
+session, which we recommend for large datasets. With
+<code>output = "pdfpages"</code>, the plots are exported in a multipage
+pdf file (A4 landscape). Because it uses
+<code><a href="https://ggforce.data-imaginist.com/reference/facet_wrap_paginate.html" class="external-link">ggforce::facet_wrap_paginate</a></code>, it is quite slow.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/flux_plot.html">flux_plot</a></span><span class="op">(</span></span>
 <span>  slopes_df <span class="op">=</span> <span class="va">flags_liahovden</span>,</span>
@@ -328,6 +332,19 @@ which we recommend for large datasets, the code looks like this:</p>
 <span>  f_datetime <span class="op">=</span> <span class="va">datetime</span>,</span>
 <span>  print_plot <span class="op">=</span> <span class="cn">FALSE</span>, <span class="co"># not printing the plots in the R session</span></span>
 <span>  output <span class="op">=</span> <span class="st">"pdfpages"</span>, <span class="co"># the type of output</span></span>
+<span>  f_plotname <span class="op">=</span> <span class="st">"plots_liahovden"</span> <span class="co"># filename for the pdf file</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>With <code>output = "longpdf"</code>, the plots are exported in a
+single pdf file (defautl width 29.7 cm and as long as needed). This does
+not allow for printing and is aesthetically discutable, but it is much
+faster.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/flux_plot.html">flux_plot</a></span><span class="op">(</span></span>
+<span>  slopes_df <span class="op">=</span> <span class="va">flags_liahovden</span>,</span>
+<span>  f_conc <span class="op">=</span> <span class="va">conc</span>,</span>
+<span>  f_datetime <span class="op">=</span> <span class="va">datetime</span>,</span>
+<span>  print_plot <span class="op">=</span> <span class="cn">FALSE</span>, <span class="co"># not printing the plots in the R session</span></span>
+<span>  output <span class="op">=</span> <span class="st">"longpdf"</span>, <span class="co"># the type of output</span></span>
 <span>  f_plotname <span class="op">=</span> <span class="st">"plots_liahovden"</span> <span class="co"># filename for the pdf file</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>If the argument <code>f_plotname</code> is left empty (the default),
@@ -355,7 +372,7 @@ also force it to be zero). This is achieved with
 <code>force_zero = c(100, 101)</code>.</p>
 <p>The function <code>flux_fitting</code> is run again, with an end cut
 of 60 seconds:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fits_liahovden_60</span> <span class="op">&lt;-</span> <span class="va">conc_liahovden</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/flux_fitting.html">flux_fitting</a></span><span class="op">(</span></span>
 <span>    <span class="va">conc</span>,</span>
@@ -365,7 +382,7 @@ of 60 seconds:</p>
 <span>  <span class="op">)</span></span></code></pre></div>
 <p>Then <code>flux_quality</code> again, forcing the use of the linear
 model for fluxID 101:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">flags_liahovden_60</span> <span class="op">&lt;-</span> <span class="va">fits_liahovden_60</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/flux_quality.html">flux_quality</a></span><span class="op">(</span></span>
 <span>    <span class="va">conc</span>,</span>
@@ -385,7 +402,7 @@ model for fluxID 101:</p>
 <span><span class="co">#&gt;  force_zero   0   0 %</span></span>
 <span><span class="co">#&gt;  no_slope     0   0 %</span></span></code></pre></div>
 <p>And finally <code>flux_plot</code> again to check the output:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">flags_liahovden_60</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">f_fluxid</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">54</span>, <span class="fl">95</span>, <span class="fl">100</span>, <span class="fl">101</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/flux_plot.html">flux_plot</a></span><span class="op">(</span></span>
@@ -458,7 +475,7 @@ ppb. The units of the calculated flux can be
 (<code>flux_unit = "micromol"</code>). Temperature in the input can be
 in Celsius, Kelvin or Fahrenheit, and will be returned in the same unit
 in the output.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fluxes_liahovden_60</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flux_calc.html">flux_calc</a></span><span class="op">(</span></span>
 <span>  slopes_df <span class="op">=</span> <span class="va">flags_liahovden_60</span>,</span>
 <span>  slope_col <span class="op">=</span> <span class="va">f_slope_corr</span>, <span class="co"># we use the slopes provided by flux_quality</span></span>
@@ -542,7 +559,7 @@ column, which is pairing each NEE measurement with its following ER
 measurement. This pairs the NEE and ER measurements of the same plot and
 same round of measurement because we systematically measured ER after
 NEE for each plot.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">fluxes_liahovden_60</span> <span class="op">&lt;-</span> <span class="va">fluxes_liahovden_60</span> <span class="op">|&gt;</span></span>

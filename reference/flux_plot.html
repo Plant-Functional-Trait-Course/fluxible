@@ -19,7 +19,7 @@ will work best with datasets produced following a fluxible workflow."></head><bo
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.8</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.9</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -78,6 +78,7 @@ will work best with datasets produced following a fluxible workflow.</p>
 <span>  f_plotname <span class="op">=</span> <span class="st">""</span>,</span>
 <span>  f_facetid <span class="op">=</span> <span class="st">"f_fluxid"</span>,</span>
 <span>  facet_wrap_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>ncol <span class="op">=</span> <span class="fl">4</span>, nrow <span class="op">=</span> <span class="fl">3</span>, scales <span class="op">=</span> <span class="st">"free"</span><span class="op">)</span>,</span>
+<span>  longpdf_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>ncol <span class="op">=</span> <span class="fl">4</span>, width <span class="op">=</span> <span class="fl">29.7</span>, ratio <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span>
 <span>  y_text_position <span class="op">=</span> <span class="fl">500</span>,</span>
 <span>  print_plot <span class="op">=</span> <span class="st">"FALSE"</span>,</span>
 <span>  output <span class="op">=</span> <span class="st">"print_only"</span>,</span>
@@ -144,7 +145,14 @@ measurement. Default is <code>f_fluxid</code></p></dd>
 
 <dt id="arg-facet-wrap-args">facet_wrap_args<a class="anchor" aria-label="anchor" href="#arg-facet-wrap-args"></a></dt>
 <dd><p>list of arguments for
-<a href="https://ggforce.data-imaginist.com/reference/facet_wrap_paginate.html" class="external-link">facet_wrap_paginate</a></p></dd>
+<a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a>, also used by
+<a href="https://ggforce.data-imaginist.com/reference/facet_wrap_paginate.html" class="external-link">facet_wrap_paginate</a> in case
+<code>output = "pdfpages</code></p></dd>
+
+
+<dt id="arg-longpdf-args">longpdf_args<a class="anchor" aria-label="anchor" href="#arg-longpdf-args"></a></dt>
+<dd><p>arguments for plotly in the form
+<code>list(ncol, width (in cm), ratio)</code></p></dd>
 
 
 <dt id="arg-y-text-position">y_text_position<a class="anchor" aria-label="anchor" href="#arg-y-text-position"></a></dt>
@@ -177,6 +185,17 @@ diagnostics of each measurement.
 The plots are returned as a ggplot object if <code>print_plot = TRUE</code>;
 if <code>print_plot = FALSE</code> it will not return anything but will produce a file
 according to the <code>output</code> argument.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p><code>output = "pdfpages"</code> uses
+<a href="https://ggforce.data-imaginist.com/reference/facet_wrap_paginate.html" class="external-link">facet_wrap_paginate</a>, which tends to be
+slow and heavy. With <code>output = "longpdf</code>, a long single page pdf is exported.
+Default width is 29.7 cm (A4 landscape) and is will be as long as it needs
+to be to fit all the facets. The arguments <code>ncol</code> and <code>ratio</code> in
+<code>longpdf_args</code> specify the number of columns and the ratio of the facet
+respectively. This method is considerably faster than <code>pdfpages</code>, because
+it bypasses <code>facet_wrap_paginate</code>, but is a bit less aesthetic.</p>
     </div>
 
     <div class="section level2">
