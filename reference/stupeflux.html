@@ -9,7 +9,7 @@ the step-by-step workflow for more control over the process."><meta property="og
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.10</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.11</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -390,15 +390,16 @@ https://doi.org/10.1016/j.agrformet.2018.08.022</p>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> R constant set to 0.082057</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Concentration was measured in ppm</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Fluxes are in mmol/m2/h</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 6</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   f_fluxid f_slope_corr f_temp_air_ave datetime            f_flux f_model   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 1               0.817           7.28 2022-07-28 <span style="color: #949494;">23:43:25</span>   50.3 exp_zhao18</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 2               0.508           7.37 2022-07-28 <span style="color: #949494;">23:47:12</span>   31.3 exp_zhao18</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 3               0.328           7.44 2022-07-28 <span style="color: #949494;">23:52:00</span>   20.2 exp_zhao18</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 4               0.703           7.78 2022-07-28 <span style="color: #949494;">23:59:22</span>   43.2 exp_zhao18</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 5              <span style="color: #BB0000;">NA</span>               7.69 2022-07-29 <span style="color: #949494;">00:03:00</span>   <span style="color: #BB0000;">NA</span>   exp_zhao18</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> 6               0.510           7.74 2022-07-29 <span style="color: #949494;">00:06:25</span>   31.3 exp_zhao18</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 7</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   f_fluxid f_slope_corr f_temp_air_ave f_atm_pressure_ave datetime           </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span>             </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 1               0.817           7.28                  1 2022-07-28 <span style="color: #949494;">23:43:25</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 2               0.508           7.37                  1 2022-07-28 <span style="color: #949494;">23:47:12</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 3               0.328           7.44                  1 2022-07-28 <span style="color: #949494;">23:52:00</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 4               0.703           7.78                  1 2022-07-28 <span style="color: #949494;">23:59:22</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 5              <span style="color: #BB0000;">NA</span>               7.69                  1 2022-07-29 <span style="color: #949494;">00:03:00</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> 6               0.510           7.74                  1 2022-07-29 <span style="color: #949494;">00:06:25</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 2 more variables: f_flux &lt;dbl&gt;, f_model &lt;chr&gt;</span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
