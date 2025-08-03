@@ -5,12 +5,17 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Practical example: from raw gas concentration data to clean ecosystem gas fluxes. • fluxible</title>
+<title>From raw gas concentration data to clean ecosystem gas fluxes. • fluxible</title>
+<!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="../favicon-96x96.png">
+<link rel="icon" type="”image/svg+xml”" href="../favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="icon" sizes="any" href="../favicon.ico">
+<link rel="manifest" href="../site.webmanifest">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Practical example: from raw gas concentration data to clean ecosystem gas fluxes.">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="From raw gas concentration data to clean ecosystem gas fluxes.">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -20,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.12</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.13</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -35,6 +40,7 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
 <li><a class="dropdown-item" href="../articles/data-prep.html">Preparing the data for fluxible</a></li>
+    <li><a class="dropdown-item" href="../articles/li7500.html">Using fluxible with the Li7500</a></li>
     <li><a class="dropdown-item" href="../articles/two-gases.html">Working with two gases measured simultaneously</a></li>
   </ul>
 </li>
@@ -57,7 +63,7 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="../logo.png" class="logo" alt=""><h1>Practical example: from raw gas concentration data to clean ecosystem gas fluxes.</h1>
+      <img src="../logo.png" class="logo" alt=""><h1>From raw gas concentration data to clean ecosystem gas fluxes.</h1>
             
       
       <small class="dont-index">Source: <a href="https://github.com/Plant-Functional-Trait-Course/fluxible/blob/main/vignettes/fluxible.Rmd" class="external-link"><code>vignettes/fluxible.Rmd</code></a></small>
@@ -486,7 +492,7 @@ in the output.</p>
 <span>  setup_volume <span class="op">=</span> <span class="fl">24.575</span>, <span class="co"># in liters, can also be a variable</span></span>
 <span>  atm_pressure <span class="op">=</span> <span class="fl">1</span>, <span class="co"># in atm, can also be a variable</span></span>
 <span>  plot_area <span class="op">=</span> <span class="fl">0.0625</span>, <span class="co"># in m2, can also be a variable</span></span>
-<span>  cols_keep <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"turfID"</span>, <span class="st">"type"</span><span class="op">)</span>,</span>
+<span>  cols_keep <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"turfID"</span>, <span class="st">"type"</span>, <span class="st">"round"</span><span class="op">)</span>,</span>
 <span>  cols_ave <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"temp_soil"</span>, <span class="st">"PAR"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <!-- The output is in $mmol/m^2/h$ and the calculation is as follow: -->
@@ -515,12 +521,13 @@ A: area of chamber frame base (m^2^) -->
 <!-- Fluxes were calculated in five steps from raw gas concentration data and the process is entirely reproducible. -->
 <!-- Next we can calculated gross ecosystem production (GEP) and plot the results: -->
 <!-- Structure of the dataframe with calculated fluxes, `fluxes_liahovden_60`: -->
-<pre><code><span><span class="co">#&gt; tibble [138 × 10] (S3: tbl_df/tbl/data.frame)</span></span>
+<pre><code><span><span class="co">#&gt; tibble [138 × 11] (S3: tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;  $ f_fluxid      : Factor w/ 138 levels "1","2","3","4",..: 1 2 3 4 ..</span></span>
 <span><span class="co">#&gt;  $ temp_soil_ave : num [1:138] 6.96 7.01 6.83 6.83 2.5 ...</span></span>
 <span><span class="co">#&gt;  $ PAR_ave       : num [1:138] 24.242 1.05 28.809 0.403 48.062 ...</span></span>
 <span><span class="co">#&gt;  $ turfID        : chr [1:138] "4 AN1C 4" "4 AN1C 4" "27 AN3C 27" ""..</span></span>
 <span><span class="co">#&gt;  $ type          : chr [1:138] "NEE" "ER" "NEE" "ER" ...</span></span>
+<span><span class="co">#&gt;  $ round         : num [1:138] 1 1 1 1 1 1 2 2 2 2 ...</span></span>
 <span><span class="co">#&gt;  $ f_slope_corr  : num [1:138] -0.2258 0.0718 -0.3718 0.2433 -0.2865..</span></span>
 <span><span class="co">#&gt;  $ f_temp_air_ave: num [1:138] 3.21 3.3 3.15 2.96 2.81 ...</span></span>
 <span><span class="co">#&gt;  $ datetime      : POSIXct[1:138], format: "2022-07-27 05:37:30" ...</span></span>
@@ -552,31 +559,15 @@ response curves, soil respiration) are kept.
 <!-- The timestamps and PAR value from the NEE measurement are also attributed to the GEP one and any variable specified by the user. -->
 Each NEE and ER measurements need to be paired together for this
 calculation. The <code>id_cols</code> argument specifies which columns
-should be used for pairing (e.g., date, campaign). Since those
-measurements were done continuously for 24 hours, we added a pairID
-column, which is pairing each NEE measurement with its following ER
-measurement. This pairs the NEE and ER measurements of the same plot and
-same round of measurement because we systematically measured ER after
-NEE for each plot.</p>
+should be used for pairing (e.g., date, campaign). Note that the more
+generic <code>flux_diff</code> can also be used.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">fluxes_liahovden_60</span> <span class="op">&lt;-</span> <span class="va">fluxes_liahovden_60</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
-<span>    f_fluxid <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">f_fluxid</span><span class="op">)</span>,</span>
-<span>    pairID <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case_when.html" class="external-link">case_when</a></span><span class="op">(</span></span>
-<span>      <span class="va">type</span> <span class="op">==</span> <span class="st">"NEE"</span> <span class="op">~</span> <span class="va">f_fluxid</span>,</span>
-<span>      <span class="va">type</span> <span class="op">==</span> <span class="st">"ER"</span> <span class="op">~</span> <span class="va">f_fluxid</span> <span class="op">-</span> <span class="fl">1</span></span>
-<span>    <span class="op">)</span>,</span>
-<span>    f_fluxid <span class="op">=</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/as_factor.html" class="external-link">as_factor</a></span><span class="op">(</span><span class="va">f_fluxid</span><span class="op">)</span>,</span>
-<span>    pairID <span class="op">=</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/as_factor.html" class="external-link">as_factor</a></span><span class="op">(</span><span class="va">pairID</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span>
-<span></span>
+<code class="sourceCode R"><span></span>
 <span><span class="va">gpp_liahovden_60</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flux_gpp.html">flux_gpp</a></span><span class="op">(</span></span>
 <span>  fluxes_df <span class="op">=</span> <span class="va">fluxes_liahovden_60</span>,</span>
 <span>  type_col <span class="op">=</span> <span class="va">type</span>, <span class="co"># the column specifying the type of measurement</span></span>
 <span>  f_datetime <span class="op">=</span> <span class="va">datetime</span>,</span>
-<span>  id_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"pairID"</span>, <span class="st">"turfID"</span><span class="op">)</span>,</span>
+<span>  id_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"round"</span>, <span class="st">"turfID"</span><span class="op">)</span>,</span>
 <span>  cols_keep <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"temp_soil_ave"</span>, <span class="st">"PAR_ave"</span><span class="op">)</span>, <span class="co"># or "none" (default) or "all"</span></span>
 <span>  nee_arg <span class="op">=</span> <span class="st">"NEE"</span>, <span class="co"># default value</span></span>
 <span>  er_arg <span class="op">=</span> <span class="st">"ER"</span> <span class="co"># default value</span></span>
@@ -588,7 +579,7 @@ NEE for each plot.</p>
 <span><span class="co">#&gt;  $ f_flux       : num [1:207] -18.57 -14.09 4.48 -38.42 -23.22 ...</span></span>
 <span><span class="co">#&gt;  $ temp_soil_ave: num [1:207] 6.96 6.96 7.01 6.83 6.83 ...</span></span>
 <span><span class="co">#&gt;  $ PAR_ave      : num [1:207] 24.24 24.24 1.05 28.81 28.81 ...</span></span>
-<span><span class="co">#&gt;  $ pairID       : Factor w/ 69 levels "1","3","5","7",..: 1 1 1 2 2 ..</span></span>
+<span><span class="co">#&gt;  $ round        : num [1:207] 1 1 1 1 1 1 1 1 1 2 ...</span></span>
 <span><span class="co">#&gt;  $ turfID       : chr [1:207] "4 AN1C 4" "4 AN1C 4" "4 AN1C 4" "27 "..</span></span></code></pre>
 <div class="section level4 unnumbered">
 <h4 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
