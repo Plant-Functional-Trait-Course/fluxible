@@ -19,7 +19,7 @@ will work best with datasets produced following a fluxible workflow."><meta prop
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.13</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.3.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -151,7 +151,7 @@ measurement. Default is <code>f_fluxid</code></p></dd>
 
 
 <dt id="arg-longpdf-args">longpdf_args<a class="anchor" aria-label="anchor" href="#arg-longpdf-args"></a></dt>
-<dd><p>arguments for plotly in the form
+<dd><p>arguments for longpdf in the form
 <code>list(ncol, width (in cm), ratio)</code></p></dd>
 
 
@@ -165,10 +165,12 @@ but will take time depending on the size of the dataset</p></dd>
 
 
 <dt id="arg-output">output<a class="anchor" aria-label="anchor" href="#arg-output"></a></dt>
-<dd><p><code>pdfpages</code>, the plots are saved as A4 landscape pdf pages;
-<code>ggsave</code>, the plots can be saved with the ggsave function;
-<code>print_only</code> (default) prints the plot without creating a file
-(independently from <code>print_plot</code> being TRUE or FALSE)</p></dd>
+<dd><p><code>"pdfpages"</code>, the plots are saved as A4 landscape pdf pages;
+<code>"ggsave"</code>, the plots can be saved with the ggsave function;
+<code>"print_only"</code> (default) prints the plot without creating a file
+(independently from <code>print_plot</code> being TRUE or FALSE);
+<code>"longpdf"</code>, the plots are saved as a pdf file as long as needed (faster than
+<code>"pdfpages"</code>)</p></dd>
 
 
 <dt id="arg-ggsave-args">ggsave_args<a class="anchor" aria-label="anchor" href="#arg-ggsave-args"></a></dt>

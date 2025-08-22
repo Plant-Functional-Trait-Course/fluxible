@@ -16,8 +16,8 @@
 <script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Ecosystem Gas Fluxes Calculations for Closed Loop Chamber Setup">
-<meta name="description" content="Processes the raw data from closed loop flux chamber (or tent) setups into ecosystem gas fluxes usable for analysis. It goes from a data frame of gas concentration over time (which can contain several measurements) and a meta data file indicating which measurement was done when, to a data frame of ecosystem gas fluxes including quality diagnostics. Functions provided include different models (exponential as described in Zhao et al (2018) &lt;doi:10.1016/j.agrformet.2018.08.022&gt;, quadratic and linear) to estimate the fluxes from the raw data, quality assessment, plotting for visual check and calculation of fluxes based on the setup specific parameters (chamber size, plot area, ...).">
-<meta property="og:description" content="Processes the raw data from closed loop flux chamber (or tent) setups into ecosystem gas fluxes usable for analysis. It goes from a data frame of gas concentration over time (which can contain several measurements) and a meta data file indicating which measurement was done when, to a data frame of ecosystem gas fluxes including quality diagnostics. Functions provided include different models (exponential as described in Zhao et al (2018) &lt;doi:10.1016/j.agrformet.2018.08.022&gt;, quadratic and linear) to estimate the fluxes from the raw data, quality assessment, plotting for visual check and calculation of fluxes based on the setup specific parameters (chamber size, plot area, ...).">
+<meta name="description" content="Toolbox to process raw data from closed loop flux chamber (or tent) setups into ecosystem gas fluxes usable for analysis. It goes from a data frame of gas concentration over time (which can contain several measurements) and a meta data file indicating which measurement was done when, to a data frame of ecosystem gas fluxes including quality diagnostics. Organized with one function per step, maximizing user flexibility and backwards compatibility. Different models to estimate the fluxes from the raw data are available: exponential as described in Zhao et al (2018) &lt;doi:10.1016/j.agrformet.2018.08.022&gt;, exponential as described in Hutchinson and Mosier (1981) &lt;doi:10.2136/sssaj1981.03615995004500020017x&gt;, quadratic, and linear. Other functions include quality assessment, plotting for visual check, calculation of fluxes based on the setup specific parameters (chamber size, plot area, ...), gross primary production and transpiration rate calculation, and light response curves.">
+<meta property="og:description" content="Toolbox to process raw data from closed loop flux chamber (or tent) setups into ecosystem gas fluxes usable for analysis. It goes from a data frame of gas concentration over time (which can contain several measurements) and a meta data file indicating which measurement was done when, to a data frame of ecosystem gas fluxes including quality diagnostics. Organized with one function per step, maximizing user flexibility and backwards compatibility. Different models to estimate the fluxes from the raw data are available: exponential as described in Zhao et al (2018) &lt;doi:10.1016/j.agrformet.2018.08.022&gt;, exponential as described in Hutchinson and Mosier (1981) &lt;doi:10.2136/sssaj1981.03615995004500020017x&gt;, quadratic, and linear. Other functions include quality assessment, plotting for visual check, calculation of fluxes based on the setup specific parameters (chamber size, plot area, ...), gross primary production and transpiration rate calculation, and light response curves.">
 <meta property="og:image" content="https://plant-functional-trait-course.github.io/fluxible/index.html/logo.png">
 </head>
 <body>
@@ -28,7 +28,7 @@
 
     <a class="navbar-brand me-2" href="index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.13</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.3.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -69,17 +69,17 @@
 </div>
 <!-- badges: start -->
 
-<p>The Fluxible R package is made to transform any dataset of gas concentration over time into a gas flux dataset. <!-- It was originally made to be used with a closed loop chamber system connected to a gas analyzer. --> Thanks to its flexibility, it works for all kinds of setups (separated files for each measurement vs continuous logging, variable vs constant chamber volume, variable vs constant measurement length, …). It is organized as a toolbox with one function per steps, which offers a lot of freedom. If environmental data were recorded simultaneously (photosynthetically active radiation, soil temperature, …), they can also be processed (mean, sum or median), with the same focus window as the flux estimate.</p>
-<p>The goal of fluxible is to provide a workflow that removes individual evaluation of each flux, reduces risk of bias, and makes it reproducible. Users set specific data quality standards and selection parameters as function arguments that are applied to the entire dataset. Fluxible offers different methods to estimate fluxes: linear, quadratic, exponential (Zhao <em>et al.</em>, 2018), and the original HM model (Hutchinson and Mosier, 1981; Pedersen <em>et al.</em>, 2010). The kappamax method (Hüppi <em>et al.</em>, 2018) is also included, at the quality control step. The package runs the calculations automatically, without prompting the user to take decisions mid-way, and provides quality flags and plots at the end of the process for a visual check.</p>
-<p>This makes it easy to use with large flux datasets and to integrate into a reproducible and automated data processing pipeline such as the <a href="https://books.ropensci.org/targets/" class="external-link">targets R package (Landau, 2021)</a>. Using the Fluxible R package makes the workflow reproducible, increases compatibility across studies, and is more time efficient.</p>
+<p>The <code>fluxible</code> R package is made to transform any dataset of gas concentration over time measured with closed loop chamber systems into a gas flux dataset. <!-- It was originally made to be used with a closed loop chamber system connected to a gas analyzer. --> Thanks to its flexibility, it works for all kinds of field setup (manual or automated chambers, tents, soil respiration chambers, …) and data collection strategies (separated files for each measurement vs continuous logging, variable vs constant chamber volume, variable vs constant measurement length, …). It is organized as a toolbox with one function per steps, which offers a lot of freedom and backwards compatibility for ongoing projects. If environmental data were recorded simultaneously (photosynthetically active radiation, soil temperature, …), they can also be processed (mean, sum or median), with the same focus window as the flux estimate.</p>
+<p>The goal of <code>fluxible</code> is to provide a workflow that removes individual evaluation of each flux, reduces risk of bias, and makes it reproducible. Users set specific data quality standards and selection parameters as function arguments that are applied to the entire dataset. <code>fluxible</code> offers different methods to estimate fluxes: linear, quadratic, exponential (Zhao <em>et al.</em>, 2018), and the original HM model (Hutchinson and Mosier, 1981; Pedersen <em>et al.</em>, 2010). The kappamax method (Hüppi <em>et al.</em>, 2018) is also included, at the quality control step. The package runs the calculations automatically, without prompting the user to take decisions mid-way, and provides quality flags and plots at the end of the process for a visual check.</p>
+<p>This makes it easy to use with large flux datasets and to integrate into a reproducible and automated data processing pipeline such as the <a href="https://books.ropensci.org/targets/" class="external-link"><code>targets</code> R package (Landau, 2021)</a>. Using the <code>fluxible</code> R package makes the workflow reproducible, increases compatibility across studies, and is more time efficient.</p>
 <p>For a visual overview of the package, see <a href="https://raw.githubusercontent.com/Plant-Functional-Trait-Course/fluxible/refs/heads/main/dissemination/poster_fluxible.pdf" class="external-link">the poster</a>.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>Fluxible can be installed from CRAN.</p>
+<p><code>fluxible</code> can be installed from CRAN.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"fluxible"</span><span class="op">)</span></span></code></pre></div>
-<p>You can install the development version of fluxible from the <a href="https://github.com/Plant-Functional-Trait-Course/fluxible" class="external-link">GitHub repo</a> with:</p>
+<p>You can install the development version of <code>fluxible</code> from the <a href="https://github.com/Plant-Functional-Trait-Course/fluxible" class="external-link">GitHub repo</a> with:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"plant-functional-trait-course/fluxible"</span><span class="op">)</span></span></code></pre></div>
@@ -167,7 +167,7 @@ Output of flux_plot, showing fluxes plotted individually with diagnostics and qu
 <span><span class="co">#&gt; Creating a df with the columns from 'cols_keep' argument...</span></span>
 <span><span class="co">#&gt; Creating a df with the columns from 'cols_ave' argument...</span></span>
 <span><span class="co">#&gt; Calculating fluxes...</span></span>
-<span><span class="co">#&gt; R constant set to 0.082057</span></span>
+<span><span class="co">#&gt; R constant set to 0.082057 L * atm * K^-1 * mol^-1</span></span>
 <span><span class="co">#&gt; Concentration was measured in ppm</span></span>
 <span><span class="co">#&gt; Fluxes are in mmol/m2/h</span></span>
 <span></span>
@@ -199,9 +199,10 @@ Output of flux_plot, showing fluxes plotted individually with diagnostics and qu
 <h2 id="supporting-infrastructure">Supporting infrastructure<a class="anchor" aria-label="anchor" href="#supporting-infrastructure"></a>
 </h2>
 <div class="section level3">
-<h3 id="licoread-r-package">licoread R package<a class="anchor" aria-label="anchor" href="#licoread-r-package"></a>
+<h3 id="licoread-r-package">
+<code>licoread</code> R package<a class="anchor" aria-label="anchor" href="#licoread-r-package"></a>
 </h3>
-<p>The <a href="https://jogaudard.github.io/licoread/index.html" class="external-link">licoread R package</a>, developped in collaboration with <a href="https://www.licor.com/" class="external-link">LI-COR</a>, provides an easy way to import raw files from Li-COR gas analyzers as R objects that can be used directly with the Fluxible R package.</p>
+<p>The <a href="https://jogaudard.github.io/licoread/index.html" class="external-link"><code>licoread</code> R package</a>, developed in collaboration with <a href="https://www.licor.com/" class="external-link">LI-COR</a>, provides an easy way to import raw files from LI-COR gas analyzers as R objects that can be used directly with the <code>fluxible</code> R package.</p>
 </div>
 </div>
 <div class="section level2">
@@ -210,12 +211,15 @@ Output of flux_plot, showing fluxes plotted individually with diagnostics and qu
 <div class="section level3">
 <h3 id="segmentation-tool">Segmentation tool<a class="anchor" aria-label="anchor" href="#segmentation-tool"></a>
 </h3>
-<p>We are working on a tool to automatically select the window of the measurement on which to fit a model. This selection will be based on environmental variable, such as photosynthetically active radiation (PAR), measured simultaneously.</p>
+<p>We are working on a tool to automatically select the window of the measurement on which to fit a model. This selection will be based on environmental variable, such as photosynthetically active radiation (PAR), or residuals.</p>
 </div>
 <div class="section level3">
-<h3 id="more-fits">More fits<a class="anchor" aria-label="anchor" href="#more-fits"></a>
+<h3 id="working-in-molvolume">Working in mol/volume<a class="anchor" aria-label="anchor" href="#working-in-molvolume"></a>
 </h3>
-<p>As we want fluxible to fit the use of as many projects as possible, more fitting expressions will be included in the flux_fitting function. Feel welcome to get in touch if you wish to include yours in fluxible.</p>
+<p>So far <code>fluxible</code> works in fractional concentration (e. g. ppm) and transforms it in mol when calculating the fluxes, using the average temperature of the measurement. This has the advantage to work even if the setup does not provide temperature for each gas concentration data point. Recent setups provide temperature at the same frequency as gas concentration, and this allows to transform the concentration in mol/volume earlier in the process, accounting better for temperature changes during the measurement. This will be implemented in a future version of <code>fluxible</code>.</p>
+<!-- ### More fits
+As we want fluxible to fit the use of as many projects as possible, more fitting expressions will be included in the flux_fitting function.
+Feel welcome to get in touch if you wish to include yours in fluxible. -->
 </div>
 </div>
 <div class="section level2">
@@ -228,17 +232,17 @@ Output of flux_plot, showing fluxes plotted individually with diagnostics and qu
 <div class="section level2">
 <h2 id="dissemination">Dissemination<a class="anchor" aria-label="anchor" href="#dissemination"></a>
 </h2>
-<p>If you are running a course and want to talk about Fluxible, feel free to use this <a href="https://raw.githubusercontent.com/Plant-Functional-Trait-Course/fluxible/refs/heads/main/dissemination/fluxible_jgaudard_short.pdf" class="external-link">two-slides presentation</a>. Of course, you can always reach out if you wish to have more material.</p>
-<p>Gaudard J, Chacon-Labella J, Dawson HR, Enquist B, Telford RJ, Töpper JP, Trepel J, Vandvik V, Baumane M, Birkeli K, Holle MJM, Hupp JR, Santos-Andrade PE, Satriawan TW, Halbritter AH. “Fluxible: an R package to process ecosystem gas fluxes from closed-loop chambers in an automated and reproducible way.” Authorea Preprints. <a href="https://doi.org/10.22541/au.175071021.14153294/v1" class="external-link">doi:10.22541/au.175071021.14153294/v1</a>, 2025.</p>
-<p>Gaudard J, Trepel J, Dawson HR, Enquist B, Halbritter AH, Mustri M, Niittynen P, Santos-Andrade PE, Topper JP, Vandvik V, and Telford RJ. “Fluxible: an R package to calculate ecosystem gas fluxes from closed loop chamber systems in a reproducible and automated workflow” (<a href="https://raw.githubusercontent.com/Plant-Functional-Trait-Course/fluxible/refs/heads/main/dissemination/fluxible_jgaudard_EGU25.pdf" class="external-link">slides</a>), EGU General Assembly 2025, Vienna, Austria, 27 Apr–2 May 2025, EGU25-12409, <a href="https://doi.org/10.5194/egusphere-egu25-12409" class="external-link">doi:10.5194/egusphere-egu25-12409</a>, 2025.</p>
-<p>Gaudard J, Telford R, Vandvik V, and Halbritter AH: “Fluxible: an R package to calculate ecosystem gas fluxes in a reproducible and automated workflow” (<a href="https://raw.githubusercontent.com/Plant-Functional-Trait-Course/fluxible/refs/heads/main/dissemination/poster_fluxible.pdf" class="external-link">poster</a>), EGU General Assembly 2024, Vienna, Austria, 14–19 Apr 2024, EGU24-956, <a href="https://doi.org/10.5194/egusphere-egu24-956" class="external-link">doi:10.5194/egusphere-egu24-956</a>, 2024.</p>
+<p>If you are running a course and want to talk about <code>fluxible</code>, feel free to use this <a href="https://raw.githubusercontent.com/Plant-Functional-Trait-Course/fluxible/refs/heads/main/dissemination/fluxible_jgaudard_short.pdf" class="external-link">two-slides presentation</a>. Of course, you can always reach out if you wish to have more material.</p>
+<p>Gaudard J, Chacon-Labella J, Dawson HR, Enquist B, Telford RJ, Töpper JP, Trepel J, Vandvik V, Baumane M, Birkeli K, Holle MJM, Hupp JR, Santos-Andrade PE, Satriawan TW, Halbritter AH. “<code>fluxible</code>: an R package to process ecosystem gas fluxes from closed-loop chambers in an automated and reproducible way.” Authorea Preprints. <a href="https://doi.org/10.22541/au.175071021.14153294/v1" class="external-link">doi:10.22541/au.175071021.14153294/v1</a>, 2025.</p>
+<p>Gaudard J, Trepel J, Dawson HR, Enquist B, Halbritter AH, Mustri M, Niittynen P, Santos-Andrade PE, Topper JP, Vandvik V, and Telford RJ. “<code>fluxible</code>: an R package to calculate ecosystem gas fluxes from closed loop chamber systems in a reproducible and automated workflow” (<a href="https://raw.githubusercontent.com/Plant-Functional-Trait-Course/fluxible/refs/heads/main/dissemination/fluxible_jgaudard_EGU25.pdf" class="external-link">slides</a>), EGU General Assembly 2025, Vienna, Austria, 27 Apr–2 May 2025, EGU25-12409, <a href="https://doi.org/10.5194/egusphere-egu25-12409" class="external-link">doi:10.5194/egusphere-egu25-12409</a>, 2025.</p>
+<p>Gaudard J, Telford R, Vandvik V, and Halbritter AH: “<code>fluxible</code>: an R package to calculate ecosystem gas fluxes in a reproducible and automated workflow” (<a href="https://raw.githubusercontent.com/Plant-Functional-Trait-Course/fluxible/refs/heads/main/dissemination/poster_fluxible.pdf" class="external-link">poster</a>), EGU General Assembly 2024, Vienna, Austria, 14–19 Apr 2024, EGU24-956, <a href="https://doi.org/10.5194/egusphere-egu24-956" class="external-link">doi:10.5194/egusphere-egu24-956</a>, 2024.</p>
 <!-- [Direct link to the poster](https://github.com/Plant-Functional-Trait-Course/fluxible/blob/main/dissemination/poster_EGU24_jgaudard.pdf) -->
 <!-- [Link to the abstract](https://meetingorganizer.copernicus.org/EGU24/EGU24-956.html) -->
 </div>
 <div class="section level2">
 <h2 id="acknowledgements">Acknowledgements<a class="anchor" aria-label="anchor" href="#acknowledgements"></a>
 </h2>
-<p>Fluxible builds on the earlier effort from the Plant Functional Traits Course Community <a href="https://github.com/PaulESantos/co2fluxtent" class="external-link">co2fluxtent</a> (Brummer <em>et al.</em>, 2023).</p>
+<p><code>fluxible</code> builds on the earlier effort from the Plant Functional Traits Course Community <a href="https://github.com/PaulESantos/co2fluxtent" class="external-link"><code>co2fluxtent</code> (Brummer <em>et al.</em>, 2023)</a>.</p>
 <div class="section level4">
 <h4 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h4>

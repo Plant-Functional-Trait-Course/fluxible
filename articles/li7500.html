@@ -25,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.13</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.3.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -135,7 +135,7 @@ as normally</li>
 <div class="section level3">
 <h3 id="one-side-is-reliable">One side is reliable<a class="anchor" aria-label="anchor" href="#one-side-is-reliable"></a>
 </h3>
-<p>If the start or the end are consistant but not the other, you can
+<p>If the start or the end are consistent but not the other, you can
 change the direction of the cutting in <code>flux_fitting</code>. By
 default, <code>flux_fitting</code> cuts the focus window as
 <code>start + start_cut</code> to <code>end - end_cut</code>. The
@@ -154,7 +154,7 @@ be from <code>end - start_cut</code> to <code>end - end_cut</code>
 </div>
 </div>
 <div class="section level2">
-<h2 id="processing-with-fluxible">Processing with fluxible<a class="anchor" aria-label="anchor" href="#processing-with-fluxible"></a>
+<h2 id="processing-with-fluxible">Processing with <code>fluxible</code><a class="anchor" aria-label="anchor" href="#processing-with-fluxible"></a>
 </h2>
 <!-- Since the `licoread::import7500` already provides `f_fluxid`, `f_start` and `f_end`, we can skip `fluxible::flux_match` and directly fit with `fluxible::flux_fitting`. -->
 <div class="section level3">
@@ -196,8 +196,8 @@ the dataset.</p>
 <span>          y_text_position <span class="op">=</span> <span class="fl">450</span>,</span>
 <span>          print_plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
-<img src="li7500_files/figure-html/plotting_co2-1.png" alt="Output of `flux_plot` for co2 fluxes" width="700"><p class="caption">
-Output of <code>flux_plot</code> for co2 fluxes
+<img src="li7500_files/figure-html/plotting_co2-1.png" alt="Output of `flux_plot` for CO~2~ fluxes" width="700"><p class="caption">
+Output of <code>flux_plot</code> for CO<sub>2</sub> fluxes
 </p>
 </div>
 <p>Can be exported in pdf directly (much easier to handle with a lot of
@@ -234,7 +234,7 @@ the <code>cols_nest</code> argument.</p>
 <span><span class="co">#&gt; Averaging air temperature for each flux...</span></span>
 <span><span class="co">#&gt; Creating a df with the columns from 'cols_keep' argument...</span></span>
 <span><span class="co">#&gt; Calculating fluxes...</span></span>
-<span><span class="co">#&gt; R constant set to 0.082057</span></span>
+<span><span class="co">#&gt; R constant set to 0.082057 L * atm * K^-1 * mol^-1</span></span>
 <span><span class="co">#&gt; Concentration was measured in ppm</span></span>
 <span><span class="co">#&gt; Fluxes are in umol/m2/s</span></span></code></pre></div>
 </div>
@@ -282,8 +282,8 @@ the dataset:</p>
 <span>          f_ylim_upper <span class="op">=</span> <span class="fl">15</span>,</span>
 <span>          y_text_position <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span></code></pre></div>
 <div class="figure">
-<img src="li7500_files/figure-html/plotting_h2o-1.png" alt="Output of `flux_plot` for h2o fluxes" width="700"><p class="caption">
-Output of <code>flux_plot</code> for h2o fluxes
+<img src="li7500_files/figure-html/plotting_h2o-1.png" alt="Output of `flux_plot` for H~2~O fluxes" width="700"><p class="caption">
+Output of <code>flux_plot</code> for H<sub>2</sub>O fluxes
 </p>
 </div>
 <p>Or directly exported as a pdf:</p>
@@ -313,7 +313,7 @@ Output of <code>flux_plot</code> for h2o fluxes
 <span><span class="co">#&gt; Averaging air temperature for each flux...</span></span>
 <span><span class="co">#&gt; Creating a df with the columns from 'cols_keep' argument...</span></span>
 <span><span class="co">#&gt; Calculating fluxes...</span></span>
-<span><span class="co">#&gt; R constant set to 0.082057</span></span>
+<span><span class="co">#&gt; R constant set to 0.082057 L * atm * K^-1 * mol^-1</span></span>
 <span><span class="co">#&gt; Concentration was measured in mmol/mol</span></span>
 <span><span class="co">#&gt; Fluxes are in mmol/m2/s</span></span></code></pre></div>
 </div>

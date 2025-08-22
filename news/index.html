@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.13</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.3.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,6 +39,16 @@
     </div>
 
     <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.3.0" id="fluxible-130">fluxible 1.3.0<a class="anchor" aria-label="anchor" href="#fluxible-130"></a></h2>
+<ul><li>
+<code>flux_match</code>: checks that the two inputs have different column names</li>
+<li>
+<code>flux_plot</code>: dots in legend and lines bigger</li>
+<li>
+<code>flux_fitting</code>: <code>exp_zhao18</code> now default model</li>
+<li>various fixes and code improvements</li>
+</ul></div>
+    <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.2.13" id="fluxible-1213">fluxible 1.2.13<a class="anchor" aria-label="anchor" href="#fluxible-1213"></a></h2>
 <ul><li>
 <code>flux_fitting</code>: <code>cut_direction</code> allows to cut from both sides, or start, or end</li>
@@ -50,7 +60,7 @@
 <li>
 <code>flux_units</code>: added <code>mmol/mol</code> as a possible concentration unit</li>
 <li>
-<code>flux_diff</code>: calculates the difference betwen fluxes (GPP, transpiration, etc)</li>
+<code>flux_diff</code>: calculates the difference between fluxes (GPP, transpiration, etc)</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.2.11" id="fluxible-1211">fluxible 1.2.11<a class="anchor" aria-label="anchor" href="#fluxible-1211"></a></h2>
@@ -218,12 +228,13 @@
 <ul><li>Added a vignette describing how to prepare the data for <code>fluxible</code>.</li>
 <li>
 <code>flux_plot</code> now adds a vertical line showing where t_zero is.</li>
-<li>‘flux_plot’: scale_x_datetime arguments are now past as a list.</li>
-<li>Functions now recycle user’s column names instead of renaming them. Columns created by fluxible functions have the suffix ‘f_’.</li>
+<li>
+<code>flux_plot</code>: scale_x_datetime arguments are now past as a list.</li>
+<li>Functions now recycle user<code>s column names instead of renaming them.   Columns created by fluxible functions have the suffix</code>f_`.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.6" id="fluxible-006">fluxible 0.0.6<a class="anchor" aria-label="anchor" href="#fluxible-006"></a></h2>
-<ul><li>Correction in <code>flux_quality</code>: ‘zero’ and ‘discard’ flags were inverted when using the linear fit.</li>
+<ul><li>Correction in <code>flux_quality</code>: <code>zero</code> and <code>discard</code> flags were inverted when using the linear fit.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.0.5" id="fluxible-005">fluxible 0.0.5<a class="anchor" aria-label="anchor" href="#fluxible-005"></a></h2>
@@ -246,7 +257,7 @@
 <ul><li>
 <code>flux_calc</code> allows to choose units.</li>
 <li>
-<code>flux_calc</code> alows plot area as a variable.</li>
+<code>flux_calc</code> allows plot area as a variable.</li>
 <li>
 <code>flux_fitting</code> with exponential model works when concentration data are missing in the middle of the measurement.</li>
 </ul></div>

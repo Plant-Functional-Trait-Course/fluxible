@@ -25,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.13</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.3.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -78,7 +78,7 @@ ecosystem respiration (ER), air and soil temperature and
 photosynthetically active radiation (PAR) were recorded over the course
 of 24 hours at an experimental site called Liahovden, situated in an
 alpine grassland in southwestern Norway. Those data are available in the
-Fluxible R package.
+<code>fluxible</code> R package.
 <!-- This example uses the data that were recorded during the Plant Functional Traits Course 6 (PFTC6) in Norway in 2022 at the site called Liahovden. -->
 <!-- (CITE when data paper out). --> To work with your own data, you
 need to import them as a dataframe object in your R session. For import
@@ -91,8 +91,9 @@ examples, please see
 temperature and PAR were recorded in a dataframe named
 <code>co2_liahovden</code>. The metadata for each measurement are in a
 dataframe named <code>record_liahovden</code>. This dataframe contains
-the starting time of each measurement, the measurement type (NEE or ER)
-and the unique plot ID (called turfs in this experiment).
+the starting time of each measurement, the measurement type (NEE or ER),
+the measurement round, and the unique plot ID (called turfs in this
+experiment).
 <!-- The type of measurement describes if it was NEE, measured with a transparent chamber, or ER, measured with a dark chamber. --></p>
 <p>Structure of the CO<sub>2</sub> concentration data
 (<code>co2_liahovden</code>):</p>
@@ -104,38 +105,41 @@ and the unique plot ID (called turfs in this experiment).
 <span><span class="co">#&gt;  $ PAR      : num [1:89692] 2.59 NA NA NA NA NA NA NA NA NA ...</span></span></code></pre>
 <p>Structure of the meta data (<code>record_liahovden</code>):</p>
 <pre><code><span><span class="co">#&gt; tibble [138 × 4] (S3: tbl_df/tbl/data.frame)</span></span>
-<span><span class="co">#&gt;  $ turfID: chr [1:138] "4 AN1C 4" "4 AN1C 4" "27 AN3C 27" "27 AN3C "..</span></span>
-<span><span class="co">#&gt;  $ type  : chr [1:138] "NEE" "ER" "NEE" "ER" ...</span></span>
-<span><span class="co">#&gt;  $ round : num [1:138] 1 1 1 1 1 1 2 2 2 2 ...</span></span>
-<span><span class="co">#&gt;  $ start : POSIXct[1:138], format: "2022-07-27 05:37:30" ...</span></span></code></pre>
+<span><span class="co">#&gt;  $ turfID           : chr [1:138] "4 AN1C 4" "4 AN1C 4" "27 AN3C 27"..</span></span>
+<span><span class="co">#&gt;  $ type             : chr [1:138] "NEE" "ER" "NEE" "ER" ...</span></span>
+<span><span class="co">#&gt;  $ measurement_round: num [1:138] 1 1 1 1 1 1 2 2 2 2 ...</span></span>
+<span><span class="co">#&gt;  $ start            : POSIXct[1:138], format: "2022-07-27 05:37:30" ..</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="attributing-meta-data">Attributing meta-data<a class="anchor" aria-label="anchor" href="#attributing-meta-data"></a>
 </h2>
-<p>We use the <code>flux_match</code> function to slice each measurement
-in the CO<sub>2</sub> concentration data and discard the recordings in
-between. The two inputs are <code>raw_conc</code>, the dataframe
-containing field measured raw gas concentration, and
-<code>field_record</code>, the meta data dataframe with the start of
-each measurement. Then <code>f_datetime</code> is the column containing
-date and time in the gas concentration dataframe, and
-<code>start_col</code> the column containing the start date and time of
-each measurement in the meta data dataframe.
+<p>The gas concentration was logged continuously in a single file and
+therefore we need to trim the irrelevant data before and in between
+measurements and attribute meta data (flux ID, turf ID, type, and
+measurement round) to each row of gas concentration.
+<!-- We use the `flux_match` function to slice each measurement in the CO~2~ concentration data and discard the recordings in between. -->
+The two inputs are <code>raw_conc</code>, the dataframe containing field
+measured raw gas concentration, and <code>field_record</code>, the meta
+data dataframe with the start of each measurement. Then
+<code>f_datetime</code> is the column containing date and time in the
+gas concentration dataframe, and <code>start_col</code> the column
+containing the start date and time of each measurement in the meta data
+dataframe.
 <!-- The column containing the gas concentration in the gas concentrationd dataframe `f_conc`. -->
 The length of the measurements is provided with
 <code>measurement_length</code> (in seconds). Alternatively, a column
 indicating the end time and date of each measurement can be provided to
-<code>end_col</code>, with <code>fixed_length = FALSE</code>. The
-<code>time_diff</code> argument allow to account for a consistant time
-difference (in seconds) between the two inputs. This value is added to
-the datetime column of the gas concentration dataset.</p>
+<code>end_col</code>. The <code>time_diff</code> argument allow to
+account for a consistent time difference (in seconds) between the two
+inputs. This value is added to the datetime column of the gas
+concentration dataset.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://plant-functional-trait-course.github.io/fluxible/" class="external-link">fluxible</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">conc_liahovden</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flux_match.html">flux_match</a></span><span class="op">(</span></span>
 <span>  raw_conc <span class="op">=</span> <span class="va">co2_liahovden</span>, <span class="co"># dataframe with raw gas concentration</span></span>
 <span>  field_record <span class="op">=</span> <span class="va">record_liahovden</span>, <span class="co"># dataframe with meta data</span></span>
-<span>  f_datetime <span class="op">=</span> <span class="va">datetime</span>, <span class="co"># column containing date and time</span></span>
+<span>  f_datetime <span class="op">=</span> <span class="va">datetime</span>, <span class="co"># date and time of each gas concentration row</span></span>
 <span>  start_col <span class="op">=</span> <span class="va">start</span>, <span class="co"># start date and time of each measurement</span></span>
 <span>  measurement_length <span class="op">=</span> <span class="fl">220</span>, <span class="co"># length of measurements (in seconds)</span></span>
 <span>  time_diff <span class="op">=</span> <span class="fl">0</span> <span class="co"># time difference between f_datetime and start_col</span></span>
@@ -150,13 +154,13 @@ which is needed for the flux calculation, with the
 <code>flux_fitting</code> function.
 <!-- Before calculating fluxes we need to fit a model to each measurement and estimate a slope of the concentration changing rate. -->
 <!-- We use the `flux_fitting` function with the model provided by @zhaoCalculationDaytimeCO22018. -->
-In this example we use the <code>exp_zhao18</code> model <span class="citation">(Zhao <em>et al.</em>, 2018)</span>. The
+In this example we use the <code>exp_zhao18</code> model <span class="citation">(Zhao <em>et al.</em>, 2018)</span>, which is the
+default setting as it is more robust and recent. The
 <code>exp_zhao18</code> is a mix of an exponential and linear model -
-thus fitting all fluxes independantly from curvature - and includes
+thus fitting all fluxes independently from curvature - and includes
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>t</mi><mn>0</mn></msub><annotation encoding="application/x-tex">t_0</annotation></semantics></math>
-as a fitting parameter (its implementation is described in
-<code>vignette("zhao18", package = "fluxible")</code>). A similar model
-but with the option to manually set
+as a fitting parameter. A similar model but with the option to manually
+set
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>t</mi><mn>0</mn></msub><annotation encoding="application/x-tex">t_0</annotation></semantics></math>
 is <code>exp_tz</code>. Other available models are: <code>linear</code>
 for a linear fit, <code>quadratic</code> for a quadratic fit, and
@@ -172,17 +176,17 @@ datetime column. The arguments <code>f_start</code>, <code>f_end</code>,
 and <code>f_fluxid</code> are produced by <code>flux_match</code>. They
 indicate, respectively, the start, end and unique ID of each
 measurement. The model chosen to fit the gas concentration is provided
-with <code>fit_type</code>. The user can decide to restrict the focus
+with <code>fit_type</code>. The user can decide to restrict the fitting
 window before fitting the model with the <code>start_cut</code> and
 <code>end_cut</code> arguments. For the models <code>quadratic</code>,
 <code>exp_tz</code>, and <code>exp_hm</code>, <code>t_zero</code> needs
-to be provided to indicate how many seconds after the start of the focus
-window should the slope be calculated. Arguments <code>cz_window</code>,
-<code>b_window</code>, <code>a_window</code> and <code>roll_width</code>
-are specific to the automatic fitting of the <code>exp_zhao18</code> and
-<code>exp_tz</code> models and are described in
-<code>vignette("zhao18", package = "fluxible")</code>. We recommend
-keeping the default values.</p>
+to be provided to indicate how many seconds after the start of the
+fitting window should the slope be calculated. Arguments
+<code>cz_window</code>, <code>b_window</code>, <code>a_window</code> and
+<code>roll_width</code> are specific to the automatic fitting of the
+<code>exp_zhao18</code> and <code>exp_tz</code> models and we recommand
+keeping the default values.
+<!-- We recommend keeping the default values. --></p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">slopes_liahovden</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flux_fitting.html">flux_fitting</a></span><span class="op">(</span></span>
 <span>  conc_df <span class="op">=</span> <span class="va">conc_liahovden</span>, <span class="co"># the output of flux_match</span></span>
@@ -199,7 +203,7 @@ keeping the default values.</p>
 <!-- If they have not been renamed, default values can be used. -->
 </div>
 <div class="section level2">
-<h2 id="quality-checks-and-visualizations">Quality checks and visualizations<a class="anchor" aria-label="anchor" href="#quality-checks-and-visualizations"></a>
+<h2 id="quality-checks-and-visualisations">Quality checks and visualisations<a class="anchor" aria-label="anchor" href="#quality-checks-and-visualisations"></a>
 </h2>
 <p>The function <code>flux_quality</code> is used to provide diagnostics
 about the quality of the fit, potentially advising to discard some
@@ -214,7 +218,7 @@ the user to override this automatic flagging by providing a vector of
 fluxIDs. The <code>ambient_conc</code> and <code>error</code> arguments
 are used to detect measurements starting outside of a reasonable range
 (the mean of the three first gas concentration data points is used,
-independantly from the focus window). The minimal detectable slope is
+independently from the fitting window). The minimal detectable slope is
 calculated as
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mfrac><mrow><mn>2</mn><mo>×</mo><mtext mathvariant="normal">instr error</mtext></mrow><mtext mathvariant="normal">length of measurement</mtext></mfrac><annotation encoding="application/x-tex">\frac{2 \times \text{instr error}}{\text{length of measurement}}</annotation></semantics></math>
 and is used to detect slopes that should be replaced by zero. Other
@@ -265,36 +269,6 @@ flux dataset. This table is also printed as a side effect of
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> force_zero         0 0     </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> force_lm           0 0     </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> no_slope           0 0</span></span></code></pre></div>
-<p><!-- f_fluxid = f_fluxid, # unique flux ID, provided by flux_match
-  f_slope = f_slope, # slope at t_zero, prodided by flux_fitting
-  f_time = f_time, # elapsed time for each measurement, provided by flux_fitting
-  f_start = f_start, # start of each measurement, provided by flux_match
-  f_end = f_end, # end of each measurement, provided by flux_match
-  f_fit = f_fit, # modelled gas concentration, provided by flux_fitting
-  f_cut = f_cut, # indicating if a row is cut or kept, provided by flux_fitting
-  f_pvalue = f_pvalue, # p-value of the fit (linear and quadratic), provided by flux_fitting
-  f_rsquared = f_rsquared, # R² of the fit (linear and quadratic), provided by flux_fitting
-  f_slope_lm = f_slope_lm, # slope of the linear model, provided by flux_fitting
-  f_fit_lm = f_fit_lm, # modelled gas concentration with the linear model, provided by flux_fitting
-  f_b = f_b, # b parameter (exponential fits), provided by flux_fitting
-  force_discard = c(), # vector of flux IDs to force discard
-  force_ok = c(), # vector of flux IDs to force ok
-  force_zero = c(), # vector of flux IDs to force zero
-  force_lm = c(), # vector of flux IDs to force the use of the linear model
-  force_exp = c(), # vector of flux IDS to force the use of the exponential model
-  ratio_threshold = 0.5, # threshold under which a measurement is flagged as having not enough data
-  gfactor_threshold = 10, # threshold above which a measurement is flagged as showing an exponential or quadratic fit too different from the linear fit
-  fit_type = c(), # same as fit_type in flux_fitting and needed only if the slopes_df dataframe has been stripped of its attributes
-  ambient_conc = 421, # ambient gas concentration at field site
-  error = 100, # error of the setup, used to detect measurements starting outside of a realistic range
-  pvalue_threshold = 0.3, # threshold of the p-value
-  rsquared_threshold = 0.7, # threshold of the R²
-  rmse_threshold = 25, # threshold for the root mean square error (RMSE)
-  cor_threshold = 0.5, # threshold for the correlation coefficient between time and gas concentration
-  b_threshold = 1, # threshold for the b value, borders an interval with its opposite value
-  cut_arg = "cut", # indicating cut row in f_cut column, provided by flux_fitting
-  instr_error = 5, # error of the instrument, used to calculate the minimal detectable slope
-  kappamax = FALSE # TRUE to use the kappamax method --></p>
 <p>The function <code>flux_plot</code> provides plots for a visual
 assessment of the measurements, explicitly displaying the quality flags
 from <code>flux_quality</code> and the cuts from
@@ -317,33 +291,35 @@ respectively.</p>
 <span>      nrow <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>      ncol <span class="op">=</span> <span class="fl">2</span>,</span>
 <span>      scales <span class="op">=</span> <span class="st">"free"</span></span>
-<span>    <span class="op">)</span></span>
+<span>    <span class="op">)</span>,</span>
+<span>    f_facetid <span class="op">=</span> <span class="st">"f_fluxid"</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
 <div class="figure">
-<img src="fluxible_files/figure-html/explot-1.png" alt="Output of `flux_plot` for fluxid 54, 95, 100 and 101." width="768"><p class="caption">
-Output of <code>flux_plot</code> for fluxid 54, 95, 100 and 101.
+<img src="fluxible_files/figure-html/fig-explot-1.png" alt="Output of `flux_plot` for fluxid 54, 95, 100 and 101. With quality flags and diagnostics from `flux_quality`, the slope at $t_0$ (continuous line), the model fit (dashed line), the linear fit (dotted line), and the raw gas concentration (dots). The colours show the quality flags (green for `ok`, red for `discard` and purple for `zero` with default settings) and cuts (same colour as `discard`). The gray vertical line indicates $t_0$ (a fitting parameter when using the `exp_zhao18` model, otherwise user defined in `flux_fitting`). The g-factor is calculated as slope/linear slope, and b is the b parameter inside the exponential model. Concentration is in ppm in this example. Due to poor quality (strong peak at the start), `flux_fitting` could not provide a decent fit for fluxid 101. This was detected by `flux_quality` which flagged it as discard." width="768"><p class="caption">
+Output of <code>flux_plot</code> for fluxid 54, 95, 100 and 101. With
+quality flags and diagnostics from <code>flux_quality</code>, the slope
+at
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>t</mi><mn>0</mn></msub><annotation encoding="application/x-tex">t_0</annotation></semantics></math>
+(continuous line), the model fit (dashed line), the linear fit (dotted
+line), and the raw gas concentration (dots). The colours show the
+quality flags (green for <code>ok</code>, red for <code>discard</code>
+and purple for <code>zero</code> with default settings) and cuts (same
+colour as <code>discard</code>). The gray vertical line indicates
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>t</mi><mn>0</mn></msub><annotation encoding="application/x-tex">t_0</annotation></semantics></math>
+(a fitting parameter when using the <code>exp_zhao18</code> model,
+otherwise user defined in <code>flux_fitting</code>). The g-factor is
+calculated as slope/linear slope, and b is the b parameter inside the
+exponential model. Concentration is in ppm in this example. Due to poor
+quality (strong peak at the start), <code>flux_fitting</code> could not
+provide a decent fit for fluxid 101. This was detected by
+<code>flux_quality</code> which flagged it as discard.
 </p>
 </div>
-<!-- To export the plots as pdf without printing them in one's R session, which we recommend for large datasets, the code looks like this: -->
-<p>The plots can be directly exported without printing them in the R
-session, which we recommend for large datasets. With
-<code>output = "pdfpages"</code>, the plots are exported in a multipage
-pdf file (A4 landscape). Because it uses
-<code><a href="https://ggforce.data-imaginist.com/reference/facet_wrap_paginate.html" class="external-link">ggforce::facet_wrap_paginate</a></code>, it is quite slow.</p>
+<p>To export the plots as pdf without printing them in one’s R session,
+which we recommend for large datasets, the code looks like this
+(<code>pdfpages</code> produces nice A4 pages, <code>longpdf</code>
+produces a single long pdf file, which is much faster):</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/flux_plot.html">flux_plot</a></span><span class="op">(</span></span>
-<span>  slopes_df <span class="op">=</span> <span class="va">flags_liahovden</span>,</span>
-<span>  f_conc <span class="op">=</span> <span class="va">conc</span>,</span>
-<span>  f_datetime <span class="op">=</span> <span class="va">datetime</span>,</span>
-<span>  print_plot <span class="op">=</span> <span class="cn">FALSE</span>, <span class="co"># not printing the plots in the R session</span></span>
-<span>  output <span class="op">=</span> <span class="st">"pdfpages"</span>, <span class="co"># the type of output</span></span>
-<span>  f_plotname <span class="op">=</span> <span class="st">"plots_liahovden"</span> <span class="co"># filename for the pdf file</span></span>
-<span><span class="op">)</span></span></code></pre></div>
-<p>With <code>output = "longpdf"</code>, the plots are exported in a
-single pdf file (defautl width 29.7 cm and as long as needed). This does
-not allow for printing and is aesthetically discutable, but it is much
-faster.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/flux_plot.html">flux_plot</a></span><span class="op">(</span></span>
 <span>  slopes_df <span class="op">=</span> <span class="va">flags_liahovden</span>,</span>
 <span>  f_conc <span class="op">=</span> <span class="va">conc</span>,</span>
@@ -356,25 +332,91 @@ faster.</p>
 the name of the <code>slopes_df</code> object will be used
 (<code>flags_liahovden</code> in our case). The pdf file will be saved
 in a folder named <code>f_quality_plots</code>.</p>
+<blockquote>
+<p>ℹ️ Handling lots of data?</p>
+<p>Automated chambers produce a lot of data, and visually inspecting all
+the fluxes might not be a reasonable option. In such cases, it is
+possible to first calculate the fluxes without plotting them
+(<code>flux_calc</code> takes the output of <code>flux_quality</code> as
+input) and target fluxes to visually inspect afterwards. Here are some
+suggestions on how to select which fluxes to inspect:</p>
+<ul>
+<li>target specific campaigns or dates</li>
+<li>random sampling of flux IDs, campaigns, or dates</li>
+<li>target measurements based on other variables (wind speed for
+example)</li>
+<li>apply over conservative thresholds in <code>flux_quality</code>
+(therefore assuming only false negative) and inspect flagged
+measurements only</li>
+<li>do quality control statistics, targeting unrealistic changes in
+fluxes over time or outliers</li>
+</ul>
+<p>Filtering the data directly before plotting is made convenient as
+<code>fluxible</code> follows the <code>tidyverse</code> grammar <span class="citation">(Wickham <em>et al.</em>, 2019)</span>, as shown in the
+example below.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">flags_lia</span> <span class="op">|&gt;</span> <span class="co"># the output of flux_quality</span></span>
+<span>  <span class="co"># apply here dplyr::filter on f_quality_flags, f_fluxid,</span></span>
+<span>  <span class="co"># sample(f_fluxid) for random sampling of fluxid, campaigns,</span></span>
+<span>  <span class="co"># dates, windspeed...</span></span>
+<span>  <span class="co"># flux_plot will plot only the measurements passing the filter</span></span>
+<span>  <span class="co"># and not the entire flags_lia df</span></span>
+<span>  <span class="fu"><a href="../reference/flux_plot.html">flux_plot</a></span><span class="op">(</span></span>
+<span>    f_conc <span class="op">=</span> <span class="va">conc</span>,</span>
+<span>    f_datetime <span class="op">=</span> <span class="va">datetime</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+</blockquote>
 <p>Based on the quality flags and the plots, the user can decide to run
 <code>flux_fitting</code> and/or <code>flux_quality</code> again with
-different parameters. Here we will cut the last 60 seconds of the fluxes
-(cutting the last third). We also detected a flux that do not look
-correct. Sometimes measurements will pass the automated quality control
-but the user might have reasons to still discard them (or the opposite).
-That is what the <code>force_discard</code>, <code>force_ok</code>,
-<code>force_lm</code> and <code>force_zero</code> arguments are for.
-<!-- Or course -->
+different parameters.
+<!-- [If a majority of fluxes show noise or other quality issues at the end of the measurement, like flux 100 in the example, the user could decide to redefine the focus window with the `start_cut`, `end_cut and `cut_direction` arguments.]{.mark} -->
+<!-- [The `cut_direction` argument decides how the focus window is defined: `"none"` (default) defines the focus window at `start + start_cut` to `end - end_cut`, `"from_start"` makes it `start + start_cut` to `start + end_cut`; "from_end" makes it `end - start_cut` to `end - end_cut`.]{.mark} -->
+<!-- [This accommodates if the initial measurements' length are inconsistent but the user wants to cut all of them at the same length.]{.mark} -->
+<!-- [In case subsets of the measurements require a different focus window, we recommend applying `flux_fitting` to specific subset separately and then rebinding the dataset.]{.mark} -->
+<!-- [And if a detailed flux-by-flux cutting is needed, a `field_record` including an end column should be used in `flux_match`.]{.mark} --></p>
+<p>If a majority of fluxes show anomalies issues at the end of the
+measurement, like flux 100 in the example, the user could decide to
+prune the last 60 seconds of the measurements.
+<!-- Here we will cut the last 60 seconds of the fluxes (cutting the last third). -->
+<!-- We also detected a flux that do not look correct. --> Sometimes
+measurements will pass the automated quality control but the user might
+have reasons to still discard them (or the opposite). That is what the
+<code>force_discard</code>, <code>force_ok</code>, <code>force_lm</code>
+and <code>force_zero</code> arguments are for. <!-- Or course -->
 <!-- For the sake of reproducibility, this argument should be the last option and be accompanied with a justification. -->
 In our example, for the measurement with fluxID 101, the exponential
 model is not providing a good fit (resulting in the flux being
-discarded) due to some noise at the start of the measurement. We take
-the decision to force the use of the linear model instead, because it
-seems to fit much better (given that the flux looks quite flat, we could
-also force it to be zero). This is achieved with
-<code>force_lm = 101</code>. Several fluxIDs can be provided to the
+discarded) due to some noise at the start of the measurement and it gets
+flagged to be discarded.
+<!-- We take the decision to force the use of the linear model instead, because it seems to fit much better (given that the flux looks quite flat, we could also force it to be zero). -->
+The user could decide to replace that flux by zero instead (that would
+need to be reported and defended). This is achieved with
+<code>force_zero = 101</code>. Several fluxIDs can be provided to the
 <code>force_</code> arguments by providing a vector:
 <code>force_zero = c(100, 101)</code>.</p>
+<blockquote>
+<p>ℹ️ Redefining the focus window</p>
+<p>It might be sometime necessary to redefine the focus window (the
+portion of the flux used for model fitting) in case of consistent
+anomalies at one or both ends of the measurements. This is done with
+arguments <code>start_cut</code>, <code>end_cut</code> and
+<code>cut_direction</code> in <code>flux_fitting</code>. The
+<code>cut_direction</code> argument decides how the focus window is
+defined: <code>"none"</code> (default) defines the focus window at
+<code>start + start_cut</code> to <code>end - end_cut</code>,
+<code>"from_start"</code> makes it <code>start + start_cut</code> to
+<code>start + end_cut</code>; <code>"from_end"</code> makes it
+<code>end - start_cut</code> to <code>end - end_cut</code>. This
+accommodates if the initial measurements’ length are inconsistent but
+the user wants to cut all of them at the same length.</p>
+<p>Those parameters are applied homogeneously to the entire dataset and
+do not allow for flux specific focus window. In case subsets of the
+measurements require a different focus window, we recommend applying
+<code>flux_fitting</code> to specific subset separately and then
+rebinding the dataset. And if a detailed flux-by-flux cutting is needed,
+a <code>field_record</code> including an end column should be used in
+<code>flux_match</code> instead of a fixed measurement length.</p>
+</blockquote>
 <p>The function <code>flux_fitting</code> is run again, with an end cut
 of 60 seconds:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -385,28 +427,28 @@ of 60 seconds:</p>
 <span>    fit_type <span class="op">=</span> <span class="st">"exp_zhao18"</span>,</span>
 <span>    end_cut <span class="op">=</span> <span class="fl">60</span> <span class="co"># we decided to cut the last 60 seconds of the measurements</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<p>Then <code>flux_quality</code> again, forcing the use of the linear
-model for fluxID 101:</p>
+<p>Then <code>flux_quality</code> again, possibly forcing a “zero” flag
+for fluxID 101:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">flags_liahovden_60</span> <span class="op">&lt;-</span> <span class="va">fits_liahovden_60</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/flux_quality.html">flux_quality</a></span><span class="op">(</span></span>
-<span>    <span class="va">conc</span>,</span>
-<span>    force_lm <span class="op">=</span> <span class="fl">101</span> <span class="co"># we force the use of the linear model for fluxid 101</span></span>
+<span>    <span class="va">conc</span></span>
+<span>    <span class="co"># force_zero = 101 # to replace flux 101 with 0 instead of discarding</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  Total number of measurements: 138</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  ok   127     92 %</span></span>
 <span><span class="co">#&gt;  zero     8   6 %</span></span>
-<span><span class="co">#&gt;  discard      2   1 %</span></span>
-<span><span class="co">#&gt;  force_lm     1   1 %</span></span>
+<span><span class="co">#&gt;  discard      3   2 %</span></span>
 <span><span class="co">#&gt;  force_discard    0   0 %</span></span>
 <span><span class="co">#&gt;  start_error      0   0 %</span></span>
 <span><span class="co">#&gt;  no_data      0   0 %</span></span>
 <span><span class="co">#&gt;  force_ok     0   0 %</span></span>
 <span><span class="co">#&gt;  force_zero   0   0 %</span></span>
+<span><span class="co">#&gt;  force_lm     0   0 %</span></span>
 <span><span class="co">#&gt;  no_slope     0   0 %</span></span></code></pre></div>
-<p>And finally <code>flux_plot</code> again to check the output:</p>
+<p>And finally <code>flux_plot</code> again to check the output.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">flags_liahovden_60</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">f_fluxid</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">54</span>, <span class="fl">95</span>, <span class="fl">100</span>, <span class="fl">101</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -423,23 +465,34 @@ model for fluxID 101:</p>
 <span>    <span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
 <div class="figure">
-<img src="fluxible_files/figure-html/plot_exp_cut-1.png" alt="Output of `flux_plot` for fluxid 54, 95, 100 and 101 after refitting with a 60 seconds end cut." width="768"><p class="caption">
-Output of <code>flux_plot</code> for fluxid 54, 95, 100 and 101 after
-refitting with a 60 seconds end cut.
+<img src="fluxible_files/figure-html/fig-plot_exp_cut-1.png" alt="Output of `flux_plot` for fluxid 54, 95, 100 and 101, after quality check. Concentration is in ppm in this example." width="768"><p class="caption">
+Output of <code>flux_plot</code> for fluxid 54, 95, 100 and 101, after
+quality check. Concentration is in ppm in this example.
 </p>
 </div>
+<blockquote>
+<p>ℹ️ The importance of reporting</p>
+<p>Because of <code>fluxible</code>‘s flexibility in choice of models,
+quality thresholds and focus window selection, it is crucial that users
+report the applied parameters when describing their method, for
+reproducibility purpose. In the example above, flux ID 95 changed
+quality flag after changing the focus window. Since the fit and its
+diagnosis are now done on fewer points, it can indeed change the quality
+flag. Note that all those parameters are functions’ arguments, making
+reporting as simple as sharing clean and documented code.</p>
+</blockquote>
 </div>
 <div class="section level2">
 <h2 id="flux-calculation">Flux calculation<a class="anchor" aria-label="anchor" href="#flux-calculation"></a>
 </h2>
 <p>Now that we are satisfied with the fit, we can calculate fluxes with
 <code>flux_calc</code>, which applies the following equation:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">flux</mtext><mo>=</mo><mi>C</mi><mi>′</mi><mrow><mo stretchy="true" form="prefix">(</mo><msub><mi>t</mi><mn>0</mn></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>×</mo><mfrac><mrow><mi>P</mi><mo>×</mo><mi>V</mi></mrow><mrow><mi>R</mi><mo>×</mo><mi>T</mi><mo>×</mo><mi>A</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">
-\text{flux}=C'(t_0)\times \frac{P\times V}{R\times T\times A}
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mtext mathvariant="normal">flux</mtext><mo>=</mo><mtext mathvariant="normal">slope</mtext><mo>×</mo><mfrac><mrow><mi>P</mi><mo>×</mo><mi>V</mi></mrow><mrow><mi>R</mi><mo>×</mo><mi>T</mi><mo>×</mo><mi>A</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">
+\text{flux}=\text{slope}\times \frac{P\times V}{R\times T\times A}
 </annotation></semantics></math></p>
 <p>where</p>
 <p>flux: the flux of gas at the surface of the plot (mmol m<sup>-2</sup>
-h<sup>-1</sup>)</p>
+s<sup>-1</sup>)</p>
 <p>slope: slope estimate (ppm s<sup>-1</sup>)</p>
 <p>P: pressure (atm)</p>
 <p>V: volume of the chamber and tubing (L)</p>
@@ -452,11 +505,12 @@ quality checked) or <code>f_slope_corr</code> which is the recommended
 slope after quality check with <code>flux_quality</code>. Here the
 volume is defined as a constant for all the measurements but it is also
 possible to provide the volume as a separate column
-(<code>setup_volume</code>). The <code>cols_ave</code> arguments
-indicates which column(s), i.e. the environmental data, should be
-averaged for each flux. When setting the argument
-<code>cut = TRUE</code> (default), the same cut that was applied in
-<code>flux_fitting</code> will be used.
+(<code>setup_volume</code>).
+<!-- [Calculation parameters that are variables (`setup_volume` or `atm_pressure` for example) need to be in the dataframe when running `flux_calc`, but if does not matter if they ]{.mark} -->
+The <code>cols_ave</code> arguments indicates which column(s), i.e. the
+environmental data, should be averaged for each flux. When setting the
+argument <code>cut = TRUE</code> (default), the same cut that was
+applied in <code>flux_fitting</code> will be used.
 <!-- , applying the same cut that were applied in `flux_fitting` (if `cut = TRUE`, which is the default). -->
 The <code>cols_sum</code> and <code>cols_med</code> do the same for sum
 and median respectively. In the output, those columns get appended with
@@ -467,19 +521,42 @@ dataset and would like their average for each measurement. The
 As <code>flux_calc</code> transforms the dataframe from one row per
 datapoint of gas concentration to one row per flux, the values in the
 columns specified in <code>cols_keep</code> have to be constant within
-each measurement (if not, rows will be repeated to accomodate for non
+each measurement (if not, rows will be repeated to accommodate for non
 constant values). Other columns can be nested in a column called
 <code>nested_variables</code> with <code>cols_nest</code>
 (<code>cols_nest = "all"</code> will nest all the columns present in the
 dataset, except those provided to <code>cols_keep</code>).</p>
-<p>The units of gas concentration, <code>conc_unit</code>, can be ppm or
-ppb. The units of the calculated flux can be
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mi>m</mi><mi>o</mi><mi>l</mi><mi>/</mi><msup><mi>m</mi><mn>2</mn></msup><mi>/</mi><mi>h</mi></mrow><annotation encoding="application/x-tex">mmol/m^2/h</annotation></semantics></math>
-(<code>flux_unit = "mmol"</code>) or
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>μ</mi><mi>m</mi><mi>o</mi><mi>l</mi><mi>/</mi><msup><mi>m</mi><mn>2</mn></msup><mi>/</mi><mi>h</mi></mrow><annotation encoding="application/x-tex">\mu mol/m^2/h</annotation></semantics></math>
-(<code>flux_unit = "micromol"</code>). Temperature in the input can be
-in Celsius, Kelvin or Fahrenheit, and will be returned in the same unit
-in the output.</p>
+<!-- The units of gas concentration, `conc_unit`, can be ppm or ppb. -->
+<!-- The units of the calculated flux can be $mmol\ m^{-2}\ h^{-1}$ (`flux_unit = "mmol"`) or $\mu mol\ m^{-2}\ h$ (`flux_unit = "micromol"`). -->
+<p>The units of gas concentration, <code>conc_unit</code>, can be
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mi>m</mi><mi>o</mi><mi>l</mi><mspace width="0.222em"></mspace><mi>m</mi><mi>o</mi><msup><mi>l</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">mmol\ mol^{-1}</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mi>p</mi><mi>m</mi></mrow><annotation encoding="application/x-tex">ppm</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mi>p</mi><mi>b</mi></mrow><annotation encoding="application/x-tex">ppb</annotation></semantics></math>
+or
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mi>p</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">ppt</annotation></semantics></math>.
+The units of the calculated flux is decided by the user and should be in
+the form
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mi>m</mi><mi>o</mi><mi>u</mi><mi>n</mi><mi>t</mi><mspace width="0.222em"></mspace><mi>s</mi><mi>u</mi><mi>r</mi><mi>f</mi><mi>a</mi><mi>c</mi><msup><mi>e</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mspace width="0.222em"></mspace><mi>t</mi><mi>i</mi><mi>m</mi><msup><mi>e</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">amount\ surface^{-1}\ time^{-1}</annotation></semantics></math>.
+Amount can be
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mi>o</mi><mi>l</mi></mrow><annotation encoding="application/x-tex">mol</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mi>m</mi><mi>o</mi><mi>l</mi></mrow><annotation encoding="application/x-tex">mmol</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>μ</mi><mi>m</mi><mi>o</mi><mi>l</mi></mrow><annotation encoding="application/x-tex">\mu mol</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>m</mi><mi>o</mi><mi>l</mi></mrow><annotation encoding="application/x-tex">nmol</annotation></semantics></math>
+or
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mi>m</mi><mi>o</mi><mi>l</mi></mrow><annotation encoding="application/x-tex">pmol</annotation></semantics></math>;
+surface can be
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>m</mi><mn>2</mn></msup><annotation encoding="application/x-tex">m^2</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><msup><mi>m</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">dm^2</annotation></semantics></math>
+or
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>c</mi><msup><mi>m</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">cm^2</annotation></semantics></math>;
+time can be
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>a</mi><mi>y</mi></mrow><annotation encoding="application/x-tex">day</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi><mi>o</mi><mi>u</mi><mi>r</mi></mrow><annotation encoding="application/x-tex">hour</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mi>i</mi><mi>n</mi><mi>u</mi><mi>t</mi><mi>e</mi></mrow><annotation encoding="application/x-tex">minute</annotation></semantics></math>
+or
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>s</mi><mi>e</mi><mi>c</mi><mi>o</mi><mi>n</mi><mi>d</mi></mrow><annotation encoding="application/x-tex">second</annotation></semantics></math>.
+Temperature in the input can be in Celsius, Kelvin or Fahrenheit, and
+will be returned in the same unit in the output.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fluxes_liahovden_60</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flux_calc.html">flux_calc</a></span><span class="op">(</span></span>
 <span>  slopes_df <span class="op">=</span> <span class="va">flags_liahovden_60</span>,</span>
@@ -492,7 +569,7 @@ in the output.</p>
 <span>  setup_volume <span class="op">=</span> <span class="fl">24.575</span>, <span class="co"># in liters, can also be a variable</span></span>
 <span>  atm_pressure <span class="op">=</span> <span class="fl">1</span>, <span class="co"># in atm, can also be a variable</span></span>
 <span>  plot_area <span class="op">=</span> <span class="fl">0.0625</span>, <span class="co"># in m2, can also be a variable</span></span>
-<span>  cols_keep <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"turfID"</span>, <span class="st">"type"</span>, <span class="st">"round"</span><span class="op">)</span>,</span>
+<span>  cols_keep <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"turfID"</span>, <span class="st">"type"</span>, <span class="st">"measurement_round"</span><span class="op">)</span>,</span>
 <span>  cols_ave <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"temp_soil"</span>, <span class="st">"PAR"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <!-- The output is in $mmol/m^2/h$ and the calculation is as follow: -->
@@ -522,17 +599,17 @@ A: area of chamber frame base (m^2^) -->
 <!-- Next we can calculated gross ecosystem production (GEP) and plot the results: -->
 <!-- Structure of the dataframe with calculated fluxes, `fluxes_liahovden_60`: -->
 <pre><code><span><span class="co">#&gt; tibble [138 × 11] (S3: tbl_df/tbl/data.frame)</span></span>
-<span><span class="co">#&gt;  $ f_fluxid      : Factor w/ 138 levels "1","2","3","4",..: 1 2 3 4 ..</span></span>
-<span><span class="co">#&gt;  $ temp_soil_ave : num [1:138] 6.96 7.01 6.83 6.83 2.5 ...</span></span>
-<span><span class="co">#&gt;  $ PAR_ave       : num [1:138] 24.242 1.05 28.809 0.403 48.062 ...</span></span>
-<span><span class="co">#&gt;  $ turfID        : chr [1:138] "4 AN1C 4" "4 AN1C 4" "27 AN3C 27" ""..</span></span>
-<span><span class="co">#&gt;  $ type          : chr [1:138] "NEE" "ER" "NEE" "ER" ...</span></span>
-<span><span class="co">#&gt;  $ round         : num [1:138] 1 1 1 1 1 1 2 2 2 2 ...</span></span>
-<span><span class="co">#&gt;  $ f_slope_corr  : num [1:138] -0.2258 0.0718 -0.3718 0.2433 -0.2865..</span></span>
-<span><span class="co">#&gt;  $ f_temp_air_ave: num [1:138] 3.21 3.3 3.15 2.96 2.81 ...</span></span>
-<span><span class="co">#&gt;  $ datetime      : POSIXct[1:138], format: "2022-07-27 05:37:30" ...</span></span>
-<span><span class="co">#&gt;  $ f_flux        : num [1:138] -14.09 4.48 -23.22 15.2 -17.91 ...</span></span>
-<span><span class="co">#&gt;  $ f_model       : chr [1:138] "exp_zhao18" "exp_zhao18" "exp_zhao1"..</span></span></code></pre>
+<span><span class="co">#&gt;  $ f_fluxid         : Factor w/ 138 levels "1","2","3","4",..: 1 2 3..</span></span>
+<span><span class="co">#&gt;  $ temp_soil_ave    : num [1:138] 6.96 7.01 6.83 6.83 2.5 ...</span></span>
+<span><span class="co">#&gt;  $ PAR_ave          : num [1:138] 24.242 1.05 28.809 0.403 48.062 ...</span></span>
+<span><span class="co">#&gt;  $ turfID           : chr [1:138] "4 AN1C 4" "4 AN1C 4" "27 AN3C 27"..</span></span>
+<span><span class="co">#&gt;  $ type             : chr [1:138] "NEE" "ER" "NEE" "ER" ...</span></span>
+<span><span class="co">#&gt;  $ measurement_round: num [1:138] 1 1 1 1 1 1 2 2 2 2 ...</span></span>
+<span><span class="co">#&gt;  $ f_slope_corr     : num [1:138] -0.2258 0.0718 -0.3718 0.2433 -0.2..</span></span>
+<span><span class="co">#&gt;  $ f_temp_air_ave   : num [1:138] 3.21 3.3 3.15 2.96 2.81 ...</span></span>
+<span><span class="co">#&gt;  $ datetime         : POSIXct[1:138], format: "2022-07-27 05:37:30" ..</span></span>
+<span><span class="co">#&gt;  $ f_flux           : num [1:138] -14.09 4.48 -23.22 15.2 -17.91 ...</span></span>
+<span><span class="co">#&gt;  $ f_model          : chr [1:138] "exp_zhao18" "exp_zhao18" "exp_zh"..</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="gross-primary-production-calculation">Gross Primary Production calculation<a class="anchor" aria-label="anchor" href="#gross-primary-production-calculation"></a>
@@ -549,38 +626,62 @@ isolated from ER but is often a variable of interest.
 <!-- It is not possible to isolate GEP to measure it as ER is an ongoing background process. -->
 <!-- Instead, net ecosystem exchange (NEE), the sum of GEP and ER, is measured, and we then calculate GEP. -->
 <!-- As GEP cannot be measured it is calculated as $GEP = NEE - ER$. -->
-The function <code>flux_gep</code> calculates GPP as
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mi>P</mi><mi>P</mi><mo>=</mo><mi>N</mi><mi>E</mi><mi>E</mi><mo>−</mo><mi>E</mi><mi>R</mi></mrow><annotation encoding="application/x-tex">GPP = NEE - ER</annotation></semantics></math>
-and returns a dataset in long format, with NEE, ER and GPP as flux type
-and filling any variables specified by the user (<code>cols_keep</code>
-argument) with their values corresponding to the NEE measurement. Other
-type of flux than ER and NEE, if present in the dataset (e.g. light
-response curves, soil respiration) are kept.
+The function <code>flux_diff</code> calculates the difference between
+two types of fluxes as
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>i</mi><mi>f</mi><mi>f</mi><mo>=</mo><mi>t</mi><mi>y</mi><mi>p</mi><mi>e</mi><mi>_</mi><mi>a</mi><mo>−</mo><mi>t</mi><mi>y</mi><mi>p</mi><mi>e</mi><mi>_</mi><mi>b</mi></mrow><annotation encoding="application/x-tex">diff = type\_a - type\_b</annotation></semantics></math>
+and returns a dataset in long format, with type_a, type_b and diff as
+flux type. Any variables specified by the user (<code>cols_keep</code>
+argument) will be filled with their values corresponding to the type_a
+measurement. Other type of flux than type_a and type_b, if present in
+the dataset (e.g. light response curves, soil respiration) are kept.
 <!-- The timestamps and PAR value from the NEE measurement are also attributed to the GEP one and any variable specified by the user. -->
-Each NEE and ER measurements need to be paired together for this
+Each type_a and type_b measurements need to be paired together for this
 calculation. The <code>id_cols</code> argument specifies which columns
-should be used for pairing (e.g., date, campaign). Note that the more
-generic <code>flux_diff</code> can also be used.</p>
+should be used for pairing (e.g., date, campaign). The
+<code>flux_diff</code> function can be used to calculate GPP in the case
+of
+CO<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi></mi><mn>2</mn></msub><annotation encoding="application/x-tex">_2</annotation></semantics></math>
+fluxes, or transpiration with
+H<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi></mi><mn>2</mn></msub><annotation encoding="application/x-tex">_2</annotation></semantics></math>O
+fluxes.
+<!-- Since those measurements were done continuously for 24 hours, we added a pairID column, which is pairing each NEE measurement with its following ER measurement. -->
+<!-- This pairs the NEE and ER measurements of the same plot and same round of measurement because we systematically measured ER after NEE for each plot. --></p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="va">gpp_liahovden_60</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flux_gpp.html">flux_gpp</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">gpp_liahovden_60</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/flux_diff.html">flux_diff</a></span><span class="op">(</span></span>
 <span>  fluxes_df <span class="op">=</span> <span class="va">fluxes_liahovden_60</span>,</span>
 <span>  type_col <span class="op">=</span> <span class="va">type</span>, <span class="co"># the column specifying the type of measurement</span></span>
-<span>  f_datetime <span class="op">=</span> <span class="va">datetime</span>,</span>
-<span>  id_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"round"</span>, <span class="st">"turfID"</span><span class="op">)</span>,</span>
-<span>  cols_keep <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"temp_soil_ave"</span>, <span class="st">"PAR_ave"</span><span class="op">)</span>, <span class="co"># or "none" (default) or "all"</span></span>
-<span>  nee_arg <span class="op">=</span> <span class="st">"NEE"</span>, <span class="co"># default value</span></span>
-<span>  er_arg <span class="op">=</span> <span class="st">"ER"</span> <span class="co"># default value</span></span>
+<span>  id_cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"measurement_round"</span>, <span class="st">"turfID"</span><span class="op">)</span>,</span>
+<span>  cols_keep <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"temp_soil_ave"</span>, <span class="st">"PAR_ave"</span>, <span class="st">"datetime"</span><span class="op">)</span>, <span class="co"># or "none" or "all"</span></span>
+<span>  type_a <span class="op">=</span> <span class="st">"NEE"</span>, <span class="co"># we want the difference between NEE</span></span>
+<span>  type_b <span class="op">=</span> <span class="st">"ER"</span>, <span class="co"># and ER</span></span>
+<span>  diff_name <span class="op">=</span> <span class="st">"GPP"</span> <span class="co"># the name of the calculated flux</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Structure of the flux dataset including GPP:</p>
-<pre><code><span><span class="co">#&gt; tibble [207 × 7] (S3: tbl_df/tbl/data.frame)</span></span>
-<span><span class="co">#&gt;  $ datetime     : POSIXct[1:207], format: "2022-07-27 05:37:30" ...</span></span>
-<span><span class="co">#&gt;  $ type         : chr [1:207] "GPP" "NEE" "ER" "GPP" ...</span></span>
-<span><span class="co">#&gt;  $ f_flux       : num [1:207] -18.57 -14.09 4.48 -38.42 -23.22 ...</span></span>
-<span><span class="co">#&gt;  $ temp_soil_ave: num [1:207] 6.96 6.96 7.01 6.83 6.83 ...</span></span>
-<span><span class="co">#&gt;  $ PAR_ave      : num [1:207] 24.24 24.24 1.05 28.81 28.81 ...</span></span>
-<span><span class="co">#&gt;  $ round        : num [1:207] 1 1 1 1 1 1 1 1 1 2 ...</span></span>
-<span><span class="co">#&gt;  $ turfID       : chr [1:207] "4 AN1C 4" "4 AN1C 4" "4 AN1C 4" "27 "..</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; tibble [204 × 7] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;  $ type             : chr [1:204] "ER" "GPP" "NEE" "ER" ...</span></span>
+<span><span class="co">#&gt;  $ f_flux           : num [1:204] 4.48 -18.57 -14.09 15.2 -38.42 ...</span></span>
+<span><span class="co">#&gt;  $ temp_soil_ave    : num [1:204] 7.01 6.96 6.96 6.83 6.83 ...</span></span>
+<span><span class="co">#&gt;  $ PAR_ave          : num [1:204] 1.05 24.242 24.242 0.403 28.809 ...</span></span>
+<span><span class="co">#&gt;  $ datetime         : POSIXct[1:204], format: "2022-07-27 05:42:00" ..</span></span>
+<span><span class="co">#&gt;  $ measurement_round: num [1:204] 1 1 1 1 1 1 1 1 1 2 ...</span></span>
+<span><span class="co">#&gt;  $ turfID           : chr [1:204] "4 AN1C 4" "4 AN1C 4" "4 AN1C 4" "..</span></span></code></pre>
+<p>The fluxes can then be transformed in units more suited for
+publishing, for example
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mi>g</mi><mo>*</mo><msup><mi>m</mi><mrow><mo>−</mo><mn>2</mn></mrow></msup><mo>*</mo><msup><mi>h</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">mg * m^{-2} * h^{-1}</annotation></semantics></math>:</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">gpp_liahovden_60</span> <span class="op">&lt;-</span> <span class="va">gpp_liahovden_60</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
+<span>    flux_mg <span class="op">=</span> <span class="va">f_flux</span> <span class="op">*</span> <span class="fl">0.0440095</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">#&gt; tibble [204 × 8] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;  $ type             : chr [1:204] "ER" "GPP" "NEE" "ER" ...</span></span>
+<span><span class="co">#&gt;  $ f_flux           : num [1:204] 4.48 -18.57 -14.09 15.2 -38.42 ...</span></span>
+<span><span class="co">#&gt;  $ temp_soil_ave    : num [1:204] 7.01 6.96 6.96 6.83 6.83 ...</span></span>
+<span><span class="co">#&gt;  $ PAR_ave          : num [1:204] 1.05 24.242 24.242 0.403 28.809 ...</span></span>
+<span><span class="co">#&gt;  $ datetime         : POSIXct[1:204], format: "2022-07-27 05:42:00" ..</span></span>
+<span><span class="co">#&gt;  $ measurement_round: num [1:204] 1 1 1 1 1 1 1 1 1 2 ...</span></span>
+<span><span class="co">#&gt;  $ turfID           : chr [1:204] "4 AN1C 4" "4 AN1C 4" "4 AN1C 4" "..</span></span>
+<span><span class="co">#&gt;  $ flux_mg          : num [1:204] 0.197 -0.817 -0.62 0.669 -1.691 ...</span></span></code></pre>
 <div class="section level4 unnumbered">
 <h4 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h4>
@@ -590,6 +691,11 @@ Hutchinson, G.L. and Mosier, A.R. (1981), <span>“<a href="https://doi.org/10.2
 <span>Soil Cover Method</span> for <span>Field Measurement</span> of
 <span>Nitrous Oxide Fluxes</span></a>”</span>, <em>Soil Science Society
 of America Journal</em>, Vol. 45 No. 2, pp. 311–316.
+</div>
+<div id="ref-tidyverse2019" class="csl-entry">
+Wickham, H., Averick, M., Bryan, J., Chang, W., McGowan, L.D., François,
+R., Grolemund, G., <em>et al.</em> (2019), <span>“<a href="https://doi.org/10.21105/joss.01686" class="external-link">Welcome to the <span class="nocase">tidyverse</span></a>”</span>, <em>Journal of Open Source
+Software</em>, Vol. 4 No. 43, p. 1686.
 </div>
 <div id="ref-zhaoCalculationDaytimeCO22018" class="csl-entry">
 Zhao, P., Hammerle, A., Zeeman, M. and Wohlfahrt, G. (2018), <span>“<a href="https://doi.org/10.1016/j.agrformet.2018.08.022" class="external-link">On the
