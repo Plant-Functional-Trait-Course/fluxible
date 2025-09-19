@@ -55,10 +55,10 @@
 #' `longpdf_args` specify the number of columns and the ratio of the facet
 #' respectively. This method is considerably faster than `pdfpages`, because
 #' it bypasses `facet_wrap_paginate`, but is a bit less aesthetic.
-#' @importFrom dplyr select distinct mutate
+#' @importFrom dplyr select distinct mutate n_distinct
 #' @importFrom ggplot2 ggplot aes geom_point geom_line scale_color_manual
 #' scale_x_datetime ylim facet_wrap labs geom_text theme_bw ggsave
-#' scale_linetype_manual guides guide_legend
+#' scale_linetype_manual guides guide_legend geom_vline
 #' @importFrom purrr quietly
 #' @importFrom stringr str_detect
 #' @importFrom tidyr unite
@@ -100,27 +100,25 @@ flux_plot <- function(slopes_df,
                       print_plot = "FALSE",
                       output = "print_only",
                       ggsave_args = list()) {
-  args_ok <- flux_fun_check(list(
+
+  # fortify data
+  slopes_params <- flux_fortify(
+    slopes_df = slopes_df,
+    f_conc = {{f_conc}},
+    f_datetime = {{f_datetime}},
     f_ylim_upper = f_ylim_upper,
     f_ylim_lower = f_ylim_lower,
+    f_facetid = f_facetid,
     y_text_position = y_text_position
-  ),
-  fn = list(is.numeric, is.numeric, is.numeric),
-  msg = rep("has to be numeric", 3))
+  )
+  slopes_df <- slopes_params$slopes_df
 
-  if (any(!args_ok))
-    stop("Please correct the arguments", call. = FALSE)
-
+  # prepare for plotting
   output <- match.arg(output, c("pdfpages", "ggsave", "print_only", "longpdf"))
 
   if (output == "print_only") {
     print_plot <- "TRUE"
   }
-
-  fit_type <- flux_fit_type(
-    slopes_df
-  )
-
 
   if (f_plotname == "") {
     f_plotname <- as_label(enquo(slopes_df))
@@ -128,141 +126,44 @@ flux_plot <- function(slopes_df,
 
   if (output %in% c("pdfpages", "ggsave", "longpdf")) {
     f_plotname <- paste("f_quality_plots/", f_plotname, sep = "")
-
     folder <- "./f_quality_plots"
     if (!file.exists(folder)) {
       dir.create(folder)
     }
   }
 
-  # making slopes_df as light as possible
-  slopes_df <- slopes_df |>
-    select(
-      {{f_conc}},
-      {{f_datetime}},
-      all_of(f_facetid),
-      any_of(c(
-        "f_quality_flag",
-        "f_fluxid",
-        "f_fit",
-        "f_start", "f_pvalue_lm", "f_start_z",
-        "f_rsquared", "f_pvalue", "f_fit_slope",
-        "f_RMSE", "f_cor_coef", "f_b", "f_gfactor",
-        "f_cut", "f_rsquared_lm", "f_fit_lm",
-        "f_model"
-      ))
-    )
+  # build plot
+  f_plot <- slopes_df |>
+    ggplot(aes({{f_datetime}}))
 
-  if (
-    max(slopes_df[[as_label(enquo(f_conc))]], na.rm = TRUE) > f_ylim_upper
-  ) {
-    message("Some concentration data points will not be displayed
-    because f_ylim_upper is too low.")
+  if (any(names(slopes_df) == "f_start_z")) {
+
+    f_plot <- f_plot +
+      geom_vline(
+        mapping = aes(xintercept = .data$f_start_z),
+        data = distinct(slopes_df, .data$f_facetid, .keep_all = TRUE),
+        color = "grey",
+        linewidth = 0.5
+      )
   }
-
-  if (max(slopes_df$f_fit, na.rm = TRUE) > f_ylim_upper) {
-    message("Part of the fit will not be displayed
-    because f_ylim_upper is too low.")
-  }
-
-  if (
-    min(slopes_df[[as_label(enquo(f_conc))]], na.rm = TRUE) < f_ylim_lower
-  ) {
-    message("Some concentration data points will not be displayed
-    because f_ylim_lower is too high.")
-  }
-
-  if (min(slopes_df$f_fit, na.rm = TRUE) < f_ylim_lower) {
-    message("Part of the fit will not be displayed
-    because f_ylim_lower is too high.")
-  }
-
-  flags <- slopes_df |>
-    select("f_fluxid", "f_quality_flag") |>
-    distinct() |>
-    filter(.data$f_quality_flag == "no data") |>
-    mutate(
-      f_warnings = paste(
-        "\n", "fluxID", .data$f_fluxid, "dropped because there is no data"
-      ),
-      f_warnings = as.character(.data$f_warnings)
-    ) |>
-    pull(.data$f_warnings)
-
-  f_warnings <- str_c(flags)
-
-
-  if (any(!is.na(f_warnings))) message(f_warnings)
-
-  slopes_df <- slopes_df |>
-    filter(
-      (.data$f_quality_flag != "no data") |> replace_na(TRUE)
-    )
-
-  # extracting attributes before they get stripped later on
-  kappamax <- attr(slopes_df, "kappamax")
-
-  nb_fluxid <- slopes_df |>
-    distinct(.data$f_fluxid) |>
-    nrow()
-
-  # costumize facet ID
-  slopes_df <- slopes_df |>
-    unite(
-      col = "f_facetid",
-      all_of(f_facetid),
-      sep = " "
-    ) |>
-    mutate(
-      f_facetid = fct_reorder(f_facetid, {{f_datetime}})
-    )
-
-
-  # testing if f_facetid is unique, otherwise facet will make a mess
-  nb_fluxid_post <- slopes_df |>
-    distinct(.data$f_facetid) |>
-    nrow()
-
-  if (nb_fluxid != nb_fluxid_post) {
-    stop("Please use a f_facetid that is unique for each measurement")
-  }
-
-
-
-  if (str_detect(fit_type, "exp")) {
-    f_plot <- flux_plot_exp(
-      slopes_df,
-      {{f_conc}},
-      {{f_datetime}},
-      y_text_position = y_text_position,
-      kappamax = kappamax
-    )
-  }
-
-
-  if (fit_type == "linear") {
-    f_plot <- flux_plot_lin(
-      slopes_df,
-      {{f_conc}},
-      {{f_datetime}},
-      y_text_position = y_text_position
-    )
-  }
-
-  if (fit_type == "quadratic") {
-    f_plot <- flux_plot_quadratic(
-      slopes_df,
-      {{f_conc}},
-      {{f_datetime}},
-      y_text_position = y_text_position
-    )
-  }
-
-  message("Plotting in progress")
 
   f_plot <- f_plot +
+    geom_point(aes(y = {{f_conc}}, color = .data$f_quality_flag),
+      size = 0.4,
+      na.rm = TRUE
+    ) +
+    geom_text(
+      data = slopes_params$param_df,
+      aes(
+        x = .data$f_start, y = y_text_position,
+        label = .data$print_col
+      ),
+      vjust = 0, hjust = "inward",
+      na.rm = TRUE
+    ) +
     geom_line(
       aes(y = .data$f_fit, linetype = .data$linetype),
+      data = slopes_params$fits_df,
       linewidth = 0.5,
       na.rm = TRUE,
       show.legend = TRUE
@@ -288,41 +189,42 @@ flux_plot <- function(slopes_df,
     ylim(f_ylim_lower, f_ylim_upper) +
     labs(
       title = "Fluxes quality assessment",
-      subtitle = paste(fit_type, "model"),
+      subtitle = paste(slopes_params$fit_type, "model"),
       x = "Datetime",
       y = "Concentration",
       colour = "Quality flags",
       linetype = "Fits"
     ) +
-    guides(color = guide_legend(override.aes = list(linetype = 0, size = 3)))
+    guides(color = guide_legend(override.aes = list(linetype = 0, size = 3))) +
+    theme_bw()
 
+  message("Plotting in progress")
 
-  if (output == "pdfpages") {
-    flux_plot_pdf(f_plot, f_plotname, facet_wrap_args, nb_fluxid)
-  }
-
-  if (output == "longpdf") {
-    flux_plot_longpdf(f_plot, f_plotname, nb_fluxid, longpdf_args)
-  }
-
-  if (output == "ggsave") {
-    message("Saving plots with ggsave.")
-    f_plot <- f_plot +
-      do.call(facet_wrap, # do.call is here to pass arguments as a list
-        args = c(facets = ~f_facetid, facet_wrap_args)
+  # select plotting engine
+  switch(
+    output,
+    pdfpages = flux_plot_pdf(
+      f_plot, f_plotname, facet_wrap_args, slopes_params$nb_fluxid
+    ),
+    longpdf = flux_plot_longpdf(
+      f_plot, f_plotname, slopes_params$nb_fluxid, longpdf_args
+    ),
+    ggsave = {
+      message("Saving plots with ggsave.")
+      f_plot <- flux_print_plot(f_plot, facet_wrap_args)
+      do.call(
+        ggsave,
+        args = c(filename = f_plotname, ggsave_args)
       )
-    do.call(
-      ggsave,
-      args = c(filename = f_plotname, ggsave_args)
-    )
 
-    message("Plots saved in f_quality_plots folder.")
-    if (print_plot == TRUE) {
-      return(f_plot)
+      message("Plots saved in f_quality_plots folder.")
+      if (print_plot) {
+        return(f_plot)
+      }
     }
-  }
+  )
 
-  if (print_plot == TRUE) {
+  if (print_plot) {
     f_plot <- flux_print_plot(f_plot, facet_wrap_args)
     return(f_plot)
   }

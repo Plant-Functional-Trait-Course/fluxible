@@ -199,7 +199,7 @@ flux_calc <- function(slopes_df,
     kappamax <- FALSE
   }
 
-  if (kappamax == TRUE) {
+  if (kappamax) {
     cols_keep <- c(cols_keep, "f_model")
   }
 
@@ -209,7 +209,7 @@ flux_calc <- function(slopes_df,
   )
 
 
-  if (cut == TRUE) {
+  if (cut) {
     message("Cutting data according to 'keep_arg'...")
     slopes_df <- flux_cut(
       slopes_df,
@@ -366,9 +366,7 @@ flux_calc <- function(slopes_df,
       mutate(
         f_model = .data$f_model
       )
-  }
-
-  if (isFALSE(kappamax)) {
+  } else {
     fluxes <- fluxes |>
       mutate(
         f_model = fit_type

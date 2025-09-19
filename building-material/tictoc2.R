@@ -68,37 +68,37 @@ result
 
 rep_1 <- time_test(
     replicate = 1,
-    version = "v132",
+    version = "graphics",
     output = "pdfpages"
 )
 
 rep_2 <- time_test(
     replicate = 2,
-    version = "v132",
+    version = "graphics",
     output = "pdfpages"
 )
 
 rep_3 <- time_test(
     replicate = 3,
-    version = "v132",
+    version = "graphics",
     output = "pdfpages"
 )
 
 rep_1l <- time_test(
     replicate = 1,
-    version = "v132",
+    version = "graphics",
     output = "longpdf"
 )
 
 rep_2l <- time_test(
     replicate = 2,
-    version = "v132",
+    version = "graphics",
     output = "longpdf"
 )
 
 rep_3l <- time_test(
     replicate = 3,
-    version = "v132",
+    version = "graphics",
     output = "longpdf"
 )
 
@@ -112,23 +112,38 @@ allreps <- bind_rows(
 )
 
 # check fluxible version!
-saveRDS(allreps, "building-material/v132.rds")
+saveRDS(allreps, "building-material/graphics.rds")
 
+graphics <- readRDS("building-material/graphics.rds")
 v132 <- readRDS("building-material/v132.rds")
 v129 <- readRDS("building-material/v129.rds")
 v128 <- readRDS("building-material/v128.rds")
 v126 <- readRDS("building-material/v126.rds")
 
 etime_all <- bind_rows(
+  graphics,
   v132,
   v129,
   v128,
   v126
-)
+) |>
+separate_wider_delim(fluxible, "_", names = c("version", "output"), cols_remove = FALSE)
 
 etime_all |>
-    ggplot(aes(nb_fluxes, e_time, color = fluxible)) +
+    ggplot(aes(nb_fluxes, e_time, color = version)) +
     geom_point() +
     geom_smooth(se = FALSE) +
-    theme_bw()
-ggsave("building-material/flux_plot_etime.png")
+    theme_bw() +
+    facet_wrap(output ~ ., nrow = 2, scales = "free")
+
+ggsave("building-material/flux_plot_etime_all.png")
+
+etime_all |>
+    filter(version %in% c("v132", "graphics")) |>
+    ggplot(aes(nb_fluxes, e_time, color = version)) +
+    geom_point() +
+    geom_smooth(se = FALSE) +
+    theme_bw() +
+    facet_wrap(output ~ ., nrow = 2, scales = "free")
+
+ggsave("building-material/flux_plot_etime_recent.png")

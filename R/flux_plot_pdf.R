@@ -6,13 +6,13 @@
 #' @param f_plotname name of plot
 #' @importFrom ggforce facet_wrap_paginate
 #' @importFrom progress progress_bar
+#' @importFrom grDevices pdf dev.off
 #' @keywords internal
 
-
 flux_plot_pdf <- function(f_plot,
-    f_plotname,
-    facet_wrap_args,
-    nb_fluxid
+  f_plotname,
+  facet_wrap_args,
+  nb_fluxid
 ) {
 
   # n_pages is too slow to get the number of page

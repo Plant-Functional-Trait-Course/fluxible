@@ -7,7 +7,6 @@
 #' @importFrom ggplot2 ggsave
 #' @keywords internal
 
-
 flux_plot_longpdf <- function(f_plot,
   f_plotname,
   nb_fluxid,

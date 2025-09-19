@@ -6,8 +6,6 @@
 #' @importFrom ggplot2 facet_wrap
 #' @keywords internal
 
-
-
 flux_print_plot <- function(f_plot,
   facet_wrap_args
 ) {
