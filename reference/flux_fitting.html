@@ -11,7 +11,7 @@ to calculate gas fluxes with flux_calc"><meta property="og:image" content="https
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.3.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.3.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -131,7 +131,9 @@ C(t) = C_m + (C_z - C_m) exp(-b * t)
 <dd><p><code>"none"</code> (default) means that the focus window is
 <code>f_start + start_cut</code> to <code>f_end - end_cut</code>; <code>"from_start"</code> makes it
 <code>f_start + start_cut</code> to <code>f_start + end_cut</code>; <code>"from_end"</code> makes it
-<code>f_end - start_cut</code> to <code>f_end - end_cut</code>.</p></dd>
+<code>f_end - start_cut</code> to <code>f_end - end_cut</code>.
+Bug fix since v1.3.4: <code>"from_start"</code> was doing <code>f_start</code> + <code>start_cut</code> to
+<code>f_start</code> + <code>start_cut</code> + <code>end_cut</code></p></dd>
 
 
 <dt id="arg-cz-window">cz_window<a class="anchor" aria-label="anchor" href="#arg-cz-window"></a></dt>

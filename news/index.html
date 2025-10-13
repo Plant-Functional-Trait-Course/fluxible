@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.3.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.3.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,6 +38,14 @@
       <small>Source: <a href="https://github.com/Plant-Functional-Trait-Course/fluxible/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.3.4" id="fluxible-134">fluxible 1.3.4<a class="anchor" aria-label="anchor" href="#fluxible-134"></a></h2>
+<ul><li>
+<code>flux_fitting</code>, bug fix: when using <code>cut_direction = "from_start"</code>, the focus window is now start + <code>start_cut</code> to start + <code>end_cut</code>. Previously was doing start + <code>start_cut</code> to start + <code>start_cut</code> + <code>end_cut</code>
+</li>
+<li>
+<code>flux_plot</code>, bug fix: slopes and flags were displayed at the wrong location on the plot when using <code>start_cut</code>, with no effect on the output data.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.3.3" id="fluxible-133">fluxible 1.3.3<a class="anchor" aria-label="anchor" href="#fluxible-133"></a></h2><p class="text-muted">CRAN release: 2025-09-25</p>
 <ul><li>citation: paper published!</li>
