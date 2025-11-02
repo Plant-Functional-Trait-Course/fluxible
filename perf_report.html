@@ -41,13 +41,13 @@
 
 <div id="fluxible-performance-report" class="section level1">
 
-<p>Joseph Gaudard 2025-10-03</p>
-<p>Current <code>fluxible</code> package version: 1.3.3</p>
+<p>Joseph Gaudard 2025-10-15</p>
+<p>Current <code>fluxible</code> package version: 1.3.4</p>
 </div>
 <div class="section level1">
 <h1 id="flux_plot"><code>flux_plot</code><a class="anchor" aria-label="anchor" href="#flux_plot"></a></h1>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">plotting_etime</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">version</span>, <span class="va">nb_fluxes</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">10</span>, <span class="fl">30</span>, <span class="fl">60</span>, <span class="fl">100</span>, <span class="fl">138</span><span class="op">)</span>,</span>
+<code class="sourceCode R"><span><span class="va">plotting_etime</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">version</span>, <span class="va">nb_fluxes</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">10</span>, <span class="fl">20</span>, <span class="fl">30</span>, <span class="fl">40</span>, <span class="fl">50</span>, <span class="fl">60</span>, <span class="fl">70</span>, <span class="fl">80</span>, <span class="fl">90</span>, <span class="fl">100</span>, <span class="fl">110</span>, <span class="fl">120</span>, <span class="fl">130</span>, <span class="fl">138</span><span class="op">)</span>,</span>
 <span> <span class="va">replicates</span> <span class="op">=</span> <span class="fl">3</span>, <span class="va">output</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"pdfpages"</span>, <span class="st">"longpdf"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span></span>
 <span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">replicate</a></span><span class="op">(</span>n <span class="op">=</span> <span class="va">replicates</span>, expr <span class="op">=</span> <span class="op">{</span></span>
@@ -95,7 +95,7 @@
 <div class="section level1">
 <h1 id="flux_fitting"><code>flux_fitting</code><a class="anchor" aria-label="anchor" href="#flux_fitting"></a></h1>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">fitting_etime</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">version</span>, <span class="va">nb_fluxes</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">10</span>, <span class="fl">30</span>, <span class="fl">60</span>, <span class="fl">100</span>, <span class="fl">138</span><span class="op">)</span>,</span>
+<code class="sourceCode R"><span><span class="va">fitting_etime</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">version</span>, <span class="va">nb_fluxes</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">5</span>, <span class="fl">10</span>, <span class="fl">20</span>, <span class="fl">30</span>, <span class="fl">40</span>, <span class="fl">50</span>, <span class="fl">60</span>, <span class="fl">70</span>, <span class="fl">80</span>, <span class="fl">90</span>, <span class="fl">100</span>, <span class="fl">110</span>, <span class="fl">120</span>, <span class="fl">130</span>, <span class="fl">138</span><span class="op">)</span>,</span>
 <span> <span class="va">replicates</span> <span class="op">=</span> <span class="fl">3</span>, <span class="va">fit_type</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"exp_zhao18"</span>, <span class="st">"linear"</span>, <span class="st">"quadratic"</span>, <span class="st">"exp_tz"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span></span>
 <span></span>
