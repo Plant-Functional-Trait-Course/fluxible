@@ -1,0 +1,40 @@
+# fluxible: Ecosystem Gas Fluxes Calculations for Closed Loop Chamber Setup
+
+Toolbox to process raw data from closed loop flux chamber (or tent)
+setups into ecosystem gas fluxes usable for analysis. It goes from a
+data frame of gas concentration over time (which can contain several
+measurements) and a meta data file indicating which measurement was done
+when, to a data frame of ecosystem gas fluxes including quality
+diagnostics. Organized with one function per step, maximizing user
+flexibility and backwards compatibility. Different models to estimate
+the fluxes from the raw data are available: exponential as described in
+Zhao et al (2018)
+[doi:10.1016/j.agrformet.2018.08.022](https://doi.org/10.1016/j.agrformet.2018.08.022)
+, exponential as described in Hutchinson and Mosier (1981)
+[doi:10.2136/sssaj1981.03615995004500020017x](https://doi.org/10.2136/sssaj1981.03615995004500020017x)
+, quadratic, and linear. Other functions include quality assessment,
+plotting for visual check, calculation of fluxes based on the setup
+specific parameters (chamber size, plot area, ...), gross primary
+production and transpiration rate calculation, and light response
+curves.
+
+## See also
+
+Useful links:
+
+- <https://plant-functional-trait-course.github.io/fluxible/>
+
+- <https://github.com/Plant-Functional-Trait-Course/fluxible>
+
+- Report bugs at
+  <https://github.com/Plant-Functional-Trait-Course/fluxible/issues>
+
+## Author
+
+**Maintainer**: Joseph Gaudard <joseph.gaudard@pm.me>
+([ORCID](https://orcid.org/0000-0002-6989-7624))
+
+Authors:
+
+- Richard James Telford <richard.telford@uib.no>
+  ([ORCID](https://orcid.org/0000-0001-9826-3076))

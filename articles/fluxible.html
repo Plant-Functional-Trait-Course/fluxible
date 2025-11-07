@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
 <link rel="icon" sizes="any" href="../favicon.ico">
 <link rel="manifest" href="../site.webmanifest">
-<script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
@@ -21,7 +21,7 @@
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
-    <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light" aria-label="Site navigation"><div class="container">
+    <nav class="navbar navbar-expand-lg fixed-top " aria-label="Site navigation"><div class="container">
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
@@ -51,6 +51,14 @@
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json">
 </form></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://github.com/Plant-Functional-Trait-Course/fluxible/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-lightswitch" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" aria-label="Light switch"><span class="fa fa-sun"></span></button>
+  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-lightswitch">
+<li><button class="dropdown-item" data-bs-theme-value="light"><span class="fa fa-sun"></span> Light</button></li>
+    <li><button class="dropdown-item" data-bs-theme-value="dark"><span class="fa fa-moon"></span> Dark</button></li>
+    <li><button class="dropdown-item" data-bs-theme-value="auto"><span class="fa fa-adjust"></span> Auto</button></li>
+  </ul>
+</li>
       </ul>
 </div>
 
@@ -295,7 +303,7 @@ respectively.</p>
 <span>    f_facetid <span class="op">=</span> <span class="st">"f_fluxid"</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
 <div class="figure">
-<img src="fluxible_files/figure-html/fig-explot-1.png" alt="Output of `flux_plot` for fluxid 54, 95, 100 and 101. With quality flags and diagnostics from `flux_quality`, the slope at $t_0$ (continuous line), the model fit (dashed line), the linear fit (dotted line), and the raw gas concentration (dots). The colours show the quality flags (green for `ok`, red for `discard` and purple for `zero` with default settings) and cuts (same colour as `discard`). The gray vertical line indicates $t_0$ (a fitting parameter when using the `exp_zhao18` model, otherwise user defined in `flux_fitting`). The g-factor is calculated as slope/linear slope, and b is the b parameter inside the exponential model. Concentration is in ppm in this example. Due to poor quality (strong peak at the start), `flux_fitting` could not provide a decent fit for fluxid 101. This was detected by `flux_quality` which flagged it as discard." width="768"><p class="caption">
+<img src="fluxible_files/figure-html/fig-explot-1.png" class="r-plt" alt="Output of `flux_plot` for fluxid 54, 95, 100 and 101. With quality flags and diagnostics from `flux_quality`, the slope at $t_0$ (continuous line), the model fit (dashed line), the linear fit (dotted line), and the raw gas concentration (dots). The colours show the quality flags (green for `ok`, red for `discard` and purple for `zero` with default settings) and cuts (same colour as `discard`). The gray vertical line indicates $t_0$ (a fitting parameter when using the `exp_zhao18` model, otherwise user defined in `flux_fitting`). The g-factor is calculated as slope/linear slope, and b is the b parameter inside the exponential model. Concentration is in ppm in this example. Due to poor quality (strong peak at the start), `flux_fitting` could not provide a decent fit for fluxid 101. This was detected by `flux_quality` which flagged it as discard." width="768"><p class="caption">
 Output of <code>flux_plot</code> for fluxid 54, 95, 100 and 101. With
 quality flags and diagnostics from <code>flux_quality</code>, the slope
 at
@@ -465,7 +473,7 @@ for fluxID 101:</p>
 <span>    <span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
 <div class="figure">
-<img src="fluxible_files/figure-html/fig-plot_exp_cut-1.png" alt="Output of `flux_plot` for fluxid 54, 95, 100 and 101, after quality check. Concentration is in ppm in this example." width="768"><p class="caption">
+<img src="fluxible_files/figure-html/fig-plot_exp_cut-1.png" class="r-plt" alt="Output of `flux_plot` for fluxid 54, 95, 100 and 101, after quality check. Concentration is in ppm in this example." width="768"><p class="caption">
 Output of <code>flux_plot</code> for fluxid 54, 95, 100 and 101, after
 quality check. Concentration is in ppm in this example.
 </p>
@@ -725,7 +733,7 @@ Meteorology</em>, Vol. 263, pp. 267–275.
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer>
