@@ -2,6 +2,8 @@
 
 ## fluxible 1.3.4
 
+CRAN release: 2025-11-11
+
 - `flux_fitting`, bug fix: when using `cut_direction = "from_start"`,
   the focus window is now start + `start_cut` to start + `end_cut`.
   Previously was doing start + `start_cut` to start + `start_cut` +
