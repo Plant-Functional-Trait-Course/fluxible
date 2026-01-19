@@ -33,3 +33,4 @@
 ^download_logs\.qmd$
 ^download_logs\.md$
 ^dev$
+^building_internal$

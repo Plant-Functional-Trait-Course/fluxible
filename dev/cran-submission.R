@@ -43,5 +43,6 @@ rhub::rhub_doctor()
 rhub::rhub_check()
 
 devtools::check_win_devel()
+devtools::check_win_oldrelease()
 usethis::use_news_md()
 usethis::use_cran_comments()
