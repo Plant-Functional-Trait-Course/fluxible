@@ -38,12 +38,12 @@ Suggests:
 Config/testthat/edition: 3
 Imports: 
     broom,
-    dplyr,
+    dplyr (>= 1.0.10),
     ggforce,
     ggplot2,
     haven,
     lubridate,
-    rlang,
+    rlang (>= 0.4.0),
     purrr,
     stats,
     stringr,
