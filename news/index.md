@@ -1,5 +1,10 @@
 # Changelog
 
+## fluxible 1.3.5
+
+- added minimum version of `rlang 0.4.0` in DESCRIPTION to avoid issues
+  with [`as_label()`](https://rlang.r-lib.org/reference/as_label.html).
+
 ## fluxible 1.3.4
 
 CRAN release: 2025-11-11
