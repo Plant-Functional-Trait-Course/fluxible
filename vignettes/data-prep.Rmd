@@ -154,6 +154,28 @@ raw_conc <- list.files( # list the files
   select(datetime, conc)
 ```
 
+## Units row below column names?
+
+Some instruments include a row with units just below the column names.
+This is annoying because `read_delim` will read that row as data, and therefore the column with gas concentration will be read as character instead of numeric.
+Normally, those units are stated in the protocol or (draft) data paper of the project, so it is ok to remove them.
+There are different ways to do that, here is one:
+
+```{r units-row, message=FALSE, eval=FALSE}
+library(tidyverse)
+
+co2 <- read_delim(
+  "raw_data/NatuRA_raw_CO2_2026-01-18.data",
+  skip = 5 # skipping the first 5 rows (instrument info)
+  ) |> 
+  slice(-1) |> # we slice the first row (units)
+  select(c(DATE, TIME, CO2)) |> # and select what we want
+mutate(
+  datetime = ymd_hms(paste(DATE, TIME)), # lubridate function to create datetime
+                     CO2 = as.double(CO2),  # converting CO2 to numeric
+                    .keep = "unused" # we remove DATE and TIME columns
+                     )
+```
 
 ## The one file per flux approach
 `fluxible` can also be used with data that were recorded with one file per flux and the file names as flux ID.
