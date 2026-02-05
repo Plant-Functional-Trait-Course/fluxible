@@ -190,19 +190,20 @@ flux_fitting <- function(conc_df,
       ),
       f_time = as.double(.data$f_time),
       f_start_og = {{f_start}},
-      {{f_start}} := case_when(
-        cut_direction %in% c("none", "from_start") ~
-          .data$f_start_og + start_cut,
-        cut_direction == "from_end" ~ {{f_end}} - start_cut
-      ),
-      {{f_end}} := case_when(
-        cut_direction %in% c("none", "from_end") ~ {{f_end}} - end_cut,
-        cut_direction == "from_start" ~ .data$f_start_og + end_cut
-      ),
+      {{f_start}} := if (cut_direction %in% c("none", "from_start")) {
+        .data$f_start_og + start_cut
+      } else if (cut_direction == "from_end") {
+        {{f_end}} - start_cut
+      },
+      {{f_end}} := if (cut_direction %in% c("none", "from_end")) {
+        {{f_end}} - end_cut
+      } else if (cut_direction == "from_start") {
+        .data$f_start_og + end_cut
+      },
       f_cut = case_when(
         {{f_datetime}} < {{f_start}} | {{f_datetime}} >= {{f_end}}
         ~ "cut",
-        TRUE ~ "keep"
+        .default = "keep"
       ),
       f_time_diff = difftime({{f_start}}, .data$f_start_og, units = "secs"),
       f_time_diff = as.double(.data$f_time_diff),

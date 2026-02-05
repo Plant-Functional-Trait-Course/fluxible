@@ -241,12 +241,13 @@ flux_calc <- function(slopes_df,
       )
     ) |>
     mutate(
-      f_temp_air_ave = case_when(
-        temp_air_unit == "celsius" ~ .data$f_temp_air_ave + 273.15,
-        temp_air_unit == "fahrenheit"
-        ~ (.data$f_temp_air_ave + 459.67) * (5 / 9),
-        temp_air_unit == "kelvin" ~ .data$f_temp_air_ave
-      )
+      f_temp_air_ave = if (temp_air_unit == "celsius") {
+        .data$f_temp_air_ave + 273.15
+      } else if (temp_air_unit == "fahrenheit") {
+        (.data$f_temp_air_ave + 459.67) * (5 / 9)
+      } else if (temp_air_unit == "kelvin") {
+        .data$f_temp_air_ave
+      }
     )
 
   # a df with all the columns we just want to keep and join back in the end
