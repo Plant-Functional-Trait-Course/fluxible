@@ -1,5 +1,11 @@
 # Changelog
 
+## fluxible 1.3.6
+
+- fixed the use of
+  [`case_when()`](https://dplyr.tidyverse.org/reference/case-and-replace-when.html)
+  to avoid warnings with `dplyr 1.2.0`.
+
 ## fluxible 1.3.5
 
 - added minimum version of `rlang 0.4.0` in DESCRIPTION to avoid issues

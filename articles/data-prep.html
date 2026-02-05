@@ -25,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.3.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.3.6</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -261,6 +261,30 @@ their names.</p>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="va">datetime</span>, <span class="va">conc</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
+<h2 id="units-row-below-column-names">Units row below column names?<a class="anchor" aria-label="anchor" href="#units-row-below-column-names"></a>
+</h2>
+<p>Some instruments include a row with units just below the column
+names. This is annoying because <code>read_delim</code> will read that
+row as data, and therefore the column with gas concentration will be
+read as character instead of numeric. Normally, those units are stated
+in the protocol or (draft) data paper of the project, so it is ok to
+remove them. There are different ways to do that, here is one:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">co2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_delim</a></span><span class="op">(</span></span>
+<span>  <span class="st">"raw_data/NatuRA_raw_CO2_2026-01-18.data"</span>,</span>
+<span>  skip <span class="op">=</span> <span class="fl">5</span> <span class="co"># skipping the first 5 rows (instrument info)</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html" class="external-link">slice</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="co"># we slice the first row (units)</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">DATE</span>, <span class="va">TIME</span>, <span class="va">CO2</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="co"># and select what we want</span></span>
+<span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
+<span>  datetime <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/ymd_hms.html" class="external-link">ymd_hms</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">DATE</span>, <span class="va">TIME</span><span class="op">)</span><span class="op">)</span>, <span class="co"># lubridate function to create datetime</span></span>
+<span>                     CO2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/double.html" class="external-link">as.double</a></span><span class="op">(</span><span class="va">CO2</span><span class="op">)</span>,  <span class="co"># converting CO2 to numeric</span></span>
+<span>                    .keep <span class="op">=</span> <span class="st">"unused"</span> <span class="co"># we remove DATE and TIME columns</span></span>
+<span>                     <span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
 <h2 id="the-one-file-per-flux-approach">The one file per flux approach<a class="anchor" aria-label="anchor" href="#the-one-file-per-flux-approach"></a>
 </h2>
 <p><code>fluxible</code> can also be used with data that were recorded
@@ -292,7 +316,7 @@ defined as <code>end - start_cut</code> to
 <code>end - end_cut</code>
 </li>
 </ul>
-<!-- `fluxible` is designed to process data that were measured continuously (in a single or several files) and a `field_record` that records what was measured when. --><!-- Another strategy while measuring gas fluxes on the field is to create a new file for each measurement, with the file name as the flux ID. --><!-- The approach is similar to reading multiple files, except we add a column with the file name, and can then by-pass `flux_match`. --><div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<!-- `fluxible` is designed to process data that were measured continuously (in a single or several files) and a `field_record` that records what was measured when. --><!-- Another strategy while measuring gas fluxes on the field is to create a new file for each measurement, with the file name as the flux ID. --><!-- The approach is similar to reading multiple files, except we add a column with the file name, and can then by-pass `flux_match`. --><div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
 <span></span>
@@ -359,7 +383,7 @@ Gnnnnnnn</div>
 </div>
 <p><br>
 Let’s try the usual way first:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org" class="external-link">tidyverse</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">raw_conc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span> <span class="co"># read_csv is the same as read_delim(delim = ",")</span></span>
@@ -380,7 +404,7 @@ Let’s try the usual way first:</p>
 comma as separators, and made a mess. Let’s see if we can skipped the
 header and then assemble the columns with left and right side of the
 decimal point:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">raw_conc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html" class="external-link">read_csv</a></span><span class="op">(</span></span>
 <span>  <span class="st">"ex_data/011023001.#01"</span>,</span>
 <span>  skip <span class="op">=</span> <span class="fl">1</span>, <span class="co"># this time we skip the row with the column names</span></span>
@@ -411,7 +435,7 @@ re extract your raw file with a European csv output, or anything that is
 not comma separated, or set the decimal point as a… point. But for the
 sake of it, let’s pretend that it is not an option and solve that issue
 in R:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span></span>
 <span><span class="co"># we read each row of our file as an element of a list</span></span>
 <span><span class="va">lines</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readLines.html" class="external-link">readLines</a></span><span class="op">(</span><span class="st">"ex_data/011023001.#01"</span><span class="op">)</span></span>
