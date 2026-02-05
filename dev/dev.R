@@ -27,7 +27,7 @@ devtools::load_all()
 # autoimport::autoimport()
 
 devtools::document()
-devtools::test(filter = "flux_plot")
+devtools::test(filter = "flux_fitting")
 devtools::test()
 devtools::run_examples()
 devtools::check()
