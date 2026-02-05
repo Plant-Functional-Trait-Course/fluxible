@@ -200,15 +200,6 @@ flux_fitting <- function(conc_df,
       } else if (cut_direction == "from_start") {
         .data$f_start_og + end_cut
       },
-      # {{f_start}} := case_when(
-      #   cut_direction %in% c("none", "from_start") ~
-      #     .data$f_start_og + start_cut,
-      #   cut_direction == "from_end" ~ {{f_end}} - start_cut
-      # ),
-      # {{f_end}} := case_when(
-      #   cut_direction %in% c("none", "from_end") ~ {{f_end}} - end_cut,
-      #   cut_direction == "from_start" ~ .data$f_start_og + end_cut
-      # ),
       f_cut = case_when(
         {{f_datetime}} < {{f_start}} | {{f_datetime}} >= {{f_end}}
         ~ "cut",
