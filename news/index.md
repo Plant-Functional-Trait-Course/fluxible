@@ -2,6 +2,8 @@
 
 ## fluxible 1.3.6
 
+CRAN release: 2026-02-05
+
 - fixed the use of
   [`case_when()`](https://dplyr.tidyverse.org/reference/case-and-replace-when.html)
   to avoid warnings with `dplyr 1.2.0`.
