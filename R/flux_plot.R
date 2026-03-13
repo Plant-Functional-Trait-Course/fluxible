@@ -99,9 +99,14 @@ flux_plot <- function(slopes_df,
                       y_text_position = 500,
                       print_plot = "FALSE",
                       output = "print_only",
-                      ggsave_args = list()) {
+                      ggsave_args = list(),
+                      arrange_cols = c()) {
 
   # fortify data
+  if (missing(arrange_cols)) {
+    arrange_cols <- f_datetime
+  }
+
   slopes_params <- flux_fortify(
     slopes_df = slopes_df,
     f_conc = {{f_conc}},
@@ -109,7 +114,8 @@ flux_plot <- function(slopes_df,
     f_ylim_upper = f_ylim_upper,
     f_ylim_lower = f_ylim_lower,
     f_facetid = f_facetid,
-    y_text_position = y_text_position
+    y_text_position = y_text_position,
+    arrange_cols = arrange_cols
   )
   slopes_df <- slopes_params$slopes_df
 

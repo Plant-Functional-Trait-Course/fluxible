@@ -22,7 +22,8 @@ flux_fortify <- function(slopes_df,
                          f_ylim_upper,
                          f_ylim_lower,
                          f_facetid,
-                         y_text_position) {
+                         y_text_position,
+                         arrange_cols) {
 
   args_ok <- flux_fun_check(list(
     f_ylim_upper = f_ylim_upper,
@@ -115,7 +116,7 @@ flux_fortify <- function(slopes_df,
       sep = " "
     ) |>
     mutate(
-      f_facetid = fct_reorder(f_facetid, {{f_datetime}})
+      f_facetid = fct_reorder(f_facetid, arrange_cols)
     )
 
   # testing if f_facetid is unique, otherwise facet will make a mess
