@@ -31,7 +31,7 @@ flux_plot(
   print_plot = "FALSE",
   output = "print_only",
   ggsave_args = list(),
-  arrange_col = c()
+  arrange_col
 )
 ```
 
