@@ -515,3 +515,36 @@ test_that("slope crosses fit at tz with quadratic", {
     )
   )
 })
+
+test_that("facet ordering", {
+  slopes30lin_flag <- suppressWarnings(flux_fitting(
+    co2_conc,
+    conc,
+    datetime,
+    fit_type = "linear",
+    end_cut = 30
+  )) |>
+    flux_quality(
+      conc
+    ) |>
+    mutate(
+      plotID = f_fluxid,
+      plotID = case_when(
+        plotID == 1 ~ "b",
+        plotID == 2 ~ "c",
+        plotID == 3 ~ "a",
+        plotID == 4 ~ "f",
+        plotID == 5 ~ "m",
+        plotID == 6 ~ "f"
+      )
+    )
+
+  plot_object <- flux_plot(
+    slopes30lin_flag,
+    conc,
+    datetime,
+    f_facetid = c("f_fluxid", "plotID"),
+    arrange_cols = plotID
+  )
+  vdiffr::expect_doppelganger("facet ordering", plot_object)
+})
