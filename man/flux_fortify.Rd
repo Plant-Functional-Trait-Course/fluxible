@@ -11,7 +11,8 @@ flux_fortify(
   f_ylim_upper,
   f_ylim_lower,
   f_facetid,
-  y_text_position
+  y_text_position,
+  arrange_col
 )
 }
 \arguments{
