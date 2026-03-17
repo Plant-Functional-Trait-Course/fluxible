@@ -23,7 +23,7 @@ flux_fortify <- function(slopes_df,
                          f_ylim_lower,
                          f_facetid,
                          y_text_position,
-                         arrange_cols) {
+                         arrange_col) {
 
   args_ok <- flux_fun_check(list(
     f_ylim_upper = f_ylim_upper,
@@ -45,7 +45,7 @@ flux_fortify <- function(slopes_df,
     select(
       {{f_conc}},
       {{f_datetime}},
-      {{arrange_cols}},
+      {{arrange_col}},
       all_of(f_facetid),
       any_of(c(
         "f_quality_flag",
@@ -118,7 +118,7 @@ flux_fortify <- function(slopes_df,
       sep = " ",
       remove = FALSE
     ) |>
-    arrange({{arrange_cols}}, {{f_datetime}}) |>
+    arrange({{arrange_col}}, {{f_datetime}}) |>
     mutate(
       .by = "f_facetid",
       rowid = cur_group_id(),

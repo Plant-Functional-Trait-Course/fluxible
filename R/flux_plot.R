@@ -40,7 +40,7 @@
 #' measurement. Default is `f_fluxid`
 #' @param longpdf_args arguments for longpdf in the form
 #' `list(ncol, width (in cm), ratio)`
-#' @param arrange_cols character vector of columns to use to reorder the facets.
+#' @param arrange_col character vector of columns to use to reorder the facets.
 #' If NULL (default), facets are ordered by the datetime of the measurement.
 #' @return plots of fluxes, with raw concentration data points, fit, slope,
 #' and color code indicating quality flags and cuts. The plots are organized
@@ -102,7 +102,7 @@ flux_plot <- function(slopes_df,
                       print_plot = "FALSE",
                       output = "print_only",
                       ggsave_args = list(),
-                      arrange_cols = c()) {
+                      arrange_col) {
 
   # fortify data
 
@@ -115,7 +115,7 @@ flux_plot <- function(slopes_df,
     f_ylim_lower = f_ylim_lower,
     f_facetid = f_facetid,
     y_text_position = y_text_position,
-    arrange_cols = {{arrange_cols}}
+    arrange_col = {{arrange_col}}
   )
   slopes_df <- slopes_params$slopes_df
 
