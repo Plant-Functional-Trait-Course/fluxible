@@ -115,7 +115,7 @@ flux_plot <- function(slopes_df,
     f_ylim_lower = f_ylim_lower,
     f_facetid = f_facetid,
     y_text_position = y_text_position,
-    arrange_cols = arrange_cols
+    arrange_cols = {{arrange_cols}}
   )
   slopes_df <- slopes_params$slopes_df
 

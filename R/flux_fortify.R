@@ -45,6 +45,7 @@ flux_fortify <- function(slopes_df,
     select(
       {{f_conc}},
       {{f_datetime}},
+      {{arrange_cols}},
       all_of(f_facetid),
       any_of(c(
         "f_quality_flag",
@@ -109,19 +110,28 @@ flux_fortify <- function(slopes_df,
   nb_fluxid <- n_distinct(slopes_df$f_fluxid)
 
   # customize facet ID
+
   slopes_df <- slopes_df |>
     unite(
       col = "f_facetid",
       all_of(f_facetid),
-      sep = " "
+      sep = " ",
+      remove = FALSE
     ) |>
+    arrange({{arrange_cols}}, {{f_datetime}}) |>
     mutate(
-      f_facetid = if (is.null(arrange_cols)) {
-        fct_reorder(f_facetid, {{f_datetime}})
-      } else {
-        fct_reorder(f_facetid, {{arrange_cols}})
-      }
+      .by = "f_facetid",
+      rowid = cur_group_id(),
+      f_facetid = fct_reorder(f_facetid, .data$rowid)
     )
+    # mutate(
+    #   f_facetid = fct_reorder(f_facetid, {{arrange_cols}})
+      # f_facetid = dplyr::if_else(
+      #   {{arrange_cols}} == "",
+      #   fct_reorder(f_facetid, {{f_datetime}}),
+      #   fct_reorder(f_facetid, {{arrange_cols}})
+      # )
+    # )
 
   # testing if f_facetid is unique, otherwise facet will make a mess
   nb_fluxid_post <- n_distinct(slopes_df$f_facetid)

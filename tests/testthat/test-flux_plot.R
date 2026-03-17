@@ -537,12 +537,14 @@ test_that("facet ordering", {
         plotID == 5 ~ "m",
         plotID == 6 ~ "f"
       )
+      # plotID = factor(plotID, levels = c("a", "b", "c", "f", "m"))
     )
 
   plot_object <- flux_plot(
     slopes30lin_flag,
     conc,
     datetime,
+    f_facetid = c("f_fluxid", "plotID"),
     arrange_cols = plotID
   )
   vdiffr::expect_doppelganger("facet ordering", plot_object)
