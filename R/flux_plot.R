@@ -102,7 +102,7 @@ flux_plot <- function(slopes_df,
                       print_plot = "FALSE",
                       output = "print_only",
                       ggsave_args = list(),
-                      arrange_col = c()) {
+                      arrange_col) {
 
   # fortify data
 
