@@ -537,7 +537,6 @@ test_that("facet ordering", {
         plotID == 5 ~ "m",
         plotID == 6 ~ "f"
       )
-      # plotID = factor(plotID, levels = c("a", "b", "c", "f", "m"))
     )
 
   plot_object <- flux_plot(

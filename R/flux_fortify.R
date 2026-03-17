@@ -124,14 +124,6 @@ flux_fortify <- function(slopes_df,
       rowid = cur_group_id(),
       f_facetid = fct_reorder(f_facetid, .data$rowid)
     )
-    # mutate(
-    #   f_facetid = fct_reorder(f_facetid, {{arrange_cols}})
-      # f_facetid = dplyr::if_else(
-      #   {{arrange_cols}} == "",
-      #   fct_reorder(f_facetid, {{f_datetime}}),
-      #   fct_reorder(f_facetid, {{arrange_cols}})
-      # )
-    # )
 
   # testing if f_facetid is unique, otherwise facet will make a mess
   nb_fluxid_post <- n_distinct(slopes_df$f_facetid)
