@@ -1,6 +1,6 @@
 # fluxible 1.3.7
 
-* `flux_plot`: argument `arrange_col` allows to customize the order of the factes
+* `flux_plot`: argument `arrange_col` allows to customize the order of the facets
 
 # fluxible 1.3.6
 
