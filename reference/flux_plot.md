@@ -30,7 +30,8 @@ flux_plot(
   y_text_position = 500,
   print_plot = "FALSE",
   output = "print_only",
-  ggsave_args = list()
+  ggsave_args = list(),
+  arrange_col = c()
 )
 ```
 
@@ -124,6 +125,11 @@ flux_plot(
   list of arguments for
   [ggsave](https://ggplot2.tidyverse.org/reference/ggsave.html) (in case
   `output = "ggsave"`)
+
+- arrange_col:
+
+  character vector of columns to use to reorder the facets. If NULL
+  (default), facets are ordered by the datetime of the measurement.
 
 ## Value
 

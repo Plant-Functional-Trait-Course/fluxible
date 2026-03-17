@@ -10,7 +10,10 @@ data files for the `fluxible` R package. For users of Li-COR
 instruments, the [`licoread` R
 package](https://jogaudard.github.io/licoread/index.html), developed in
 collaboration with Li-COR, is designed to read 82z and 81x files and
-import them as `fluxible`-friendly objets.
+import them as `fluxible`-friendly objets. Eosense ecosystem gas flux
+chambers users can also use the [`readosense` R
+package](https://jogaudard.github.io/readosense/) to read their raw
+files and import them as `fluxible`-friendly objects.
 
 ## Checklists for inputs
 

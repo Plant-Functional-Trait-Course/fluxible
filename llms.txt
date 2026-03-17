@@ -176,6 +176,14 @@ collaboration with [LI-COR](https://www.licor.com/), provides an easy
 way to import raw files from LI-COR gas analyzers as R objects that can
 be used directly with the `fluxible` R package.
 
+### `readosense` R package
+
+The [`readosense` R
+package](https://jogaudard.github.io/readosense/index.html) provides an
+easy way to import raw files from [Eosense](https://eosense.com/) multi
+chamber ecosystem gas flux setups as R objects that can be used directly
+with the `fluxible` R package.
+
 ## Further developments
 
 ### Segmentation tool

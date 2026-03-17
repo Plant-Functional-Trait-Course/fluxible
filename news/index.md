@@ -1,5 +1,10 @@
 # Changelog
 
+## fluxible 1.3.7
+
+- `flux_plot`: argument `arrange_col` allows to customize the order of
+  the facets
+
 ## fluxible 1.3.6
 
 CRAN release: 2026-02-05
