@@ -1,3 +1,7 @@
+# fluxible 1.3.7
+
+* `flux_plot`: argument `arrange_col` allows to customize the order of the factes
+
 # fluxible 1.3.6
 
 * fixed the use of `case_when()` to avoid warnings with `dplyr 1.2.0`.

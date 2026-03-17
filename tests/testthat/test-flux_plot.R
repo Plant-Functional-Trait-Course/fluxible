@@ -544,7 +544,7 @@ test_that("facet ordering", {
     conc,
     datetime,
     f_facetid = c("f_fluxid", "plotID"),
-    arrange_cols = plotID
+    arrange_col = plotID
   )
   vdiffr::expect_doppelganger("facet ordering", plot_object)
 })

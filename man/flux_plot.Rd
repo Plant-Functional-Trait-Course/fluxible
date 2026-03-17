@@ -23,7 +23,8 @@ flux_plot(
   y_text_position = 500,
   print_plot = "FALSE",
   output = "print_only",
-  ggsave_args = list()
+  ggsave_args = list(),
+  arrange_col = c()
 )
 }
 \arguments{
@@ -78,6 +79,9 @@ but will take time depending on the size of the dataset}
 
 \item{ggsave_args}{list of arguments for \link[ggplot2:ggsave]{ggsave}
 (in case \code{output = "ggsave"})}
+
+\item{arrange_col}{character vector of columns to use to reorder the facets.
+If NULL (default), facets are ordered by the datetime of the measurement.}
 }
 \value{
 plots of fluxes, with raw concentration data points, fit, slope,
