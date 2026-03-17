@@ -528,7 +528,15 @@ test_that("facet ordering", {
       conc
     ) |>
     mutate(
-      plotID = c("C", "D", "A", "E", "B", "A")
+      plotID = f_fluxid,
+      plotID = case_when(
+        plotID == 1 ~ "b",
+        plotID == 2 ~ "c",
+        plotID == 3 ~ "a",
+        plotID == 4 ~ "f",
+        plotID == 5 ~ "m",
+        plotID == 6 ~ "f"
+      )
     )
 
   plot_object <- flux_plot(
