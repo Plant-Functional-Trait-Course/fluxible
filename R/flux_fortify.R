@@ -116,7 +116,11 @@ flux_fortify <- function(slopes_df,
       sep = " "
     ) |>
     mutate(
-      f_facetid = fct_reorder(f_facetid, arrange_cols)
+      f_facetid = if (is.null(arrange_cols)) {
+        fct_reorder(f_facetid, {{f_datetime}})
+      } else {
+        fct_reorder(f_facetid, {{arrange_cols}})
+      }
     )
 
   # testing if f_facetid is unique, otherwise facet will make a mess

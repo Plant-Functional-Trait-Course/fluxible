@@ -103,9 +103,7 @@ flux_plot <- function(slopes_df,
                       arrange_cols = c()) {
 
   # fortify data
-  if (missing(arrange_cols)) {
-    arrange_cols <- as_label(enquo(f_datetime))
-  }
+
 
   slopes_params <- flux_fortify(
     slopes_df = slopes_df,
