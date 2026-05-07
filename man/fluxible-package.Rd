@@ -24,6 +24,7 @@ Useful links:
 
 Authors:
 \itemize{
+  \item Joseph Gaudard \email{joseph.gaudard@pm.me} (\href{https://orcid.org/0000-0002-6989-7624}{ORCID})
   \item Richard James Telford \email{richard.telford@uib.no} (\href{https://orcid.org/0000-0001-9826-3076}{ORCID})
 }
 
