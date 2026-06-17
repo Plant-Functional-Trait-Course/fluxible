@@ -24,8 +24,7 @@
 #' modeled concentration over time and exponential expression parameters
 #' @keywords internal
 #' @importFrom rlang .data
-#' @importFrom dplyr rename mutate select group_by case_when
-#' ungroup filter distinct left_join rowwise summarize pull slice
+#' @importFrom dplyr rename mutate select group_by case_when ungroup filter distinct left_join rowwise summarize pull slice
 #' @importFrom tidyr pivot_wider drop_na nest unnest
 #' @importFrom haven as_factor
 #' @importFrom stringr str_c
