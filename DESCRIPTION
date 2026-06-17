@@ -25,7 +25,6 @@ Description: Toolbox to process raw data from closed loop flux chamber (or tent)
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.3
 Suggests:
     knitr,
     rmarkdown,
@@ -61,3 +60,4 @@ LazyData: true
 URL: https://plant-functional-trait-course.github.io/fluxible/, https://github.com/Plant-Functional-Trait-Course/fluxible
 VignetteBuilder: knitr
 BugReports: https://github.com/Plant-Functional-Trait-Course/fluxible/issues
+Config/roxygen2/version: 8.0.0

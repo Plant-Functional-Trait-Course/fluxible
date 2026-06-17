@@ -24,8 +24,7 @@
 #' ER as flux type, datetime, and any column specified in `cols_keep`.
 #' Values of datetime and columns in `cols_keep` for GPP row are taken from
 #' NEE measurements.
-#' @importFrom dplyr rename select mutate case_when filter full_join
-#' cur_group_id bind_rows
+#' @importFrom dplyr rename select mutate case_when filter full_join cur_group_id bind_rows
 #' @importFrom tidyr pivot_wider fill
 #' @importFrom purrrlyr slice_rows unslice
 #' @examples

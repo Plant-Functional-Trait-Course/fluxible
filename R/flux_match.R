@@ -34,8 +34,7 @@
 #' @details If both `end_col` and `measurement_length` are provided, `end_col`
 #' will be ignored. Measurements either all have the same length (provide
 #' `measurement_length`), or the length varies and `end_col` has to be provided.
-#' @importFrom dplyr arrange mutate row_number full_join case_when
-#' group_by filter ungroup select distinct pull join_by coalesce
+#' @importFrom dplyr arrange mutate row_number full_join case_when group_by filter ungroup select distinct pull join_by coalesce
 #' @importFrom tidyr fill drop_na
 #' @importFrom lubridate is.POSIXct
 #' @importFrom lifecycle deprecate_stop deprecated deprecate_warn is_present

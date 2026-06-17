@@ -58,9 +58,7 @@
 #' respectively. This method is considerably faster than `pdfpages`, because
 #' it bypasses `facet_wrap_paginate`, but is a bit less aesthetic.
 #' @importFrom dplyr select distinct mutate n_distinct
-#' @importFrom ggplot2 ggplot aes geom_point geom_line scale_color_manual
-#' scale_x_datetime ylim facet_wrap labs geom_text theme_bw ggsave
-#' scale_linetype_manual guides guide_legend geom_vline
+#' @importFrom ggplot2 ggplot aes geom_point geom_line scale_color_manual scale_x_datetime ylim facet_wrap labs geom_text theme_bw ggsave scale_linetype_manual guides guide_legend geom_vline
 #' @importFrom purrr quietly
 #' @importFrom stringr str_detect
 #' @importFrom tidyr unite

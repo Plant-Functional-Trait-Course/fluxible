@@ -7,8 +7,7 @@
 #' @return a df with the modeled gas concentration, slope, intercept,
 #' std error, r square and p value of the linear model
 #' @importFrom rlang .data
-#' @importFrom dplyr rename all_of mutate select group_by
-#' ungroup filter left_join distinct pull bind_cols
+#' @importFrom dplyr rename all_of mutate select group_by ungroup filter left_join distinct pull bind_cols
 #' @importFrom tidyr drop_na pivot_wider fill
 #' @importFrom haven as_factor
 #' @importFrom stringr str_c

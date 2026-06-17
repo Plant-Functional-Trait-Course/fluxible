@@ -58,8 +58,7 @@
 #' with their values treated accordingly over the measurement after cuts, and a
 #' column `nested_variables` with the variables specified in `cols_nest`.
 #' @importFrom rlang .data := enquo quo_is_symbolic as_label
-#' @importFrom dplyr select group_by summarise rename_with nest_by
-#' ungroup mutate case_when distinct left_join across everything
+#' @importFrom dplyr select group_by summarise rename_with nest_by ungroup mutate case_when distinct left_join across everything
 #' @importFrom tidyselect any_of
 #' @importFrom stats median
 #' @importFrom lifecycle deprecated deprecate_stop deprecate_warn

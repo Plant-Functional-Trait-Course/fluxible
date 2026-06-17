@@ -19,8 +19,7 @@
 #' @return a dataframe with the slope at t zero,
 #' modeled concentration over time and exponential expression parameters
 #' @importFrom rlang .data
-#' @importFrom dplyr rename mutate select group_by case_when
-#' ungroup filter distinct left_join rowwise summarize pull slice join_by
+#' @importFrom dplyr rename mutate select group_by case_when ungroup filter distinct left_join rowwise summarize pull slice join_by
 #' @importFrom tidyr pivot_wider drop_na nest unnest
 #' @importFrom haven as_factor
 #' @importFrom stringr str_c
