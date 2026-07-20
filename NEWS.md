@@ -1,3 +1,7 @@
+# fluxible 1.4.0
+
+* `flux_flag_count`: added a row with total number of fluxes, to facilitate reporting.
+
 # fluxible 1.3.7
 
 * `flux_plot`: argument `arrange_col` allows to customize the order of the facets
