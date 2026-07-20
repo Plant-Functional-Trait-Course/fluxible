@@ -5,9 +5,11 @@
 #' @param conc_df dataframe of gas concentration over time
 #' @param f_conc column with gas concentration
 #' @param atm_pressure atmospheric pressure in atm,
-#' can be a constant (numerical) or a variable (column name)
+#' can be a constant (numerical) or a variable (column name).
+#' Default is 1.
 #' @param temp_air_col column containing the air temperature used
 #' to convert concentration.
+#' @param f_fluxid column with ID of each flux
 #' @param temp_air_unit units in which air temperature was measured.
 #' Has to be either `celsius` (default), `fahrenheit` or `kelvin.`
 #' @details Required temperature and pressure data
@@ -20,15 +22,21 @@
 #' of the fractional concentration provided. For exemple, if the input is in
 #' 'ppm', the result is in 'µmol/L'; if the input is in 'ppb', the result is in
 #' 'nmol/L'; if the input is in 'ppt', the result is in 'pmol/L'.
+#' @return The same dataframe, with additional column 'f_conc_vol' in volumetric
+#' concentration.
+#' @importFrom dplyr mutate
+#' @importFrom tidyr fill
+#' @examples
+#' data(co2_conc)
+#' flux_conc(co2_conc, conc, temp_air)
+#' @export
 
-flux_conc <- function(
-  conc_df,
-  f_conc,
-  atm_pressure,
-  temp_air_col,
-  f_fluxid = f_fluxid,
-  temp_air_unit = "celsius"
-) {
+flux_conc <- function(conc_df,
+                      f_conc,
+                      temp_air_col,
+                      atm_pressure = 1,
+                      f_fluxid = f_fluxid,
+                      temp_air_unit = "celsius") {
 
 
   prep_conc_df <- conc_df |>
@@ -66,5 +74,3 @@ flux_conc <- function(
 
   new_conc_df
 }
-
-
