@@ -12,6 +12,8 @@
 #' @param f_quality_flag column containing the quality flags
 #' @return a dataframe with the number of fluxes for each quality flags
 #' and their proportion to the total
+#' @param show_total logical, if TRUE (default), adds a row with the total
+#' number of fluxes
 #' @importFrom dplyr all_of select group_by summarise tibble right_join filter distinct arrange desc
 #' @importFrom tidyr replace_na
 #' @author Vincent Belde
@@ -37,7 +39,8 @@ flux_flag_count <- function(flags_df,
                               "force_zero",
                               "force_lm",
                               "no_slope"
-                            )) {
+                            ),
+                            show_total = TRUE) {
 
   flag_df <- flags_df |>
     mutate(
@@ -45,6 +48,10 @@ flux_flag_count <- function(flags_df,
     ) |>
     select({{f_fluxid}}, {{f_quality_flag}}) |>
     distinct()
+
+  if (show_total) {
+    f_flags <- c(f_flags, "total")
+  }
 
   flags <- tibble({{f_quality_flag}} := factor(f_flags))
 
@@ -55,8 +62,11 @@ flux_flag_count <- function(flags_df,
     ) |>
     right_join(flags, by = join_by({{f_quality_flag}})) |>
     mutate(
-      n = replace_na(.data$n, 0),
-      ratio = .data$n / sum(.data$n)
+      n = case_when(
+        f_quality_flag == "total" ~ sum(.data$n, na.rm = TRUE),
+        .default = replace_na(.data$n, 0)
+      ),
+      ratio = .data$n / sum(.data$n[!.data$f_quality_flag == "total"])
     ) |>
     arrange(desc(.data$n))
 

@@ -1668,28 +1668,28 @@
 <polyline points='34.95,327.33 37.69,327.33 ' style='stroke-width: 1.07; stroke: #333333; stroke-linecap: butt;' />
 <text x='333.71' y='568.24' text-anchor='middle' style='font-size: 11.00px; font-family: sans;' textLength='44.02px' lengthAdjust='spacingAndGlyphs'>Datetime</text>
 <text transform='translate(13.05,295.19) rotate(-90)' text-anchor='middle' style='font-size: 11.00px; font-family: sans;' textLength='68.49px' lengthAdjust='spacingAndGlyphs'>Concentration</text>
-<rect x='640.68' y='211.58' width='73.84' height='78.13' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<text x='646.16' y='225.77' style='font-size: 11.00px; font-family: sans;' textLength='17.72px' lengthAdjust='spacingAndGlyphs'>Fits</text>
+<rect x='640.68' y='211.58' width='71.49' height='78.13' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<text x='646.16' y='225.77' style='font-size: 11.00px; font-family: sans;' textLength='60.54px' lengthAdjust='spacingAndGlyphs'>Quality flags</text>
 <rect x='646.16' y='232.39' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<line x1='647.89' y1='241.03' x2='661.72' y2='241.03' style='stroke-width: 1.07; stroke-dasharray: 9.96,4.27; stroke-linecap: butt;' />
+<circle cx='654.80' cy='241.03' r='3.56' style='stroke-width: 0.71; stroke: #D55E00; fill: #D55E00;' />
 <rect x='646.16' y='249.67' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<line x1='647.89' y1='258.31' x2='661.72' y2='258.31' style='stroke-width: 1.07; stroke-dasharray: 1.42,4.27; stroke-linecap: butt;' />
+<circle cx='654.80' cy='258.31' r='3.56' style='stroke-width: 0.71; stroke: #D55E00; fill: #D55E00;' />
 <rect x='646.16' y='266.95' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<line x1='647.89' y1='275.59' x2='661.72' y2='275.59' style='stroke-width: 1.07; stroke-linecap: butt;' />
-<text x='668.92' y='244.06' style='font-size: 8.80px; font-family: sans;' textLength='14.18px' lengthAdjust='spacingAndGlyphs'>f_fit</text>
-<text x='668.92' y='261.34' style='font-size: 8.80px; font-family: sans;' textLength='28.36px' lengthAdjust='spacingAndGlyphs'>f_fit_lm</text>
-<text x='668.92' y='278.62' style='font-size: 8.80px; font-family: sans;' textLength='40.12px' lengthAdjust='spacingAndGlyphs'>f_fit_slope</text>
-<rect x='640.68' y='300.67' width='71.49' height='78.13' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<text x='646.16' y='314.86' style='font-size: 11.00px; font-family: sans;' textLength='60.54px' lengthAdjust='spacingAndGlyphs'>Quality flags</text>
+<circle cx='654.80' cy='275.59' r='3.56' style='stroke-width: 0.71; stroke: #009E73; fill: #009E73;' />
+<text x='668.92' y='244.06' style='font-size: 8.80px; font-family: sans;' textLength='11.74px' lengthAdjust='spacingAndGlyphs'>cut</text>
+<text x='668.92' y='261.34' style='font-size: 8.80px; font-family: sans;' textLength='28.37px' lengthAdjust='spacingAndGlyphs'>discard</text>
+<text x='668.92' y='278.62' style='font-size: 8.80px; font-family: sans;' textLength='9.30px' lengthAdjust='spacingAndGlyphs'>ok</text>
+<rect x='640.68' y='300.67' width='73.84' height='78.13' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
+<text x='646.16' y='314.86' style='font-size: 11.00px; font-family: sans;' textLength='17.72px' lengthAdjust='spacingAndGlyphs'>Fits</text>
 <rect x='646.16' y='321.48' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<circle cx='654.80' cy='330.12' r='3.56' style='stroke-width: 0.71; stroke: #D55E00; fill: #D55E00;' />
+<line x1='647.89' y1='330.12' x2='661.72' y2='330.12' style='stroke-width: 1.07; stroke-dasharray: 9.96,4.27; stroke-linecap: butt;' />
 <rect x='646.16' y='338.76' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<circle cx='654.80' cy='347.40' r='3.56' style='stroke-width: 0.71; stroke: #D55E00; fill: #D55E00;' />
+<line x1='647.89' y1='347.40' x2='661.72' y2='347.40' style='stroke-width: 1.07; stroke-dasharray: 1.42,4.27; stroke-linecap: butt;' />
 <rect x='646.16' y='356.04' width='17.28' height='17.28' style='stroke-width: 1.07; stroke: none; fill: #FFFFFF;' />
-<circle cx='654.80' cy='364.68' r='3.56' style='stroke-width: 0.71; stroke: #009E73; fill: #009E73;' />
-<text x='668.92' y='333.15' style='font-size: 8.80px; font-family: sans;' textLength='11.74px' lengthAdjust='spacingAndGlyphs'>cut</text>
-<text x='668.92' y='350.43' style='font-size: 8.80px; font-family: sans;' textLength='28.37px' lengthAdjust='spacingAndGlyphs'>discard</text>
-<text x='668.92' y='367.71' style='font-size: 8.80px; font-family: sans;' textLength='9.30px' lengthAdjust='spacingAndGlyphs'>ok</text>
+<line x1='647.89' y1='364.68' x2='661.72' y2='364.68' style='stroke-width: 1.07; stroke-linecap: butt;' />
+<text x='668.92' y='333.15' style='font-size: 8.80px; font-family: sans;' textLength='14.18px' lengthAdjust='spacingAndGlyphs'>f_fit</text>
+<text x='668.92' y='350.43' style='font-size: 8.80px; font-family: sans;' textLength='28.36px' lengthAdjust='spacingAndGlyphs'>f_fit_lm</text>
+<text x='668.92' y='367.71' style='font-size: 8.80px; font-family: sans;' textLength='40.12px' lengthAdjust='spacingAndGlyphs'>f_fit_slope</text>
 <text x='37.69' y='30.35' style='font-size: 11.00px; font-family: sans;' textLength='65.44px' lengthAdjust='spacingAndGlyphs'>exp_tz model</text>
 <text x='37.69' y='14.56' style='font-size: 13.20px; font-family: sans;' textLength='154.84px' lengthAdjust='spacingAndGlyphs'>Fluxes quality assessment</text>
 </g>

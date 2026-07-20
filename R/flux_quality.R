@@ -350,7 +350,9 @@ flux_quality <- function(slopes_df,
   }
 
   flag_count <- flux_flag_count(
-    quality_flag, f_fluxid = {{f_fluxid}}
+    quality_flag,
+    f_fluxid = {{f_fluxid}},
+    show_total = FALSE
   )
 
   flag_msg <- flag_count |>
