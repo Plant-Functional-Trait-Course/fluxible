@@ -10,7 +10,7 @@ flux_conc(
   temp_air_col,
   atm_pressure = 1,
   f_fluxid = f_fluxid,
-  temp_air_unit = "kelvin"
+  temp_air_unit = "celsius"
 )
 }
 \arguments{
