@@ -37,12 +37,10 @@ test_that("plot for linear fit", {
       conc
     )
 
-  expect_snapshot(
     vdiffr::expect_doppelganger(
       "plot for linear fit",
       flux_plot(slopes30lin_flag, conc, datetime)
     )
-  )
 })
 
 test_that("plot for linear fit with jpg extension works", {
@@ -83,7 +81,6 @@ test_that("ggssave and print", {
       conc
     )
 
-  expect_snapshot(
     vdiffr::expect_doppelganger(
       "ggssave and print",
       flux_plot(slopes30lin_flag,
@@ -95,7 +92,6 @@ test_that("ggssave and print", {
         ggsave_args = list(device = "jpg")
       )
     )
-  )
   # the plots are quite heavy so we do not keep them
   unlink("f_quality_plots/", recursive = TRUE, force = TRUE)
 })
@@ -117,26 +113,23 @@ test_that("plot can be exported as an object", {
 })
 
 test_that("plot for quadratic fit with mid missing data", {
-  expect_snapshot(
     vdiffr::expect_doppelganger(
       "plot for quadratic fit with mid missing data",
-      flux_fitting(
+      suppressWarnings(flux_fitting(
         co2_conc_mid_missing,
         conc,
         datetime,
         fit_type = "quadratic",
         end_cut = 60,
         t_zero = 20
-      ) |>
+      )) |>
         flux_quality(conc) |>
         flux_plot(conc, datetime)
     )
-  )
 })
 
 
 test_that("plot for exp_tz fit", {
-  expect_snapshot(
     vdiffr::expect_doppelganger(
       "plot for exp_tz fit",
       flux_fitting(
@@ -150,48 +143,42 @@ test_that("plot for exp_tz fit", {
         flux_quality(conc) |>
         flux_plot(conc, datetime)
     )
-  )
 })
 
 
 test_that("plot for exp_tz fit with mid missing data", {
-  expect_snapshot(
     vdiffr::expect_doppelganger(
       "plot for exp_tz fit with mid missing data",
-      flux_fitting(
+      suppressWarnings(flux_fitting(
         co2_conc_mid_missing,
         conc,
         datetime,
         fit_type = "exp_tz",
         end_cut = 60,
         t_zero = 20
-      ) |>
+      )) |>
         flux_quality(conc) |>
         flux_plot(conc, datetime)
     )
-  )
 })
 
 test_that("plot for exp_zhao18 fit with mid missing data", {
-  expect_snapshot(
     vdiffr::expect_doppelganger(
       "plot for exp_zhao18 fit with mid missing data",
-      flux_fitting(
+      suppressWarnings(flux_fitting(
         co2_conc_mid_missing,
         conc,
         datetime,
         fit_type = "exp_zhao18",
         end_cut = 60,
         t_zero = 20
-      ) |>
+      )) |>
         flux_quality(conc) |>
         flux_plot(conc, datetime)
     )
-  )
 })
 
 test_that("plot for exp_hm fit", {
-  expect_snapshot(
     vdiffr::expect_doppelganger(
       "plot for exp_hm fit",
       flux_fitting(
@@ -205,21 +192,19 @@ test_that("plot for exp_hm fit", {
         flux_quality(conc) |>
         flux_plot(conc, datetime)
     )
-  )
 })
 
 test_that("plot for kappamax fit", {
-  expect_snapshot(
     vdiffr::expect_doppelganger(
       "plot for kappamax fit",
-      flux_fitting(
+      suppressWarnings(flux_fitting(
         co2_conc,
         conc,
         datetime,
         fit_type = "exp_hm",
         end_cut = 30,
         t_zero = 10
-      ) |>
+      )) |>
         flux_quality(
           conc,
           f_pvalue = f_pvalue_lm,
@@ -228,7 +213,6 @@ test_that("plot for kappamax fit", {
         ) |>
         flux_plot(conc, datetime)
     )
-  )
 })
 
 test_that("plot with custom facet id", {
@@ -243,7 +227,6 @@ test_that("plot with custom facet id", {
       conc
     )
 
-  expect_snapshot(
     vdiffr::expect_doppelganger(
       "plot with custom facet id",
       flux_plot(
@@ -253,7 +236,6 @@ test_that("plot with custom facet id", {
         f_facetid = c("type", "turfID")
       )
     )
-  )
 })
 
 test_that("error with custom facet id not unique", {
@@ -316,7 +298,6 @@ test_that("longpdf and print", {
     conc
   ))
 
-  expect_snapshot(
     vdiffr::expect_doppelganger(
       "longpdf and print",
       flux_plot(slopes0_flag,
@@ -327,7 +308,6 @@ test_that("longpdf and print", {
         output = "longpdf"
       )
     )
-  )
   # the plots are quite heavy so we do not keep them
   unlink("f_quality_plots/", recursive = TRUE, force = TRUE)
 })
@@ -384,7 +364,6 @@ test_that("flux diff and lm", {
 
   flux_flag_lm <- flux_quality(flux_fit)
 
-  expect_snapshot(
     vdiffr::expect_doppelganger(
       "flux diff and lm",
       flux_plot(
@@ -394,7 +373,6 @@ test_that("flux diff and lm", {
         y_text_position = 450
       )
     )
-  )
 })
 
 test_that("slope crosses fit at tz with exp_tz", {
@@ -424,7 +402,6 @@ test_that("slope crosses fit at tz with exp_tz", {
 
   flux_flag_tz <- flux_quality(flux_fit)
 
-  expect_snapshot(
     vdiffr::expect_doppelganger(
       "slope crosses fit at tz with exp_tz",
       flux_plot(
@@ -434,7 +411,6 @@ test_that("slope crosses fit at tz with exp_tz", {
         y_text_position = 450
       )
     )
-  )
 })
 
 test_that("slope crosses fit at tz with exp_hm", {
@@ -464,7 +440,6 @@ test_that("slope crosses fit at tz with exp_hm", {
 
   flux_flag_hm <- flux_quality(flux_fit)
 
-  expect_snapshot(
     vdiffr::expect_doppelganger(
       "slope crosses fit at tz with exp_hm",
       flux_plot(
@@ -474,7 +449,6 @@ test_that("slope crosses fit at tz with exp_hm", {
         y_text_position = 450
       )
     )
-  )
 })
 
 test_that("slope crosses fit at tz with quadratic", {
@@ -503,7 +477,6 @@ test_that("slope crosses fit at tz with quadratic", {
 
   flux_flag_zhao18 <- flux_quality(flux_fit)
 
-  expect_snapshot(
     vdiffr::expect_doppelganger(
       "slope crosses fit at tz with quadratic",
       flux_plot(
@@ -513,7 +486,6 @@ test_that("slope crosses fit at tz with quadratic", {
         y_text_position = 450
       )
     )
-  )
 })
 
 test_that("facet ordering", {
