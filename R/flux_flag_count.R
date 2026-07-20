@@ -12,6 +12,8 @@
 #' @param f_quality_flag column containing the quality flags
 #' @return a dataframe with the number of fluxes for each quality flags
 #' and their proportion to the total
+#' @param show_total logical, if TRUE (default), adds a row with the total
+#' number of fluxes
 #' @importFrom dplyr all_of select group_by summarise tibble right_join filter distinct arrange desc
 #' @importFrom tidyr replace_na
 #' @author Vincent Belde
