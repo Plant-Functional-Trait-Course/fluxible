@@ -50,7 +50,7 @@ flux_flag_count <- function(flags_df,
     distinct()
 
   if (show_total) {
-    f_flags <- c(all_of(f_flags), "total")
+    f_flags <- c(f_flags, "total")
   }
 
   flags <- tibble({{f_quality_flag}} := factor(f_flags))
