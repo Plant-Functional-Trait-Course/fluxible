@@ -9,7 +9,8 @@ flux_flag_count(
   f_fluxid = f_fluxid,
   f_quality_flag = f_quality_flag,
   f_flags = c("ok", "discard", "zero", "force_discard", "start_error", "no_data",
-    "force_ok", "force_zero", "force_lm", "no_slope")
+    "force_ok", "force_zero", "force_lm", "no_slope"),
+  show_total = TRUE
 )
 }
 \arguments{
@@ -23,6 +24,9 @@ flux_flag_count(
 (if different from default from flux_quality).
 If not provided, it will list only the flags that are
 present in the dataset (no showing 0).}
+
+\item{show_total}{logical, if TRUE (default), adds a row with the total
+number of fluxes}
 }
 \value{
 a dataframe with the number of fluxes for each quality flags
