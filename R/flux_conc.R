@@ -44,20 +44,20 @@ flux_conc <- function(conc_df,
       f_temp_air_kelvin = if (temp_air_unit == "celsius") {
         {{temp_air_col}} + 273.15
       } else if (temp_air_unit == "fahrenheit") {
-        ({{temp_air_col}} + 459.67) * (5 / 9)
+        {{temp_air_col}} + 273.15
       } else if (temp_air_unit == "kelvin") {
-        {{temp_air_col}}
+        as.numeric({{temp_air_col}})
       },
       f_atm_press = {{atm_pressure}}
       # if constant, creates col, if already col, useless and harmless
     ) |>
     fill( # filling in case of missing values
-      .data$f_temp_air_kelvin,
+      "f_temp_air_kelvin",
       .by = {{f_fluxid}},
       .direction = "downup"
     ) |>
     fill( # filling in case of missing values
-      .data$f_atm_press,
+      "f_atm_press",
       .by = {{f_fluxid}},
       .direction = "downup"
     )
@@ -68,7 +68,7 @@ flux_conc <- function(conc_df,
   new_conc_df <- prep_conc_df |>
     mutate(
       f_conc_vol =
-        (.data$f_conc * .data$f_atm_press)
+        ({{f_conc}} * .data$f_atm_press)
         / (r_const * .data$f_temp_air_kelvin)
     )
 
