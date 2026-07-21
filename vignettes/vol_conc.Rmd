@@ -74,3 +74,24 @@ flux_plot(
   f_ylim_lower = 10
 )
 ```
+
+Then we can calculate fluxes with 'flux_calc'.
+We still input the columns 'atm_press' and 'temp_air', to get them averaged per fluxes.
+They are however not used in the flux calculation since this was done with 'flux_conc' already.
+
+```{r calc-vol, message=FALSE}
+fluxes <- flux_calc(
+  quality_df,
+  f_slope,
+  datetime,
+  temp_air,
+  conc_unit = "umol/l", # notice the units change
+  flux_unit = "umol/m2/s",
+  setup_volume = 125,
+  atm_pressure = atm_press,
+  plot_area = 0.25,
+  cut = FALSE
+)
+
+str(fluxes)
+```
