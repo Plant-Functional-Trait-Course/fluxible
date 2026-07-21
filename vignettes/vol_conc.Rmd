@@ -65,4 +65,12 @@ quality_df <- flux_quality(
   ambient_conc = 18, # approx ambient CO2 concentration at 20°C in umol/l
   error = 4 # this one also needs to be adapted
 )
+
+flux_plot(
+  quality_df,
+  f_conc_vol,
+  datetime,
+  f_ylim_upper = 25, # default values are for ppm
+  f_ylim_lower = 10
+)
 ```
