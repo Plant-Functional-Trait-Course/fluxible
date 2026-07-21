@@ -15,7 +15,7 @@
 #' @keywords internal
 
 flux_calc_frac <- function(
-  slope_df,
+  slopes_df,
   slope_col,
   setup_volume,
   plot_area,
@@ -25,13 +25,13 @@ flux_calc_frac <- function(
   r_const <- 0.082057
   message("R constant set to 0.082057 L * atm * K^-1 * mol^-1")
 
-  fluxes <- slope_df |>
+  fluxes <- slopes_df |>
     mutate(
       f_flux =
         ({{slope_col}} * .data$f_atm_pressure_ave * {{setup_volume}})
         / (r_const *
            .data$f_temp_air_ave
-           * {{plot_area}}), # flux in micromol/s/m^2
+           * {{plot_area}}),
       .by = {{f_fluxid}}
     )
 

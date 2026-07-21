@@ -74,6 +74,17 @@
 #' setup_volume = 24.575,
 #' atm_pressure = 1,
 #' plot_area = 0.0625)
+#' conc_vol <- flux_conc(co2_conc, conc, temp_air)
+#' slopes_vol <- flux_fitting(conc_vol, conc, datetime, fit_type = "exp_zhao18")
+#' flux_calc(slopes_vol,
+#' f_slope,
+#' datetime,
+#' temp_air,
+#' conc_unit = "umol/l",
+#' flux_unit = "mmol/m2/h",
+#' setup_volume = 24.575,
+#' atm_pressure = f_atm_press,
+#' plot_area = 0.0625)
 #' @export
 
 
@@ -345,28 +356,6 @@ flux_calc <- function(slopes_df,
 
 
 
-
-  # fluxes <- slope_med |>
-  #   mutate(
-  #     f_flux =
-  #       ({{slope_col}} * .data$f_atm_pressure_ave * {{setup_volume}})
-  #       / (r_const *
-  #          .data$f_temp_air_ave
-  #          * {{plot_area}}), # flux in micromol/s/m^2
-  #     f_flux = .data$f_flux * flux_coeff, # converting to desired unit
-  #     f_temp_air_ave = case_when(
-  #       temp_air_unit == "celsius" ~ .data$f_temp_air_ave - 273.15,
-  #       temp_air_unit == "fahrenheit"
-  #       ~ (.data$f_temp_air_ave - 273.15) * (9 / 5) + 32,
-  #       temp_air_unit == "kelvin" ~ .data$f_temp_air_ave
-  #     ),
-  #     .by = {{f_fluxid}}
-  #   )
-
-  # if (!quo_is_symbolic(enquo(atm_pressure))) {
-  #   fluxes <- fluxes |>
-  #     select(!"f_atm_pressure_ave")
-  # }
 
   fluxes <- fluxes |>
     mutate(

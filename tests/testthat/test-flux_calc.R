@@ -797,7 +797,7 @@ test_that("volumetric concentration works", {
     cols_sum = "PAR",
     cols_ave = c("temp_soil", "PAR"),
     setup_volume = 24.575,
-    atm_pressure = 1,
+    atm_pressure = f_atm_press,
     plot_area = 0.0625,
     cut = FALSE
   ) |>

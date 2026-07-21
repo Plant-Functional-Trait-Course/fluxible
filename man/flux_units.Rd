@@ -7,7 +7,8 @@
 flux_units(
   flux_units,
   conc_units,
-  conc_units_list = c("mmol/mol", "ppm", "ppb", "ppt"),
+  conc_units_list = c("mmol/mol", "ppm", "ppb", "ppt", "mol/l", "mmol/l", "umol/l",
+    "nmol/l", "pmol/l"),
   amount_units = c("mol", "mmol", "umol", "nmol", "pmol"),
   surface_units = c("m2", "dm2", "cm2"),
   time_units = c("d", "h", "mn", "s")

@@ -12,13 +12,13 @@
 #' @keywords internal
 
 flux_calc_vol <- function(
-  slope_df,
+  slopes_df,
   slope_col,
   setup_volume,
   plot_area,
   f_fluxid
 ) {
-  fluxes <- slope_df |>
+  fluxes <- slopes_df |>
     mutate(
       f_flux =
         ({{slope_col}} * {{setup_volume}}) / {{plot_area}},
