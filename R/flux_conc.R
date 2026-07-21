@@ -70,7 +70,8 @@ flux_conc <- function(conc_df,
       f_conc_vol =
         ({{f_conc}} * .data$f_atm_press)
         / (r_const * .data$f_temp_air_kelvin)
-    )
+    ) |>
+    select(!.data$f_temp_air_kelvin)
 
   new_conc_df
 }

@@ -771,3 +771,37 @@ test_that("sum and average works on same variable", {
 
   expect_snapshot(output)
 })
+
+test_that("volumetric concentration works", {
+  slopes <- flux_conc(co2_conc, conc, temp_air)
+  fit_df <- flux_fitting(
+    conc_df_vol,
+    f_conc_vol,
+    datetime
+  )
+
+  quality_df <- flux_quality(
+    fit_df,
+    f_conc_vol,
+    ambient_conc = 18, # approx ambient CO2 concentration at 20°C in umol/l
+    error = 4 # this one also needs to be adapted
+  )
+
+  output <- flux_calc(
+    quality_df,
+    f_slope,
+    datetime,
+    temp_air,
+    conc_unit = "umol/l",
+    flux_unit = "mmol/m2/h",
+    cols_sum = "PAR",
+    cols_ave = c("temp_soil", "PAR"),
+    setup_volume = 24.575,
+    atm_pressure = 1,
+    plot_area = 0.0625,
+    cut = FALSE
+  ) |>
+    dplyr::select(f_fluxid, datetime, f_flux, PAR_sum, temp_soil_ave, PAR_ave)
+
+  expect_snapshot(output)
+})
