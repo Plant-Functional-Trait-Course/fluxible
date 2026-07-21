@@ -12,7 +12,7 @@ pkgdown::build_site()
 usethis::use_pkgdown_github_pages()
 
 usethis::use_vignette("two-gases")
-devtools::build_vignettes()
+pkgdown::build_articles()
 
 usethis::use_readme_rmd()
 devtools::build_readme()
@@ -27,7 +27,7 @@ devtools::load_all()
 # autoimport::autoimport()
 
 devtools::document()
-devtools::test(filter = "flux_plot")
+devtools::test(filter = "flux_calc")
 devtools::test()
 devtools::run_examples()
 devtools::check()

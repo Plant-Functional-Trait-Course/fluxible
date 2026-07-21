@@ -126,4 +126,15 @@ flux_unit = "mmol/m2/h",
 setup_volume = 24.575,
 atm_pressure = 1,
 plot_area = 0.0625)
+conc_vol <- flux_conc(co2_conc, conc, temp_air)
+slopes_vol <- flux_fitting(conc_vol, conc, datetime, fit_type = "exp_zhao18")
+flux_calc(slopes_vol,
+f_slope,
+datetime,
+temp_air,
+conc_unit = "umol/l",
+flux_unit = "mmol/m2/h",
+setup_volume = 24.575,
+atm_pressure = 1,
+plot_area = 0.0625)
 }
