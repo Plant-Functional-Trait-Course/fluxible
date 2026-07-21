@@ -18,9 +18,12 @@ flux_gpp(
 \arguments{
 \item{fluxes_df}{a dataframe containing NEE and ER}
 
-\item{type_col}{column containing type of flux (NEE or ER)}
+\item{type_col}{column containing type of flux (NEE or ER). Supply as a bare
+(unquoted) column name (e.g. \code{type}), not a string; this function uses
+tidy-evaluation with \code{{{ }}}.}
 
-\item{f_datetime}{column containing start of measurement as datetime}
+\item{f_datetime}{column containing start of measurement as datetime. Supply
+as a bare (unquoted) column name (e.g. \code{f_datetime}), not a string.}
 
 \item{f_flux}{column containing flux values}
 

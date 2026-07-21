@@ -9,9 +9,12 @@ flux_drygas(conc_df, gas_wet, h2o_wet)
 \arguments{
 \item{conc_df}{dataframe of gas concentration over time}
 
-\item{gas_wet}{the gas to correct}
+\item{gas_wet}{the gas to correct. Supply as a bare (unquoted) column name
+(e.g. \code{co2}), not a string; this function uses tidy-evaluation with
+\code{{{ }}}.}
 
-\item{h2o_wet}{water vapor concentration before correction (in mmol/mol)}
+\item{h2o_wet}{water vapor concentration before correction (in mmol/mol).
+Supply as a bare (unquoted) column name (e.g. \code{h2o}), not a string.}
 }
 \value{
 the same dataframe with the additional column \verb{[gas_wet]_dry} in the

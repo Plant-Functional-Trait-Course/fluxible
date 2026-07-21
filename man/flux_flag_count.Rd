@@ -16,9 +16,13 @@ flux_flag_count(
 \arguments{
 \item{flags_df}{dataframe of flux slopes}
 
-\item{f_fluxid}{column containing fluxes unique ID}
+\item{f_fluxid}{column containing fluxes unique ID. Supply as a bare (unquoted)
+column name (e.g. \code{f_fluxid}), not a string; this function uses tidy-evaluation
+with \code{{{ }}}.}
 
-\item{f_quality_flag}{column containing the quality flags}
+\item{f_quality_flag}{column containing the quality flags. Supply as a bare
+(unquoted) column name (e.g. \code{f_quality_flag}), not a string; this function
+uses tidy-evaluation with \code{{{ }}}.}
 
 \item{f_flags}{list of flags used in the dataset
 (if different from default from flux_quality).

@@ -42,41 +42,53 @@ flux_quality(
 \arguments{
 \item{slopes_df}{dataset containing slopes}
 
-\item{f_conc}{column containing the measured gas concentration
-(exponential fits)}
+\item{f_conc}{column containing the measured gas concentration (exponential
+fits). Supply as a bare (unquoted) column name (e.g. \code{conc}), not a string.}
 
-\item{f_fluxid}{column containing unique IDs for each flux}
+\item{f_fluxid}{column containing unique IDs for each flux. Supply as a
+bare (unquoted) column name (e.g. \code{f_fluxid}), not a string.}
 
-\item{f_slope}{column containing the slope of each flux
-(as calculated by the \link[fluxible:flux_fitting]{flux_fitting} function)}
+\item{f_slope}{column containing the slope of each flux (as calculated by the
+\link[fluxible:flux_fitting]{flux_fitting} function). Supply as a bare
+(unquoted) column name (e.g. \code{f_slope}), not a string.}
 
 \item{f_time}{column containing the time of each measurement in seconds
-(exponential fits)}
+(exponential fits). Supply as a bare (unquoted) column name (e.g.
+\code{f_time}), not a string.}
 
 \item{f_start}{column with datetime of the start of the measurement
-(after cuts)}
+(after cuts). Supply as a bare (unquoted) column name (e.g. \code{f_start}), not
+a string.}
 
-\item{f_end}{column with datetime of the end of the measurement
-(after cuts)}
+\item{f_end}{column with datetime of the end of the measurement (after
+cuts). Supply as a bare (unquoted) column name (e.g. \code{f_end}), not a
+string.}
 
-\item{f_fit}{column containing the modeled data (exponential fits)}
+\item{f_fit}{column containing the modeled data (exponential fits). Supply
+as a bare (unquoted) column name (e.g. \code{f_fit}), not a string.}
 
-\item{f_cut}{column containing the cutting information}
+\item{f_cut}{column containing the cutting information. Supply as a bare
+(unquoted) column name (e.g. \code{f_cut}), not a string.}
 
-\item{f_pvalue}{column containing the p-value of each flux
-(linear and quadratic fits)}
+\item{f_pvalue}{column containing the p-value of each flux (linear and
+quadratic fits). Supply as a bare (unquoted) column name (e.g. \code{f_pvalue}),
+not a string.}
 
-\item{f_rsquared}{column containing the r squared of each flux
-(linear and quadratic fits)}
+\item{f_rsquared}{column containing the r squared of each flux (linear and
+quadratic fits). Supply as a bare (unquoted) column name (e.g.
+\code{f_rsquared}), not a string.}
 
-\item{f_slope_lm}{column containing the linear slope of each flux
-(as calculated by the \link[fluxible:flux_fitting]{flux_fitting} function)}
+\item{f_slope_lm}{column containing the linear slope of each flux (as
+calculated by the \link[fluxible:flux_fitting]{flux_fitting} function).
+Supply as a bare (unquoted) column name (e.g. \code{f_slope_lm}), not a string.}
 
-\item{f_fit_lm}{column with the fit of the linear model.
-(as calculated by the \link[fluxible:flux_fitting]{flux_fitting} function)}
+\item{f_fit_lm}{column with the fit of the linear model (as calculated by
+the \link[fluxible:flux_fitting]{flux_fitting} function). Supply as a bare
+(unquoted) column name (e.g. \code{f_fit_lm}), not a string.}
 
 \item{f_b}{column containing the b parameter of the exponential expression
-(exponential fits)}
+(exponential fits). Supply as a bare (unquoted) column name (e.g. \code{f_b}),
+not a string.}
 
 \item{force_discard}{vector of fluxIDs that should be discarded
 by the user's decision}

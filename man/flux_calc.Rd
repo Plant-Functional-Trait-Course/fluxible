@@ -32,14 +32,18 @@ flux_calc(
 \arguments{
 \item{slopes_df}{dataframe of flux slopes}
 
-\item{slope_col}{column containing the slope to calculate the flux}
+\item{slope_col}{column containing the slope to calculate the flux. Supply
+as a bare (unquoted) column name (e.g. \code{f_slope}), not a string; this
+function uses tidy-evaluation with \code{{{ }}}.}
 
 \item{f_datetime}{column containing the datetime of each gas concentration
 measurements in \code{slopes_df}. The first one after cutting will be kept as
-datetime of each flux in the output.}
+datetime of each flux in the output. Supply as a bare (unquoted) column
+name (e.g. \code{datetime}), not a string.}
 
 \item{temp_air_col}{column containing the air temperature used
-to calculate fluxes. Will be averaged with NA removed.}
+to calculate fluxes. Will be averaged with NA removed. Supply as a bare
+(unquoted) column name (e.g. \code{temp_air}), not a string.}
 
 \item{chamber_volume}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} see \code{setup_volume}}
 
@@ -52,7 +56,8 @@ can be a constant (numerical) or a variable (column name)}
 \item{plot_area}{area of the plot in m^2,
 can also be a column in case it is a variable}
 
-\item{f_fluxid}{column containing the flux IDs}
+\item{f_fluxid}{column containing the flux IDs. Supply as a bare
+(unquoted) column name (e.g. \code{f_fluxid}), not a string.}
 
 \item{conc_unit}{unit in which the concentration of gas was measured
 \code{mmol/mol}, \code{ppm}, \code{ppb}, or \code{ppt}}
@@ -87,7 +92,8 @@ none, or \code{"all"} selects all the column except those in \code{cols_keep}.}
 \item{temp_air_unit}{units in which air temperature was measured.
 Has to be either \code{celsius} (default), \code{fahrenheit} or \code{kelvin.}}
 
-\item{f_cut}{column containing cutting information}
+\item{f_cut}{column containing cutting information. Supply as a bare
+(unquoted) column name (e.g. \code{f_cut}), not a string.}
 
 \item{keep_arg}{name in \code{f_cut} of data to keep}
 
