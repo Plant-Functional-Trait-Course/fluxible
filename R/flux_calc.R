@@ -323,38 +323,57 @@ flux_calc <- function(slopes_df,
   message(paste("Concentration was measured in", conc_unit))
 
   if (conc_unit %in% c("mmol/mol", "ppm", "ppb", "ppt")) {
-    fluxes <- flux_calc_frac(slope_med)
-  } else if (conc_unit %in% c("mol/l", "mmol/l")) {
-     selected
+    fluxes <- flux_calc_frac(
+      slope_med,
+      {{slope_col}},
+      {{setup_volume}},
+      {{plot_area}},
+      {{f_fluxid}},
+      {{atm_pressure}}
+    )
+  } else if (conc_unit %in% c(
+    "mol/l", "mmol/l", "umol/l", "nmol/l", "pmol/l"
+  )) {
+    fluxes <- flux_calc_vol(slope_med)
   }
 
-  r_const <- 0.082057
-  message("R constant set to 0.082057 L * atm * K^-1 * mol^-1")
-
+  
   
 
 
-  fluxes <- slope_med |>
+  # fluxes <- slope_med |>
+  #   mutate(
+  #     f_flux =
+  #       ({{slope_col}} * .data$f_atm_pressure_ave * {{setup_volume}})
+  #       / (r_const *
+  #          .data$f_temp_air_ave
+  #          * {{plot_area}}), # flux in micromol/s/m^2
+  #     f_flux = .data$f_flux * flux_coeff, # converting to desired unit
+  #     f_temp_air_ave = case_when(
+  #       temp_air_unit == "celsius" ~ .data$f_temp_air_ave - 273.15,
+  #       temp_air_unit == "fahrenheit"
+  #       ~ (.data$f_temp_air_ave - 273.15) * (9 / 5) + 32,
+  #       temp_air_unit == "kelvin" ~ .data$f_temp_air_ave
+  #     ),
+  #     .by = {{f_fluxid}}
+  #   )
+
+  # if (!quo_is_symbolic(enquo(atm_pressure))) {
+  #   fluxes <- fluxes |>
+  #     select(!"f_atm_pressure_ave")
+  # }
+
+  fluxes <- fluxes |>
     mutate(
-      f_flux =
-        ({{slope_col}} * .data$f_atm_pressure_ave * {{setup_volume}})
-        / (r_const *
-           .data$f_temp_air_ave
-           * {{plot_area}}), # flux in micromol/s/m^2
+      .by = {{f_fluxid}},
       f_flux = .data$f_flux * flux_coeff, # converting to desired unit
       f_temp_air_ave = case_when(
         temp_air_unit == "celsius" ~ .data$f_temp_air_ave - 273.15,
         temp_air_unit == "fahrenheit"
         ~ (.data$f_temp_air_ave - 273.15) * (9 / 5) + 32,
         temp_air_unit == "kelvin" ~ .data$f_temp_air_ave
-      ),
-      .by = {{f_fluxid}}
+      )
     )
-
-  if (!quo_is_symbolic(enquo(atm_pressure))) {
-    fluxes <- fluxes |>
-      select(!"f_atm_pressure_ave")
-  }
 
   if (length(cols_nest) > 0) {
     message("Creating a df with the columns from 'cols_nest' argument...")

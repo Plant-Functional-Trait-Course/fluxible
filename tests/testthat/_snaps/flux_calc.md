@@ -24,8 +24,8 @@
       Averaging air temperature for each flux...
       Creating a df with the columns from 'cols_keep' argument...
       Calculating fluxes...
-      R constant set to 0.082057 L * atm * K^-1 * mol^-1
       Concentration was measured in ppm
+      R constant set to 0.082057 L * atm * K^-1 * mol^-1
       Fluxes are in mmol/m2/h
     Output
       # A tibble: 6 x 6
@@ -51,8 +51,8 @@
       Creating a df with the columns from 'cols_keep' argument...
       Creating a df with the columns from 'cols_ave' argument...
       Calculating fluxes...
-      R constant set to 0.082057 L * atm * K^-1 * mol^-1
       Concentration was measured in ppm
+      R constant set to 0.082057 L * atm * K^-1 * mol^-1
       Fluxes are in mmol/m2/h
     Output
       # A tibble: 6 x 7
@@ -123,8 +123,8 @@
     Message
       Averaging air temperature for each flux...
       Calculating fluxes...
-      R constant set to 0.082057 L * atm * K^-1 * mol^-1
       Concentration was measured in ppm
+      R constant set to 0.082057 L * atm * K^-1 * mol^-1
       Fluxes are in mmol/m2/h
     Output
       # A tibble: 6 x 4
@@ -147,8 +147,8 @@
     Message
       Averaging air temperature for each flux...
       Calculating fluxes...
-      R constant set to 0.082057 L * atm * K^-1 * mol^-1
       Concentration was measured in ppm
+      R constant set to 0.082057 L * atm * K^-1 * mol^-1
       Fluxes are in mmol/m2/h
     Output
       # A tibble: 6 x 4
@@ -172,8 +172,8 @@
       Cutting data according to 'keep_arg'...
       Averaging air temperature for each flux...
       Calculating fluxes...
-      R constant set to 0.082057 L * atm * K^-1 * mol^-1
       Concentration was measured in ppm
+      R constant set to 0.082057 L * atm * K^-1 * mol^-1
       Fluxes are in mmol/m2/h
     Output
       # A tibble: 6 x 4
@@ -196,8 +196,8 @@
       Cutting data according to 'keep_arg'...
       Averaging air temperature for each flux...
       Calculating fluxes...
-      R constant set to 0.082057 L * atm * K^-1 * mol^-1
       Concentration was measured in ppm
+      R constant set to 0.082057 L * atm * K^-1 * mol^-1
       Fluxes are in mmol/m2/h
     Output
       # A tibble: 6 x 4
@@ -220,8 +220,8 @@
       Cutting data according to 'keep_arg'...
       Averaging air temperature for each flux...
       Calculating fluxes...
-      R constant set to 0.082057 L * atm * K^-1 * mol^-1
       Concentration was measured in ppm
+      R constant set to 0.082057 L * atm * K^-1 * mol^-1
       Fluxes are in mmol/m2/h
     Output
       # A tibble: 6 x 4
@@ -277,8 +277,8 @@
       Cutting data according to 'keep_arg'...
       Averaging air temperature for each flux...
       Calculating fluxes...
-      R constant set to 0.082057 L * atm * K^-1 * mol^-1
       Concentration was measured in ppm
+      R constant set to 0.082057 L * atm * K^-1 * mol^-1
       Fluxes are in mmol/m2/h
     Output
       # A tibble: 6 x 7
