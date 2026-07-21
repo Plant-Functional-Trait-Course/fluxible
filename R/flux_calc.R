@@ -334,11 +334,16 @@ flux_calc <- function(slopes_df,
   } else if (conc_unit %in% c(
     "mol/l", "mmol/l", "umol/l", "nmol/l", "pmol/l"
   )) {
-    fluxes <- flux_calc_vol(slope_med)
+    fluxes <- flux_calc_vol(
+      slope_med,
+      {{slope_col}},
+      {{setup_volume}},
+      {{plot_area}},
+      {{f_fluxid}}
+    )
   }
 
-  
-  
+
 
 
   # fluxes <- slope_med |>
