@@ -93,6 +93,10 @@ flux_match <- function(raw_conc,
   name_raw_conc <- as_label(enquo(raw_conc))
   name_field_record <- as_label(enquo(field_record))
 
+  check_bare_col(enquo(f_datetime), "f_datetime")
+  check_bare_col(enquo(start_col), "start_col")
+  check_bare_col(enquo(end_col), "end_col")
+
   args_ok <- flux_fun_check(
     list(time_diff = time_diff),
     fn = list(is.numeric),

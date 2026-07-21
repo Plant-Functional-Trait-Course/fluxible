@@ -38,6 +38,10 @@ flux_conc <- function(conc_df,
                       f_fluxid = f_fluxid,
                       temp_air_unit = "celsius") {
 
+  check_bare_col(enquo(f_conc), "f_conc")
+  check_bare_col(enquo(temp_air_col), "temp_air_col")
+  check_bare_col(enquo(f_fluxid), "f_fluxid")
+
 
   prep_conc_df <- conc_df |>
     mutate( # unit conversion to kelvin

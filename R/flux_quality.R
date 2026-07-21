@@ -136,6 +136,19 @@ flux_quality <- function(slopes_df,
 
   name_df <- as_label(enquo(slopes_df))
 
+  check_bare_col(enquo(f_conc), "f_conc")
+  check_bare_col(enquo(f_slope), "f_slope")
+  check_bare_col(enquo(f_slope_lm), "f_slope_lm")
+  check_bare_col(enquo(f_fit), "f_fit")
+  check_bare_col(enquo(f_time), "f_time")
+  check_bare_col(enquo(f_start), "f_start")
+  check_bare_col(enquo(f_end), "f_end")
+  check_bare_col(enquo(f_cut), "f_cut")
+  check_bare_col(enquo(f_pvalue), "f_pvalue")
+  check_bare_col(enquo(f_rsquared), "f_rsquared")
+  check_bare_col(enquo(f_b), "f_b")
+  check_bare_col(enquo(f_fit_lm), "f_fit_lm")
+
   args_ok <- flux_fun_check(list(
     ambient_conc = ambient_conc,
     error = error,

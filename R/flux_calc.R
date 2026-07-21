@@ -149,6 +149,12 @@ flux_calc <- function(slopes_df,
 
   name_df <- as_label(enquo(slopes_df))
 
+  check_bare_col(enquo(slope_col), "slope_col")
+  check_bare_col(enquo(f_datetime), "f_datetime")
+  check_bare_col(enquo(temp_air_col), "temp_air_col")
+  check_bare_col(enquo(f_fluxid), "f_fluxid")
+  check_bare_col(enquo(f_cut), "f_cut")
+
   colnames <- colnames(slopes_df)
   if (length(setdiff(cols_keep, colnames)) > 0) {
     stop("some names in cols_keep cannot be found in slopes_df")

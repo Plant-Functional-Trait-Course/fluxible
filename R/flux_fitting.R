@@ -89,6 +89,12 @@ flux_fitting <- function(conc_df,
 
   name_df <- as_label(enquo(conc_df))
 
+  check_bare_col(enquo(f_conc), "f_conc")
+  check_bare_col(enquo(f_datetime), "f_datetime")
+  check_bare_col(enquo(f_start), "f_start")
+  check_bare_col(enquo(f_end), "f_end")
+  check_bare_col(enquo(f_fluxid), "f_fluxid")
+
   args_ok <- flux_fun_check(list(
     start_cut = start_cut,
     end_cut = end_cut

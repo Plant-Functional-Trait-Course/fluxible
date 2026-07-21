@@ -191,6 +191,12 @@ stupeflux <- function(raw_conc,
     time_diff = time_diff
   )
 
+  check_bare_col(enquo(f_datetime), "f_datetime")
+  check_bare_col(enquo(start_col), "start_col")
+  check_bare_col(enquo(end_col), "end_col")
+  check_bare_col(enquo(f_conc), "f_conc")
+  check_bare_col(enquo(temp_air_col), "temp_air_col")
+
   conc_fitting <- flux_fitting(
     conc_df,
     {{f_conc}},

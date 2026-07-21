@@ -104,6 +104,10 @@ flux_plot <- function(slopes_df,
 
   # fortify data
 
+  check_bare_col(enquo(f_conc), "f_conc")
+  check_bare_col(enquo(f_datetime), "f_datetime")
+  check_bare_col(enquo(arrange_col), "arrange_col")
+
 
   slopes_params <- flux_fortify(
     slopes_df = slopes_df,
