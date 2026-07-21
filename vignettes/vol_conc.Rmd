@@ -1,0 +1,16 @@
+---
+title: "Transforming gas concentration in volumetric units before modelling the fluxes"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Transforming gas concentration in volumetric units before modelling the fluxes}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+options(tidyverse.quiet = TRUE)
+```
