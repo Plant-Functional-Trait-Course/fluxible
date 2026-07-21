@@ -2,17 +2,21 @@
 #' @description Calculates a flux based on the rate of change
 #' of gas concentration over time
 #' @param slopes_df dataframe of flux slopes
-#' @param slope_col column containing the slope to calculate the flux
+#' @param slope_col column containing the slope to calculate the flux. Supply
+#' as a bare (unquoted) column name (e.g. `f_slope`), not a string; this
+#' function uses tidy-evaluation with `{{ }}`.
 #' @param f_datetime column containing the datetime of each gas concentration
 #' measurements in `slopes_df`. The first one after cutting will be kept as
-#' datetime of each flux in the output.
+#' datetime of each flux in the output. Supply as a bare (unquoted) column
+#' name (e.g. `datetime`), not a string.
 #' @param conc_unit unit in which the concentration of gas was measured
 #' `mmol/mol`, `ppm`, `ppb`, or `ppt`
 #' @param flux_unit desired units for the calculated fluxes. Has to be of the
 #' form amount/surface/time. Amount can be `mol`, `mmol`, `umol`, `nmol` or
 #' `pmol`. Time can be `d` (day), `h` (hour), `mn` (minute) or `s` (seconds).
 #' Surface can be `m2`, `dm2` or `cm2`.
-#' @param f_cut column containing cutting information
+#' @param f_cut column containing cutting information. Supply as a bare
+#' (unquoted) column name (e.g. `f_cut`), not a string.
 #' @param keep_arg name in `f_cut` of data to keep
 #' @param chamber_volume `r lifecycle::badge("deprecated")` see `setup_volume`
 #' @param tube_volume `r lifecycle::badge("deprecated")` see `setup_volume`
@@ -37,9 +41,11 @@
 #' @param cols_nest columns to nest in `nested_variables` for each flux in the
 #' output. Can be character vector of column names, `"none"` (default) selects
 #' none, or `"all"` selects all the column except those in `cols_keep`.
-#' @param f_fluxid column containing the flux IDs
+#' @param f_fluxid column containing the flux IDs. Supply as a bare
+#' (unquoted) column name (e.g. `f_fluxid`), not a string.
 #' @param temp_air_col column containing the air temperature used
-#' to calculate fluxes. Will be averaged with NA removed.
+#' to calculate fluxes. Will be averaged with NA removed. Supply as a bare
+#' (unquoted) column name (e.g. `temp_air`), not a string.
 #' @param temp_air_unit units in which air temperature was measured.
 #' Has to be either `celsius` (default), `fahrenheit` or `kelvin.`
 #' @param cut if 'TRUE' (default), the measurements will be cut according to

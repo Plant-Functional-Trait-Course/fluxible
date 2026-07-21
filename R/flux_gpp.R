@@ -12,8 +12,11 @@
 #' @param fluxes_df a dataframe containing NEE and ER
 #' @param id_cols columns used to identify each pair of ER and NEE
 #' @param f_flux column containing flux values
-#' @param type_col column containing type of flux (NEE or ER)
-#' @param f_datetime column containing start of measurement as datetime
+#' @param type_col column containing type of flux (NEE or ER). Supply as a bare
+#' (unquoted) column name (e.g. `type`), not a string; this function uses
+#' tidy-evaluation with `{{ }}`.
+#' @param f_datetime column containing start of measurement as datetime. Supply
+#' as a bare (unquoted) column name (e.g. `f_datetime`), not a string.
 #' @param nee_arg argument designating NEE fluxes in type column
 #' @param er_arg argument designating ER fluxes in type column
 #' @param cols_keep columns to keep from `fluxes_df`. Values from NEE row will
@@ -43,6 +46,10 @@ flux_gpp <- function(fluxes_df,
                      cols_keep = "none") {
 
   name <- as_label(enquo(fluxes_df))
+
+  check_bare_col(enquo(type_col), "type_col")
+  check_bare_col(enquo(f_datetime), "f_datetime")
+  check_bare_col(enquo(f_flux), "f_flux")
 
   fluxes_df_check <- fluxes_df |>
     select({{f_flux}})

@@ -3,13 +3,17 @@
 #' (e.g., ppm) to volumetric units (e.g., μmol/liter) based on the ideal gas
 #' law and the specific conditions of the measurement.
 #' @param conc_df dataframe of gas concentration over time
-#' @param f_conc column with gas concentration
+#' @param f_conc column with gas concentration. Supply as a bare (unquoted)
+#' column name (e.g. `conc`), not a string; this function uses tidy-evaluation
+#' with `{{ }}`.
 #' @param atm_pressure atmospheric pressure in atm,
 #' can be a constant (numerical) or a variable (column name).
 #' Default is 1.
 #' @param temp_air_col column containing the air temperature used
-#' to convert concentration.
-#' @param f_fluxid column with ID of each flux
+#' to convert concentration. Supply as a bare (unquoted) column name (e.g.
+#' `temp_air`), not a string.
+#' @param f_fluxid column with ID of each flux. Supply as a bare (unquoted)
+#' column name (e.g. `f_fluxid`), not a string.
 #' @param temp_air_unit units in which air temperature was measured.
 #' Has to be either `celsius` (default), `fahrenheit` or `kelvin.`
 #' @details Required temperature and pressure data

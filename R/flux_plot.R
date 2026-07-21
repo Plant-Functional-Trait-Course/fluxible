@@ -8,8 +8,11 @@
 #' will work best with datasets produced following a fluxible workflow.
 #' @param slopes_df dataset containing slopes,
 #' with flags produced by \link[fluxible:flux_quality]{flux_quality}
-#' @param f_conc column with gas concentration
-#' @param f_datetime column with datetime of each data point
+#' @param f_conc column with gas concentration. Supply as a bare (unquoted)
+#' column name (e.g. `conc`), not a string; this function uses tidy-evaluation
+#' with `{{ }}`.
+#' @param f_datetime column with datetime of each data point. Supply as a
+#' bare (unquoted) column name (e.g. `datetime`), not a string.
 #' @param color_discard color for fits with a discard quality flag
 #' @param color_cut color for the part of the flux that is cut
 #' @param color_ok color for fits with an ok quality flag
@@ -42,6 +45,8 @@
 #' `list(ncol, width (in cm), ratio)`
 #' @param arrange_col character vector of columns to use to reorder the facets.
 #' If NULL (default), facets are ordered by the datetime of the measurement.
+#' When supplying a single column for `arrange_col`, provide it as a bare
+#' (unquoted) column name; for multiple columns use a character vector.
 #' @return plots of fluxes, with raw concentration data points, fit, slope,
 #' and color code indicating quality flags and cuts. The plots are organized
 #' in facets according to flux ID, and a text box display the quality flag and

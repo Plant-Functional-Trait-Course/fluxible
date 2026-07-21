@@ -8,8 +8,12 @@
 #' (if different from default from flux_quality).
 #' If not provided, it will list only the flags that are
 #' present in the dataset (no showing 0).
-#' @param f_fluxid column containing fluxes unique ID
-#' @param f_quality_flag column containing the quality flags
+#' @param f_fluxid column containing fluxes unique ID. Supply as a bare (unquoted)
+#' column name (e.g. `f_fluxid`), not a string; this function uses tidy-evaluation
+#' with `{{ }}`.
+#' @param f_quality_flag column containing the quality flags. Supply as a bare
+#' (unquoted) column name (e.g. `f_quality_flag`), not a string; this function
+#' uses tidy-evaluation with `{{ }}`.
 #' @return a dataframe with the number of fluxes for each quality flags
 #' and their proportion to the total
 #' @param show_total logical, if TRUE (default), adds a row with the total
@@ -41,6 +45,9 @@ flux_flag_count <- function(flags_df,
                               "no_slope"
                             ),
                             show_total = TRUE) {
+
+  check_bare_col(enquo(f_fluxid), "f_fluxid")
+  check_bare_col(enquo(f_quality_flag), "f_quality_flag")
 
   flag_df <- flags_df |>
     mutate(

@@ -2,9 +2,13 @@
 #' @description Calculates light response curves (LRC) for CO2 fluxes and
 #' standardizes CO2 fluxes according to the LRC
 #' @param fluxes_df a dataframe containing NEE, ER and LRC measurements
-#' @param type_col column containing type of flux (NEE, ER, LRC)
-#' @param par_ave column containing the PAR value for each flux
-#' @param f_flux column containing flux values
+#' @param type_col column containing type of flux (NEE, ER, LRC). Supply as a
+#' bare (unquoted) column name (e.g. `type`), not a string; this function uses
+#' tidy-evaluation with `{{ }}`.
+#' @param par_ave column containing the PAR value for each flux. Supply as a
+#' bare (unquoted) column name (e.g. `PAR_ave`), not a string.
+#' @param f_flux column containing flux values. Supply as a bare (unquoted)
+#' column name (e.g. `f_flux`), not a string.
 #' @param nee_arg argument designating NEE fluxes in type column
 #' @param er_arg argument designating ER fluxes in type column
 #' @param lrc_arg argument designating LRC fluxes in type column
@@ -57,6 +61,10 @@ flux_lrc <- function(fluxes_df,
                      par_er = 0) {
 
   name <- as_label(enquo(fluxes_df))
+
+  check_bare_col(enquo(type_col), "type_col")
+  check_bare_col(enquo(par_ave), "par_ave")
+  check_bare_col(enquo(f_flux), "f_flux")
 
   args_ok <- flux_fun_check(list(
     par_nee = par_nee,

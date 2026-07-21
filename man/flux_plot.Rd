@@ -31,9 +31,12 @@ flux_plot(
 \item{slopes_df}{dataset containing slopes,
 with flags produced by \link[fluxible:flux_quality]{flux_quality}}
 
-\item{f_conc}{column with gas concentration}
+\item{f_conc}{column with gas concentration. Supply as a bare (unquoted)
+column name (e.g. \code{conc}), not a string; this function uses tidy-evaluation
+with \code{{{ }}}.}
 
-\item{f_datetime}{column with datetime of each data point}
+\item{f_datetime}{column with datetime of each data point. Supply as a
+bare (unquoted) column name (e.g. \code{datetime}), not a string.}
 
 \item{color_discard}{color for fits with a discard quality flag}
 
@@ -81,7 +84,9 @@ but will take time depending on the size of the dataset}
 (in case \code{output = "ggsave"})}
 
 \item{arrange_col}{character vector of columns to use to reorder the facets.
-If NULL (default), facets are ordered by the datetime of the measurement.}
+If NULL (default), facets are ordered by the datetime of the measurement.
+When supplying a single column for \code{arrange_col}, provide it as a bare
+(unquoted) column name; for multiple columns use a character vector.}
 }
 \value{
 plots of fluxes, with raw concentration data points, fit, slope,

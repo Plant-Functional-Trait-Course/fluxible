@@ -21,12 +21,15 @@
 #' @param time_diff time difference (in seconds) between the two datasets.
 #' Will be added to the datetime column of the `raw_conc` dataset.
 #' For situations where the time was not synchronized correctly.
-#' @param f_datetime datetime column in raw_conc (`ymd_hms` format)
+#' @param f_datetime datetime column in raw_conc (`ymd_hms` format). Supply as
+#' a bare (unquoted) column name (e.g. `datetime`), not a string.
 #' @param f_conc `r lifecycle::badge("deprecated")` `f_conc` is no longer
 #' required
-#' @param start_col start column in field_record (`ymd_hms` format)
+#' @param start_col start column in field_record (`ymd_hms` format). Supply as
+#' a bare (unquoted) column name (e.g. `start`), not a string.
 #' @param end_col end column in field_record (`ymd_hms` format), if present
-#' (see `measurement_length`).
+#' (see `measurement_length`). Supply as a bare (unquoted) column name (e.g.
+#' `end`), not a string.
 #' @param fixed_length `r lifecycle::badge("deprecated")` no longer required.
 #' `flux_match` will detect if `end_col` or `measurement_length` are provided.
 #' @return a dataframe with concentration measurements, corresponding datetime,

@@ -27,12 +27,15 @@ a gas concentration column as double.}
 Has to contain at least a column containing the start of each measurement,
 and any other column identifying the measurements.}
 
-\item{f_datetime}{datetime column in raw_conc (\code{ymd_hms} format)}
+\item{f_datetime}{datetime column in raw_conc (\code{ymd_hms} format). Supply as
+a bare (unquoted) column name (e.g. \code{datetime}), not a string.}
 
-\item{start_col}{start column in field_record (\code{ymd_hms} format)}
+\item{start_col}{start column in field_record (\code{ymd_hms} format). Supply as
+a bare (unquoted) column name (e.g. \code{start}), not a string.}
 
 \item{end_col}{end column in field_record (\code{ymd_hms} format), if present
-(see \code{measurement_length}).}
+(see \code{measurement_length}). Supply as a bare (unquoted) column name (e.g.
+\code{end}), not a string.}
 
 \item{measurement_length}{length of the measurements (in seconds)
 from the start specified in the \code{field_record}. Use \code{measurement_length} if

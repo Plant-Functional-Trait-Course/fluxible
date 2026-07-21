@@ -10,11 +10,14 @@
 #' measurement (used to detect measurement that started with a polluted setup)
 #' @param error error of the setup, defines a window outside of which
 #' the starting values indicate a polluted setup
-#' @param f_fluxid column containing unique IDs for each flux
-#' @param f_slope column containing the slope of each flux
-#' (as calculated by the \link[fluxible:flux_fitting]{flux_fitting} function)
-#' @param f_slope_lm column containing the linear slope of each flux
-#' (as calculated by the \link[fluxible:flux_fitting]{flux_fitting} function)
+#' @param f_fluxid column containing unique IDs for each flux. Supply as a
+#' bare (unquoted) column name (e.g. `f_fluxid`), not a string.
+#' @param f_slope column containing the slope of each flux (as calculated by the
+#' \link[fluxible:flux_fitting]{flux_fitting} function). Supply as a bare
+#' (unquoted) column name (e.g. `f_slope`), not a string.
+#' @param f_slope_lm column containing the linear slope of each flux (as
+#' calculated by the \link[fluxible:flux_fitting]{flux_fitting} function).
+#' Supply as a bare (unquoted) column name (e.g. `f_slope_lm`), not a string.
 #' @param force_discard vector of fluxIDs that should be discarded
 #' by the user's decision
 #' @param force_ok vector of fluxIDs for which the user wants to keep
@@ -28,33 +31,41 @@
 #' @param ratio_threshold ratio of gas concentration data points over length of
 #' measurement (in seconds) below which the measurement will be considered as
 #' not having enough data points to be considered for calculations
-#' @param f_pvalue column containing the p-value of each flux
-#' (linear and quadratic fits)
-#' @param f_rsquared column containing the r squared of each flux
-#' (linear and quadratic fits)
+#' @param f_pvalue column containing the p-value of each flux (linear and
+#' quadratic fits). Supply as a bare (unquoted) column name (e.g. `f_pvalue`),
+#' not a string.
+#' @param f_rsquared column containing the r squared of each flux (linear and
+#' quadratic fits). Supply as a bare (unquoted) column name (e.g.
+#' `f_rsquared`), not a string.
 #' @param pvalue_threshold threshold of p-value below which the change of
 #' gas concentration over time is considered not significant
 #' (linear and quadratic fits)
 #' @param rsquared_threshold threshold of r squared value below which
 #' the linear model is considered an unsatisfactory fit
 #' (linear and quadratic fits)
-#' @param f_conc column containing the measured gas concentration
-#' (exponential fits)
+#' @param f_conc column containing the measured gas concentration (exponential
+#' fits). Supply as a bare (unquoted) column name (e.g. `conc`), not a string.
 #' @param f_b column containing the b parameter of the exponential expression
-#' (exponential fits)
+#' (exponential fits). Supply as a bare (unquoted) column name (e.g. `f_b`),
+#' not a string.
 #' @param f_time column containing the time of each measurement in seconds
-#' (exponential fits)
+#' (exponential fits). Supply as a bare (unquoted) column name (e.g.
+#' `f_time`), not a string.
 #' @param f_start column with datetime of the start of the measurement
-#' (after cuts)
-#' @param f_end column with datetime of the end of the measurement
-#' (after cuts)
-#' @param f_fit column containing the modeled data (exponential fits)
+#' (after cuts). Supply as a bare (unquoted) column name (e.g. `f_start`), not
+#' a string.
+#' @param f_end column with datetime of the end of the measurement (after
+#' cuts). Supply as a bare (unquoted) column name (e.g. `f_end`), not a
+#' string.
+#' @param f_fit column containing the modeled data (exponential fits). Supply
+#' as a bare (unquoted) column name (e.g. `f_fit`), not a string.
 #' @param rmse_threshold threshold for the RMSE of each flux above which
 #' the fit is considered unsatisfactory (exponential fits)
 #' @param cor_threshold threshold for the correlation coefficient of
 #' gas concentration with time below which the correlation
 #' is considered not significant (exponential fits)
-#' @param f_cut column containing the cutting information
+#' @param f_cut column containing the cutting information. Supply as a bare
+#' (unquoted) column name (e.g. `f_cut`), not a string.
 #' @param cut_arg argument defining that the data point should be cut out
 #' @param b_threshold threshold for the b parameter.
 #' Defines a window with its opposite inside which the fit is
@@ -65,8 +76,9 @@
 #' @param kappamax logical. If `TRUE` the kappamax method will be applied.
 #' @param instr_error error of the instrument, in the same unit as the
 #' gas concentration
-#' @param f_fit_lm column with the fit of the linear model.
-#' (as calculated by the \link[fluxible:flux_fitting]{flux_fitting} function)
+#' @param f_fit_lm column with the fit of the linear model (as calculated by
+#' the \link[fluxible:flux_fitting]{flux_fitting} function). Supply as a bare
+#' (unquoted) column name (e.g. `f_fit_lm`), not a string.
 #' @details the kappamax method (Hüppi et al., 2018) selects the linear slope if
 #' \ifelse{html}{\out{|b| > kappamax}}{\eqn{|b| > kappamax}{ASCII}}, with
 #' \ifelse{html}{\out{kappamax = |f_slope_lm / instr_error|}}{\eqn{kappamax = |f_slope_lm / instr_error|}{ASCII}}.

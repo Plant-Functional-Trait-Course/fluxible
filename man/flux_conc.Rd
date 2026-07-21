@@ -16,16 +16,20 @@ flux_conc(
 \arguments{
 \item{conc_df}{dataframe of gas concentration over time}
 
-\item{f_conc}{column with gas concentration}
+\item{f_conc}{column with gas concentration. Supply as a bare (unquoted)
+column name (e.g. \code{conc}), not a string; this function uses tidy-evaluation
+with \code{{{ }}}.}
 
 \item{temp_air_col}{column containing the air temperature used
-to convert concentration.}
+to convert concentration. Supply as a bare (unquoted) column name (e.g.
+\code{temp_air}), not a string.}
 
 \item{atm_pressure}{atmospheric pressure in atm,
 can be a constant (numerical) or a variable (column name).
 Default is 1.}
 
-\item{f_fluxid}{column with ID of each flux}
+\item{f_fluxid}{column with ID of each flux. Supply as a bare (unquoted)
+column name (e.g. \code{f_fluxid}), not a string.}
 
 \item{temp_air_unit}{units in which air temperature was measured.
 Has to be either \code{celsius} (default), \code{fahrenheit} or \code{kelvin.}}
