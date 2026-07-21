@@ -135,6 +135,6 @@ temp_air,
 conc_unit = "umol/l",
 flux_unit = "mmol/m2/h",
 setup_volume = 24.575,
-atm_pressure = f_atm_press,
+atm_pressure = 1,
 plot_area = 0.0625)
 }
