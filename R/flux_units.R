@@ -67,7 +67,11 @@ flux_units <- function(flux_units,
     conc_units == "ppm" ~ 1,
     conc_units == "ppb" ~ 1e-3,
     conc_units == "ppt" ~ 1e-6,
-    
+    conc_units == "mol/l" ~ 1e6,
+    conc_units == "mmol/l" ~ 1e3,
+    conc_units == "umol/l" ~ 1,
+    conc_units == "nmol/l" ~ 1e-3,
+    conc_units == "pmol/l" ~ 1e-6
   )
 
   flux_coeff <- amount_coeff * surface_coeff * time_coeff * conc_coeff

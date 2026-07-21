@@ -774,11 +774,11 @@ test_that("sum and average works on same variable", {
 
 test_that("volumetric concentration works", {
   slopes <- flux_conc(co2_conc, conc, temp_air)
-  fit_df <- flux_fitting(
-    conc_df_vol,
+  fit_df <- suppressWarnings(flux_fitting(
+    slopes,
     f_conc_vol,
     datetime
-  )
+  ))
 
   quality_df <- flux_quality(
     fit_df,
@@ -787,7 +787,7 @@ test_that("volumetric concentration works", {
     error = 4 # this one also needs to be adapted
   )
 
-  output <- flux_calc(
+  output_vol <- flux_calc(
     quality_df,
     f_slope,
     datetime,
@@ -803,5 +803,5 @@ test_that("volumetric concentration works", {
   ) |>
     dplyr::select(f_fluxid, datetime, f_flux, PAR_sum, temp_soil_ave, PAR_ave)
 
-  expect_snapshot(output)
+  expect_snapshot(output_vol)
 })
