@@ -320,10 +320,18 @@ flux_calc <- function(slopes_df,
 
   message("Calculating fluxes...")
 
+  message(paste("Concentration was measured in", conc_unit))
+
+  if (conc_unit %in% c("mmol/mol", "ppm", "ppb", "ppt")) {
+    fluxes <- flux_calc_frac(slope_med)
+  } else if (conc_unit %in% c("mol/l", "mmol/l")) {
+     selected
+  }
+
   r_const <- 0.082057
   message("R constant set to 0.082057 L * atm * K^-1 * mol^-1")
 
-  message(paste("Concentration was measured in", conc_unit))
+  
 
 
   fluxes <- slope_med |>
