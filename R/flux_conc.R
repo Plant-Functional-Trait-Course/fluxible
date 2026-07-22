@@ -32,7 +32,7 @@
 #' provided as a constant for the entire dataset.
 #' @return The same dataframe, with additional column `f_conc_vol` in volumetric
 #' concentration.
-#' @importFrom dplyr mutate
+#' @importFrom dplyr mutate group_by ungroup
 #' @importFrom tidyr fill
 #' @examples
 #' data(co2_conc)
@@ -63,16 +63,16 @@ flux_conc <- function(conc_df,
       f_atm_press = {{atm_pressure}}
       # if constant, creates col, if already col, useless and harmless
     ) |>
+    group_by({{f_fluxid}}) |>
     fill( # filling in case of missing values
       "f_temp_air_kelvin",
-      .by = {{f_fluxid}},
       .direction = "downup"
     ) |>
     fill( # filling in case of missing values
       "f_atm_press",
-      .by = {{f_fluxid}},
       .direction = "downup"
-    )
+    ) |>
+    ungroup()
 
   r_const <- 0.082057
   message("R constant set to 0.082057 L * atm * K^-1 * mol^-1")
