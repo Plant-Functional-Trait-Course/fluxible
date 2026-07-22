@@ -1,6 +1,7 @@
 # fluxible 1.4.0
 
 * `flux_flag_count`: added a row with total number of fluxes, to facilitate reporting.
+* `flux_fitting` (bug fix): last point not cut automatically anymore. The fix can change the results if gas concentration data points are very spaced. The previous results can be obtained by cutting one extra second at the end of the measurements.
 
 # fluxible 1.3.7
 
