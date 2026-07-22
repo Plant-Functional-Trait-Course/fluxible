@@ -157,8 +157,8 @@ fluxes_df <- flux_calc(
 #> Creating a df with the columns from 'cols_keep' argument...
 #> Creating a df with the columns from 'cols_ave' argument...
 #> Calculating fluxes...
-#> R constant set to 0.082057 L * atm * K^-1 * mol^-1
 #> Concentration was measured in ppm
+#> R constant set to 0.082057 L * atm * K^-1 * mol^-1
 #> Fluxes are in mmol/m2/h
 
 fluxes_gpp <- flux_gpp(
@@ -186,6 +186,10 @@ fluxes_gpp
 #> 9 2022-07-29 00:06:25 NEE    32.7           12.2 29 WN3C 106
 ```
 
+To convert gas concentration into volumetric units before modelling, see
+`vignette("vol_conc", package = "fluxible")`, available since ‘fluxible
+1.4.0’.
+
 ## Supporting infrastructure
 
 ### `licoread` R package
@@ -212,18 +216,6 @@ We are working on a tool to automatically select the window of the
 measurement on which to fit a model. This selection will be based on
 environmental variable, such as photosynthetically active radiation
 (PAR), or residuals.
-
-### Working in mol/volume
-
-So far `fluxible` works in fractional concentration (e. g. ppm) and
-transforms it in mol when calculating the fluxes, using the average
-temperature of the measurement. This has the advantage to work even if
-the setup does not provide temperature for each gas concentration data
-point. Recent setups provide temperature at the same frequency as gas
-concentration, and this allows to transform the concentration in
-mol/volume earlier in the process, accounting better for temperature
-changes during the measurement. This will be implemented in a future
-version of `fluxible`.
 
 <!-- ### More fits
 As we want fluxible to fit the use of as many projects as possible, more fitting expressions will be included in the flux_fitting function.
@@ -253,6 +245,11 @@ Evolution*,
 [doi:10.1111/2041-210X.70161](https://doi.org/10.1111/2041-210X.70161).
 
 <br>
+
+**Gaudard J**. “Global Change Impacts on Carbon Dynamics in Alpine
+Grasslands : Experimental Insights from Western Norway and
+Methodological Advances”, PhD thesis, 2026, University of Bergen (UiB)
+and Bjerknes Centre for Climate Research (BCCR), Bergen, Norway.
 
 Gaudard J, Telford RJ, Chacon-Labella J, Dawson HR, **Enquist BJ**,
 Töpper JP, Trepel J, Vandvik V, Baumane M, Birkeli K, Holle MJM, Hupp
