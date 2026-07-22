@@ -36,5 +36,8 @@ Useful links:
 
 Authors:
 
+- Joseph Gaudard <joseph.gaudard@pm.me>
+  ([ORCID](https://orcid.org/0000-0002-6989-7624))
+
 - Richard James Telford <richard.telford@uib.no>
   ([ORCID](https://orcid.org/0000-0001-9826-3076))

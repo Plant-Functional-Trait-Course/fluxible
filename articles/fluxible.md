@@ -56,6 +56,7 @@ difference (in seconds) between the two inputs. This value is added to
 the datetime column of the gas concentration dataset.
 
 ``` r
+
 library(fluxible)
 
 conc_liahovden <- flux_match(
@@ -70,13 +71,17 @@ conc_liahovden <- flux_match(
 
 ## Model fitting
 
-We fit a model and obtain the slope at $t_{0}$, which is needed for the
+To convert gas concentration into volumetric units before modelling, see
+[`vignette("vol_conc", package = "fluxible")`](https://plant-functional-trait-course.github.io/fluxible/index.html/articles/vol_conc.md),
+available since ‘fluxible 1.4.0’.
+
+We fit a model and obtain the slope at $`t_0`$, which is needed for the
 flux calculation, with the `flux_fitting` function. In this example we
 use the `exp_zhao18` model (Zhao *et al.*, 2018), which is the default
 setting as it is more robust and recent. The `exp_zhao18` is a mix of an
 exponential and linear model - thus fitting all fluxes independently
-from curvature - and includes $t_{0}$ as a fitting parameter. A similar
-model but with the option to manually set $t_{0}$ is `exp_tz`. Other
+from curvature - and includes $`t_0`$ as a fitting parameter. A similar
+model but with the option to manually set $`t_0`$ is `exp_tz`. Other
 available models are: `linear` for a linear fit, `quadratic` for a
 quadratic fit, and `exp_hm` for the original HM model (Hutchinson and
 Mosier, 1981).
@@ -100,6 +105,7 @@ calculated. Arguments `cz_window`, `b_window`, `a_window` and
 and `exp_tz` models and we recommand keeping the default values.
 
 ``` r
+
 slopes_liahovden <- flux_fitting(
   conc_df = conc_liahovden, # the output of flux_match
   f_conc = conc, # gas concentration column
@@ -128,7 +134,7 @@ are used to detect measurements starting outside of a reasonable range
 (the mean of the three first gas concentration data points is used,
 independently from the fitting window). The minimal detectable slope is
 calculated as
-$\frac{2 \times \text{instr error}}{\text{length of measurement}}$ and
+$`\frac{2 \times \text{instr error}}{\text{length of measurement}}`$ and
 is used to detect slopes that should be replaced by zero. Other
 arguments are described in the function documentation (displayed with
 [`?flux_quality`](https://plant-functional-trait-course.github.io/fluxible/index.html/reference/flux_quality.md)).
@@ -138,6 +144,7 @@ and can also be done on the final flux dataset. This table is also
 printed as a side effect of `flux_quality`.
 
 ``` r
+
 flags_liahovden <- flux_quality(
   slopes_df = slopes_liahovden,
   f_conc = conc,
@@ -165,19 +172,20 @@ flags_liahovden <- flux_quality(
 #>  no_slope     0   0 %
 
 flux_flag_count(flags_liahovden)
-#> # A tibble: 10 × 3
+#> # A tibble: 11 × 3
 #>    f_quality_flag     n  ratio
 #>    <fct>          <int>  <dbl>
-#>  1 ok               109 0.790 
-#>  2 zero              27 0.196 
-#>  3 discard            2 0.0145
-#>  4 force_discard      0 0     
-#>  5 start_error        0 0     
-#>  6 no_data            0 0     
-#>  7 force_ok           0 0     
-#>  8 force_zero         0 0     
-#>  9 force_lm           0 0     
-#> 10 no_slope           0 0
+#>  1 total            138 1     
+#>  2 ok               109 0.790 
+#>  3 zero              27 0.196 
+#>  4 discard            2 0.0145
+#>  5 force_discard      0 0     
+#>  6 start_error        0 0     
+#>  7 no_data            0 0     
+#>  8 force_ok           0 0     
+#>  9 force_zero         0 0     
+#> 10 force_lm           0 0     
+#> 11 no_slope           0 0
 ```
 
 The function `flux_plot` provides plots for a visual assessment of the
@@ -188,6 +196,7 @@ values than the default can be provided to `scale_x_datetime` and
 and `facet_wrap_args` respectively.
 
 ``` r
+
 flags_liahovden |>
   # we show only a sample of the plots in this example
   dplyr::filter(f_fluxid %in% c(54, 95, 100, 101)) |>
@@ -222,12 +231,12 @@ detected by \`flux_quality\` which flagged it as
 discard.](fluxible_files/figure-html/fig-explot-1.png)
 
 Output of `flux_plot` for fluxid 54, 95, 100 and 101. With quality flags
-and diagnostics from `flux_quality`, the slope at $t_{0}$ (continuous
+and diagnostics from `flux_quality`, the slope at $`t_0`$ (continuous
 line), the model fit (dashed line), the linear fit (dotted line), and
 the raw gas concentration (dots). The colours show the quality flags
 (green for `ok`, red for `discard` and purple for `zero` with default
 settings) and cuts (same colour as `discard`). The gray vertical line
-indicates $t_{0}$ (a fitting parameter when using the `exp_zhao18`
+indicates $`t_0`$ (a fitting parameter when using the `exp_zhao18`
 model, otherwise user defined in `flux_fitting`). The g-factor is
 calculated as slope/linear slope, and b is the b parameter inside the
 exponential model. Concentration is in ppm in this example. Due to poor
@@ -241,11 +250,14 @@ which we recommend for large datasets, the code looks like this
 file, which is much faster):
 
 ``` r
+
 flux_plot(
   slopes_df = flags_liahovden,
   f_conc = conc,
   f_datetime = datetime,
-  print_plot = FALSE, # not printing the plots in the R session
+  f_ylim_upper = 600, # upper limit of y-axis
+  f_ylim_lower = 350, # lower limit of x-axis
+  y_text_position = 450, # position of text with flags and diagnostics
   output = "longpdf", # the type of output
   f_plotname = "plots_liahovden" # filename for the pdf file
 )
@@ -278,6 +290,7 @@ pdf file will be saved in a folder named `f_quality_plots`.
 > as shown in the example below.
 >
 > ``` r
+>
 > flags_lia |> # the output of flux_quality
 >   # apply here dplyr::filter on f_quality_flags, f_fluxid,
 >   # sample(f_fluxid) for random sampling of fluxid, campaigns,
@@ -333,6 +346,7 @@ the `force_` arguments by providing a vector:
 The function `flux_fitting` is run again, with an end cut of 60 seconds:
 
 ``` r
+
 fits_liahovden_60 <- conc_liahovden |>
   flux_fitting(
     conc,
@@ -346,6 +360,7 @@ Then `flux_quality` again, possibly forcing a “zero” flag for fluxID
 101:
 
 ``` r
+
 flags_liahovden_60 <- fits_liahovden_60 |>
   flux_quality(
     conc
@@ -354,9 +369,9 @@ flags_liahovden_60 <- fits_liahovden_60 |>
 #> 
 #>  Total number of measurements: 138
 #> 
-#>  ok   127     92 %
-#>  zero     8   6 %
-#>  discard      3   2 %
+#>  ok   128     93 %
+#>  zero     9   7 %
+#>  discard      1   1 %
 #>  force_discard    0   0 %
 #>  start_error      0   0 %
 #>  no_data      0   0 %
@@ -369,6 +384,7 @@ flags_liahovden_60 <- fits_liahovden_60 |>
 And finally `flux_plot` again to check the output.
 
 ``` r
+
 flags_liahovden_60 |>
   dplyr::filter(f_fluxid %in% c(54, 95, 100, 101)) |>
   flux_plot(
@@ -408,7 +424,9 @@ check. Concentration is in ppm in this example.
 Now that we are satisfied with the fit, we can calculate fluxes with
 `flux_calc`, which applies the following equation:
 
-$$\text{flux} = \text{slope} \times \frac{P \times V}{R \times T \times A}$$
+``` math
+\text{flux}=\text{slope}\times \frac{P\times V}{R\times T\times A}
+```
 
 where
 
@@ -448,15 +466,17 @@ column called `nested_variables` with `cols_nest` (`cols_nest = "all"`
 will nest all the columns present in the dataset, except those provided
 to `cols_keep`).
 
-The units of gas concentration, `conc_unit`, can be $mmol\ mol^{- 1}$,
-$ppm$, $ppb$ or $ppt$. The units of the calculated flux is decided by
-the user and should be in the form $amount\ surface^{- 1}\ time^{- 1}$.
-Amount can be $mol$, $mmol$, $\mu mol$, $nmol$ or $pmol$; surface can be
-$m^{2}$, $dm^{2}$ or $cm^{2}$; time can be $day$, $hour$, $minute$ or
-$second$. Temperature in the input can be in Celsius, Kelvin or
-Fahrenheit, and will be returned in the same unit in the output.
+The units of gas concentration, `conc_unit`, can be $`mmol\ mol^{-1}`$,
+$`ppm`$, $`ppb`$ or $`ppt`$. The units of the calculated flux is decided
+by the user and should be in the form
+$`amount\ surface^{-1}\ time^{-1}`$. Amount can be $`mol`$, $`mmol`$,
+$`\mu mol`$, $`nmol`$ or $`pmol`$; surface can be $`m^2`$, $`dm^2`$ or
+$`cm^2`$; time can be $`day`$, $`hour`$, $`minute`$ or $`second`$.
+Temperature in the input can be in Celsius, Kelvin or Fahrenheit, and
+will be returned in the same unit in the output.
 
 ``` r
+
 fluxes_liahovden_60 <- flux_calc(
   slopes_df = flags_liahovden_60,
   slope_col = f_slope_corr, # we use the slopes provided by flux_quality
@@ -480,10 +500,10 @@ fluxes_liahovden_60 <- flux_calc(
     #>  $ turfID           : chr [1:138] "4 AN1C 4" "4 AN1C 4" "27 AN3C 27"..
     #>  $ type             : chr [1:138] "NEE" "ER" "NEE" "ER" ...
     #>  $ measurement_round: num [1:138] 1 1 1 1 1 1 2 2 2 2 ...
-    #>  $ f_slope_corr     : num [1:138] -0.2258 0.0718 -0.3718 0.2433 -0.2..
+    #>  $ f_slope_corr     : num [1:138] -0.2209 0.0708 -0.3712 0.2427 -0.2..
     #>  $ f_temp_air_ave   : num [1:138] 3.21 3.3 3.15 2.96 2.81 ...
     #>  $ datetime         : POSIXct[1:138], format: "2022-07-27 05:37:30" ..
-    #>  $ f_flux           : num [1:138] -14.09 4.48 -23.22 15.2 -17.91 ...
+    #>  $ f_flux           : num [1:138] -13.79 4.42 -23.17 15.16 -18.03 ...
     #>  $ f_model          : chr [1:138] "exp_zhao18" "exp_zhao18" "exp_zh"..
 
 ## Gross Primary Production calculation
@@ -494,7 +514,7 @@ the light levels in the chamber. The difference between the two is the
 gross primary production (GPP), which cannot be measured isolated from
 ER but is often a variable of interest. The function `flux_diff`
 calculates the difference between two types of fluxes as
-$diff = type\_ a - type\_ b$ and returns a dataset in long format, with
+$`diff = type\_a - type\_b`$ and returns a dataset in long format, with
 type_a, type_b and diff as flux type. Any variables specified by the
 user (`cols_keep` argument) will be filled with their values
 corresponding to the type_a measurement. Other type of flux than type_a
@@ -503,9 +523,10 @@ respiration) are kept. Each type_a and type_b measurements need to be
 paired together for this calculation. The `id_cols` argument specifies
 which columns should be used for pairing (e.g., date, campaign). The
 `flux_diff` function can be used to calculate GPP in the case of
-CO$_{2}$ fluxes, or transpiration with H$_{2}$O fluxes.
+CO$`_2`$ fluxes, or transpiration with H$`_2`$O fluxes.
 
 ``` r
+
 gpp_liahovden_60 <- flux_diff(
   fluxes_df = fluxes_liahovden_60,
   type_col = type, # the column specifying the type of measurement
@@ -519,34 +540,35 @@ gpp_liahovden_60 <- flux_diff(
 
 Structure of the flux dataset including GPP:
 
-    #> tibble [204 × 7] (S3: tbl_df/tbl/data.frame)
-    #>  $ type             : chr [1:204] "ER" "GPP" "NEE" "ER" ...
-    #>  $ f_flux           : num [1:204] 4.48 -18.57 -14.09 15.2 -38.42 ...
-    #>  $ temp_soil_ave    : num [1:204] 7.01 6.96 6.96 6.83 6.83 ...
-    #>  $ PAR_ave          : num [1:204] 1.05 24.242 24.242 0.403 28.809 ...
-    #>  $ datetime         : POSIXct[1:204], format: "2022-07-27 05:42:00" ..
-    #>  $ measurement_round: num [1:204] 1 1 1 1 1 1 1 1 1 2 ...
-    #>  $ turfID           : chr [1:204] "4 AN1C 4" "4 AN1C 4" "4 AN1C 4" "..
+    #> tibble [206 × 7] (S3: tbl_df/tbl/data.frame)
+    #>  $ type             : chr [1:206] "ER" "GPP" "NEE" "ER" ...
+    #>  $ f_flux           : num [1:206] 4.42 -18.21 -13.79 15.16 -38.34 ...
+    #>  $ temp_soil_ave    : num [1:206] 7.01 6.96 6.96 6.83 6.83 ...
+    #>  $ PAR_ave          : num [1:206] 1.05 24.242 24.242 0.403 28.809 ...
+    #>  $ datetime         : POSIXct[1:206], format: "2022-07-27 05:42:00" ..
+    #>  $ measurement_round: num [1:206] 1 1 1 1 1 1 1 1 1 2 ...
+    #>  $ turfID           : chr [1:206] "4 AN1C 4" "4 AN1C 4" "4 AN1C 4" "..
 
 The fluxes can then be transformed in units more suited for publishing,
-for example $mg*m^{- 2}*h^{- 1}$:
+for example $`mg * m^{-2} * h^{-1}`$:
 
 ``` r
+
 gpp_liahovden_60 <- gpp_liahovden_60 |>
   dplyr::mutate(
     flux_mg = f_flux * 0.0440095
   )
 ```
 
-    #> tibble [204 × 8] (S3: tbl_df/tbl/data.frame)
-    #>  $ type             : chr [1:204] "ER" "GPP" "NEE" "ER" ...
-    #>  $ f_flux           : num [1:204] 4.48 -18.57 -14.09 15.2 -38.42 ...
-    #>  $ temp_soil_ave    : num [1:204] 7.01 6.96 6.96 6.83 6.83 ...
-    #>  $ PAR_ave          : num [1:204] 1.05 24.242 24.242 0.403 28.809 ...
-    #>  $ datetime         : POSIXct[1:204], format: "2022-07-27 05:42:00" ..
-    #>  $ measurement_round: num [1:204] 1 1 1 1 1 1 1 1 1 2 ...
-    #>  $ turfID           : chr [1:204] "4 AN1C 4" "4 AN1C 4" "4 AN1C 4" "..
-    #>  $ flux_mg          : num [1:204] 0.197 -0.817 -0.62 0.669 -1.691 ...
+    #> tibble [206 × 8] (S3: tbl_df/tbl/data.frame)
+    #>  $ type             : chr [1:206] "ER" "GPP" "NEE" "ER" ...
+    #>  $ f_flux           : num [1:206] 4.42 -18.21 -13.79 15.16 -38.34 ...
+    #>  $ temp_soil_ave    : num [1:206] 7.01 6.96 6.96 6.83 6.83 ...
+    #>  $ PAR_ave          : num [1:206] 1.05 24.242 24.242 0.403 28.809 ...
+    #>  $ datetime         : POSIXct[1:206], format: "2022-07-27 05:42:00" ..
+    #>  $ measurement_round: num [1:206] 1 1 1 1 1 1 1 1 1 2 ...
+    #>  $ turfID           : chr [1:206] "4 AN1C 4" "4 AN1C 4" "4 AN1C 4" "..
+    #>  $ flux_mg          : num [1:206] 0.194 -0.801 -0.607 0.667 -1.687 ...
 
 #### References
 

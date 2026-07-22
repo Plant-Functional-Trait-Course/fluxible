@@ -11,7 +11,6 @@ flux_calc(
   slope_col,
   f_datetime = f_datetime,
   temp_air_col,
-  chamber_volume = deprecated(),
   setup_volume,
   atm_pressure,
   plot_area,
@@ -23,7 +22,6 @@ flux_calc(
   cols_sum = c(),
   cols_med = c(),
   cols_nest = "none",
-  tube_volume = deprecated(),
   temp_air_unit = "celsius",
   f_cut = f_cut,
   keep_arg = "keep",
@@ -40,22 +38,22 @@ flux_calc(
 
 - slope_col:
 
-  column containing the slope to calculate the flux
+  column containing the slope to calculate the flux. Supply as a bare
+  (unquoted) column name (e.g. `f_slope`), not a string; this function
+  uses tidy-evaluation with `{{ }}`.
 
 - f_datetime:
 
   column containing the datetime of each gas concentration measurements
   in `slopes_df`. The first one after cutting will be kept as datetime
-  of each flux in the output.
+  of each flux in the output. Supply as a bare (unquoted) column name
+  (e.g. `datetime`), not a string.
 
 - temp_air_col:
 
   column containing the air temperature used to calculate fluxes. Will
-  be averaged with NA removed.
-
-- chamber_volume:
-
-  **\[deprecated\]** see `setup_volume`
+  be averaged with NA removed. Supply as a bare (unquoted) column name
+  (e.g. `temp_air`), not a string.
 
 - setup_volume:
 
@@ -73,7 +71,8 @@ flux_calc(
 
 - f_fluxid:
 
-  column containing the flux IDs
+  column containing the flux IDs. Supply as a bare (unquoted) column
+  name (e.g. `f_fluxid`), not a string.
 
 - conc_unit:
 
@@ -117,10 +116,6 @@ flux_calc(
   be character vector of column names, `"none"` (default) selects none,
   or `"all"` selects all the column except those in `cols_keep`.
 
-- tube_volume:
-
-  **\[deprecated\]** see `setup_volume`
-
 - temp_air_unit:
 
   units in which air temperature was measured. Has to be either
@@ -128,7 +123,8 @@ flux_calc(
 
 - f_cut:
 
-  column containing cutting information
+  column containing cutting information. Supply as a bare (unquoted)
+  column name (e.g. `f_cut`), not a string.
 
 - keep_arg:
 
@@ -162,6 +158,12 @@ any column specified in `cols_keep`, any column specified in `cols_ave`,
 measurement after cuts, and a column `nested_variables` with the
 variables specified in `cols_nest`.
 
+## See also
+
+for transforming the gas concentration into volumetric units before
+fitting, see
+[flux_conc](https://plant-functional-trait-course.github.io/fluxible/index.html/reference/flux_conc.md)
+
 ## Examples
 
 ``` r
@@ -187,8 +189,8 @@ plot_area = 0.0625)
 #> Cutting data according to 'keep_arg'...
 #> Averaging air temperature for each flux...
 #> Calculating fluxes...
-#> R constant set to 0.082057 L * atm * K^-1 * mol^-1
 #> Concentration was measured in ppm
+#> R constant set to 0.082057 L * atm * K^-1 * mol^-1
 #> Fluxes are in mmol/m2/h
 #> # A tibble: 6 × 6
 #>   f_fluxid f_slope f_temp_air_ave datetime            f_flux f_model   
@@ -199,4 +201,39 @@ plot_area = 0.0625)
 #> 4 4          1.13            7.77 2022-07-28 23:59:32   69.4 exp_zhao18
 #> 5 5          1.46            7.71 2022-07-29 00:03:10   89.9 exp_zhao18
 #> 6 6          0.426           7.75 2022-07-29 00:06:35   26.2 exp_zhao18
+conc_vol <- flux_conc(co2_conc, conc, temp_air)
+#> R constant set to 0.082057 L * atm * K^-1 * mol^-1
+slopes_vol <- flux_fitting(conc_vol, conc, datetime, fit_type = "exp_zhao18")
+#> Cutting measurements...
+#> Estimating starting parameters for optimization...
+#> Optimizing fitting parameters...
+#> Calculating fits and slopes...
+#> Done.
+#> Warning: 
+#>  fluxID 5 : slope was estimated on 205 points out of 210 seconds
+#>  fluxID 6 : slope was estimated on 206 points out of 210 seconds
+flux_calc(slopes_vol,
+f_slope,
+datetime,
+temp_air,
+conc_unit = "umol/l",
+flux_unit = "mmol/m2/h",
+setup_volume = 24.575,
+atm_pressure = 1,
+plot_area = 0.0625)
+#> Cutting data according to 'keep_arg'...
+#> Averaging air temperature for each flux...
+#> Calculating fluxes...
+#> Concentration was measured in umol/l
+#> Fluxes are in mmol/m2/h
+#> # A tibble: 6 × 7
+#>   f_fluxid f_slope f_temp_air_ave f_atm_pressure_ave datetime            f_flux
+#>   <fct>      <dbl>          <dbl>              <dbl> <dttm>               <dbl>
+#> 1 1          1.56            7.31                  1 2022-07-28 23:43:35  2201.
+#> 2 2          0.853           7.38                  1 2022-07-28 23:47:22  1207.
+#> 3 3          0.303           7.46                  1 2022-07-28 23:52:10   429.
+#> 4 4          1.13            7.77                  1 2022-07-28 23:59:32  1599.
+#> 5 5          1.46            7.71                  1 2022-07-29 00:03:10  2071.
+#> 6 6          0.426           7.75                  1 2022-07-29 00:06:35   603.
+#> # ℹ 1 more variable: f_model <chr>
 ```

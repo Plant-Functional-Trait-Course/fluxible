@@ -40,6 +40,7 @@ poster](https://raw.githubusercontent.com/Plant-Functional-Trait-Course/fluxible
 `fluxible` can be installed from CRAN.
 
 ``` r
+
 install.packages("fluxible")
 ```
 
@@ -47,6 +48,7 @@ You can install the development version of `fluxible` from the [GitHub
 repo](https://github.com/Plant-Functional-Trait-Course/fluxible) with:
 
 ``` r
+
 # install.packages("devtools")
 devtools::install_github("plant-functional-trait-course/fluxible")
 ```
@@ -54,6 +56,7 @@ devtools::install_github("plant-functional-trait-course/fluxible")
 ## Short example
 
 ``` r
+
 library(fluxible)
 
 conc_df <- flux_match(
@@ -107,6 +110,8 @@ flux_plot(
     scales = "free"
   )
 )
+#> Part of the fit will not be displayed
+#>     because f_ylim_lower is too high.
 #> Plotting in progress
 ```
 
@@ -118,6 +123,7 @@ Output of flux_plot, showing fluxes plotted individually with
 diagnostics and quality flags.
 
 ``` r
+
 
 fluxes_df <- flux_calc(
   slopes_flag_df,
@@ -137,8 +143,8 @@ fluxes_df <- flux_calc(
 #> Creating a df with the columns from 'cols_keep' argument...
 #> Creating a df with the columns from 'cols_ave' argument...
 #> Calculating fluxes...
-#> R constant set to 0.082057 L * atm * K^-1 * mol^-1
 #> Concentration was measured in ppm
+#> R constant set to 0.082057 L * atm * K^-1 * mol^-1
 #> Fluxes are in mmol/m2/h
 
 fluxes_gpp <- flux_gpp(
@@ -155,16 +161,19 @@ fluxes_gpp
 #> # A tibble: 9 × 5
 #>   datetime            type  f_flux temp_soil_ave turfID      
 #>   <dttm>              <chr>  <dbl>         <dbl> <chr>       
-#> 1 2022-07-28 23:43:25 ER     51.9           10.9 156 AN2C 156
-#> 2 2022-07-28 23:47:12 GPP     9.72          10.7 74 WN2C 155 
-#> 3 2022-07-28 23:47:12 NEE    32.0           10.7 74 WN2C 155 
-#> 4 2022-07-28 23:52:00 ER     22.3           10.7 74 WN2C 155 
-#> 5 2022-07-28 23:59:22 GPP    -6.63          10.8 109 AN3C 109
-#> 6 2022-07-28 23:59:22 NEE    44.3           10.8 109 AN3C 109
-#> 7 2022-07-29 00:03:00 ER     50.9           10.5 109 AN3C 109
+#> 1 2022-07-28 23:43:25 ER     51.5           10.9 156 AN2C 156
+#> 2 2022-07-28 23:47:12 GPP     9.93          10.7 74 WN2C 155 
+#> 3 2022-07-28 23:47:12 NEE    31.8           10.7 74 WN2C 155 
+#> 4 2022-07-28 23:52:00 ER     21.9           10.7 74 WN2C 155 
+#> 5 2022-07-28 23:59:22 GPP    -6.19          10.8 109 AN3C 109
+#> 6 2022-07-28 23:59:22 NEE    43.6           10.8 109 AN3C 109
+#> 7 2022-07-29 00:03:00 ER     49.8           10.5 109 AN3C 109
 #> 8 2022-07-29 00:06:25 GPP    NA             12.2 29 WN3C 106 
-#> 9 2022-07-29 00:06:25 NEE    32.7           12.2 29 WN3C 106
+#> 9 2022-07-29 00:06:25 NEE    32.2           12.2 29 WN3C 106
 ```
+
+To convert gas concentration into volumetric units before modelling, see
+[`vignette("vol_conc", package = "fluxible")`](https://plant-functional-trait-course.github.io/fluxible/index.html/articles/vol_conc.md).
 
 ## Supporting infrastructure
 
@@ -193,18 +202,6 @@ measurement on which to fit a model. This selection will be based on
 environmental variable, such as photosynthetically active radiation
 (PAR), or residuals.
 
-### Working in mol/volume
-
-So far `fluxible` works in fractional concentration (e. g. ppm) and
-transforms it in mol when calculating the fluxes, using the average
-temperature of the measurement. This has the advantage to work even if
-the setup does not provide temperature for each gas concentration data
-point. Recent setups provide temperature at the same frequency as gas
-concentration, and this allows to transform the concentration in
-mol/volume earlier in the process, accounting better for temperature
-changes during the measurement. This will be implemented in a future
-version of `fluxible`.
-
 ## Contact
 
 [Joseph Gaudard](https://jogaudard.github.io/CV_jgaudard/), University
@@ -225,6 +222,11 @@ Evolution*,
 [doi:10.1111/2041-210X.70161](https://doi.org/10.1111/2041-210X.70161).
 
   
+
+**Gaudard J**. “Global Change Impacts on Carbon Dynamics in Alpine
+Grasslands : Experimental Insights from Western Norway and
+Methodological Advances”, PhD thesis, 2026, University of Bergen (UiB)
+and Bjerknes Centre for Climate Research (BCCR), Bergen, Norway.
 
 Gaudard J, Telford RJ, Chacon-Labella J, Dawson HR, **Enquist BJ**,
 Töpper JP, Trepel J, Vandvik V, Baumane M, Birkeli K, Holle MJM, Hupp
@@ -313,6 +315,8 @@ transparent chambers](https://doi.org/10.1016/j.agrformet.2018.08.022)”,
   : CO2 concentration at Liahovden
 - [`flux_calc()`](https://plant-functional-trait-course.github.io/fluxible/index.html/reference/flux_calc.md)
   : Calculates ecosystem gas fluxes
+- [`flux_conc()`](https://plant-functional-trait-course.github.io/fluxible/index.html/reference/flux_conc.md)
+  : Transforms concentration from fractional to volumetric units
 - [`flux_diff()`](https://plant-functional-trait-course.github.io/fluxible/index.html/reference/flux_diff.md)
   : Calculates difference between fluxes
 - [`flux_drygas()`](https://plant-functional-trait-course.github.io/fluxible/index.html/reference/flux_drygas.md)
@@ -359,3 +363,6 @@ transparent chambers](https://doi.org/10.1016/j.agrformet.2018.08.022)”,
   Li7500](https://plant-functional-trait-course.github.io/fluxible/index.html/articles/li7500.md):
 - [Working with two gases measured
   simultaneously](https://plant-functional-trait-course.github.io/fluxible/index.html/articles/two-gases.md):
+- [Transforming gas concentration in volumetric units before modelling
+  the
+  fluxes](https://plant-functional-trait-course.github.io/fluxible/index.html/articles/vol_conc.md):

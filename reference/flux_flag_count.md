@@ -14,7 +14,8 @@ flux_flag_count(
   f_fluxid = f_fluxid,
   f_quality_flag = f_quality_flag,
   f_flags = c("ok", "discard", "zero", "force_discard", "start_error", "no_data",
-    "force_ok", "force_zero", "force_lm", "no_slope")
+    "force_ok", "force_zero", "force_lm", "no_slope"),
+  show_total = TRUE
 )
 ```
 
@@ -26,17 +27,25 @@ flux_flag_count(
 
 - f_fluxid:
 
-  column containing fluxes unique ID
+  column containing fluxes unique ID. Supply as a bare (unquoted) column
+  name (e.g. `f_fluxid`), not a string; this function uses
+  tidy-evaluation with `{{ }}`.
 
 - f_quality_flag:
 
-  column containing the quality flags
+  column containing the quality flags. Supply as a bare (unquoted)
+  column name (e.g. `f_quality_flag`), not a string; this function uses
+  tidy-evaluation with `{{ }}`.
 
 - f_flags:
 
   list of flags used in the dataset (if different from default from
   flux_quality). If not provided, it will list only the flags that are
   present in the dataset (no showing 0).
+
+- show_total:
+
+  logical, if TRUE (default), adds a row with the total number of fluxes
 
 ## Value
 
@@ -75,17 +84,18 @@ slopes_flag <- flux_quality(slopes, conc)
 #>  force_lm     0   0 %
 #>  no_slope     0   0 %
 flux_flag_count(slopes_flag)
-#> # A tibble: 10 × 3
+#> # A tibble: 11 × 3
 #>    f_quality_flag     n ratio
 #>    <fct>          <int> <dbl>
-#>  1 ok                 3 0.5  
-#>  2 discard            2 0.333
-#>  3 zero               1 0.167
-#>  4 force_discard      0 0    
-#>  5 start_error        0 0    
-#>  6 no_data            0 0    
-#>  7 force_ok           0 0    
-#>  8 force_zero         0 0    
-#>  9 force_lm           0 0    
-#> 10 no_slope           0 0    
+#>  1 total              6 1    
+#>  2 ok                 3 0.5  
+#>  3 discard            2 0.333
+#>  4 zero               1 0.167
+#>  5 force_discard      0 0    
+#>  6 start_error        0 0    
+#>  7 no_data            0 0    
+#>  8 force_ok           0 0    
+#>  9 force_zero         0 0    
+#> 10 force_lm           0 0    
+#> 11 no_slope           0 0    
 ```

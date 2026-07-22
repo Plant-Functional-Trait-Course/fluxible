@@ -7,6 +7,7 @@ Current `fluxible` package version: 1.3.4
 # `flux_plot`
 
 ``` r
+
 plotting_etime <- function(version, nb_fluxes = c(1, 5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 138),
  replicates = 3, output = c("pdfpages", "longpdf")) {
 
@@ -56,6 +57,7 @@ Figure 1: Performance of flux_plot per version and output.
 # `flux_fitting`
 
 ``` r
+
 fitting_etime <- function(version, nb_fluxes = c(1, 5, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 138),
  replicates = 3, fit_type = c("exp_zhao18", "linear", "quadratic", "exp_tz")) {
 

@@ -15,11 +15,7 @@ flux_match(
   start_col,
   end_col,
   measurement_length,
-  fixed_length = deprecated(),
-  time_diff = 0,
-  startcrop = 0,
-  ratio_threshold = deprecated(),
-  f_conc = deprecated()
+  time_diff = 0
 )
 ```
 
@@ -39,16 +35,19 @@ flux_match(
 
 - f_datetime:
 
-  datetime column in raw_conc (`ymd_hms` format)
+  datetime column in raw_conc (`ymd_hms` format). Supply as a bare
+  (unquoted) column name (e.g. `datetime`), not a string.
 
 - start_col:
 
-  start column in field_record (`ymd_hms` format)
+  start column in field_record (`ymd_hms` format). Supply as a bare
+  (unquoted) column name (e.g. `start`), not a string.
 
 - end_col:
 
   end column in field_record (`ymd_hms` format), if present (see
-  `measurement_length`).
+  `measurement_length`). Supply as a bare (unquoted) column name (e.g.
+  `end`), not a string.
 
 - measurement_length:
 
@@ -56,30 +55,11 @@ flux_match(
   the `field_record`. Use `measurement_length` if all the measurements
   have the same length and no end column is present in `field_record`.
 
-- fixed_length:
-
-  **\[deprecated\]** no longer required. `flux_match` will detect if
-  `end_col` or `measurement_length` are provided.
-
 - time_diff:
 
   time difference (in seconds) between the two datasets. Will be added
   to the datetime column of the `raw_conc` dataset. For situations where
   the time was not synchronized correctly.
-
-- startcrop:
-
-  **\[deprecated\]** `startcrop` is no longer supported. Please use
-  `start_cut` in `flux_fitting` instead.
-
-- ratio_threshold:
-
-  **\[deprecated\]** `ratio_threshold` is no longer supported. Please
-  use `ratio_threshold` in `flux_quality` instead.
-
-- f_conc:
-
-  **\[deprecated\]** `f_conc` is no longer required
 
 ## Value
 

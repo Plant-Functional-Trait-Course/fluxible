@@ -29,7 +29,9 @@ flux_diff(
 
 - type_col:
 
-  column containing type of flux
+  column containing type of flux. Supply as a bare (unquoted) column
+  name (e.g. `type`), not a string; this function uses tidy-evaluation
+  with `{{ }}`.
 
 - f_flux:
 

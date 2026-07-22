@@ -14,6 +14,8 @@
   : CO2 concentration at Liahovden
 - [`flux_calc()`](https://plant-functional-trait-course.github.io/fluxible/index.html/reference/flux_calc.md)
   : Calculates ecosystem gas fluxes
+- [`flux_conc()`](https://plant-functional-trait-course.github.io/fluxible/index.html/reference/flux_conc.md)
+  : Transforms concentration from fractional to volumetric units
 - [`flux_diff()`](https://plant-functional-trait-course.github.io/fluxible/index.html/reference/flux_diff.md)
   : Calculates difference between fluxes
 - [`flux_drygas()`](https://plant-functional-trait-course.github.io/fluxible/index.html/reference/flux_drygas.md)

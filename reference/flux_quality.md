@@ -52,64 +52,79 @@ flux_quality(
 
 - f_conc:
 
-  column containing the measured gas concentration (exponential fits)
+  column containing the measured gas concentration (exponential fits).
+  Supply as a bare (unquoted) column name (e.g. `conc`), not a string.
 
 - f_fluxid:
 
-  column containing unique IDs for each flux
+  column containing unique IDs for each flux. Supply as a bare
+  (unquoted) column name (e.g. `f_fluxid`), not a string.
 
 - f_slope:
 
   column containing the slope of each flux (as calculated by the
   [flux_fitting](https://plant-functional-trait-course.github.io/fluxible/index.html/reference/flux_fitting.md)
-  function)
+  function). Supply as a bare (unquoted) column name (e.g. `f_slope`),
+  not a string.
 
 - f_time:
 
   column containing the time of each measurement in seconds (exponential
-  fits)
+  fits). Supply as a bare (unquoted) column name (e.g. `f_time`), not a
+  string.
 
 - f_start:
 
-  column with datetime of the start of the measurement (after cuts)
+  column with datetime of the start of the measurement (after cuts).
+  Supply as a bare (unquoted) column name (e.g. `f_start`), not a
+  string.
 
 - f_end:
 
-  column with datetime of the end of the measurement (after cuts)
+  column with datetime of the end of the measurement (after cuts).
+  Supply as a bare (unquoted) column name (e.g. `f_end`), not a string.
 
 - f_fit:
 
-  column containing the modeled data (exponential fits)
+  column containing the modeled data (exponential fits). Supply as a
+  bare (unquoted) column name (e.g. `f_fit`), not a string.
 
 - f_cut:
 
-  column containing the cutting information
+  column containing the cutting information. Supply as a bare (unquoted)
+  column name (e.g. `f_cut`), not a string.
 
 - f_pvalue:
 
-  column containing the p-value of each flux (linear and quadratic fits)
+  column containing the p-value of each flux (linear and quadratic
+  fits). Supply as a bare (unquoted) column name (e.g. `f_pvalue`), not
+  a string.
 
 - f_rsquared:
 
   column containing the r squared of each flux (linear and quadratic
-  fits)
+  fits). Supply as a bare (unquoted) column name (e.g. `f_rsquared`),
+  not a string.
 
 - f_slope_lm:
 
   column containing the linear slope of each flux (as calculated by the
   [flux_fitting](https://plant-functional-trait-course.github.io/fluxible/index.html/reference/flux_fitting.md)
-  function)
+  function). Supply as a bare (unquoted) column name (e.g.
+  `f_slope_lm`), not a string.
 
 - f_fit_lm:
 
-  column with the fit of the linear model. (as calculated by the
+  column with the fit of the linear model (as calculated by the
   [flux_fitting](https://plant-functional-trait-course.github.io/fluxible/index.html/reference/flux_fitting.md)
-  function)
+  function). Supply as a bare (unquoted) column name (e.g. `f_fit_lm`),
+  not a string.
 
 - f_b:
 
   column containing the b parameter of the exponential expression
-  (exponential fits)
+  (exponential fits). Supply as a bare (unquoted) column name (e.g.
+  `f_b`), not a string.
 
 - force_discard:
 
@@ -159,8 +174,8 @@ flux_quality(
 
 - error:
 
-  error of the setup, defines a window outside of which the starting
-  values indicate a polluted setup
+  error on the ambient concentration, defines a window outside of which
+  the starting values indicate a polluted setup
 
 - pvalue_threshold:
 
@@ -194,7 +209,8 @@ flux_quality(
 
 - instr_error:
 
-  error of the instrument, in the same unit as the gas concentration
+  error of the instrument, in the same unit as the gas concentration.
+  Used to detect a flux below the instrument detection capacity.
 
 - kappamax:
 
@@ -215,6 +231,13 @@ the kappamax method (Hüppi et al., 2018) selects the linear slope if
 original kappamax method was applied to the HMR model (Pedersen et al.,
 2010; Hutchinson and Mosier, 1981), but here it can be applied to any
 exponential fit.
+
+the `instr_error` and `error` are two different arguments. `instr_error`
+defines the minimal detectable flux (i. e., when a flux can be
+considered zero because it is below the instrument detection capacity).
+`error` is the error applied to `ambient_conc`, the ambient
+concentration of the measured gas, and defines the window outside of
+which a measurement is flagged for an error on the start.
 
 ## References
 

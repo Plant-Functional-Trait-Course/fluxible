@@ -34,11 +34,14 @@ flux_gpp(
 
 - type_col:
 
-  column containing type of flux (NEE or ER)
+  column containing type of flux (NEE or ER). Supply as a bare
+  (unquoted) column name (e.g. `type`), not a string; this function uses
+  tidy-evaluation with `{{ }}`.
 
 - f_datetime:
 
-  column containing start of measurement as datetime
+  column containing start of measurement as datetime. Supply as a bare
+  (unquoted) column name (e.g. `f_datetime`), not a string.
 
 - f_flux:
 

@@ -12,8 +12,8 @@
 <link rel="icon" sizes="any" href="favicon.ico">
 <link rel="manifest" href="site.webmanifest">
 <script src="lightswitch.js"></script><script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Ecosystem Gas Fluxes Calculations for Closed Loop Chamber Setup">
 <meta name="description" content="Toolbox to process raw data from closed loop flux chamber (or tent) setups into ecosystem gas fluxes usable for analysis. It goes from a data frame of gas concentration over time (which can contain several measurements) and a meta data file indicating which measurement was done when, to a data frame of ecosystem gas fluxes including quality diagnostics. Organized with one function per step, maximizing user flexibility and backwards compatibility. Different models to estimate the fluxes from the raw data are available: exponential as described in Zhao et al (2018) &lt;doi:10.1016/j.agrformet.2018.08.022&gt;, exponential as described in Hutchinson and Mosier (1981) &lt;doi:10.2136/sssaj1981.03615995004500020017x&gt;, quadratic, and linear. Other functions include quality assessment, plotting for visual check, calculation of fluxes based on the setup specific parameters (chamber size, plot area, ...), gross primary production and transpiration rate calculation, and light response curves.">
@@ -28,7 +28,7 @@
 
     <a class="navbar-brand me-2" href="index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.3.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,6 +45,7 @@
 <li><a class="dropdown-item" href="articles/data-prep.html">Preparing the data for fluxible</a></li>
     <li><a class="dropdown-item" href="articles/li7500.html">Using fluxible with the Li7500</a></li>
     <li><a class="dropdown-item" href="articles/two-gases.html">Working with two gases measured simultaneously</a></li>
+    <li><a class="dropdown-item" href="articles/vol_conc.html">Transforming gas concentration in volumetric units before modelling the fluxes</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="news/index.html">Changelog</a></li>
@@ -149,6 +150,8 @@
 <span>    scales <span class="op">=</span> <span class="st">"free"</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span>
+<span><span class="co">#&gt; Part of the fit will not be displayed</span></span>
+<span><span class="co">#&gt;     because f_ylim_lower is too high.</span></span>
 <span><span class="co">#&gt; Plotting in progress</span></span></code></pre></div>
 <div class="figure">
 <img src="reference/figures/README-short-example-1.png" alt="Output of flux_plot, showing fluxes plotted individually with diagnostics and quality flags." width="100%"><p class="caption">
@@ -175,8 +178,8 @@ Output of flux_plot, showing fluxes plotted individually with diagnostics and qu
 <span><span class="co">#&gt; Creating a df with the columns from 'cols_keep' argument...</span></span>
 <span><span class="co">#&gt; Creating a df with the columns from 'cols_ave' argument...</span></span>
 <span><span class="co">#&gt; Calculating fluxes...</span></span>
-<span><span class="co">#&gt; R constant set to 0.082057 L * atm * K^-1 * mol^-1</span></span>
 <span><span class="co">#&gt; Concentration was measured in ppm</span></span>
+<span><span class="co">#&gt; R constant set to 0.082057 L * atm * K^-1 * mol^-1</span></span>
 <span><span class="co">#&gt; Fluxes are in mmol/m2/h</span></span>
 <span></span>
 <span><span class="va">fluxes_gpp</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/flux_gpp.html">flux_gpp</a></span><span class="op">(</span></span>
@@ -193,15 +196,16 @@ Output of flux_plot, showing fluxes plotted individually with diagnostics and qu
 <span><span class="co">#&gt; # A tibble: 9 × 5</span></span>
 <span><span class="co">#&gt;   datetime            type  f_flux temp_soil_ave turfID      </span></span>
 <span><span class="co">#&gt;   &lt;dttm&gt;              &lt;chr&gt;  &lt;dbl&gt;         &lt;dbl&gt; &lt;chr&gt;       </span></span>
-<span><span class="co">#&gt; 1 2022-07-28 23:43:25 ER     51.9           10.9 156 AN2C 156</span></span>
-<span><span class="co">#&gt; 2 2022-07-28 23:47:12 GPP     9.72          10.7 74 WN2C 155 </span></span>
-<span><span class="co">#&gt; 3 2022-07-28 23:47:12 NEE    32.0           10.7 74 WN2C 155 </span></span>
-<span><span class="co">#&gt; 4 2022-07-28 23:52:00 ER     22.3           10.7 74 WN2C 155 </span></span>
-<span><span class="co">#&gt; 5 2022-07-28 23:59:22 GPP    -6.63          10.8 109 AN3C 109</span></span>
-<span><span class="co">#&gt; 6 2022-07-28 23:59:22 NEE    44.3           10.8 109 AN3C 109</span></span>
-<span><span class="co">#&gt; 7 2022-07-29 00:03:00 ER     50.9           10.5 109 AN3C 109</span></span>
+<span><span class="co">#&gt; 1 2022-07-28 23:43:25 ER     51.5           10.9 156 AN2C 156</span></span>
+<span><span class="co">#&gt; 2 2022-07-28 23:47:12 GPP     9.93          10.7 74 WN2C 155 </span></span>
+<span><span class="co">#&gt; 3 2022-07-28 23:47:12 NEE    31.8           10.7 74 WN2C 155 </span></span>
+<span><span class="co">#&gt; 4 2022-07-28 23:52:00 ER     21.9           10.7 74 WN2C 155 </span></span>
+<span><span class="co">#&gt; 5 2022-07-28 23:59:22 GPP    -6.19          10.8 109 AN3C 109</span></span>
+<span><span class="co">#&gt; 6 2022-07-28 23:59:22 NEE    43.6           10.8 109 AN3C 109</span></span>
+<span><span class="co">#&gt; 7 2022-07-29 00:03:00 ER     49.8           10.5 109 AN3C 109</span></span>
 <span><span class="co">#&gt; 8 2022-07-29 00:06:25 GPP    NA             12.2 29 WN3C 106 </span></span>
-<span><span class="co">#&gt; 9 2022-07-29 00:06:25 NEE    32.7           12.2 29 WN3C 106</span></span></code></pre></div>
+<span><span class="co">#&gt; 9 2022-07-29 00:06:25 NEE    32.2           12.2 29 WN3C 106</span></span></code></pre></div>
+<p>To convert gas concentration into volumetric units before modelling, see <code><a href="articles/vol_conc.html">vignette("vol_conc", package = "fluxible")</a></code>.</p>
 </div>
 <div class="section level2">
 <h2 id="supporting-infrastructure">Supporting infrastructure<a class="anchor" aria-label="anchor" href="#supporting-infrastructure"></a>
@@ -226,11 +230,6 @@ Output of flux_plot, showing fluxes plotted individually with diagnostics and qu
 <h3 id="segmentation-tool">Segmentation tool<a class="anchor" aria-label="anchor" href="#segmentation-tool"></a>
 </h3>
 <p>We are working on a tool to automatically select the window of the measurement on which to fit a model. This selection will be based on environmental variable, such as photosynthetically active radiation (PAR), or residuals.</p>
-</div>
-<div class="section level3">
-<h3 id="working-in-molvolume">Working in mol/volume<a class="anchor" aria-label="anchor" href="#working-in-molvolume"></a>
-</h3>
-<p>So far <code>fluxible</code> works in fractional concentration (e. g. ppm) and transforms it in mol when calculating the fluxes, using the average temperature of the measurement. This has the advantage to work even if the setup does not provide temperature for each gas concentration data point. Recent setups provide temperature at the same frequency as gas concentration, and this allows to transform the concentration in mol/volume earlier in the process, accounting better for temperature changes during the measurement. This will be implemented in a future version of <code>fluxible</code>.</p>
 <!-- ### More fits
 As we want fluxible to fit the use of as many projects as possible, more fitting expressions will be included in the flux_fitting function.
 Feel welcome to get in touch if you wish to include yours in fluxible. -->
@@ -251,6 +250,7 @@ Feel welcome to get in touch if you wish to include yours in fluxible. -->
 <!-- `fluxible` is described in an application paper published in *Methods in Ecology and Evolution*: [doi:10.1111/2041-210X.70161](https://doi.org/10.1111/2041-210X.70161). -->
 <p>Gaudard J, Telford RJ, Chacon-Labella J, Dawson HR, Enquist BJ, Töpper JP, Trepel J, Vandvik V, Baumane M, Birkeli K, Holle MJM, Hupp JR, Santos-Andrade PE, Satriawan TW, Halbritter AH. “<code>fluxible</code>: An R package to process ecosystem gas fluxes from closed-loop chambers in an automated and reproducible way” (2025). <em>Methods in Ecology and Evolution</em>, <a href="https://doi.org/10.1111/2041-210X.70161" class="external-link">doi:10.1111/2041-210X.70161</a>.</p>
 <p><br></p>
+<p><strong>Gaudard J</strong>. “Global Change Impacts on Carbon Dynamics in Alpine Grasslands : Experimental Insights from Western Norway and Methodological Advances”, PhD thesis, 2026, University of Bergen (UiB) and Bjerknes Centre for Climate Research (BCCR), Bergen, Norway.</p>
 <p>Gaudard J, Telford RJ, Chacon-Labella J, Dawson HR, <strong>Enquist BJ</strong>, Töpper JP, Trepel J, Vandvik V, Baumane M, Birkeli K, Holle MJM, Hupp JR, Santos-Andrade PE, Satriawan TW, Halbritter AH. “<code>fluxible</code>: An R package to process ecosystem gas fluxes from closed-loop chambers in an automated and reproducible way”, Poster, 2025 AmeriFlux Annual Meeting, Tucson AZ, USA.</p>
 <p>Gaudard J, Telford RJ, Chacon-Labella J, Dawson HR, Enquist BJ, Töpper JP, Trepel J, <strong>Vandvik V</strong>, Baumane M, Birkeli K, Holle MJM, Hupp JR, Santos-Andrade PE, Satriawan TW, Halbritter AH. “<code>fluxible</code>: An R package to process ecosystem gas fluxes from closed-loop chambers in an automated and reproducible way”, Poster, ITEX Meeting 2025, Göteborg, Sweden.</p>
 <!-- Gaudard J, Chacon-Labella J, Dawson HR, Enquist B, Telford RJ, Töpper JP, Trepel J, Vandvik V, Baumane M, Birkeli K, Holle MJM, Hupp JR, Santos-Andrade PE, Satriawan TW, Halbritter AH. “`fluxible`: an R package to process ecosystem gas fluxes from closed-loop chambers in an automated and reproducible way.” Authorea Preprints. [doi:10.22541/au.175071021.14153294/v1](https://doi.org/10.22541/au.175071021.14153294/v1), 2025. -->
@@ -343,7 +343,7 @@ Zhao, P., Hammerle, A., Zeeman, M. and Wohlfahrt, G. (2018), “<a href="https:/
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>

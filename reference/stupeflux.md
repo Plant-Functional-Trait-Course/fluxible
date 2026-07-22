@@ -66,19 +66,23 @@ stupeflux(
 
 - f_datetime:
 
-  datetime column in raw_conc (dmy_hms format)
+  datetime column in raw_conc (dmy_hms format). Supply as a bare
+  (unquoted) column name (e.g. `datetime`), not a string.
 
 - start_col:
 
-  start column in field_record (dmy_hms format)
+  start column in field_record (dmy_hms format). Supply as a bare
+  (unquoted) column name (e.g. `start`), not a string.
 
 - end_col:
 
-  end column in field_record (`ymd_hms` format)
+  end column in field_record (`ymd_hms` format). Supply as a bare
+  (unquoted) column name (e.g. `end`), not a string.
 
 - f_conc:
 
-  concentration column in raw_conc
+  concentration column in raw_conc. Supply as a bare (unquoted) column
+  name (e.g. `conc`), not a string.
 
 - setup_volume:
 
@@ -334,8 +338,8 @@ plot_area = 0.0625
 #> Cutting data according to 'keep_arg'...
 #> Averaging air temperature for each flux...
 #> Calculating fluxes...
-#> R constant set to 0.082057 L * atm * K^-1 * mol^-1
 #> Concentration was measured in ppm
+#> R constant set to 0.082057 L * atm * K^-1 * mol^-1
 #> Fluxes are in mmol/m2/h
 #> # A tibble: 6 × 7
 #>   f_fluxid f_slope_corr f_temp_air_ave f_atm_pressure_ave datetime           

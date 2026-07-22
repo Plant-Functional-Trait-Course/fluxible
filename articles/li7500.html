@@ -12,8 +12,8 @@
 <link rel="icon" sizes="any" href="../favicon.ico">
 <link rel="manifest" href="../site.webmanifest">
 <script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Using fluxible with the Li7500">
 </head>
@@ -25,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.3.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,6 +42,7 @@
 <li><a class="dropdown-item" href="../articles/data-prep.html">Preparing the data for fluxible</a></li>
     <li><a class="dropdown-item" href="../articles/li7500.html">Using fluxible with the Li7500</a></li>
     <li><a class="dropdown-item" href="../articles/two-gases.html">Working with two gases measured simultaneously</a></li>
+    <li><a class="dropdown-item" href="../articles/vol_conc.html">Transforming gas concentration in volumetric units before modelling the fluxes</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
@@ -82,9 +83,9 @@
     
 <p>This vignette shows how to process ecosystem fluxes (CO<sub>2</sub>
 and H<sub>2</sub>O) measured with the LI7500 tent setup presented in
-<span class="citation">Halbritter <em>et al.</em> (2024)</span>. Because
-of field constraints, this setup differs from the smaller chamber in
-several points:</p>
+<span class="citation"><span class="nocase">Halbritter <em>et
+al.</em></span> (2024)</span>. Because of field constraints, this setup
+differs from the smaller chamber in several points:</p>
 <ul>
 <li>one file per flux</li>
 <li>start and end of files do not represent start and end of
@@ -242,8 +243,8 @@ the <code>cols_nest</code> argument.</p>
 <span><span class="co">#&gt; Averaging air temperature for each flux...</span></span>
 <span><span class="co">#&gt; Creating a df with the columns from 'cols_keep' argument...</span></span>
 <span><span class="co">#&gt; Calculating fluxes...</span></span>
-<span><span class="co">#&gt; R constant set to 0.082057 L * atm * K^-1 * mol^-1</span></span>
 <span><span class="co">#&gt; Concentration was measured in ppm</span></span>
+<span><span class="co">#&gt; R constant set to 0.082057 L * atm * K^-1 * mol^-1</span></span>
 <span><span class="co">#&gt; Fluxes are in umol/m2/s</span></span></code></pre></div>
 </div>
 <div class="section level3">
@@ -321,8 +322,8 @@ Output of <code>flux_plot</code> for H<sub>2</sub>O fluxes
 <span><span class="co">#&gt; Averaging air temperature for each flux...</span></span>
 <span><span class="co">#&gt; Creating a df with the columns from 'cols_keep' argument...</span></span>
 <span><span class="co">#&gt; Calculating fluxes...</span></span>
-<span><span class="co">#&gt; R constant set to 0.082057 L * atm * K^-1 * mol^-1</span></span>
 <span><span class="co">#&gt; Concentration was measured in mmol/mol</span></span>
+<span><span class="co">#&gt; R constant set to 0.082057 L * atm * K^-1 * mol^-1</span></span>
 <span><span class="co">#&gt; Fluxes are in mmol/m2/s</span></span></code></pre></div>
 </div>
 </div>
@@ -365,9 +366,9 @@ H<sub>2</sub>O and CO<sub>2</sub> fluxes in the same dataset.</p>
 <span><span class="co"># Now the data are in a single long df</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; tibble [12 × 13] (S3: tbl_df/tbl/data.frame)</span></span>
 <span><span class="co">#&gt;  $ trial             : chr [1:12] "GPP" "p" "r" "GPP" ...</span></span>
-<span><span class="co">#&gt;  $ f_flux            : num [1:12] -5.59 -3.84 1.75 -6.57 -6.02 ...</span></span>
+<span><span class="co">#&gt;  $ f_flux            : num [1:12] -5.59 -3.83 1.76 -6.52 -5.98 ...</span></span>
 <span><span class="co">#&gt;  $ f_fluxid          : chr [1:12] "ACJ_C_10apr2019_plot1_p.txt" "AC"..</span></span>
-<span><span class="co">#&gt;  $ f_slope_corr      : num [1:12] -0.0928 -0.0928 0.0423 -0.1452 -0...</span></span>
+<span><span class="co">#&gt;  $ f_slope_corr      : num [1:12] -0.0927 -0.0927 0.0424 -0.1442 -0...</span></span>
 <span><span class="co">#&gt;  $ f_temp_air_ave    : num [1:12] 25.6 25.6 25 24.8 24.8 ...</span></span>
 <span><span class="co">#&gt;  $ f_atm_pressure_ave: num [1:12] 0.664 0.664 0.665 0.664 0.664 ...</span></span>
 <span><span class="co">#&gt;  $ f_datetime        : POSIXct[1:12], format: "2019-04-10 15:45:11" ..</span></span>
@@ -382,11 +383,11 @@ H<sub>2</sub>O and CO<sub>2</sub> fluxes in the same dataset.</p>
 </h4>
 <div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0" line-spacing="2">
 <div id="ref-halbritterPlantTraitVegetation2024" class="csl-entry">
-Halbritter, A.H., Vandvik, V., Cotner, S.H., Farfan-Rios, W., Maitner,
-B.S., Michaletz, S.T., Oliveras Menor, I., <em>et al.</em> (2024),
-<span>“<a href="https://doi.org/10.1038/s41597-024-02980-3" class="external-link">Plant trait
-and vegetation data along a 1314 m elevation gradient with fire history
-in <span>Puna</span> grasslands, <span>Per<span class="nocase">ú</span></span></a>”</span>, <em>Scientific Data</em>,
+<span class="nocase">Halbritter, A.H., Vandvik, V., Cotner, S.H.,
+Farfan-Rios, W., Maitner, B.S., Michaletz, S.T., Oliveras Menor, I.,
+<em>et al.</em></span> (2024), <span>“<a href="https://doi.org/10.1038/s41597-024-02980-3" class="external-link">Plant trait and
+vegetation data along a 1314 m elevation gradient with fire history in
+<span>Puna</span> grasslands, <span>Per<span class="nocase">ú</span></span></a>”</span>, <em>Scientific Data</em>,
 Nature Publishing Group, Vol. 11 No. 1, p. 225.
 </div>
 </div>
@@ -403,7 +404,7 @@ Nature Publishing Group, Vol. 11 No. 1, p. 225.
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>

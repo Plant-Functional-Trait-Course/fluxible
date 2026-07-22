@@ -10,3 +10,6 @@
   Li7500](https://plant-functional-trait-course.github.io/fluxible/index.html/articles/li7500.md):
 - [Working with two gases measured
   simultaneously](https://plant-functional-trait-course.github.io/fluxible/index.html/articles/two-gases.md):
+- [Transforming gas concentration in volumetric units before modelling
+  the
+  fluxes](https://plant-functional-trait-course.github.io/fluxible/index.html/articles/vol_conc.md):

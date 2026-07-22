@@ -28,15 +28,19 @@ flux_lrc(
 
 - type_col:
 
-  column containing type of flux (NEE, ER, LRC)
+  column containing type of flux (NEE, ER, LRC). Supply as a bare
+  (unquoted) column name (e.g. `type`), not a string; this function uses
+  tidy-evaluation with `{{ }}`.
 
 - par_ave:
 
-  column containing the PAR value for each flux
+  column containing the PAR value for each flux. Supply as a bare
+  (unquoted) column name (e.g. `PAR_ave`), not a string.
 
 - f_flux:
 
-  column containing flux values
+  column containing flux values. Supply as a bare (unquoted) column name
+  (e.g. `f_flux`), not a string.
 
 - lrc_arg:
 

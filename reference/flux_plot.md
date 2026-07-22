@@ -44,11 +44,14 @@ flux_plot(
 
 - f_conc:
 
-  column with gas concentration
+  column with gas concentration. Supply as a bare (unquoted) column name
+  (e.g. `conc`), not a string; this function uses tidy-evaluation with
+  `{{ }}`.
 
 - f_datetime:
 
-  column with datetime of each data point
+  column with datetime of each data point. Supply as a bare (unquoted)
+  column name (e.g. `datetime`), not a string.
 
 - color_discard:
 
@@ -129,7 +132,9 @@ flux_plot(
 - arrange_col:
 
   character vector of columns to use to reorder the facets. If NULL
-  (default), facets are ordered by the datetime of the measurement.
+  (default), facets are ordered by the datetime of the measurement. When
+  supplying a single column for `arrange_col`, provide it as a bare
+  (unquoted) column name; for multiple columns use a character vector.
 
 ## Value
 

@@ -12,8 +12,8 @@
 <link rel="icon" sizes="any" href="../favicon.ico">
 <link rel="manifest" href="../site.webmanifest">
 <script src="../lightswitch.js"></script><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="From raw gas concentration data to clean ecosystem gas fluxes.">
 </head>
@@ -25,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">fluxible</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.3.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.4.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -42,6 +42,7 @@
 <li><a class="dropdown-item" href="../articles/data-prep.html">Preparing the data for fluxible</a></li>
     <li><a class="dropdown-item" href="../articles/li7500.html">Using fluxible with the Li7500</a></li>
     <li><a class="dropdown-item" href="../articles/two-gases.html">Working with two gases measured simultaneously</a></li>
+    <li><a class="dropdown-item" href="../articles/vol_conc.html">Transforming gas concentration in volumetric units before modelling the fluxes</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
@@ -81,12 +82,13 @@
     
     
 <p>In this example we will process a dataset from the Plant Functional
-Traits Course 6 <span class="citation">(Vandvik <em>et al.</em>,
-2025)</span>. Net ecosystem exchange (NEE), ecosystem respiration (ER),
-air and soil temperature and photosynthetically active radiation (PAR)
-were recorded over the course of 24 hours at an experimental site called
-Liahovden, situated in an alpine grassland in southwestern Norway. Those
-data are available in the <code>fluxible</code> R package.
+Traits Course 6 <span class="citation">(<span class="nocase">Vandvik
+<em>et al.</em></span>, 2025)</span>. Net ecosystem exchange (NEE),
+ecosystem respiration (ER), air and soil temperature and
+photosynthetically active radiation (PAR) were recorded over the course
+of 24 hours at an experimental site called Liahovden, situated in an
+alpine grassland in southwestern Norway. Those data are available in the
+<code>fluxible</code> R package.
 <!-- This example uses the data that were recorded during the Plant Functional Traits Course 6 (PFTC6) in Norway in 2022 at the site called Liahovden. -->
 <!-- (CITE when data paper out). --> To work with your own data, you
 need to import them as a dataframe object in your R session. For import
@@ -156,6 +158,9 @@ concentration dataset.</p>
 <div class="section level2">
 <h2 id="model-fitting">Model fitting<a class="anchor" aria-label="anchor" href="#model-fitting"></a>
 </h2>
+<p>To convert gas concentration into volumetric units before modelling,
+see <code><a href="../articles/vol_conc.html">vignette("vol_conc", package = "fluxible")</a></code>, available
+since ‘fluxible 1.4.0’.</p>
 <p>We fit a model and obtain the slope at
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>t</mi><mn>0</mn></msub><annotation encoding="application/x-tex">t_0</annotation></semantics></math>,
 which is needed for the flux calculation, with the
@@ -264,19 +269,20 @@ flux dataset. This table is also printed as a side effect of
 <span><span class="co">#&gt;  no_slope     0   0 %</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/flux_flag_count.html">flux_flag_count</a></span><span class="op">(</span><span class="va">flags_liahovden</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 10 × 3</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 11 × 3</span></span></span>
 <span><span class="co">#&gt;    f_quality_flag     n  ratio</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> ok               109 0.790 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> zero              27 0.196 </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> discard            2 0.014<span style="text-decoration: underline;">5</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> force_discard      0 0     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> start_error        0 0     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> no_data            0 0     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> force_ok           0 0     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> force_zero         0 0     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> force_lm           0 0     </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> no_slope           0 0</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 1</span> total            138 1     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 2</span> ok               109 0.790 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 3</span> zero              27 0.196 </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 4</span> discard            2 0.014<span style="text-decoration: underline;">5</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 5</span> force_discard      0 0     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 6</span> start_error        0 0     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 7</span> no_data            0 0     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> force_ok           0 0     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> force_zero         0 0     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> force_lm           0 0     </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">11</span> no_slope           0 0</span></span></code></pre></div>
 <p>The function <code>flux_plot</code> provides plots for a visual
 assessment of the measurements, explicitly displaying the quality flags
 from <code>flux_quality</code> and the cuts from
@@ -332,7 +338,9 @@ produces a single long pdf file, which is much faster):</p>
 <span>  slopes_df <span class="op">=</span> <span class="va">flags_liahovden</span>,</span>
 <span>  f_conc <span class="op">=</span> <span class="va">conc</span>,</span>
 <span>  f_datetime <span class="op">=</span> <span class="va">datetime</span>,</span>
-<span>  print_plot <span class="op">=</span> <span class="cn">FALSE</span>, <span class="co"># not printing the plots in the R session</span></span>
+<span>  f_ylim_upper <span class="op">=</span> <span class="fl">600</span>, <span class="co"># upper limit of y-axis</span></span>
+<span>  f_ylim_lower <span class="op">=</span> <span class="fl">350</span>, <span class="co"># lower limit of x-axis</span></span>
+<span>  y_text_position <span class="op">=</span> <span class="fl">450</span>, <span class="co"># position of text with flags and diagnostics</span></span>
 <span>  output <span class="op">=</span> <span class="st">"longpdf"</span>, <span class="co"># the type of output</span></span>
 <span>  f_plotname <span class="op">=</span> <span class="st">"plots_liahovden"</span> <span class="co"># filename for the pdf file</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -446,9 +454,9 @@ for fluxID 101:</p>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  Total number of measurements: 138</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;  ok   127     92 %</span></span>
-<span><span class="co">#&gt;  zero     8   6 %</span></span>
-<span><span class="co">#&gt;  discard      3   2 %</span></span>
+<span><span class="co">#&gt;  ok   128     93 %</span></span>
+<span><span class="co">#&gt;  zero     9   7 %</span></span>
+<span><span class="co">#&gt;  discard      1   1 %</span></span>
 <span><span class="co">#&gt;  force_discard    0   0 %</span></span>
 <span><span class="co">#&gt;  start_error      0   0 %</span></span>
 <span><span class="co">#&gt;  no_data      0   0 %</span></span>
@@ -537,14 +545,14 @@ dataset, except those provided to <code>cols_keep</code>).</p>
 <!-- The units of gas concentration, `conc_unit`, can be ppm or ppb. -->
 <!-- The units of the calculated flux can be $mmol\ m^{-2}\ h^{-1}$ (`flux_unit = "mmol"`) or $\mu mol\ m^{-2}\ h$ (`flux_unit = "micromol"`). -->
 <p>The units of gas concentration, <code>conc_unit</code>, can be
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mi>m</mi><mi>o</mi><mi>l</mi><mspace width="0.222em"></mspace><mi>m</mi><mi>o</mi><msup><mi>l</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">mmol\ mol^{-1}</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mi>m</mi><mi>o</mi><mi>l</mi><mspace width="0.222em"></mspace><mi>m</mi><mi>o</mi><msup><mi>l</mi><mrow><mi>−</mi><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">mmol\ mol^{-1}</annotation></semantics></math>,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mi>p</mi><mi>m</mi></mrow><annotation encoding="application/x-tex">ppm</annotation></semantics></math>,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mi>p</mi><mi>b</mi></mrow><annotation encoding="application/x-tex">ppb</annotation></semantics></math>
 or
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mi>p</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">ppt</annotation></semantics></math>.
 The units of the calculated flux is decided by the user and should be in
 the form
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mi>m</mi><mi>o</mi><mi>u</mi><mi>n</mi><mi>t</mi><mspace width="0.222em"></mspace><mi>s</mi><mi>u</mi><mi>r</mi><mi>f</mi><mi>a</mi><mi>c</mi><msup><mi>e</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mspace width="0.222em"></mspace><mi>t</mi><mi>i</mi><mi>m</mi><msup><mi>e</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">amount\ surface^{-1}\ time^{-1}</annotation></semantics></math>.
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mi>m</mi><mi>o</mi><mi>u</mi><mi>n</mi><mi>t</mi><mspace width="0.222em"></mspace><mi>s</mi><mi>u</mi><mi>r</mi><mi>f</mi><mi>a</mi><mi>c</mi><msup><mi>e</mi><mrow><mi>−</mi><mn>1</mn></mrow></msup><mspace width="0.222em"></mspace><mi>t</mi><mi>i</mi><mi>m</mi><msup><mi>e</mi><mrow><mi>−</mi><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">amount\ surface^{-1}\ time^{-1}</annotation></semantics></math>.
 Amount can be
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mi>o</mi><mi>l</mi></mrow><annotation encoding="application/x-tex">mol</annotation></semantics></math>,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mi>m</mi><mi>o</mi><mi>l</mi></mrow><annotation encoding="application/x-tex">mmol</annotation></semantics></math>,
@@ -613,10 +621,10 @@ A: area of chamber frame base (m^2^) -->
 <span><span class="co">#&gt;  $ turfID           : chr [1:138] "4 AN1C 4" "4 AN1C 4" "27 AN3C 27"..</span></span>
 <span><span class="co">#&gt;  $ type             : chr [1:138] "NEE" "ER" "NEE" "ER" ...</span></span>
 <span><span class="co">#&gt;  $ measurement_round: num [1:138] 1 1 1 1 1 1 2 2 2 2 ...</span></span>
-<span><span class="co">#&gt;  $ f_slope_corr     : num [1:138] -0.2258 0.0718 -0.3718 0.2433 -0.2..</span></span>
+<span><span class="co">#&gt;  $ f_slope_corr     : num [1:138] -0.2209 0.0708 -0.3712 0.2427 -0.2..</span></span>
 <span><span class="co">#&gt;  $ f_temp_air_ave   : num [1:138] 3.21 3.3 3.15 2.96 2.81 ...</span></span>
 <span><span class="co">#&gt;  $ datetime         : POSIXct[1:138], format: "2022-07-27 05:37:30" ..</span></span>
-<span><span class="co">#&gt;  $ f_flux           : num [1:138] -14.09 4.48 -23.22 15.2 -17.91 ...</span></span>
+<span><span class="co">#&gt;  $ f_flux           : num [1:138] -13.79 4.42 -23.17 15.16 -18.03 ...</span></span>
 <span><span class="co">#&gt;  $ f_model          : chr [1:138] "exp_zhao18" "exp_zhao18" "exp_zh"..</span></span></code></pre>
 </div>
 <div class="section level2">
@@ -665,31 +673,31 @@ fluxes.
 <span>  diff_name <span class="op">=</span> <span class="st">"GPP"</span> <span class="co"># the name of the calculated flux</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Structure of the flux dataset including GPP:</p>
-<pre><code><span><span class="co">#&gt; tibble [204 × 7] (S3: tbl_df/tbl/data.frame)</span></span>
-<span><span class="co">#&gt;  $ type             : chr [1:204] "ER" "GPP" "NEE" "ER" ...</span></span>
-<span><span class="co">#&gt;  $ f_flux           : num [1:204] 4.48 -18.57 -14.09 15.2 -38.42 ...</span></span>
-<span><span class="co">#&gt;  $ temp_soil_ave    : num [1:204] 7.01 6.96 6.96 6.83 6.83 ...</span></span>
-<span><span class="co">#&gt;  $ PAR_ave          : num [1:204] 1.05 24.242 24.242 0.403 28.809 ...</span></span>
-<span><span class="co">#&gt;  $ datetime         : POSIXct[1:204], format: "2022-07-27 05:42:00" ..</span></span>
-<span><span class="co">#&gt;  $ measurement_round: num [1:204] 1 1 1 1 1 1 1 1 1 2 ...</span></span>
-<span><span class="co">#&gt;  $ turfID           : chr [1:204] "4 AN1C 4" "4 AN1C 4" "4 AN1C 4" "..</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; tibble [206 × 7] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;  $ type             : chr [1:206] "ER" "GPP" "NEE" "ER" ...</span></span>
+<span><span class="co">#&gt;  $ f_flux           : num [1:206] 4.42 -18.21 -13.79 15.16 -38.34 ...</span></span>
+<span><span class="co">#&gt;  $ temp_soil_ave    : num [1:206] 7.01 6.96 6.96 6.83 6.83 ...</span></span>
+<span><span class="co">#&gt;  $ PAR_ave          : num [1:206] 1.05 24.242 24.242 0.403 28.809 ...</span></span>
+<span><span class="co">#&gt;  $ datetime         : POSIXct[1:206], format: "2022-07-27 05:42:00" ..</span></span>
+<span><span class="co">#&gt;  $ measurement_round: num [1:206] 1 1 1 1 1 1 1 1 1 2 ...</span></span>
+<span><span class="co">#&gt;  $ turfID           : chr [1:206] "4 AN1C 4" "4 AN1C 4" "4 AN1C 4" "..</span></span></code></pre>
 <p>The fluxes can then be transformed in units more suited for
 publishing, for example
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mi>g</mi><mo>*</mo><msup><mi>m</mi><mrow><mo>−</mo><mn>2</mn></mrow></msup><mo>*</mo><msup><mi>h</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">mg * m^{-2} * h^{-1}</annotation></semantics></math>:</p>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mi>g</mi><mo>*</mo><msup><mi>m</mi><mrow><mi>−</mi><mn>2</mn></mrow></msup><mo>*</mo><msup><mi>h</mi><mrow><mi>−</mi><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">mg * m^{-2} * h^{-1}</annotation></semantics></math>:</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">gpp_liahovden_60</span> <span class="op">&lt;-</span> <span class="va">gpp_liahovden_60</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
 <span>    flux_mg <span class="op">=</span> <span class="va">f_flux</span> <span class="op">*</span> <span class="fl">0.0440095</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">#&gt; tibble [204 × 8] (S3: tbl_df/tbl/data.frame)</span></span>
-<span><span class="co">#&gt;  $ type             : chr [1:204] "ER" "GPP" "NEE" "ER" ...</span></span>
-<span><span class="co">#&gt;  $ f_flux           : num [1:204] 4.48 -18.57 -14.09 15.2 -38.42 ...</span></span>
-<span><span class="co">#&gt;  $ temp_soil_ave    : num [1:204] 7.01 6.96 6.96 6.83 6.83 ...</span></span>
-<span><span class="co">#&gt;  $ PAR_ave          : num [1:204] 1.05 24.242 24.242 0.403 28.809 ...</span></span>
-<span><span class="co">#&gt;  $ datetime         : POSIXct[1:204], format: "2022-07-27 05:42:00" ..</span></span>
-<span><span class="co">#&gt;  $ measurement_round: num [1:204] 1 1 1 1 1 1 1 1 1 2 ...</span></span>
-<span><span class="co">#&gt;  $ turfID           : chr [1:204] "4 AN1C 4" "4 AN1C 4" "4 AN1C 4" "..</span></span>
-<span><span class="co">#&gt;  $ flux_mg          : num [1:204] 0.197 -0.817 -0.62 0.669 -1.691 ...</span></span></code></pre>
+<pre><code><span><span class="co">#&gt; tibble [206 × 8] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;  $ type             : chr [1:206] "ER" "GPP" "NEE" "ER" ...</span></span>
+<span><span class="co">#&gt;  $ f_flux           : num [1:206] 4.42 -18.21 -13.79 15.16 -38.34 ...</span></span>
+<span><span class="co">#&gt;  $ temp_soil_ave    : num [1:206] 7.01 6.96 6.96 6.83 6.83 ...</span></span>
+<span><span class="co">#&gt;  $ PAR_ave          : num [1:206] 1.05 24.242 24.242 0.403 28.809 ...</span></span>
+<span><span class="co">#&gt;  $ datetime         : POSIXct[1:206], format: "2022-07-27 05:42:00" ..</span></span>
+<span><span class="co">#&gt;  $ measurement_round: num [1:206] 1 1 1 1 1 1 1 1 1 2 ...</span></span>
+<span><span class="co">#&gt;  $ turfID           : chr [1:206] "4 AN1C 4" "4 AN1C 4" "4 AN1C 4" "..</span></span>
+<span><span class="co">#&gt;  $ flux_mg          : num [1:206] 0.194 -0.801 -0.607 0.667 -1.687 ...</span></span></code></pre>
 <div class="section level4 unnumbered">
 <h4 class="unnumbered" id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h4>
@@ -701,12 +709,12 @@ Hutchinson, G.L. and Mosier, A.R. (1981), <span>“<a href="https://doi.org/10.2
 of America Journal</em>, Vol. 45 No. 2, pp. 311–316.
 </div>
 <div id="ref-vandvikPlantTraitsAssociated2025" class="csl-entry">
-Vandvik, V., Halbritter, A.H., Macias-Fauria, M., Maitner, B.S.,
-Michaletz, S.T., Telford, R.J., Bison, N., <em>et al.</em> (2025),
-<span>“<a href="https://doi.org/10.1038/s41597-025-05509-4" class="external-link">Plant traits
-and associated ecological data from global change experiments and
-climate gradients in <span>Norway</span></a>”</span>, <em>Scientific
-Data</em>, Nature Publishing Group, Vol. 12 No. 1, p. 1477.
+<span class="nocase">Vandvik, V., Halbritter, A.H., Macias-Fauria, M.,
+Maitner, B.S., Michaletz, S.T., Telford, R.J., Bison, N., <em>et
+al.</em></span> (2025), <span>“<a href="https://doi.org/10.1038/s41597-025-05509-4" class="external-link">Plant traits and
+associated ecological data from global change experiments and climate
+gradients in <span>Norway</span></a>”</span>, <em>Scientific Data</em>,
+Nature Publishing Group, Vol. 12 No. 1, p. 1477.
 </div>
 <div id="ref-tidyverse2019" class="csl-entry">
 Wickham, H., Averick, M., Bryan, J., Chang, W., McGowan, L.D., François,
@@ -733,7 +741,7 @@ Meteorology</em>, Vol. 263, pp. 267–275.
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>

@@ -16,11 +16,13 @@ flux_drygas(conc_df, gas_wet, h2o_wet)
 
 - gas_wet:
 
-  the gas to correct
+  the gas to correct. Supply as a bare (unquoted) column name (e.g.
+  `co2`), not a string; this function uses tidy-evaluation with `{{ }}`.
 
 - h2o_wet:
 
-  water vapor concentration before correction (in mmol/mol)
+  water vapor concentration before correction (in mmol/mol). Supply as a
+  bare (unquoted) column name (e.g. `h2o`), not a string.
 
 ## Value
 
@@ -29,7 +31,7 @@ same unit as `gas_wet`
 
 ## Details
 
-the correction is done as follows gas_dry = gas_wet / (1 - (h2o_wet /
+The correction is done as follows: gas_dry = gas_wet / (1 - (h2o_wet /
 1000))
 
 ## Examples

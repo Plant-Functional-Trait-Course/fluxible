@@ -14,6 +14,7 @@ First we use `flux_match` to slice the raw concentration data and
 attribute a unique ID to each measurement.
 
 ``` r
+
 library(fluxible)
 library(tidyverse)
 
@@ -30,6 +31,7 @@ conc_twogases <- flux_match(
 Then we fit a model to the raw data for each gas:
 
 ``` r
+
 slopes_twogases_co2 <- flux_fitting(
   conc_df = conc_twogases,
   f_conc = co2_conc,
@@ -50,6 +52,7 @@ slopes_twogases_ch4 <- flux_fitting(
 Same with the quality, we do it once for each gas:
 
 ``` r
+
 flag_twogases_co2 <- flux_quality(
   slopes_df = slopes_twogases_co2,
   f_conc = co2_conc,
@@ -92,6 +95,7 @@ flag_twogases_ch4 <- flux_quality(
 We check the fits with `flux_plot`:
 
 ``` r
+
 flag_twogases_co2 |>
   flux_plot(
     f_conc = co2_conc,
@@ -108,6 +112,7 @@ flags.](two-gases_files/figure-html/plot-co2-twogases-1.png)
 CO₂ measurements with quality flags.
 
 ``` r
+
 flag_twogases_ch4 |>
   flux_plot(
     f_conc = ch4_conc,
@@ -127,6 +132,7 @@ After calculating the fluxes, we need to rename the `f_flux` column to
 avoid confusion when joining the datasets:
 
 ``` r
+
 fluxes_twogases_co2 <- flux_calc(
   slopes_df = flag_twogases_co2,
   slope_col = f_slope_corr,
@@ -168,6 +174,7 @@ equal (`f_temp_air_ave` for example) are in fact not equal, which leads
 to additional rows when joining the dataframes.
 
 ``` r
+
 fluxes_twogases <- left_join(
   fluxes_twogases_co2,
   fluxes_twogases_ch4,

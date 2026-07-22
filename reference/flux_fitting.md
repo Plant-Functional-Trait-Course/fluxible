@@ -35,25 +35,30 @@ flux_fitting(
 
 - f_conc:
 
-  column with gas concentration data
+  column with gas concentration data. Supply as a bare (unquoted) column
+  name (e.g. `conc`), not a string.
 
 - f_datetime:
 
-  column with datetime of each concentration measurement Note that if
+  column with datetime of each concentration measurement. Note that if
   there are duplicated datetime in the same `f_fluxid` only the first
-  row will be kept
+  row will be kept. Supply as a bare (unquoted) column name (e.g.
+  `datetime`), not a string.
 
 - f_start:
 
-  column with datetime when the measurement started (`ymd_hms`)
+  column with datetime when the measurement started (`ymd_hms`). Supply
+  as a bare (unquoted) column name (e.g. `f_start`), not a string.
 
 - f_end:
 
-  column with datetime when the measurement ended (`ymd_hms`)
+  column with datetime when the measurement ended (`ymd_hms`). Supply as
+  a bare (unquoted) column name (e.g. `f_end`), not a string.
 
 - f_fluxid:
 
-  column with ID of each flux
+  column with ID of each flux. Supply as a bare (unquoted) column name
+  (e.g. `f_fluxid`), not a string.
 
 - fit_type:
 

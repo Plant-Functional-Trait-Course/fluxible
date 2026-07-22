@@ -98,6 +98,7 @@ transform the columns into what we want, and `dmy_hms` from the
 column in the right format:
 
 ``` r
+
 library(tidyverse)
 # readr, dplyr and lubridate are part of tidyverse
 
@@ -132,6 +133,7 @@ Not too bad… but we are not quite there yet:
   in `yyyy-mm-dd hh:mm:ss` format
 
 ``` r
+
 raw_conc <- raw_conc |>
   rename(
     co2_conc = "CO2_calc (ppm)"
@@ -156,6 +158,7 @@ we will read all the files in “ex_data/” that contain “CO2” in their
 names.
 
 ``` r
+
 library(tidyverse)
 
 raw_conc <- list.files( # list the files
@@ -186,6 +189,7 @@ instead of numeric. Normally, those units are stated in the protocol or
 different ways to do that, here is one:
 
 ``` r
+
 library(tidyverse)
 
 co2 <- read_delim(
@@ -221,6 +225,7 @@ and `cut_direction` in `flux_fitting`:
   `end - start_cut` to `end - end_cut`
 
 ``` r
+
 
 library(tidyverse)
 
@@ -295,6 +300,7 @@ Gnnnnnnn
 Let’s try the usual way first:
 
 ``` r
+
 library(tidyverse)
 
 raw_conc <- read_csv( # read_csv is the same as read_delim(delim = ",")
@@ -320,6 +326,7 @@ and then assemble the columns with left and right side of the decimal
 point:
 
 ``` r
+
 raw_conc <- read_csv(
   "ex_data/011023001.#01",
   skip = 1, # this time we skip the row with the column names
@@ -356,6 +363,7 @@ sake of it, let’s pretend that it is not an option and solve that issue
 in R:
 
 ``` r
+
 
 # we read each row of our file as an element of a list
 lines <- readLines("ex_data/011023001.#01")
