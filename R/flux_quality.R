@@ -8,8 +8,8 @@
 #' \link[fluxible:flux_fitting]{flux_fitting}
 #' @param ambient_conc ambient gas concentration in ppm at the site of
 #' measurement (used to detect measurement that started with a polluted setup)
-#' @param error error of the setup, defines a window outside of which
-#' the starting values indicate a polluted setup
+#' @param error error on the ambient concentration, defines a window outside of
+#' which the starting values indicate a polluted setup
 #' @param f_fluxid column containing unique IDs for each flux. Supply as a
 #' bare (unquoted) column name (e.g. `f_fluxid`), not a string.
 #' @param f_slope column containing the slope of each flux (as calculated by the
@@ -75,7 +75,8 @@
 #' (exponential quadratic fits).
 #' @param kappamax logical. If `TRUE` the kappamax method will be applied.
 #' @param instr_error error of the instrument, in the same unit as the
-#' gas concentration
+#' gas concentration. Used to detect a flux below the instrument detection
+#' capacity.
 #' @param f_fit_lm column with the fit of the linear model (as calculated by
 #' the \link[fluxible:flux_fitting]{flux_fitting} function). Supply as a bare
 #' (unquoted) column name (e.g. `f_fit_lm`), not a string.
@@ -85,6 +86,12 @@
 #' The original kappamax method was applied to the HMR model
 #' (Pedersen et al., 2010; Hutchinson and Mosier, 1981), but here it can be
 #' applied to any exponential fit.
+#' @details the `instr_error` and `error` are two different arguments.
+#' `instr_error` defines the minimal detectable flux (i. e., when a flux can be
+#' considered zero because it is below the instrument detection capacity).
+#' `error` is the error applied to `ambient_conc`, the ambient concentration
+#' of the measured gas, and defines the window outside of which a measurement
+#' is flagged for an error on the start.
 #' @references Pedersen, A.R., Petersen, S.O., Schelde, K., 2010.
 #' A comprehensive approach to soil-atmosphere trace-gas flux estimation with
 #' static chambers. European Journal of Soil Science 61, 888–902.
