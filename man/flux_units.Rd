@@ -38,10 +38,8 @@ A single numerical to multiply flux values with to convert units.
 calculates the conversion coefficient for flux_calc
 }
 \details{
-The conversion is done from micromoles per second per square metre
-and gas concentration measured in the requested concentration units.
-The coefficient is computed as
-\ifelse{html}{\out{flux_coeff = amount_coeff * surface_coeff * time_coeff * conc_coeff}}{\eqn{flux_coeff = amount_coeff * surface_coeff * time_coeff * conc_coeff}{ASCII}}.
+The conversion is done from umol/s/m2 and gas concentration
+measured in ppm.
 }
 \examples{
 flux_units("mol/m2/mn", "ppm")
