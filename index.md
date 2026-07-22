@@ -226,7 +226,8 @@ Evolution*,
 **Gaudard J**. “Global Change Impacts on Carbon Dynamics in Alpine
 Grasslands : Experimental Insights from Western Norway and
 Methodological Advances”, PhD thesis, 2026, University of Bergen (UiB)
-and Bjerknes Centre for Climate Research (BCCR), Bergen, Norway.
+and Bjerknes Centre for Climate Research (BCCR), Bergen, Norway,
+[hdl.handle.net/11250/5517571](https://hdl.handle.net/11250/5517571).
 
 Gaudard J, Telford RJ, Chacon-Labella J, Dawson HR, **Enquist BJ**,
 Töpper JP, Trepel J, Vandvik V, Baumane M, Birkeli K, Holle MJM, Hupp
