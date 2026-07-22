@@ -1,6 +1,6 @@
 #' Transforms concentration from fractional to volumetric units
 #' @description This function converts gas concentrations from fractional units
-#' (e.g., ppm) to volumetric units (e.g., μmol/liter) based on the ideal gas
+#' (e.g., ppm) to volumetric units (e.g., umol/liter) based on the ideal gas
 #' law and the specific conditions of the measurement.
 #' @param conc_df dataframe of gas concentration over time
 #' @param f_conc column with gas concentration. Supply as a bare (unquoted)
@@ -21,7 +21,7 @@
 #'
 #' The units of the newly calculated volumetric concentration follow the units
 #' of the fractional concentration provided. For exemple, if the input is in
-#' `ppm`, the result is in `µmol/L`; if the input is in `ppb`, the result is in
+#' `ppm`, the result is in `umol/L`; if the input is in `ppb`, the result is in
 #' `nmol/L`; if the input is in `ppt`, the result is in `pmol/L`.
 #' @details **Required temperature and pressure data**
 #'

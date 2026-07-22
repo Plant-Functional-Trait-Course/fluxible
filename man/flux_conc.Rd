@@ -40,7 +40,7 @@ concentration.
 }
 \description{
 This function converts gas concentrations from fractional units
-(e.g., ppm) to volumetric units (e.g., μmol/liter) based on the ideal gas
+(e.g., ppm) to volumetric units (e.g., umol/liter) based on the ideal gas
 law and the specific conditions of the measurement.
 }
 \details{
@@ -48,7 +48,7 @@ law and the specific conditions of the measurement.
 
 The units of the newly calculated volumetric concentration follow the units
 of the fractional concentration provided. For exemple, if the input is in
-\code{ppm}, the result is in \code{µmol/L}; if the input is in \code{ppb}, the result is in
+\code{ppm}, the result is in \code{umol/L}; if the input is in \code{ppb}, the result is in
 \code{nmol/L}; if the input is in \code{ppt}, the result is in \code{pmol/L}.
 
 \strong{Required temperature and pressure data}
