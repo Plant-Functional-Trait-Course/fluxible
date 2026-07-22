@@ -124,6 +124,8 @@ flux_plot(
     scales = "free"
   )
 )
+#> Part of the fit will not be displayed
+#>     because f_ylim_lower is too high.
 #> Plotting in progress
 ```
 
@@ -175,15 +177,15 @@ fluxes_gpp
 #> # A tibble: 9 × 5
 #>   datetime            type  f_flux temp_soil_ave turfID      
 #>   <dttm>              <chr>  <dbl>         <dbl> <chr>       
-#> 1 2022-07-28 23:43:25 ER     51.9           10.9 156 AN2C 156
-#> 2 2022-07-28 23:47:12 GPP     9.72          10.7 74 WN2C 155 
-#> 3 2022-07-28 23:47:12 NEE    32.0           10.7 74 WN2C 155 
-#> 4 2022-07-28 23:52:00 ER     22.3           10.7 74 WN2C 155 
-#> 5 2022-07-28 23:59:22 GPP    -6.63          10.8 109 AN3C 109
-#> 6 2022-07-28 23:59:22 NEE    44.3           10.8 109 AN3C 109
-#> 7 2022-07-29 00:03:00 ER     50.9           10.5 109 AN3C 109
+#> 1 2022-07-28 23:43:25 ER     51.5           10.9 156 AN2C 156
+#> 2 2022-07-28 23:47:12 GPP     9.93          10.7 74 WN2C 155 
+#> 3 2022-07-28 23:47:12 NEE    31.8           10.7 74 WN2C 155 
+#> 4 2022-07-28 23:52:00 ER     21.9           10.7 74 WN2C 155 
+#> 5 2022-07-28 23:59:22 GPP    -6.19          10.8 109 AN3C 109
+#> 6 2022-07-28 23:59:22 NEE    43.6           10.8 109 AN3C 109
+#> 7 2022-07-29 00:03:00 ER     49.8           10.5 109 AN3C 109
 #> 8 2022-07-29 00:06:25 GPP    NA             12.2 29 WN3C 106 
-#> 9 2022-07-29 00:06:25 NEE    32.7           12.2 29 WN3C 106
+#> 9 2022-07-29 00:06:25 NEE    32.2           12.2 29 WN3C 106
 ```
 
 To convert gas concentration into volumetric units before modelling, see
