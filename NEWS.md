@@ -1,5 +1,7 @@
 # fluxible 1.4.0
 
+* Gas concentration can now be transformed in volumetric concentration (e. g., mmol/l) before fitting a model and calculating the slope, accounting better for temperature change inside the chamber. The rest of the workflow has been adapted to support this pathway. The previous workflow (i. e., calculating the flux using the average air temperature during the measurement) is still available and unchanged.
+* `flux_conc`: new function to transform fractional gas concentration in volumetric concentration before fitting a model.
 * `flux_flag_count`: added a row with total number of fluxes, to facilitate reporting.
 * `flux_fitting` (bug fix): last point of the measurement before the end cut was also cut. The fix can change the results if gas concentration data points are very spaced. The previous results can be obtained by cutting one extra second at the end of the measurements.
 
