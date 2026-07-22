@@ -34,6 +34,15 @@ test_that("mol and minutes conversion works", {
   )
 })
 
+test_that("volumetric mol per liter conversion works", {
+  coef <- flux_units("umol/m2/s", "mol/l")
+
+  expect_equal(
+    coef,
+    1e6
+  )
+})
+
 test_that("superseeded but still works (mmol)", {
   slopes0 <- suppressWarnings(flux_fitting(
     co2_conc,

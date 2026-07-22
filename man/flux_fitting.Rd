@@ -25,17 +25,22 @@ flux_fitting(
 \arguments{
 \item{conc_df}{dataframe of gas concentration over time}
 
-\item{f_conc}{column with gas concentration data}
+\item{f_conc}{column with gas concentration data. Supply as a bare
+(unquoted) column name (e.g. \code{conc}), not a string.}
 
-\item{f_datetime}{column with datetime of each concentration measurement
+\item{f_datetime}{column with datetime of each concentration measurement.
 Note that if there are duplicated datetime in the same \code{f_fluxid} only
-the first row will be kept}
+the first row will be kept. Supply as a bare (unquoted) column name (e.g.
+\code{datetime}), not a string.}
 
-\item{f_start}{column with datetime when the measurement started (\code{ymd_hms})}
+\item{f_start}{column with datetime when the measurement started (\code{ymd_hms}).
+Supply as a bare (unquoted) column name (e.g. \code{f_start}), not a string.}
 
-\item{f_end}{column with datetime when the measurement ended (\code{ymd_hms})}
+\item{f_end}{column with datetime when the measurement ended (\code{ymd_hms}).
+Supply as a bare (unquoted) column name (e.g. \code{f_end}), not a string.}
 
-\item{f_fluxid}{column with ID of each flux}
+\item{f_fluxid}{column with ID of each flux. Supply as a bare (unquoted)
+column name (e.g. \code{f_fluxid}), not a string.}
 
 \item{fit_type}{\code{exp_zhao18}, \code{exp_tz}, \code{exp_hm}, \code{quadratic} or \code{linear.}
 \code{exp_zhao18} is using the exponential model

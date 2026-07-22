@@ -42,41 +42,53 @@ flux_quality(
 \arguments{
 \item{slopes_df}{dataset containing slopes}
 
-\item{f_conc}{column containing the measured gas concentration
-(exponential fits)}
+\item{f_conc}{column containing the measured gas concentration (exponential
+fits). Supply as a bare (unquoted) column name (e.g. \code{conc}), not a string.}
 
-\item{f_fluxid}{column containing unique IDs for each flux}
+\item{f_fluxid}{column containing unique IDs for each flux. Supply as a
+bare (unquoted) column name (e.g. \code{f_fluxid}), not a string.}
 
-\item{f_slope}{column containing the slope of each flux
-(as calculated by the \link[fluxible:flux_fitting]{flux_fitting} function)}
+\item{f_slope}{column containing the slope of each flux (as calculated by the
+\link[fluxible:flux_fitting]{flux_fitting} function). Supply as a bare
+(unquoted) column name (e.g. \code{f_slope}), not a string.}
 
 \item{f_time}{column containing the time of each measurement in seconds
-(exponential fits)}
+(exponential fits). Supply as a bare (unquoted) column name (e.g.
+\code{f_time}), not a string.}
 
 \item{f_start}{column with datetime of the start of the measurement
-(after cuts)}
+(after cuts). Supply as a bare (unquoted) column name (e.g. \code{f_start}), not
+a string.}
 
-\item{f_end}{column with datetime of the end of the measurement
-(after cuts)}
+\item{f_end}{column with datetime of the end of the measurement (after
+cuts). Supply as a bare (unquoted) column name (e.g. \code{f_end}), not a
+string.}
 
-\item{f_fit}{column containing the modeled data (exponential fits)}
+\item{f_fit}{column containing the modeled data (exponential fits). Supply
+as a bare (unquoted) column name (e.g. \code{f_fit}), not a string.}
 
-\item{f_cut}{column containing the cutting information}
+\item{f_cut}{column containing the cutting information. Supply as a bare
+(unquoted) column name (e.g. \code{f_cut}), not a string.}
 
-\item{f_pvalue}{column containing the p-value of each flux
-(linear and quadratic fits)}
+\item{f_pvalue}{column containing the p-value of each flux (linear and
+quadratic fits). Supply as a bare (unquoted) column name (e.g. \code{f_pvalue}),
+not a string.}
 
-\item{f_rsquared}{column containing the r squared of each flux
-(linear and quadratic fits)}
+\item{f_rsquared}{column containing the r squared of each flux (linear and
+quadratic fits). Supply as a bare (unquoted) column name (e.g.
+\code{f_rsquared}), not a string.}
 
-\item{f_slope_lm}{column containing the linear slope of each flux
-(as calculated by the \link[fluxible:flux_fitting]{flux_fitting} function)}
+\item{f_slope_lm}{column containing the linear slope of each flux (as
+calculated by the \link[fluxible:flux_fitting]{flux_fitting} function).
+Supply as a bare (unquoted) column name (e.g. \code{f_slope_lm}), not a string.}
 
-\item{f_fit_lm}{column with the fit of the linear model.
-(as calculated by the \link[fluxible:flux_fitting]{flux_fitting} function)}
+\item{f_fit_lm}{column with the fit of the linear model (as calculated by
+the \link[fluxible:flux_fitting]{flux_fitting} function). Supply as a bare
+(unquoted) column name (e.g. \code{f_fit_lm}), not a string.}
 
 \item{f_b}{column containing the b parameter of the exponential expression
-(exponential fits)}
+(exponential fits). Supply as a bare (unquoted) column name (e.g. \code{f_b}),
+not a string.}
 
 \item{force_discard}{vector of fluxIDs that should be discarded
 by the user's decision}
@@ -108,8 +120,8 @@ Will be automatically filled if \code{slopes_df} was produced using
 \item{ambient_conc}{ambient gas concentration in ppm at the site of
 measurement (used to detect measurement that started with a polluted setup)}
 
-\item{error}{error of the setup, defines a window outside of which
-the starting values indicate a polluted setup}
+\item{error}{error on the ambient concentration, defines a window outside of
+which the starting values indicate a polluted setup}
 
 \item{pvalue_threshold}{threshold of p-value below which the change of
 gas concentration over time is considered not significant
@@ -133,7 +145,8 @@ considered good enough (exponential fits)}
 \item{cut_arg}{argument defining that the data point should be cut out}
 
 \item{instr_error}{error of the instrument, in the same unit as the
-gas concentration}
+gas concentration. Used to detect a flux below the instrument detection
+capacity.}
 
 \item{kappamax}{logical. If \code{TRUE} the kappamax method will be applied.}
 }
@@ -157,6 +170,13 @@ the kappamax method (Hüppi et al., 2018) selects the linear slope if
 The original kappamax method was applied to the HMR model
 (Pedersen et al., 2010; Hutchinson and Mosier, 1981), but here it can be
 applied to any exponential fit.
+
+the \code{instr_error} and \code{error} are two different arguments.
+\code{instr_error} defines the minimal detectable flux (i. e., when a flux can be
+considered zero because it is below the instrument detection capacity).
+\code{error} is the error applied to \code{ambient_conc}, the ambient concentration
+of the measured gas, and defines the window outside of which a measurement
+is flagged for an error on the start.
 }
 \examples{
 data(co2_conc)

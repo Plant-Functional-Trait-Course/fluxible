@@ -9,8 +9,7 @@
 #' @return a df with the modeled gas concentration, slope, intercept,
 #' std error, r square and p value of the quadratic model
 #' @importFrom rlang .data
-#' @importFrom dplyr rename mutate select group_by case_when
-#' ungroup filter left_join distinct pull bind_cols join_by
+#' @importFrom dplyr rename mutate select group_by case_when ungroup filter left_join distinct pull bind_cols join_by
 #' @importFrom tidyr drop_na pivot_wider fill
 #' @importFrom haven as_factor
 #' @importFrom stringr str_c

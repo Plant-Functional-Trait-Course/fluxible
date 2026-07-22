@@ -8,12 +8,17 @@
 #' (if different from default from flux_quality).
 #' If not provided, it will list only the flags that are
 #' present in the dataset (no showing 0).
-#' @param f_fluxid column containing fluxes unique ID
-#' @param f_quality_flag column containing the quality flags
+#' @param f_fluxid column containing fluxes unique ID. Supply as a bare (unquoted)
+#' column name (e.g. `f_fluxid`), not a string; this function uses tidy-evaluation
+#' with `{{ }}`.
+#' @param f_quality_flag column containing the quality flags. Supply as a bare
+#' (unquoted) column name (e.g. `f_quality_flag`), not a string; this function
+#' uses tidy-evaluation with `{{ }}`.
 #' @return a dataframe with the number of fluxes for each quality flags
 #' and their proportion to the total
-#' @importFrom dplyr all_of select group_by summarise
-#' tibble right_join filter distinct arrange desc
+#' @param show_total logical, if TRUE (default), adds a row with the total
+#' number of fluxes
+#' @importFrom dplyr all_of select group_by summarise tibble right_join filter distinct arrange desc
 #' @importFrom tidyr replace_na
 #' @author Vincent Belde
 #' @examples
@@ -38,7 +43,11 @@ flux_flag_count <- function(flags_df,
                               "force_zero",
                               "force_lm",
                               "no_slope"
-                            )) {
+                            ),
+                            show_total = TRUE) {
+
+  check_bare_col(enquo(f_fluxid), "f_fluxid")
+  check_bare_col(enquo(f_quality_flag), "f_quality_flag")
 
   flag_df <- flags_df |>
     mutate(
@@ -46,6 +55,10 @@ flux_flag_count <- function(flags_df,
     ) |>
     select({{f_fluxid}}, {{f_quality_flag}}) |>
     distinct()
+
+  if (show_total) {
+    f_flags <- c(f_flags, "total")
+  }
 
   flags <- tibble({{f_quality_flag}} := factor(f_flags))
 
@@ -56,8 +69,11 @@ flux_flag_count <- function(flags_df,
     ) |>
     right_join(flags, by = join_by({{f_quality_flag}})) |>
     mutate(
-      n = replace_na(.data$n, 0),
-      ratio = .data$n / sum(.data$n)
+      n = case_when(
+        f_quality_flag == "total" ~ sum(.data$n, na.rm = TRUE),
+        .default = replace_na(.data$n, 0)
+      ),
+      ratio = .data$n / sum(.data$n[!.data$f_quality_flag == "total"])
     ) |>
     arrange(desc(.data$n))
 

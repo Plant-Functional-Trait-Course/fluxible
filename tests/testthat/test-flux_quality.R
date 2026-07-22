@@ -21,7 +21,7 @@ test_that("works for linear fitting", {
     co2_conc,
     conc,
     datetime,
-    end_cut = 30,
+    end_cut = 31,
     fit_type = "linear"
   ))
 
@@ -39,7 +39,7 @@ test_that("works for quadratic fitting", {
     co2_conc,
     conc,
     datetime,
-    end_cut = 30,
+    end_cut = 31,
     fit_type = "quadratic"
   ))
 
@@ -62,7 +62,7 @@ test_that("kappamax with HM model", {
     co2_conc,
     conc,
     datetime,
-    end_cut = 30,
+    end_cut = 31,
     fit_type = "exp_hm"
   ))
 
@@ -84,7 +84,7 @@ test_that("kappamax with zhao18 model", {
     co2_conc,
     conc,
     datetime,
-    end_cut = 30,
+    end_cut = 31,
     fit_type = "exp_zhao18"
   ))
 

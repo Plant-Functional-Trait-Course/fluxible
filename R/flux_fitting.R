@@ -13,7 +13,9 @@
 #' \ifelse{html}{\out{C(t) = C_m + (C_z - C_m) exp(-b * t)}}{\eqn{C(t) = C_m + (C_z - C_m) \exp(-b * t)}{ASCII}}
 #' `exponential` is equal to `exp_zhao18`, for backwards compatibility
 #' @param conc_df dataframe of gas concentration over time
-#' @param f_conc column with gas concentration
+#' @param f_conc column with gas concentration. Supply as a bare (unquoted)
+#' column name (e.g. `conc`), not a string; this function uses tidy-evaluation
+#' with `{{ }}`.
 #' @param cz_window window used to calculate Cz, at the beginning of cut window
 #' (`exp_zhao18` and `exp_tz` fits)
 #' @param b_window window to estimate b. It is an interval after tz where
@@ -33,13 +35,18 @@
 #' Bug fix since v1.3.4: `"from_start"` was doing `f_start` + `start_cut` to
 #' `f_start` + `start_cut` + `end_cut`
 #' @param end_cut time to discard at the end of the measurements (in seconds)
-#' @param f_start column with datetime when the measurement started (`ymd_hms`)
-#' @param f_end column with datetime when the measurement ended (`ymd_hms`)
-#' @param f_datetime column with datetime of each concentration measurement
+#' @param f_start column with datetime when the measurement started (`ymd_hms`).
+#' Supply as a bare (unquoted) column name (e.g. `f_start`), not a string.
+#' @param f_end column with datetime when the measurement ended (`ymd_hms`).
+#' Supply as a bare (unquoted) column name (e.g. `f_end`), not a string.
+#' @param f_datetime column with datetime of each concentration measurement.
 #' Note that if there are duplicated datetime in the same `f_fluxid` only
-#' the first row will be kept
-#' @param f_conc column with gas concentration data
-#' @param f_fluxid column with ID of each flux
+#' the first row will be kept. Supply as a bare (unquoted) column name (e.g.
+#' `datetime`), not a string.
+#' @param f_conc column with gas concentration data. Supply as a bare
+#' (unquoted) column name (e.g. `conc`), not a string.
+#' @param f_fluxid column with ID of each flux. Supply as a bare (unquoted)
+#' column name (e.g. `f_fluxid`), not a string.
 #' @param t_zero time at which the slope should be calculated
 #' (for `quadratic`, `exp_tz` and `exp_hm` fits)
 #' @return a dataframe with the slope at t zero (`f_slope`),
@@ -88,6 +95,12 @@ flux_fitting <- function(conc_df,
                          roll_width = 15) {
 
   name_df <- as_label(enquo(conc_df))
+
+  check_bare_col(enquo(f_conc), "f_conc")
+  check_bare_col(enquo(f_datetime), "f_datetime")
+  check_bare_col(enquo(f_start), "f_start")
+  check_bare_col(enquo(f_end), "f_end")
+  check_bare_col(enquo(f_fluxid), "f_fluxid")
 
   args_ok <- flux_fun_check(list(
     start_cut = start_cut,
@@ -201,7 +214,7 @@ flux_fitting <- function(conc_df,
         .data$f_start_og + end_cut
       },
       f_cut = case_when(
-        {{f_datetime}} < {{f_start}} | {{f_datetime}} >= {{f_end}}
+        {{f_datetime}} < {{f_start}} | {{f_datetime}} > {{f_end}}
         ~ "cut",
         .default = "keep"
       ),
@@ -340,7 +353,7 @@ flux_fitting <- function(conc_df,
       warnings = case_when(
         .data$f_n_conc == 0 ~ .data$no_data,
         is.na(.data$f_slope) ~ .data$slope_na,
-        .data$f_n_conc_cut != .data$f_length_flux ~ .data$low_data
+        .data$f_n_conc_cut < .data$f_length_flux ~ .data$low_data
       ),
       warnings = as.character(.data$warnings)
     ) |>

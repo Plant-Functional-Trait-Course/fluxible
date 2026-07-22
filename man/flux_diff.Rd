@@ -18,7 +18,9 @@ flux_diff(
 \arguments{
 \item{fluxes_df}{a dataframe containing fluxes}
 
-\item{type_col}{column containing type of flux}
+\item{type_col}{column containing type of flux. Supply as a bare (unquoted)
+column name (e.g. \code{type}), not a string; this function uses tidy-evaluation
+with \code{{{ }}}.}
 
 \item{f_flux}{column containing flux values}
 

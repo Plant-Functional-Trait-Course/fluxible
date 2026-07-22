@@ -6,7 +6,9 @@
 #' @param fluxes_df a dataframe containing fluxes
 #' @param id_cols columns used to identify each pair of fluxes
 #' @param f_flux column containing flux values
-#' @param type_col column containing type of flux
+#' @param type_col column containing type of flux. Supply as a bare (unquoted)
+#' column name (e.g. `type`), not a string; this function uses tidy-evaluation
+#' with `{{ }}`.
 #' @param type_a argument designating type_a fluxes in type column
 #' @param type_b argument designating type_b fluxes in type column
 #' @param diff_name name to give to the new calculated flux
@@ -18,8 +20,7 @@
 #' type_a, and type_b as flux type, datetime, and any column specified in
 #' `cols_keep`. Values of datetime and columns in `cols_keep` for diff row are
 #' taken from type_a measurements.
-#' @importFrom dplyr rename select mutate case_when filter full_join
-#' cur_group_id bind_rows
+#' @importFrom dplyr rename select mutate case_when filter full_join cur_group_id bind_rows
 #' @importFrom tidyr pivot_wider fill
 #' @importFrom purrrlyr slice_rows unslice
 #' @importFrom rlang := as_label enquo
@@ -39,6 +40,9 @@ flux_diff <- function(fluxes_df,
                       cols_keep = "none") {
 
   name <- as_label(enquo(fluxes_df))
+
+  check_bare_col(enquo(type_col), "type_col")
+  check_bare_col(enquo(f_flux), "f_flux")
 
   fluxes_df_check <- fluxes_df |>
     select({{f_flux}})

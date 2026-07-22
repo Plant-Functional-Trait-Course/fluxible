@@ -56,13 +56,17 @@ a gas concentration column as double.}
 Has to contain at least a column containing the start of each measurement,
 and any other column identifying the measurements.}
 
-\item{f_datetime}{datetime column in raw_conc (dmy_hms format)}
+\item{f_datetime}{datetime column in raw_conc (dmy_hms format). Supply as
+a bare (unquoted) column name (e.g. \code{datetime}), not a string.}
 
-\item{start_col}{start column in field_record (dmy_hms format)}
+\item{start_col}{start column in field_record (dmy_hms format). Supply as a
+bare (unquoted) column name (e.g. \code{start}), not a string.}
 
-\item{end_col}{end column in field_record (\code{ymd_hms} format)}
+\item{end_col}{end column in field_record (\code{ymd_hms} format). Supply as a
+bare (unquoted) column name (e.g. \code{end}), not a string.}
 
-\item{f_conc}{concentration column in raw_conc}
+\item{f_conc}{concentration column in raw_conc. Supply as a bare
+(unquoted) column name (e.g. \code{conc}), not a string.}
 
 \item{setup_volume}{volume of the flux chamber and instrument together in L,
 can also be a column in case it is a variable}

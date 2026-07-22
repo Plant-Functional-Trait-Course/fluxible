@@ -162,48 +162,6 @@ test_that("matching works with end col", {
   )
 })
 
-test_that("startcrop deprecated", {
-  expect_error(flux_match(
-    co2_df_short,
-    record_short,
-    datetime,
-    start,
-    measurement_length = 180,
-    startcrop = 10
-  ),
-  "The `startcrop` argument of `flux_match()` was deprecated in fluxible 1.2.1 and is now defunct.",
-  fixed = TRUE
-  )
-})
-
-test_that("ratio_threshold deprecated", {
-  expect_warning(flux_match(
-    co2_df_short,
-    record_short,
-    datetime,
-    start,
-    measurement_length = 180,
-    ratio_threshold = 0.8
-  ),
-  "The `ratio_threshold` argument of `flux_match()` is deprecated as of fluxible 1.2.2.",
-  fixed = TRUE
-  )
-})
-
-test_that("f_conc deprecated", {
-  expect_warning(flux_match(
-    co2_df_short,
-    record_short,
-    datetime,
-    start,
-    measurement_length = 180,
-    f_conc = "conc"
-  ),
-  "The `f_conc` argument of `flux_match()` is deprecated as of fluxible 1.2.2.",
-  fixed = TRUE
-  )
-})
-
 test_that("error on end col", {
   expect_error(flux_match(
     co2_df_short,
@@ -213,28 +171,6 @@ test_that("error on end col", {
     end_col = turfID
   ),
   "Please correct the arguments",
-  )
-})
-
-test_that("fixe length deprecated", {
-  record_short_end <- record_short |>
-    dplyr::mutate(
-      end = dplyr::case_when(
-        type == "ER" ~ start + 120,
-        type == "NEE" ~ start + 180
-      )
-    )
-
-  expect_warning(flux_match(
-    co2_df_short,
-    record_short_end,
-    datetime,
-    start,
-    end,
-    fixed_length = FALSE
-  ),
-  "The `fixed_length` argument of `flux_match()` is deprecated as of fluxible 1.2.7.",
-  fixed = TRUE
   )
 })
 

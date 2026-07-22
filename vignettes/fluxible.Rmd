@@ -71,6 +71,8 @@ conc_liahovden <- flux_match(
 
 ## Model fitting
 
+To convert gas concentration into volumetric units before modelling, see `vignette("vol_conc", package = "fluxible")`, available since 'fluxible 1.4.0'.
+
 We fit a model and obtain the slope at $t_0$, which is needed for the flux calculation, with the `flux_fitting` function.
 <!-- Before calculating fluxes we need to fit a model to each measurement and estimate a slope of the concentration changing rate. -->
 <!-- We use the `flux_fitting` function with the model provided by @zhaoCalculationDaytimeCO22018. -->
@@ -166,7 +168,9 @@ flux_plot(
   slopes_df = flags_liahovden,
   f_conc = conc,
   f_datetime = datetime,
-  print_plot = FALSE, # not printing the plots in the R session
+  f_ylim_upper = 600, # upper limit of y-axis
+  f_ylim_lower = 350, # lower limit of x-axis
+  y_text_position = 450, # position of text with flags and diagnostics
   output = "longpdf", # the type of output
   f_plotname = "plots_liahovden" # filename for the pdf file
 )

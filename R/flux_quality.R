@@ -8,13 +8,16 @@
 #' \link[fluxible:flux_fitting]{flux_fitting}
 #' @param ambient_conc ambient gas concentration in ppm at the site of
 #' measurement (used to detect measurement that started with a polluted setup)
-#' @param error error of the setup, defines a window outside of which
-#' the starting values indicate a polluted setup
-#' @param f_fluxid column containing unique IDs for each flux
-#' @param f_slope column containing the slope of each flux
-#' (as calculated by the \link[fluxible:flux_fitting]{flux_fitting} function)
-#' @param f_slope_lm column containing the linear slope of each flux
-#' (as calculated by the \link[fluxible:flux_fitting]{flux_fitting} function)
+#' @param error error on the ambient concentration, defines a window outside of
+#' which the starting values indicate a polluted setup
+#' @param f_fluxid column containing unique IDs for each flux. Supply as a
+#' bare (unquoted) column name (e.g. `f_fluxid`), not a string.
+#' @param f_slope column containing the slope of each flux (as calculated by the
+#' \link[fluxible:flux_fitting]{flux_fitting} function). Supply as a bare
+#' (unquoted) column name (e.g. `f_slope`), not a string.
+#' @param f_slope_lm column containing the linear slope of each flux (as
+#' calculated by the \link[fluxible:flux_fitting]{flux_fitting} function).
+#' Supply as a bare (unquoted) column name (e.g. `f_slope_lm`), not a string.
 #' @param force_discard vector of fluxIDs that should be discarded
 #' by the user's decision
 #' @param force_ok vector of fluxIDs for which the user wants to keep
@@ -28,33 +31,41 @@
 #' @param ratio_threshold ratio of gas concentration data points over length of
 #' measurement (in seconds) below which the measurement will be considered as
 #' not having enough data points to be considered for calculations
-#' @param f_pvalue column containing the p-value of each flux
-#' (linear and quadratic fits)
-#' @param f_rsquared column containing the r squared of each flux
-#' (linear and quadratic fits)
+#' @param f_pvalue column containing the p-value of each flux (linear and
+#' quadratic fits). Supply as a bare (unquoted) column name (e.g. `f_pvalue`),
+#' not a string.
+#' @param f_rsquared column containing the r squared of each flux (linear and
+#' quadratic fits). Supply as a bare (unquoted) column name (e.g.
+#' `f_rsquared`), not a string.
 #' @param pvalue_threshold threshold of p-value below which the change of
 #' gas concentration over time is considered not significant
 #' (linear and quadratic fits)
 #' @param rsquared_threshold threshold of r squared value below which
 #' the linear model is considered an unsatisfactory fit
 #' (linear and quadratic fits)
-#' @param f_conc column containing the measured gas concentration
-#' (exponential fits)
+#' @param f_conc column containing the measured gas concentration (exponential
+#' fits). Supply as a bare (unquoted) column name (e.g. `conc`), not a string.
 #' @param f_b column containing the b parameter of the exponential expression
-#' (exponential fits)
+#' (exponential fits). Supply as a bare (unquoted) column name (e.g. `f_b`),
+#' not a string.
 #' @param f_time column containing the time of each measurement in seconds
-#' (exponential fits)
+#' (exponential fits). Supply as a bare (unquoted) column name (e.g.
+#' `f_time`), not a string.
 #' @param f_start column with datetime of the start of the measurement
-#' (after cuts)
-#' @param f_end column with datetime of the end of the measurement
-#' (after cuts)
-#' @param f_fit column containing the modeled data (exponential fits)
+#' (after cuts). Supply as a bare (unquoted) column name (e.g. `f_start`), not
+#' a string.
+#' @param f_end column with datetime of the end of the measurement (after
+#' cuts). Supply as a bare (unquoted) column name (e.g. `f_end`), not a
+#' string.
+#' @param f_fit column containing the modeled data (exponential fits). Supply
+#' as a bare (unquoted) column name (e.g. `f_fit`), not a string.
 #' @param rmse_threshold threshold for the RMSE of each flux above which
 #' the fit is considered unsatisfactory (exponential fits)
 #' @param cor_threshold threshold for the correlation coefficient of
 #' gas concentration with time below which the correlation
 #' is considered not significant (exponential fits)
-#' @param f_cut column containing the cutting information
+#' @param f_cut column containing the cutting information. Supply as a bare
+#' (unquoted) column name (e.g. `f_cut`), not a string.
 #' @param cut_arg argument defining that the data point should be cut out
 #' @param b_threshold threshold for the b parameter.
 #' Defines a window with its opposite inside which the fit is
@@ -64,15 +75,23 @@
 #' (exponential quadratic fits).
 #' @param kappamax logical. If `TRUE` the kappamax method will be applied.
 #' @param instr_error error of the instrument, in the same unit as the
-#' gas concentration
-#' @param f_fit_lm column with the fit of the linear model.
-#' (as calculated by the \link[fluxible:flux_fitting]{flux_fitting} function)
+#' gas concentration. Used to detect a flux below the instrument detection
+#' capacity.
+#' @param f_fit_lm column with the fit of the linear model (as calculated by
+#' the \link[fluxible:flux_fitting]{flux_fitting} function). Supply as a bare
+#' (unquoted) column name (e.g. `f_fit_lm`), not a string.
 #' @details the kappamax method (Hüppi et al., 2018) selects the linear slope if
 #' \ifelse{html}{\out{|b| > kappamax}}{\eqn{|b| > kappamax}{ASCII}}, with
 #' \ifelse{html}{\out{kappamax = |f_slope_lm / instr_error|}}{\eqn{kappamax = |f_slope_lm / instr_error|}{ASCII}}.
 #' The original kappamax method was applied to the HMR model
 #' (Pedersen et al., 2010; Hutchinson and Mosier, 1981), but here it can be
 #' applied to any exponential fit.
+#' @details the `instr_error` and `error` are two different arguments.
+#' `instr_error` defines the minimal detectable flux (i. e., when a flux can be
+#' considered zero because it is below the instrument detection capacity).
+#' `error` is the error applied to `ambient_conc`, the ambient concentration
+#' of the measured gas, and defines the window outside of which a measurement
+#' is flagged for an error on the start.
 #' @references Pedersen, A.R., Petersen, S.O., Schelde, K., 2010.
 #' A comprehensive approach to soil-atmosphere trace-gas flux estimation with
 #' static chambers. European Journal of Soil Science 61, 888–902.
@@ -135,6 +154,19 @@ flux_quality <- function(slopes_df,
                          kappamax = FALSE) {
 
   name_df <- as_label(enquo(slopes_df))
+
+  check_bare_col(enquo(f_conc), "f_conc")
+  check_bare_col(enquo(f_slope), "f_slope")
+  check_bare_col(enquo(f_slope_lm), "f_slope_lm")
+  check_bare_col(enquo(f_fit), "f_fit")
+  check_bare_col(enquo(f_time), "f_time")
+  check_bare_col(enquo(f_start), "f_start")
+  check_bare_col(enquo(f_end), "f_end")
+  check_bare_col(enquo(f_cut), "f_cut")
+  check_bare_col(enquo(f_pvalue), "f_pvalue")
+  check_bare_col(enquo(f_rsquared), "f_rsquared")
+  check_bare_col(enquo(f_b), "f_b")
+  check_bare_col(enquo(f_fit_lm), "f_fit_lm")
 
   args_ok <- flux_fun_check(list(
     ambient_conc = ambient_conc,
@@ -350,7 +382,9 @@ flux_quality <- function(slopes_df,
   }
 
   flag_count <- flux_flag_count(
-    quality_flag, f_fluxid = {{f_fluxid}}
+    quality_flag,
+    f_fluxid = {{f_fluxid}},
+    show_total = FALSE
   )
 
   flag_msg <- flag_count |>

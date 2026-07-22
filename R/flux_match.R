@@ -9,37 +9,30 @@
 #' @param field_record dataframe recording which measurement happened when.
 #' Has to contain at least a column containing the start of each measurement,
 #' and any other column identifying the measurements.
-#' @param startcrop `r lifecycle::badge("deprecated")` `startcrop` is no longer
-#' supported. Please use `start_cut` in `flux_fitting` instead.
 #' @param measurement_length length of the measurements (in seconds)
 #' from the start specified in the `field_record`. Use `measurement_length` if
 #' all the measurements have the same length and no end column is present in
 #' `field_record`.
-#' @param ratio_threshold `r lifecycle::badge("deprecated")` `ratio_threshold`
-#' is no longer supported. Please use `ratio_threshold` in `flux_quality`
-#' instead.
 #' @param time_diff time difference (in seconds) between the two datasets.
 #' Will be added to the datetime column of the `raw_conc` dataset.
 #' For situations where the time was not synchronized correctly.
-#' @param f_datetime datetime column in raw_conc (`ymd_hms` format)
-#' @param f_conc `r lifecycle::badge("deprecated")` `f_conc` is no longer
-#' required
-#' @param start_col start column in field_record (`ymd_hms` format)
+#' @param f_datetime datetime column in raw_conc (`ymd_hms` format). Supply as
+#' a bare (unquoted) column name (e.g. `datetime`), not a string.
+#' @param start_col start column in field_record (`ymd_hms` format). Supply as
+#' a bare (unquoted) column name (e.g. `start`), not a string.
 #' @param end_col end column in field_record (`ymd_hms` format), if present
-#' (see `measurement_length`).
-#' @param fixed_length `r lifecycle::badge("deprecated")` no longer required.
-#' `flux_match` will detect if `end_col` or `measurement_length` are provided.
+#' (see `measurement_length`). Supply as a bare (unquoted) column name (e.g.
+#' `end`), not a string.
 #' @return a dataframe with concentration measurements, corresponding datetime,
 #' flux ID (`f_fluxid`), measurements start (`f_start`) and end (`f_end`).
 #' @details If both `end_col` and `measurement_length` are provided, `end_col`
 #' will be ignored. Measurements either all have the same length (provide
 #' `measurement_length`), or the length varies and `end_col` has to be provided.
-#' @importFrom dplyr arrange mutate row_number full_join case_when
-#' group_by filter ungroup select distinct pull join_by coalesce
+#' @importFrom dplyr arrange mutate row_number full_join case_when group_by filter ungroup select distinct pull join_by coalesce
 #' @importFrom tidyr fill drop_na
 #' @importFrom lubridate is.POSIXct
-#' @importFrom lifecycle deprecate_stop deprecated deprecate_warn is_present
 #' @importFrom rlang as_label enquo
+#' @importFrom lifecycle is_present
 #' @examples
 #' data(co2_df_short, record_short)
 #' flux_match(co2_df_short, record_short, datetime, start,
@@ -53,46 +46,14 @@ flux_match <- function(raw_conc,
                        start_col,
                        end_col,
                        measurement_length,
-                       fixed_length = deprecated(),
-                       time_diff = 0,
-                       startcrop = 0,
-                       ratio_threshold = deprecated(),
-                       f_conc = deprecated()) {
-
-  if (startcrop != 0) {
-    deprecate_stop(
-      when = "1.2.1",
-      what = "flux_match(startcrop)",
-      with = "flux_fitting(start_cut)"
-    )
-  }
-
-  if (is_present(ratio_threshold)) {
-    deprecate_warn(
-      when = "1.2.2",
-      what = "flux_match(ratio_threshold)",
-      with = "flux_quality(ratio_threshold)"
-    )
-  }
-
-  if (is_present(f_conc)) {
-    deprecate_warn(
-      when = "1.2.2",
-      what = "flux_match(f_conc)",
-      details = "f_conc is no longer required"
-    )
-  }
-
-  if (is_present(fixed_length)) {
-    deprecate_warn(
-      when = "1.2.7",
-      what = "flux_match(fixed_length)",
-      details = "fixed_length is no longer required"
-    )
-  }
+                       time_diff = 0) {
 
   name_raw_conc <- as_label(enquo(raw_conc))
   name_field_record <- as_label(enquo(field_record))
+
+  check_bare_col(enquo(f_datetime), "f_datetime")
+  check_bare_col(enquo(start_col), "start_col")
+  check_bare_col(enquo(end_col), "end_col")
 
   args_ok <- flux_fun_check(
     list(time_diff = time_diff),
