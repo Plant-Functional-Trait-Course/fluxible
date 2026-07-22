@@ -30,7 +30,7 @@
 #' be paired with a corresponding air temperature and pressure measurement. If
 #' missing, data will be filled in the downup order. Pressure can also be
 #' provided as a constant for the entire dataset.
-#' @return The same dataframe, with additional column 'f_conc_vol' in volumetric
+#' @return The same dataframe, with additional column `f_conc_vol` in volumetric
 #' concentration.
 #' @importFrom dplyr mutate
 #' @importFrom tidyr fill

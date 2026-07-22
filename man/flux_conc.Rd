@@ -35,7 +35,7 @@ column name (e.g. \code{f_fluxid}), not a string.}
 Has to be either \code{celsius} (default), \code{fahrenheit} or \code{kelvin.}}
 }
 \value{
-The same dataframe, with additional column 'f_conc_vol' in volumetric
+The same dataframe, with additional column \code{f_conc_vol} in volumetric
 concentration.
 }
 \description{
