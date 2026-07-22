@@ -18,8 +18,6 @@
 #' @param f_cut column containing cutting information. Supply as a bare
 #' (unquoted) column name (e.g. `f_cut`), not a string.
 #' @param keep_arg name in `f_cut` of data to keep
-#' @param chamber_volume `r lifecycle::badge("deprecated")` see `setup_volume`
-#' @param tube_volume `r lifecycle::badge("deprecated")` see `setup_volume`
 #' @param setup_volume volume of the flux chamber and instrument together in L,
 #' can also be a column in case it is a variable
 #' @param atm_pressure atmospheric pressure in atm,
@@ -69,7 +67,6 @@
 #' @importFrom dplyr select group_by summarise rename_with nest_by ungroup mutate case_when distinct left_join across everything
 #' @importFrom tidyselect any_of
 #' @importFrom stats median
-#' @importFrom lifecycle deprecated deprecate_stop deprecate_warn
 #' @examples
 #' data(co2_conc)
 #' slopes <- flux_fitting(co2_conc, conc, datetime, fit_type = "exp_zhao18")
@@ -101,7 +98,6 @@ flux_calc <- function(slopes_df,
                       slope_col,
                       f_datetime = f_datetime,
                       temp_air_col,
-                      chamber_volume = deprecated(),
                       setup_volume,
                       atm_pressure,
                       plot_area,
@@ -113,28 +109,11 @@ flux_calc <- function(slopes_df,
                       cols_sum = c(),
                       cols_med = c(),
                       cols_nest = "none",
-                      tube_volume = deprecated(),
                       temp_air_unit = "celsius",
                       f_cut = f_cut,
                       keep_arg = "keep",
                       cut = TRUE,
                       fit_type = c()) {
-
-  if (is_present(chamber_volume)) {
-    deprecate_stop(
-      when = "1.2.2",
-      what = "flux_calc(chamber_volume)",
-      with = "flux_calc(setup_volume)"
-    )
-  }
-
-  if (is_present(tube_volume)) {
-    deprecate_stop(
-      when = "1.2.2",
-      what = "flux_calc(tube_volume)",
-      with = "flux_calc(setup_volume)"
-    )
-  }
 
   if (flux_unit == "mmol") {
     deprecate_warn(

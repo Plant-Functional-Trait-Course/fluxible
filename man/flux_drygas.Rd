@@ -24,8 +24,8 @@ same unit as \code{gas_wet}
 Corrects for the amount of water vapor inside the air
 }
 \details{
-the correction is done as follows
-\ifelse{html}{\out{gas_dry = gas_wet / (1 - (h2o_wet / 1000))}}{\eqn{gas_dry = gas_wet / (1 - (h2o_wet / 1000}{ASCII}}
+The correction is done as follows:
+\ifelse{html}{\out{gas_dry = gas_wet / (1 - (h2o_wet / 1000))}}{\eqn{gas_dry = gas_wet / (1 - (h2o_wet / 1000))}{ASCII}}
 }
 \examples{
 data(wet_conc)
