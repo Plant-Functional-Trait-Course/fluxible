@@ -32,6 +32,7 @@
 #' @importFrom tidyr fill drop_na
 #' @importFrom lubridate is.POSIXct
 #' @importFrom rlang as_label enquo
+#' @importFrom lifecycle is_present
 #' @examples
 #' data(co2_df_short, record_short)
 #' flux_match(co2_df_short, record_short, datetime, start,
