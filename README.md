@@ -189,8 +189,7 @@ fluxes_gpp
 ```
 
 To convert gas concentration into volumetric units before modelling, see
-`vignette("vol_conc", package = "fluxible")`, available since ‘fluxible
-1.4.0’.
+`vignette("vol_conc", package = "fluxible")`.
 
 ## Supporting infrastructure
 

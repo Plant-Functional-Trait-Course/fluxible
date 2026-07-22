@@ -19,7 +19,7 @@ Gas concentration is typically measured in fractional units (e. g., ppm) by gas 
 When calculating the fluxes, the temperature, pressure, and gas constant are used to transform the flux in a volumetric concentration (e.g., mmol/l).
 Since the temperature might be changing over time during the measurement, the average is usually used in that calculation.
 
-From 'fluxible 1.4.0', it is possible to transform each gas concentration datapoints in volumetric units before modelling the slope, and calculating the flux.
+From `fluxible 1.4.0`, it is possible to transform each gas concentration datapoints in volumetric units before modelling the slope, and calculating the flux.
 This accounts better for temperature changes in the chamber, typically in hot climate, but requires more temperature measurements during the flux measurements.
 
 This vignette is showing this pathway with a sample dataset from the [NatuRA project](https://betweenthefjords.w.uib.no/our-research/natura/) in the Drakensberg in South Africa.
@@ -33,7 +33,7 @@ conc_df <- read_csv("ex_data/sample_vol_conc.csv")
 head(conc_df)
 ```
 
-We can now transform the concentration in volumetric units with the 'flux_conc' function.
+We can now transform the concentration in volumetric units with the `flux_conc` function.
 Because the CO~2~ was measured in ppm, the volumetric concentration will be in µmol/l.
 
 ```{r conc-vol, message=FALSE}
@@ -75,9 +75,9 @@ flux_plot(
 )
 ```
 
-Then we can calculate fluxes with 'flux_calc'.
-We still input the columns 'atm_press' and 'temp_air', to get them averaged per fluxes.
-They are however not used in the flux calculation since this was done with 'flux_conc' already.
+Then we can calculate fluxes with `flux_calc`.
+We still input the columns `atm_press` and `temp_air`, to get them averaged per fluxes.
+They are however not used in the flux calculation since this was done with `flux_conc` already.
 
 ```{r calc-vol, message=FALSE}
 fluxes <- flux_calc(
