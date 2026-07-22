@@ -35,7 +35,7 @@ column name (e.g. \code{f_fluxid}), not a string.}
 Has to be either \code{celsius} (default), \code{fahrenheit} or \code{kelvin.}}
 }
 \value{
-The same dataframe, with additional column 'f_conc_vol' in volumetric
+The same dataframe, with additional column \code{f_conc_vol} in volumetric
 concentration.
 }
 \description{
@@ -44,17 +44,19 @@ This function converts gas concentrations from fractional units
 law and the specific conditions of the measurement.
 }
 \details{
-Required temperature and pressure data
+\strong{Units}
+
+The units of the newly calculated volumetric concentration follow the units
+of the fractional concentration provided. For exemple, if the input is in
+\code{ppm}, the result is in \code{µmol/L}; if the input is in \code{ppb}, the result is in
+\code{nmol/L}; if the input is in \code{ppt}, the result is in \code{pmol/L}.
+
+\strong{Required temperature and pressure data}
+
 This function requires that each gas concentration data points to
 be paired with a corresponding air temperature and pressure measurement. If
 missing, data will be filled in the downup order. Pressure can also be
 provided as a constant for the entire dataset.
-
-Units
-The units of the newly calculated volumetric concentration follow the units
-of the fractional concentration provided. For exemple, if the input is in
-'ppm', the result is in 'µmol/L'; if the input is in 'ppb', the result is in
-'nmol/L'; if the input is in 'ppt', the result is in 'pmol/L'.
 }
 \examples{
 data(co2_conc)

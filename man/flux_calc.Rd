@@ -144,3 +144,7 @@ setup_volume = 24.575,
 atm_pressure = 1,
 plot_area = 0.0625)
 }
+\seealso{
+for transforming the gas concentration into volumetric units before
+fitting, see \link[fluxible:flux_conc]{flux_conc}
+}

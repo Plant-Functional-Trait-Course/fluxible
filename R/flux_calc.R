@@ -56,6 +56,8 @@
 #' @param fit_type (optional) model used in
 #' \link[fluxible:flux_fitting]{flux_fitting}. Will be automatically filled if
 #' `slopes_df` was produced using \link[fluxible:flux_fitting]{flux_fitting}.
+#' @seealso for transforming the gas concentration into volumetric units before
+#' fitting, see \link[fluxible:flux_conc]{flux_conc}
 #' @return a dataframe containing flux IDs, datetime of measurements' starts,
 #' fluxes (`f_flux`) in the units defined with `flux_unit`, temperature average
 #' for each flux in the same unit as the input (`f_temp_ave`), the model used in
