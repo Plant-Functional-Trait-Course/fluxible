@@ -137,7 +137,7 @@ test_that("plot for exp_tz fit", {
         conc,
         datetime,
         fit_type = "exp_tz",
-        end_cut = 60,
+        end_cut = 61,
         t_zero = 20
       ) |>
         flux_quality(conc) |>
@@ -154,7 +154,7 @@ test_that("plot for exp_tz fit with mid missing data", {
         conc,
         datetime,
         fit_type = "exp_tz",
-        end_cut = 60,
+        end_cut = 61,
         t_zero = 20
       )) |>
         flux_quality(conc) |>
@@ -170,7 +170,7 @@ test_that("plot for exp_zhao18 fit with mid missing data", {
         conc,
         datetime,
         fit_type = "exp_zhao18",
-        end_cut = 60,
+        end_cut = 61,
         t_zero = 20
       )) |>
         flux_quality(conc) |>
