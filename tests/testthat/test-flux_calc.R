@@ -360,7 +360,7 @@ test_that("calculating fluxes on dataset with cuts", {
     conc,
     datetime,
     fit_type = "exp_zhao18",
-    end_cut = 30
+    end_cut = 31
   ) |>
     flux_quality(conc)
 
@@ -587,7 +587,7 @@ test_that("Fluxible workflow works with kappamax", {
     datetime,
     start,
     start_cut = 10,
-    end_cut = 30,
+    end_cut = 31,
     fit_type = "exp_hm"
   ))
   slopes_flag_test <- flux_quality(
