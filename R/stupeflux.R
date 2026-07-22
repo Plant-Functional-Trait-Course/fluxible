@@ -12,10 +12,14 @@
 #' @param time_diff time difference (in seconds) between the two datasets.
 #' Will be added to the datetime column of the raw_conc dataset.
 #' For situations where the time was not synchronized correctly.
-#' @param f_datetime datetime column in raw_conc (dmy_hms format)
-#' @param f_conc concentration column in raw_conc
-#' @param start_col start column in field_record (dmy_hms format)
-#' @param end_col end column in field_record (`ymd_hms` format)
+#' @param f_datetime datetime column in raw_conc (dmy_hms format). Supply as
+#' a bare (unquoted) column name (e.g. `datetime`), not a string.
+#' @param f_conc concentration column in raw_conc. Supply as a bare
+#' (unquoted) column name (e.g. `conc`), not a string.
+#' @param start_col start column in field_record (dmy_hms format). Supply as a
+#' bare (unquoted) column name (e.g. `start`), not a string.
+#' @param end_col end column in field_record (`ymd_hms` format). Supply as a
+#' bare (unquoted) column name (e.g. `end`), not a string.
 #' @param fit_type `exp_zhao18`, `exp_tz`, `exp_hm`, `quadratic` or `linear.`
 #' `exp_zhao18` is using the exponential model
 #' \ifelse{html}{\out{C(t) = C_m + a (t - t_z) + (C_z - C_m) exp(-b (t - t_z))}}{\eqn{C(t) = C_m + a (t - t_z) + (C_z - C_m) \exp(-b (t - t_z))}{ASCII}}
@@ -190,6 +194,12 @@ stupeflux <- function(raw_conc,
     measurement_length = measurement_length,
     time_diff = time_diff
   )
+
+  check_bare_col(enquo(f_datetime), "f_datetime")
+  check_bare_col(enquo(start_col), "start_col")
+  check_bare_col(enquo(end_col), "end_col")
+  check_bare_col(enquo(f_conc), "f_conc")
+  check_bare_col(enquo(temp_air_col), "temp_air_col")
 
   conc_fitting <- flux_fitting(
     conc_df,

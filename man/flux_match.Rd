@@ -11,11 +11,7 @@ flux_match(
   start_col,
   end_col,
   measurement_length,
-  fixed_length = deprecated(),
-  time_diff = 0,
-  startcrop = 0,
-  ratio_threshold = deprecated(),
-  f_conc = deprecated()
+  time_diff = 0
 )
 }
 \arguments{
@@ -27,34 +23,24 @@ a gas concentration column as double.}
 Has to contain at least a column containing the start of each measurement,
 and any other column identifying the measurements.}
 
-\item{f_datetime}{datetime column in raw_conc (\code{ymd_hms} format)}
+\item{f_datetime}{datetime column in raw_conc (\code{ymd_hms} format). Supply as
+a bare (unquoted) column name (e.g. \code{datetime}), not a string.}
 
-\item{start_col}{start column in field_record (\code{ymd_hms} format)}
+\item{start_col}{start column in field_record (\code{ymd_hms} format). Supply as
+a bare (unquoted) column name (e.g. \code{start}), not a string.}
 
 \item{end_col}{end column in field_record (\code{ymd_hms} format), if present
-(see \code{measurement_length}).}
+(see \code{measurement_length}). Supply as a bare (unquoted) column name (e.g.
+\code{end}), not a string.}
 
 \item{measurement_length}{length of the measurements (in seconds)
 from the start specified in the \code{field_record}. Use \code{measurement_length} if
 all the measurements have the same length and no end column is present in
 \code{field_record}.}
 
-\item{fixed_length}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} no longer required.
-\code{flux_match} will detect if \code{end_col} or \code{measurement_length} are provided.}
-
 \item{time_diff}{time difference (in seconds) between the two datasets.
 Will be added to the datetime column of the \code{raw_conc} dataset.
 For situations where the time was not synchronized correctly.}
-
-\item{startcrop}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{startcrop} is no longer
-supported. Please use \code{start_cut} in \code{flux_fitting} instead.}
-
-\item{ratio_threshold}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{ratio_threshold}
-is no longer supported. Please use \code{ratio_threshold} in \code{flux_quality}
-instead.}
-
-\item{f_conc}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} \code{f_conc} is no longer
-required}
 }
 \value{
 a dataframe with concentration measurements, corresponding datetime,

@@ -20,11 +20,15 @@ flux_lrc(
 \arguments{
 \item{fluxes_df}{a dataframe containing NEE, ER and LRC measurements}
 
-\item{type_col}{column containing type of flux (NEE, ER, LRC)}
+\item{type_col}{column containing type of flux (NEE, ER, LRC). Supply as a
+bare (unquoted) column name (e.g. \code{type}), not a string; this function uses
+tidy-evaluation with \code{{{ }}}.}
 
-\item{par_ave}{column containing the PAR value for each flux}
+\item{par_ave}{column containing the PAR value for each flux. Supply as a
+bare (unquoted) column name (e.g. \code{PAR_ave}), not a string.}
 
-\item{f_flux}{column containing flux values}
+\item{f_flux}{column containing flux values. Supply as a bare (unquoted)
+column name (e.g. \code{f_flux}), not a string.}
 
 \item{lrc_arg}{argument designating LRC fluxes in type column}
 

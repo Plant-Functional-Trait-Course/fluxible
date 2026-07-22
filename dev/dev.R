@@ -12,7 +12,7 @@ pkgdown::build_site()
 usethis::use_pkgdown_github_pages()
 
 usethis::use_vignette("two-gases")
-devtools::build_vignettes()
+pkgdown::build_articles()
 
 usethis::use_readme_rmd()
 devtools::build_readme()

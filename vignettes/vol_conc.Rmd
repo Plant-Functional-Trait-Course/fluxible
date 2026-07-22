@@ -1,0 +1,97 @@
+---
+title: "Transforming gas concentration in volumetric units before modelling the fluxes"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Transforming gas concentration in volumetric units before modelling the fluxes}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+options(tidyverse.quiet = TRUE)
+```
+
+Gas concentration is typically measured in fractional units (e. g., ppm) by gas analysers.
+When calculating the fluxes, the temperature, pressure, and gas constant are used to transform the flux in a volumetric concentration (e.g., mmol/l).
+Since the temperature might be changing over time during the measurement, the average is usually used in that calculation.
+
+From `fluxible 1.4.0`, it is possible to transform each gas concentration datapoints in volumetric units before modelling the slope, and calculating the flux.
+This accounts better for temperature changes in the chamber, typically in hot climate, but requires more temperature measurements during the flux measurements.
+
+This vignette is showing this pathway with a sample dataset from the [NatuRA project](https://betweenthefjords.w.uib.no/our-research/natura/) in the Drakensberg in South Africa.
+CO~2~ concentration was measured every second with an LI7810, air temperature inside the chamber also every second, and the atmospheric pressure daily average was retrieved from a nearby weather station.
+
+```{r read-data, message=FALSE}
+library(tidyverse)
+
+conc_df <- read_csv("ex_data/sample_vol_conc.csv")
+
+head(conc_df)
+```
+
+We can now transform the concentration in volumetric units with the `flux_conc` function.
+Because the CO~2~ was measured in ppm, the volumetric concentration will be in µmol/l.
+
+```{r conc-vol, message=FALSE}
+library(fluxible)
+
+conc_df_vol <- flux_conc(
+  conc_df,
+  CO2,
+  temp_air,
+  atm_press
+)
+
+head(conc_df_vol)
+```
+
+Now we do the model fitting, quality check, and plotting as usual.
+
+```{r fitting, message=FALSE}
+
+fit_df <- flux_fitting(
+  conc_df_vol,
+  f_conc_vol,
+  datetime
+)
+
+quality_df <- flux_quality(
+  fit_df,
+  f_conc_vol,
+  ambient_conc = 18, # approx ambient CO2 concentration at 20°C in umol/l
+  error = 4 # this one also needs to be adapted
+)
+
+flux_plot(
+  quality_df,
+  f_conc_vol,
+  datetime,
+  f_ylim_upper = 25, # default values are for ppm
+  f_ylim_lower = 10
+)
+```
+
+Then we can calculate fluxes with `flux_calc`.
+We still input the columns `atm_press` and `temp_air`, to get them averaged per fluxes.
+They are however not used in the flux calculation since this was done with `flux_conc` already.
+
+```{r calc-vol, message=FALSE}
+fluxes <- flux_calc(
+  quality_df,
+  f_slope,
+  datetime,
+  temp_air,
+  conc_unit = "umol/l", # notice the units change
+  flux_unit = "umol/m2/s",
+  setup_volume = 125,
+  atm_pressure = atm_press,
+  plot_area = 0.25,
+  cut = FALSE
+)
+
+str(fluxes)
+```
