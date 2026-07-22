@@ -9,15 +9,10 @@
 #' @param field_record dataframe recording which measurement happened when.
 #' Has to contain at least a column containing the start of each measurement,
 #' and any other column identifying the measurements.
-#' @param startcrop `r lifecycle::badge("deprecated")` `startcrop` is no longer
-#' supported. Please use `start_cut` in `flux_fitting` instead.
 #' @param measurement_length length of the measurements (in seconds)
 #' from the start specified in the `field_record`. Use `measurement_length` if
 #' all the measurements have the same length and no end column is present in
 #' `field_record`.
-#' @param ratio_threshold `r lifecycle::badge("deprecated")` `ratio_threshold`
-#' is no longer supported. Please use `ratio_threshold` in `flux_quality`
-#' instead.
 #' @param time_diff time difference (in seconds) between the two datasets.
 #' Will be added to the datetime column of the `raw_conc` dataset.
 #' For situations where the time was not synchronized correctly.

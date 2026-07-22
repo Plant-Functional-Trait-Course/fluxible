@@ -16,21 +16,17 @@
 #' column name (e.g. `f_fluxid`), not a string.
 #' @param temp_air_unit units in which air temperature was measured.
 #' Has to be either `celsius` (default), `fahrenheit` or `kelvin.`
-#' @details **Units**
-#'
-#'
-#' The units of the newly calculated volumetric concentration follow the units
-#' of the fractional concentration provided. For exemple, if the input is in
-#' `ppm`, the result is in `µmol/L`; if the input is in `ppb`, the result is in
-#' `nmol/L`; if the input is in `ppt`, the result is in `pmol/L`.
-#' @details **Required temperature and pressure data**
-#'
-#'
+#' @details Required temperature and pressure data
 #' This function requires that each gas concentration data points to
 #' be paired with a corresponding air temperature and pressure measurement. If
 #' missing, data will be filled in the downup order. Pressure can also be
 #' provided as a constant for the entire dataset.
-#' @return The same dataframe, with additional column `f_conc_vol` in volumetric
+#' @details Units
+#' The units of the newly calculated volumetric concentration follow the units
+#' of the fractional concentration provided. For exemple, if the input is in
+#' 'ppm', the result is in 'µmol/L'; if the input is in 'ppb', the result is in
+#' 'nmol/L'; if the input is in 'ppt', the result is in 'pmol/L'.
+#' @return The same dataframe, with additional column 'f_conc_vol' in volumetric
 #' concentration.
 #' @importFrom dplyr mutate
 #' @importFrom tidyr fill

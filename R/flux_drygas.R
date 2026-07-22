@@ -8,8 +8,8 @@
 #' Supply as a bare (unquoted) column name (e.g. `h2o`), not a string.
 #' @return the same dataframe with the additional column `[gas_wet]_dry` in the
 #' same unit as `gas_wet`
-#' @details the correction is done as follows
-#' \ifelse{html}{\out{gas_dry = gas_wet / (1 - (h2o_wet / 1000))}}{\eqn{gas_dry = gas_wet / (1 - (h2o_wet / 1000}{ASCII}}
+#' @details The correction is done as follows:
+#' \ifelse{html}{\out{gas_dry = gas_wet / (1 - (h2o_wet / 1000))}}{\eqn{gas_dry = gas_wet / (1 - (h2o_wet / 1000))}{ASCII}}
 #' @importFrom rlang enquo as_name !! :=
 #' @importFrom dplyr mutate
 #' @export

@@ -9,7 +9,6 @@ flux_calc(
   slope_col,
   f_datetime = f_datetime,
   temp_air_col,
-  chamber_volume = deprecated(),
   setup_volume,
   atm_pressure,
   plot_area,
@@ -21,7 +20,6 @@ flux_calc(
   cols_sum = c(),
   cols_med = c(),
   cols_nest = "none",
-  tube_volume = deprecated(),
   temp_air_unit = "celsius",
   f_cut = f_cut,
   keep_arg = "keep",
@@ -44,8 +42,6 @@ name (e.g. \code{datetime}), not a string.}
 \item{temp_air_col}{column containing the air temperature used
 to calculate fluxes. Will be averaged with NA removed. Supply as a bare
 (unquoted) column name (e.g. \code{temp_air}), not a string.}
-
-\item{chamber_volume}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} see \code{setup_volume}}
 
 \item{setup_volume}{volume of the flux chamber and instrument together in L,
 can also be a column in case it is a variable}
@@ -86,8 +82,6 @@ Those columns will get the \verb{_med} suffix in the output.}
 \item{cols_nest}{columns to nest in \code{nested_variables} for each flux in the
 output. Can be character vector of column names, \code{"none"} (default) selects
 none, or \code{"all"} selects all the column except those in \code{cols_keep}.}
-
-\item{tube_volume}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}} see \code{setup_volume}}
 
 \item{temp_air_unit}{units in which air temperature was measured.
 Has to be either \code{celsius} (default), \code{fahrenheit} or \code{kelvin.}}

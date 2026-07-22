@@ -47,16 +47,18 @@ law and the specific conditions of the measurement.
 \strong{Units}
 
 The units of the newly calculated volumetric concentration follow the units
-of the fractional concentration provided. For exemple, if the input is in
+of the fractional concentration provided. For example, if the input is in
 \code{ppm}, the result is in \code{µmol/L}; if the input is in \code{ppb}, the result is in
 \code{nmol/L}; if the input is in \code{ppt}, the result is in \code{pmol/L}.
+The conversion is based on the ideal gas law,
+\ifelse{html}{\out{C_vol = C_frac * P / (R * T)}}{\eqn{C_vol = C_frac * P / (R * T)}{ASCII}}.
 
 \strong{Required temperature and pressure data}
 
-This function requires that each gas concentration data points to
-be paired with a corresponding air temperature and pressure measurement. If
-missing, data will be filled in the downup order. Pressure can also be
-provided as a constant for the entire dataset.
+This function requires that each gas concentration data point to be paired
+with a corresponding air temperature and pressure measurement. If missing,
+data will be filled in a down-up order. Pressure can also be provided as a
+constant for the entire dataset.
 }
 \examples{
 data(co2_conc)
