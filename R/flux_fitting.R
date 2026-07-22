@@ -214,7 +214,7 @@ flux_fitting <- function(conc_df,
         .data$f_start_og + end_cut
       },
       f_cut = case_when(
-        {{f_datetime}} < {{f_start}} | {{f_datetime}} >= {{f_end}}
+        {{f_datetime}} < {{f_start}} | {{f_datetime}} > {{f_end}}
         ~ "cut",
         .default = "keep"
       ),
@@ -353,7 +353,7 @@ flux_fitting <- function(conc_df,
       warnings = case_when(
         .data$f_n_conc == 0 ~ .data$no_data,
         is.na(.data$f_slope) ~ .data$slope_na,
-        .data$f_n_conc_cut != .data$f_length_flux ~ .data$low_data
+        .data$f_n_conc_cut < .data$f_length_flux ~ .data$low_data
       ),
       warnings = as.character(.data$warnings)
     ) |>

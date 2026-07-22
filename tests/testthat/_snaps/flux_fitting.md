@@ -183,7 +183,7 @@
 
     Code
       distinct(select(flux_fitting(co2_conc_missing, conc, datetime, fit_type = "exp_zhao18",
-        end_cut = 60, t_zero = 20), f_fluxid, f_slope))
+        end_cut = 61, t_zero = 20), f_fluxid, f_slope))
     Message
       Cutting measurements...
       Estimating starting parameters for optimization...
@@ -193,9 +193,9 @@
     Condition
       Warning in `flux_fitting()`:
       
-       fluxID 1 : slope was estimated on 28 points out of 150 seconds
-       fluxID 2 : slope was estimated on 61 points out of 150 seconds
-       fluxID 3 : slope was estimated on 42 points out of 150 seconds
+       fluxID 1 : slope was estimated on 28 points out of 149 seconds
+       fluxID 2 : slope was estimated on 61 points out of 149 seconds
+       fluxID 3 : slope was estimated on 42 points out of 149 seconds
        fluxID 6 dropped (no data in the conc column)
     Output
       # A tibble: 6 x 2
@@ -212,7 +212,7 @@
 
     Code
       distinct(select(flux_fitting(co2_conc_mid_missing, conc, datetime, fit_type = "exp_zhao18",
-        end_cut = 60, t_zero = 20), f_fluxid, f_slope))
+        end_cut = 61, t_zero = 20), f_fluxid, f_slope))
     Message
       Cutting measurements...
       Estimating starting parameters for optimization...
@@ -222,9 +222,9 @@
     Condition
       Warning in `flux_fitting()`:
       
-       fluxID 1 : slope was estimated on 139 points out of 150 seconds
-       fluxID 2 : slope was estimated on 114 points out of 150 seconds
-       fluxID 4 : slope was estimated on 103 points out of 150 seconds
+       fluxID 1 : slope was estimated on 139 points out of 149 seconds
+       fluxID 2 : slope was estimated on 114 points out of 149 seconds
+       fluxID 4 : slope was estimated on 103 points out of 149 seconds
     Output
       # A tibble: 6 x 2
         f_fluxid f_slope
@@ -240,7 +240,7 @@
 
     Code
       distinct(select(flux_fitting(co2_conc_mid_missing, conc, datetime, fit_type = "exp_tz",
-        end_cut = 60, t_zero = 20), f_fluxid, f_slope))
+        end_cut = 61, t_zero = 20), f_fluxid, f_slope))
     Message
       Cutting measurements...
       Estimating starting parameters for optimization...
@@ -250,9 +250,9 @@
     Condition
       Warning in `flux_fitting()`:
       
-       fluxID 1 : slope was estimated on 139 points out of 150 seconds
-       fluxID 2 : slope was estimated on 114 points out of 150 seconds
-       fluxID 4 : slope was estimated on 103 points out of 150 seconds
+       fluxID 1 : slope was estimated on 139 points out of 149 seconds
+       fluxID 2 : slope was estimated on 114 points out of 149 seconds
+       fluxID 4 : slope was estimated on 103 points out of 149 seconds
     Output
       # A tibble: 6 x 2
         f_fluxid f_slope
@@ -268,13 +268,13 @@
 
     Code
       distinct(select(flux_fitting(co2_conc_mid_missing, conc, datetime, fit_type = "quadratic",
-        end_cut = 60, t_zero = 20), f_fluxid, f_slope))
+        end_cut = 61, t_zero = 20), f_fluxid, f_slope))
     Condition
       Warning in `flux_fitting()`:
       
-       fluxID 1 : slope was estimated on 139 points out of 150 seconds
-       fluxID 2 : slope was estimated on 114 points out of 150 seconds
-       fluxID 4 : slope was estimated on 103 points out of 150 seconds
+       fluxID 1 : slope was estimated on 139 points out of 149 seconds
+       fluxID 2 : slope was estimated on 114 points out of 149 seconds
+       fluxID 4 : slope was estimated on 103 points out of 149 seconds
     Output
       # A tibble: 6 x 2
         f_fluxid f_slope
@@ -290,7 +290,7 @@
 
     Code
       distinct(select(flux_fitting(test_data, conc, datetime, fit_type = "exp_tz",
-        end_cut = 60, t_zero = 20), f_fluxid, f_slope))
+        end_cut = 61, t_zero = 20), f_fluxid, f_slope))
     Message
       Cutting measurements...
       Estimating starting parameters for optimization...
@@ -300,9 +300,9 @@
     Condition
       Warning in `flux_fitting()`:
       
-       fluxID 1 : slope was estimated on 28 points out of 150 seconds
-       fluxID 2 : slope was estimated on 61 points out of 150 seconds
-       fluxID 3 : slope was estimated on 42 points out of 150 seconds
+       fluxID 1 : slope was estimated on 28 points out of 149 seconds
+       fluxID 2 : slope was estimated on 61 points out of 149 seconds
+       fluxID 3 : slope was estimated on 42 points out of 149 seconds
        fluxID 4 : slope is NA, most likely an issue with the model optimization.
               Check your data or use a different model.
        fluxID 6 dropped (no data in the conc column)
@@ -321,7 +321,7 @@
 
     Code
       distinct(select(flux_fitting(test_data, conc, datetime, fit_type = "exp_zhao18",
-        end_cut = 60, t_zero = 20), f_fluxid, f_slope))
+        end_cut = 61, t_zero = 20), f_fluxid, f_slope))
     Message
       Cutting measurements...
       Estimating starting parameters for optimization...
@@ -331,9 +331,9 @@
     Condition
       Warning in `flux_fitting()`:
       
-       fluxID 1 : slope was estimated on 28 points out of 150 seconds
-       fluxID 2 : slope was estimated on 61 points out of 150 seconds
-       fluxID 3 : slope was estimated on 42 points out of 150 seconds
+       fluxID 1 : slope was estimated on 28 points out of 149 seconds
+       fluxID 2 : slope was estimated on 61 points out of 149 seconds
+       fluxID 3 : slope was estimated on 42 points out of 149 seconds
        fluxID 4 : slope is NA, most likely an issue with the model optimization.
               Check your data or use a different model.
        fluxID 6 dropped (no data in the conc column)
@@ -635,7 +635,7 @@
 
     Code
       summarize(select(filter(flux_fitting(co2_conc, conc, datetime, fit_type = "line",
-        start_cut = 20, end_cut = 60, cut_direction = "from_start"), f_cut == "keep"),
+        start_cut = 20, end_cut = 59, cut_direction = "from_start"), f_cut == "keep"),
       f_fluxid, f_slope), nrow = dplyr::n(), .by = c(f_fluxid, f_slope))
     Output
       # A tibble: 6 x 3
@@ -652,7 +652,7 @@
 
     Code
       summarize(select(filter(flux_fitting(co2_conc, conc, datetime, fit_type = "line",
-        start_cut = 60, end_cut = 20, cut_direction = "from_end"), f_cut == "keep"),
+        start_cut = 60, end_cut = 21, cut_direction = "from_end"), f_cut == "keep"),
       f_fluxid, f_slope), nrow = dplyr::n(), .by = c(f_fluxid, f_slope))
     Output
       # A tibble: 6 x 3

@@ -131,7 +131,7 @@ test_that("works for exp_zhao18 with missing data", {
       conc,
       datetime,
       fit_type = "exp_zhao18",
-      end_cut = 60,
+      end_cut = 61,
       t_zero = 20
     ) |>
       select(f_fluxid, f_slope) |>
@@ -146,7 +146,7 @@ test_that("works for exp_zhao18 with mid missing data", {
       conc,
       datetime,
       fit_type = "exp_zhao18",
-      end_cut = 60,
+      end_cut = 61,
       t_zero = 20
     ) |>
       select(f_fluxid, f_slope) |>
@@ -161,7 +161,7 @@ test_that("works for exp_tz with mid missing data", {
       conc,
       datetime,
       fit_type = "exp_tz",
-      end_cut = 60,
+      end_cut = 61,
       t_zero = 20
     ) |>
       select(f_fluxid, f_slope) |>
@@ -176,7 +176,7 @@ test_that("works for quadratic with mid missing data", {
       conc,
       datetime,
       fit_type = "quadratic",
-      end_cut = 60,
+      end_cut = 61,
       t_zero = 20
     ) |>
       select(f_fluxid, f_slope) |>
@@ -202,7 +202,7 @@ test_that("exp_tz: optim produces non-finite values", {
       conc,
       datetime,
       fit_type = "exp_tz",
-      end_cut = 60,
+      end_cut = 61,
       t_zero = 20
     ) |>
       select(f_fluxid, f_slope) |>
@@ -227,7 +227,7 @@ test_that("exp_zhao18: optim produces non-finite values", {
       conc,
       datetime,
       fit_type = "exp_zhao18",
-      end_cut = 60,
+      end_cut = 61,
       t_zero = 20
     ) |>
       select(f_fluxid, f_slope) |>
@@ -535,7 +535,7 @@ test_that("cut direction from start", {
       datetime,
       fit_type = "line",
       start_cut = 20,
-      end_cut = 60,
+      end_cut = 59,
       cut_direction = "from_start"
     ) |>
       filter(f_cut == "keep") |>
@@ -555,7 +555,7 @@ test_that("cut direction from end", {
       datetime,
       fit_type = "line",
       start_cut = 60,
-      end_cut = 20,
+      end_cut = 21,
       cut_direction = "from_end"
     ) |>
       filter(f_cut == "keep") |>
