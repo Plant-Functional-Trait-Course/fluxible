@@ -2,6 +2,8 @@
 
 ## fluxible 1.4.0
 
+CRAN release: 2026-07-22
+
 - Gas concentration can now be transformed in volumetric concentration
   (e. g., mmol/l) before fitting a model and calculating the slope,
   accounting better for temperature change inside the chamber. The rest
